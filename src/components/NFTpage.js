@@ -77,6 +77,32 @@ function NFTpage(props) {
                 </button>
             </div>
             }
+             <div>
+                <div className='border-2 py-4 bg-slate-50 rounded-lg mx-10 mb-10 mt-4'>
+                    <div className='text-xl px-5 font-semibold'>
+                        Additional NFT's found in Account
+                        <div className='text-sm mt-2 mb-2 px-5 font-medium'>
+                            These are additional NFT's we've found in your Flow Address, but <u>we just can't pull the images for them yet</u>. There may also be some in here that haven't been linked to Alchemy so they may not be showing up just yet.
+                        </div>
+                    </div>
+                    <div className='grid grid-cols-4 gap-4 mt-10'>
+                        {nfts?.map((nft, index) =>{
+                                if(nft?.media[0]?.uri.startsWith('ipfs')){
+                                    return null
+                                } else if(nft?.media?.length === 0){
+                                    return(
+                                        <div className='text-left px-5 mb-5 bg-slate-700 text-white mx-5 rounded-lg py-3'>
+                                            <b className='text-green-400'>NFT Contract Name:</b> {nft?.contract?.name} <br />
+                                            <b className='text-green-400'>Token ID:</b> {nft?.id?.tokenId}
+                                        </div>
+                                    )
+                                } else{
+                                return null
+                            }
+                            })}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

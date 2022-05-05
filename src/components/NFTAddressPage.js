@@ -65,7 +65,7 @@ function NFTAddressPage(props) {
             </div>
             }
             <div>
-                <div className='border-2 py-4 bg-slate-50 rounded-lg mx-10 mb-10'>
+                <div className='border-2 py-4 bg-slate-50 rounded-lg mx-10 mb-10 mt-4'>
                     <div className='text-xl px-5 font-semibold'>
                         Additional NFT's found in Account
                         <div className='text-sm mt-2 mb-2 px-5 font-medium'>
