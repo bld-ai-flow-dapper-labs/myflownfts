@@ -1,5 +1,4 @@
 import React from 'react';
-import * as fcl from "@onflow/fcl";
 import logo from '../flowgo.png'
 
 function Nav({addr}) {

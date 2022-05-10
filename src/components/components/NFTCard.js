@@ -3,7 +3,7 @@ import React from 'react';
 function NFTCard({image, index, nft}) {
     return (
         <div key={index} className='bg-slate-100 p-5 rounded-lg'>      
-            <img src={image} className='rounded-lg'/>
+            <img src={image} className='rounded-lg' alt="logo" />
             <div className='pt-5 font-bold text-lg'>
                 {nft.title}
             </div>

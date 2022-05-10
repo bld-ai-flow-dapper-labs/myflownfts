@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient';
 import * as fcl from "@onflow/fcl";
 import axios from 'axios';
 import loadingGif from '../loading.gif'
@@ -9,23 +8,20 @@ import Nav from './_Nav';
 function NFTpage(props) {
 
     const [user, setUser] = useState({loggedIn: null})
-    const [showLoading, setShowLoading] = useState(false)
     const [nfts, setNfts] = useState()
 
     useEffect(() =>{
         fcl.currentUser.subscribe(setUser)
-        setShowLoading(true)
         async function getNFTs() {
             fcl.currentUser.subscribe(async res => {
                 if(res.loggedIn === true){
                     await axios.get(`https://flow-mainnet.g.alchemy.com/v2/5wg7vsodim8tqcmccaouianrc50f8r0a/getNFTs/?owner=${res.addr}&offset=0&`)
-                    .then(res => setNfts(res?.data?.nfts), setShowLoading(false))
+                    .then(res => setNfts(res?.data?.nfts))
                 }
             })
         }
         getNFTs()
-        console.log('hello')
-    },[setShowLoading])
+    },[])
 
     return (
         <div>
@@ -62,7 +58,7 @@ function NFTpage(props) {
                     {nfts?.length === 0 ? 
                     <></>
                     :
-                    <img src={loadingGif} className='mt-8 h-16'/>
+                    <img src={loadingGif} className='mt-8 h-16' alt="loading" />
                     }
                 </div>
             </div>

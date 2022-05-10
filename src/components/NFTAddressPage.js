@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient';
-import * as fcl from "@onflow/fcl";
 import axios from 'axios';
 import loadingGif from '../loading.gif'
 import NFTCard from './components/NFTCard';
@@ -8,31 +6,34 @@ import Nav from './_Nav';
 
 function NFTAddressPage(props) {
 
-    const [showLoading, setShowLoading] = useState(false)
     const [nfts, setNfts] = useState()
     const [addr, setAddr] = useState()
 
     useEffect(() =>{
-        setShowLoading(true)
         const userAddr = window.location.href.split('address/')[1]
         setAddr(userAddr)
         async function getNFTs() {
                     await axios.get(`https://flow-mainnet.g.alchemy.com/v2/mxuvw76vwdiq0vy0vbn502z7ivzu5p83/getNFTs/?owner=${userAddr}&offset=0&`)
                     .then(res => 
-                        setNfts(res?.data?.nfts), setShowLoading(false)
+                        setNfts(res?.data?.nfts)
                     )
         }
         getNFTs()
     },[])
 
-    console.log(nfts)
     return (
         <div>
             <Nav addr={addr}/>
             {nfts?.length > 1 ?
             <div className='flex grid grid-cols-4 gap-10 mx-10 mt-10 pb-10'>
             {nfts.map((nft, index) =>{
-                if(nft?.media[0]?.uri.startsWith('ipfs')){
+                if(nft?.media[0]?.uri.startsWith('Qm')){
+                    let ipfsHash = nft?.media[0]?.uri
+                    let gateway = `https://cloudflare-ipfs.com/ipfs/${ipfsHash}`
+                    return(
+                    <NFTCard image={gateway} index={index} nft={nft}/>
+                    )
+                } else if(nft?.media[0]?.uri.startsWith('ipfs')){
                     let ipfsHash = nft?.media[0]?.uri.split('ipfs://')[1]
                     let gateway = `https://cloudflare-ipfs.com/ipfs/${ipfsHash}`
                     return(
@@ -59,7 +60,7 @@ function NFTAddressPage(props) {
                     {nfts?.length === 0 ? 
                     <></>
                     :
-                    <img src={loadingGif} className='mt-8 h-16'/>
+                    <img src={loadingGif} className='mt-8 h-16' alt="loading" />
                     }
                 </div>
             </div>
