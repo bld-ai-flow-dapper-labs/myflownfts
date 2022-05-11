@@ -39,7 +39,7 @@ function NFTAddressPage(props) {
                     return(
                     <NFTCard image={gateway} index={index} nft={nft}/>
                     )
-                } else if(nft?.media?.length === 0){
+                } else if(nft?.media?.length === 0 || nft?.media[0]?.uri === ""){
                     return null
                 } else{
                 return(
@@ -77,7 +77,7 @@ function NFTAddressPage(props) {
                         {nfts?.map((nft, index) =>{
                                 if(nft?.media[0]?.uri.startsWith('ipfs')){
                                     return null
-                                } else if(nft?.media?.length === 0){
+                                } else if(nft?.media?.length === 0 || nft?.media[0]?.uri === ""){
                                     return(
                                         <div className='text-left px-5 mb-5 bg-slate-700 text-white mx-5 rounded-lg py-3'>
                                             <b className='text-green-400'>NFT Contract Name:</b> {nft?.contract?.name} <br />

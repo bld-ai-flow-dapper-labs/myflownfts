@@ -31,13 +31,19 @@ function NFTpage(props) {
             nfts?.length > 1 ?
             <div className='flex grid grid-cols-4 gap-10 mx-10 mt-10 pb-10'>
             {nfts.map((nft, index) =>{
-                if(nft?.media[0]?.uri.startsWith('ipfs')){
+                if(nft?.media[0]?.uri.startsWith('Qm')){
+                    let ipfsHash = nft?.media[0]?.uri
+                    let gateway = `https://cloudflare-ipfs.com/ipfs/${ipfsHash}`
+                    return(
+                    <NFTCard image={gateway} index={index} nft={nft}/>
+                    )
+                } else if(nft?.media[0]?.uri.startsWith('ipfs')){
                     let ipfsHash = nft?.media[0]?.uri.split('ipfs://')[1]
                     let gateway = `https://cloudflare-ipfs.com/ipfs/${ipfsHash}`
                     return(
                     <NFTCard image={gateway} index={index} nft={nft}/>
                     )
-                } else if(nft?.media?.length === 0){
+                } else if(nft?.media?.length === 0 || nft?.media[0]?.uri === ""){
                     return null
                 } else{
                 return(
@@ -85,7 +91,7 @@ function NFTpage(props) {
                         {nfts?.map((nft, index) =>{
                                 if(nft?.media[0]?.uri.startsWith('ipfs')){
                                     return null
-                                } else if(nft?.media?.length === 0){
+                                } else if(nft?.media?.length === 0 || nft?.media[0]?.uri === ""){
                                     return(
                                         <div className='text-left px-5 mb-5 bg-slate-700 text-white mx-5 rounded-lg py-3'>
                                             <b className='text-green-400'>NFT Contract Name:</b> {nft?.contract?.name} <br />

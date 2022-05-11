@@ -1,9 +1,21 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
+
+
 
 function NFTCard({image, index, nft}) {
     return (
-        <div key={index} className='bg-slate-100 p-5 rounded-lg'>      
-            <img src={image} className='rounded-lg' alt="logo" />
+        <div key={index} className='bg-slate-100 p-5 rounded-lg'>   
+            {image.endsWith("mp4") === true ? 
+            <ReactPlayer url={image} 
+            width='100%' 
+            playing={true}
+            volume={0}
+            loop={true}
+            /> 
+                :
+            <img src={image} className='rounded-lg' alt="logo" />            
+            }
             <div className='pt-5 font-bold text-lg'>
                 {nft.title}
             </div>
