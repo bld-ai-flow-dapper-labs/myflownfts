@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
+    "formulahendry.auto-rename-tag",
+    "hashicorp.terraform",
+    "lokalise.i18n-ally",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "nrwl.angular-console",
+    "oderwat.indent-rainbow",
+    "steoates.autoimport"
+  ]
+}
