@@ -1,6 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.lintTask.enable": true,
+  "i18n-ally.localesPaths": ["apps/site/locales"],
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": ["source.fixAll"]

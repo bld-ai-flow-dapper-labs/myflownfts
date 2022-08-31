@@ -1,0 +1,12 @@
+{
+  "common": {
+    "buttonConnectWallet": "Connect Wallet",
+    "title": "My Flow NFTs"
+  },
+  "pages": {
+    "landing": {
+      "buttonLearnMore": "Learn More",
+      "welcome": "Welcome to Flow’s next generation of NFTs."
+    }
+  }
+}
