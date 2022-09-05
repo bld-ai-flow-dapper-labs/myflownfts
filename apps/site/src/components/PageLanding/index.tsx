@@ -1,6 +1,7 @@
 import Navbar from '../Navbar';
 import Header from './Header';
 import Intro from './Intro';
+import Partners from './Partners';
 
 export default function PageLanding() {
   return (
@@ -8,6 +9,7 @@ export default function PageLanding() {
       <Navbar />
       <Header />
       <Intro />
+      <Partners />
       <span>Next components</span>
     </div>
   );

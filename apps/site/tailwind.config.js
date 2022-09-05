@@ -23,14 +23,17 @@ module.exports = {
       inherit: 'inherit',
       h1: ['3.25rem'],
       h2: ['2.25rem'],
+      h3: ['2rem'],
       subtitle: ['1.125rem'],
     },
     extend: {
       backgroundImage: (theme) => ({
-        header: "url('../../public/header.png')",
-        intro: "url('../../public/intro.png')",
+        header: "url('../../src/components/PageLanding/images/bg-header.png')",
+        intro: "url('../../src/components/PageLanding/images/bg-intro.png')",
+        partners:
+          "url('../../src/components/PageLanding/images/bg-partners.png')",
       }),
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
