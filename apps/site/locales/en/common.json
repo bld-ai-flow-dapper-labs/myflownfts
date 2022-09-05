@@ -1,12 +1,16 @@
 {
   "common": {
     "buttonConnectWallet": "Connect Wallet",
-    "title": "My Flow NFTs"
+    "title": "My Flow NFTs",
+    "search": "Search by Wallet Address, NFT or Community"
   },
   "pages": {
     "landing": {
       "buttonLearnMore": "Learn More",
-      "welcome": "Welcome to Flow’s next generation of NFTs."
+      "welcome": "Welcome to Flow’s ",
+      "next": " next ",
+      "generation": " generation ",
+      "nfts": "of NFTs."
     }
   }
 }
