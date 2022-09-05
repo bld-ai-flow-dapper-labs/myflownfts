@@ -12,6 +12,7 @@ module.exports = {
   theme: {
     colors: {
       primary: '#23ff82',
+      secondary: '#5A72F8',
       white: colors.white,
       inverted: '#122a48',
       'button-browse': '#2d3040',
@@ -26,7 +27,9 @@ module.exports = {
       h1: ['3.25rem'],
       h2: ['2.25rem'],
       h3: ['2rem'],
+      h4: ['1.5rem'],
       subtitle: ['1.125rem'],
+      'button-medium': ['0.875rem'],
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,
@@ -41,6 +44,7 @@ module.exports = {
           "url('../../src/components/PageLanding/images/bg-partners.png')",
         'community-featured':
           "url('../../src/components/PageLanding/images/bg-community-featured.png')",
+        signup: "url('../../src/components/PageLanding/images/bg-signup.png')",
       }),
     },
   },

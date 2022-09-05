@@ -21,7 +21,13 @@
       },
       "partners": "Partners",
       "ourCommunities": "Our Communities",
-      "featuredNFTs": "Featured NFTs"
+      "featuredNFTs": "Featured NFTs",
+      "flowCommunity": {
+        "title": "Be a part of the Flow community",
+        "email": "Email",
+        "discord": "Join Our Discord",
+        "signup": "Sign Up"
+      }
     }
   }
 }

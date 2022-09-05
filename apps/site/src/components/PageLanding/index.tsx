@@ -4,6 +4,7 @@ import Featured from './Featured';
 import Header from './Header';
 import Intro from './Intro';
 import Partners from './Partners';
+import Signup from './Signup';
 
 export default function PageLanding() {
   return (
@@ -16,6 +17,7 @@ export default function PageLanding() {
         <Communities />
         <Featured />
       </div>
+      <Signup />
       <span>Next components</span>
     </div>
   );
