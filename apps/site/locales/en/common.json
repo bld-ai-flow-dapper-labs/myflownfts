@@ -6,6 +6,7 @@
   },
   "pages": {
     "landing": {
+      "buttonBrowseMore": "Browse More",
       "buttonLearnMore": "Learn More",
       "header": {
         "welcome": "Welcome to Flow’s ",
@@ -18,7 +19,9 @@
         "subtitle1": "Flow is easy to use and powerful to build with. Every aspect of the platform was designed from the ground up to support exceptional user experience at mainstream scale.",
         "subtitle2": " Originally conceived by the team behind CryptoKitties, Flow today is a decentralized network supported and built on by a growing community of brands and Web3 builders."
       },
-      "partners": "Partners"
+      "partners": "Partners",
+      "ourCommunities": "Our Communities",
+      "featuredNFTs": "Featured NFTs"
     }
   }
 }
