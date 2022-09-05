@@ -22,10 +22,13 @@ module.exports = {
     fontSize: {
       inherit: 'inherit',
       h1: ['3.25rem'],
+      h2: ['2.25rem'],
+      subtitle: ['1.125rem'],
     },
     extend: {
       backgroundImage: (theme) => ({
         header: "url('../../public/header.png')",
+        intro: "url('../../public/intro.png')",
       }),
     },
   },

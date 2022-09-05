@@ -1,17 +1,12 @@
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
+import { ReactComponent as ImageLogo } from './images/logo.svg';
 
 export default function Navbar() {
   const { t } = useTranslation();
   return (
     <div className="absolute px-20 h-20 w-screen flex justify-between items-center">
       <div className="flex items-center">
-        <Image
-          src="/../public/favicon-64x64.png"
-          alt="favicon"
-          width={47}
-          height={47}
-        />
+        <ImageLogo />
         <span className="text-white pl-3">{t('common.title')}</span>
       </div>
       <a

@@ -6,12 +6,14 @@ export default function Header() {
     <div className="bg-header h-full w-screen bg-no-repeat bg-cover">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-80 lg:px-8 lg:flex lg:flex-col lg:items-center lg:justify-between">
         <h2 className="text-h1 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="text-white">{t('pages.landing.welcome')}</span>
-          <span className="bg-primary text-inverted">
-            {t('pages.landing.next')}
-            <br /> {t('pages.landing.generation')}
+          <span className="text-white">
+            {t('pages.landing.header.welcome')}
           </span>
-          <span className="text-white">{t('pages.landing.nfts')}</span>
+          <span className="bg-primary text-inverted">
+            {t('pages.landing.header.next')}
+            <br /> {t('pages.landing.header.generation')}
+          </span>
+          <span className="text-white">{t('pages.landing.header.nfts')}</span>
         </h2>
         <input
           type="text"

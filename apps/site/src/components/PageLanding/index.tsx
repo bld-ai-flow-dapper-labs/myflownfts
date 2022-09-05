@@ -1,13 +1,13 @@
-import useTranslation from 'next-translate/useTranslation';
-import Header from './Header';
 import Navbar from '../Navbar';
-export default function PageLanding() {
-  const { t } = useTranslation();
+import Header from './Header';
+import Intro from './Intro';
 
+export default function PageLanding() {
   return (
     <div>
       <Navbar />
       <Header />
+      <Intro />
       <span>Next components</span>
     </div>
   );
