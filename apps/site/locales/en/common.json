@@ -27,6 +27,11 @@
         "email": "Email",
         "discord": "Join Our Discord",
         "signup": "Sign Up"
+      },
+      "footer": {
+        "title": "Built by <bold>Flow</bold> Foundation",
+        "contactUs": "Contact Us",
+        "terms": "Terms"
       }
     }
   }

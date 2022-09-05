@@ -13,6 +13,8 @@ module.exports = {
     colors: {
       primary: '#23ff82',
       secondary: '#5A72F8',
+      footer: '#202124',
+      'text-footer': '#82818e',
       white: colors.white,
       inverted: '#122a48',
       'button-browse': '#2d3040',
