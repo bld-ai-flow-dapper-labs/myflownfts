@@ -8,7 +8,9 @@ export default function Partners() {
     <div className="flex flex-col no-scrollbar items-center w-screen h-[21.5rem] overflow-x-scroll bg-no-repeat bg-auto bg-partners text-h3 pt-16 gap-6">
       <div className="flex items-center gap-12">
         <StarIcon />
-        <span className="text-white">{t('pages.landing.partners')}</span>
+        <span className="font-bold text-white text-section">
+          {t('pages.landing.partners')}
+        </span>
         <StarIcon />
       </div>
       <PartnersBanner />

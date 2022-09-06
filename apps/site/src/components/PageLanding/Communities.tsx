@@ -12,7 +12,7 @@ export default function Communities() {
       <div className="flex justify-between px-20 py-4">
         <div className="flex items-center gap-12">
           <StarIcon />
-          <span className="text-white text-h3">
+          <span className="font-bold text-white text-section">
             {t('pages.landing.ourCommunities')}
           </span>
           <StarIcon />

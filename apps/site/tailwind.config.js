@@ -13,8 +13,7 @@ module.exports = {
     colors: {
       primary: '#23ff82',
       secondary: '#5A72F8',
-      footer: '#202124',
-      'text-footer': '#82818e',
+
       white: colors.white,
       inverted: '#122a48',
       'button-browse': '#2d3040',
@@ -23,18 +22,33 @@ module.exports = {
         600: '#4f46e5',
         700: '#4338ca',
       },
+      gray: {
+        700: '#82818e',
+        900: '#202124',
+      },
+    },
+    fontFamily: {
+      sans: ['Termina', ...defaultTheme.fontFamily.sans],
+      body: ['Acumin-Pro', ...defaultTheme.fontFamily.sans],
     },
     fontSize: {
-      inherit: 'inherit',
-      h1: ['3.25rem'],
-      h2: ['2.25rem'],
-      h3: ['2rem'],
-      h4: ['1.5rem'],
-      subtitle: ['1.125rem'],
-      'button-medium': ['0.875rem'],
+      h1: ['3.25rem', { letterSpacing: '0.05em', lineHeight: '62.4px' }], //52px
+      h2: ['2.5rem', { letterSpacing: '0.05em', lineHeight: '48px' }], // 40px
+      h3: ['1.5rem', { lineHeight: '28.8px' }], //24px
+      'h3-caps': ['1.5rem', { letterSpacing: '0.02em', lineHeight: '28.8px' }],
+      h4: ['1.125rem', { lineHeight: '22px' }], //18px
+      section: ['2rem', { letterSpacing: '0.05em', lineHeight: '38.4px' }], //32px
+      md: ['2.25rem', { letterSpacing: '0.05em', lineHeight: '43.2px' }], //36px
+      sm: ['1.5rem', { lineHeight: '28.8px' }], //24px
+      title: ['1.125rem', { lineHeight: '22px' }], //18px
+      footer: ['1rem', { lineHeight: '19.2px' }], //18px
+      body: ['0.9375rem', { lineHeight: '18px' }], //15px
+      caption: ['0.75rem', { lineHeight: '14.4px' }], //12px
+      button: ['0.875rem', { letterSpacing: '0.03em', lineHeight: '24px' }], //14px
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,
+      medium: defaultTheme.fontWeight.medium,
       semibold: defaultTheme.fontWeight.semibold,
       bold: defaultTheme.fontWeight.bold,
     },
