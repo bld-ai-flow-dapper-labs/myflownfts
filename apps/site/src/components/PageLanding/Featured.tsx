@@ -22,23 +22,25 @@ export default function Featured() {
       <div className="grid grid-flow-col grid-rows-2 gap-6 pb-12 overflow-x-scroll scrollbar">
         {nfts.map((item, index) => (
           <NFTCard
-            key={item.token_id}
-            chain={item.chain}
+            key={item?.token_id}
+            chain={item?.chain}
             creatorName={
-              item.collection?.twitter_username
-                ? item.collection.twitter_username
-                : 'Unknown'
+              item.collection?.twitter_username ??
+              item.collection?.name ??
+              'Unknown'
             }
-            creatorAvatar={item.collection?.image_url}
-            token_id={item.token_id}
-            name={item.name}
+            creatorAvatar={
+              item.collection?.image_url ?? item.previews?.image_small_url
+            }
+            token_id={item?.token_id}
+            name={item?.name}
             image_url={
-              index % 6 === 0
+              index % 7 === 0
                 ? item.previews?.image_large_url
                 : item.previews?.image_medium_url
             }
             url={item.collection?.external_url}
-            big={index % 6 === 0 ? true : false}
+            big={index % 7 === 0 ? true : false}
           />
         ))}
       </div>

@@ -100,6 +100,196 @@
     }
   },
   {
+    "nft_id": "flow.A.0b2a3299cc857e29.TopShot.604",
+    "chain": "flow",
+    "contract_address": "A.0b2a3299cc857e29.TopShot",
+    "token_id": "604",
+    "name": "Kristaps Porziņģis",
+    "description": "Dallas Mavericks big man and known unicorn Kristaps Porzingis shows his range by nailing the half court buzzer beater against the Miami Heat on December 14, 2019.",
+    "image_url": "https://cdn.simplehash.com/assets/0bba059d9d9074f406caa811173f123f3f2f815d4b303a4b9c2a111c123d957a.jpg",
+    "video_url": "https://cdn.simplehash.com/assets/da42b3d0be4bb73e49a0156cc82b6bd976e14e4f9958651786ef5d7b5480fa9e.mp4",
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/-KQZZsxVz7wn0crmRlYInFiJfheB13xK7tq55kCARNkRMXJM5Cw6_0_jVR1Du36Zw4TUZJZAe_3RROJ5vF6Pkrno3k-ywzgECa5R=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/-KQZZsxVz7wn0crmRlYInFiJfheB13xK7tq55kCARNkRMXJM5Cw6_0_jVR1Du36Zw4TUZJZAe_3RROJ5vF6Pkrno3k-ywzgECa5R",
+      "image_large_url": "https://lh3.googleusercontent.com/-KQZZsxVz7wn0crmRlYInFiJfheB13xK7tq55kCARNkRMXJM5Cw6_0_jVR1Du36Zw4TUZJZAe_3RROJ5vF6Pkrno3k-ywzgECa5R=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/-KQZZsxVz7wn0crmRlYInFiJfheB13xK7tq55kCARNkRMXJM5Cw6_0_jVR1Du36Zw4TUZJZAe_3RROJ5vF6Pkrno3k-ywzgECa5R=k-w1200-s2400-rj",
+      "blurhash": "UD7UI}V[9FtRWBaeofkC00of-;V@t7ogRjae"
+    },
+    "background_color": null,
+    "external_url": "https://nbatopshot.com/moment/604",
+    "created_date": null,
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0x10285e5afddd80c3",
+        "quantity": 1,
+        "first_acquired_date": "2021-01-08T02:38:09",
+        "last_acquired_date": "2021-01-08T02:38:09"
+      }
+    ],
+    "last_sale": null,
+    "contract": {
+      "type": "NonFungibleToken",
+      "name": "TopShot",
+      "symbol": null
+    },
+    "collection": {
+      "collection_id": "8101d3b866ba081dbf84201ce4b8ecef",
+      "name": "TopShot",
+      "description": null,
+      "image_url": null,
+      "banner_image_url": null,
+      "external_url": null,
+      "twitter_username": null,
+      "discord_url": null,
+      "marketplace_pages": [],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "attributes": [
+        {
+          "trait_type": "firstName",
+          "value": "Kristaps"
+        },
+        {
+          "trait_type": "lastName",
+          "value": "Porziņģis"
+        },
+        {
+          "trait_type": "birthdate",
+          "value": "1995-08-02"
+        },
+        {
+          "trait_type": "birthplace",
+          "value": "Liepaja,, LVA"
+        },
+        {
+          "trait_type": "jerseyNumber",
+          "value": "6"
+        },
+        {
+          "trait_type": "draftTeam",
+          "value": "New York Knicks"
+        },
+        {
+          "trait_type": "draftYear",
+          "value": "2015"
+        },
+        {
+          "trait_type": "draftSelection",
+          "value": "4"
+        },
+        {
+          "trait_type": "draftRound",
+          "value": "1"
+        },
+        {
+          "trait_type": "teamAtMomentNBAID",
+          "value": "1610612742"
+        },
+        {
+          "trait_type": "teamAtMoment",
+          "value": "Dallas Mavericks"
+        },
+        {
+          "trait_type": "primaryPosition",
+          "value": "PF"
+        },
+        {
+          "trait_type": "height",
+          "value": "87"
+        },
+        {
+          "trait_type": "weight",
+          "value": "240"
+        },
+        {
+          "trait_type": "totalYearsExperience",
+          "value": "3"
+        },
+        {
+          "trait_type": "nbaSeason",
+          "value": "2019-20"
+        },
+        {
+          "trait_type": "dateOfMoment",
+          "value": "2019-12-15T01:30:00Z"
+        },
+        {
+          "trait_type": "playCategory",
+          "value": "3 Pointer"
+        },
+        {
+          "trait_type": "playType",
+          "value": "3 Pointer"
+        },
+        {
+          "trait_type": "homeTeamName",
+          "value": "Dallas Mavericks"
+        },
+        {
+          "trait_type": "awayTeamName",
+          "value": "Miami Heat"
+        },
+        {
+          "trait_type": "homeTeamScore",
+          "value": "118"
+        },
+        {
+          "trait_type": "awayTeamScore",
+          "value": "122"
+        },
+        {
+          "trait_type": "seriesNumber",
+          "value": 0
+        },
+        {
+          "trait_type": "setName",
+          "value": "Early Adopters"
+        },
+        {
+          "trait_type": "serialNumber",
+          "value": 4
+        },
+        {
+          "trait_type": "playID",
+          "value": 114
+        },
+        {
+          "trait_type": "setID",
+          "value": 6
+        },
+        {
+          "trait_type": "numMomentsInEdition",
+          "value": 1325
+        }
+      ],
+      "media": [
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Animated_1080_1080_Black.mp4",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Animated_1080_1080_Texture.mp4",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Animated_1080_1920_Black.mp4",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Animated_1080_1920_Texture.mp4",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Hero_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_ReverseHero_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Category_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Game_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Logos_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_NFT_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Player_2880_2880_Black.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Hero_2400_1200_Texture.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Hero_2400_2400_Texture.jpg",
+        "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Hero_375_375_Transparent.png"
+      ],
+      "image_original_url": "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Hero_2880_2880_Black.jpg",
+      "animation_original_url": "https://assets.nbatopshot.com/editions/1_early_adopters_common/b2afd92f-bcf5-494f-9b05-b5a50165d106/play_b2afd92f-bcf5-494f-9b05-b5a50165d106_1_early_adopters_common_capture_Animated_1080_1080_Black.mp4"
+    }
+  },
+  {
     "nft_id": "ethereum.0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb.570",
     "chain": "ethereum",
     "contract_address": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
