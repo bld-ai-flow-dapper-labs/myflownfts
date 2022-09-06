@@ -1,0 +1,271 @@
+[
+  {
+    "nft_id": "ethereum.0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b.17028",
+    "chain": "ethereum",
+    "contract_address": "0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B",
+    "token_id": "17028",
+    "name": "CloneX #368",
+    "description": "🧬 CLONE X 🧬\n\n20,000 next-gen Avatars, by RTFKT and Takashi Murakami 🌸\n\nIf you own a clone without any Murakami trait please read the terms regarding RTFKT - Owned Content here: https://rtfkt.com/legal-2A\n\nYou are also entitled to a commercial license, please read the terms to that here: https://rtfkt.com/legal-2C",
+    "image_url": "https://cdn.simplehash.com/assets/7cddff6530a5c3d32ae8c2c65d8b582739730c3764db2e0d4b6c6d8d64cc081d.png",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/CCyaFQXYuW1TSLqyi48ha6IpriRTNBWRZbQ60oIKBbpyoHjLB9ujKotR1WDn8Ms1MsoS7UqBTB_85ZZ1LR3AQDOZDnDCRms_pb_4=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/CCyaFQXYuW1TSLqyi48ha6IpriRTNBWRZbQ60oIKBbpyoHjLB9ujKotR1WDn8Ms1MsoS7UqBTB_85ZZ1LR3AQDOZDnDCRms_pb_4",
+      "image_large_url": "https://lh3.googleusercontent.com/CCyaFQXYuW1TSLqyi48ha6IpriRTNBWRZbQ60oIKBbpyoHjLB9ujKotR1WDn8Ms1MsoS7UqBTB_85ZZ1LR3AQDOZDnDCRms_pb_4=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/CCyaFQXYuW1TSLqyi48ha6IpriRTNBWRZbQ60oIKBbpyoHjLB9ujKotR1WDn8Ms1MsoS7UqBTB_85ZZ1LR3AQDOZDnDCRms_pb_4=k-w1200-s2400-rj",
+      "blurhash": "UXC;=,NXezxbItW9w}R~,|W-XJjJV~jcWAjZ"
+    },
+    "background_color": null,
+    "external_url": null,
+    "created_date": "2021-12-15T09:28:51",
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0x4cD4Bc4B5b6c789A25E9E838b6e743bd70375954",
+        "quantity": 1,
+        "first_acquired_date": "2022-06-27T09:12:51",
+        "last_acquired_date": "2022-06-27T09:12:51"
+      }
+    ],
+    "last_sale": {
+      "from_address": "0xF58DBd74f26E4bDBCF2A26e2F848E8348530f0e4",
+      "to_address": "0x57d6Ced6b00e5Eb8654Fd323C5cF50E83E5b8bb4",
+      "quantity": 1,
+      "timestamp": "2022-03-27T20:45:17",
+      "transaction": "0x566ce92cac7999df3cbd6ddeded3aec2c255e67f63545df5ab7473d1faf12d1d",
+      "marketplace_name": "LooksRare",
+      "is_bundle_sale": false,
+      "payment_token": {
+        "payment_token_id": "ethereum.0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": 18
+      },
+      "unit_price": 17000000000000000000,
+      "total_price": 17000000000000000000
+    },
+    "contract": {
+      "type": "ERC721",
+      "name": "CloneX",
+      "symbol": "CloneX"
+    },
+    "collection": {
+      "collection_id": "a260125ee1a6b2b0719e961c4cdc1ec8",
+      "name": "CLONE X - X TAKASHI MURAKAMI",
+      "description": "🧬 CLONE X 🧬\r\n\r\n20,000 next-gen Avatars, by RTFKT and Takashi Murakami 🌸",
+      "image_url": "https://lh3.googleusercontent.com/0Oy4KUFID9t0ntnNtK1Lu9V1wfwomyH1bp-FlaCXbO3gqD2Cmj_o55G2crf_k0fXsoOzJmYvR8QHi-Gmu1myy1xO9oEmi45UVtMI",
+      "banner_image_url": "https://lh3.googleusercontent.com/02iRSmR6unbTl2LIU23rjjIbyyDCO4XkaQGeLS5LwL5rymtEyFG9pZC3lGDY3Tnh4xhYKzVK-b_WfG_Nr_rzuoRqOzoLDAiMFgWD=w2500",
+      "external_url": "http://www.rtfkt.com",
+      "twitter_username": "RTFKTstudios",
+      "discord_url": "https://discord.gg/RTFKT",
+      "marketplace_pages": [
+        {
+          "marketplace_name": "OpenSea",
+          "marketplace_collection_id": "clonex",
+          "collection_url": "https://opensea.io/collection/clonex",
+          "verified": true
+        }
+      ],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "attributes": [
+        {
+          "trait_type": "DNA",
+          "value": "Robot"
+        },
+        {
+          "trait_type": "Hair",
+          "value": "NVY DRDZ"
+        },
+        {
+          "trait_type": "Clothing",
+          "value": "THRML PFA JCKT"
+        }
+      ],
+      "image_original_url": "https://clonex-assets.rtfkt.com/images/17028.png",
+      "animation_original_url": null
+    }
+  },
+  {
+    "nft_id": "ethereum.0x44102bd86bccb4efe8e90b4a4d5c4e43a895d22e.4679",
+    "chain": "ethereum",
+    "contract_address": "0x44102Bd86bCcB4eFe8E90b4A4D5C4E43a895D22e",
+    "token_id": "4679",
+    "name": "MAIYC #4679",
+    "description": "10,097 mutants wandered into another dimension, where they were captured and cloned by a rogue AI. We are coming. Resistance is futile.",
+    "image_url": "https://cdn.simplehash.com/assets/baa484185ee9396a99672be4b13b1cc8027d92c391dc6112d2e27e05528daba4.png",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/QNMn2YyHcu5ljgy40TNa39O0ep4CM1BG3puJdth5GBB00gv-ITMden5PWTYWzXU2YDIEgzFvwjFLT2RAP8D-w9Qj6m1RHAbexAA=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/QNMn2YyHcu5ljgy40TNa39O0ep4CM1BG3puJdth5GBB00gv-ITMden5PWTYWzXU2YDIEgzFvwjFLT2RAP8D-w9Qj6m1RHAbexAA",
+      "image_large_url": "https://lh3.googleusercontent.com/QNMn2YyHcu5ljgy40TNa39O0ep4CM1BG3puJdth5GBB00gv-ITMden5PWTYWzXU2YDIEgzFvwjFLT2RAP8D-w9Qj6m1RHAbexAA=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/QNMn2YyHcu5ljgy40TNa39O0ep4CM1BG3puJdth5GBB00gv-ITMden5PWTYWzXU2YDIEgzFvwjFLT2RAP8D-w9Qj6m1RHAbexAA=k-w1200-s2400-rj",
+      "blurhash": "UMN,RCt6?#IY-youN4aPtMRpRVt1tcaeaQtQ"
+    },
+    "background_color": null,
+    "external_url": "https://mutantaiyachtclub.wtf",
+    "created_date": "2022-06-07T01:41:03",
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0xc360614e540Aa7d38AE9b1F93CBF978979b12f32",
+        "quantity": 1,
+        "first_acquired_date": "2022-06-23T17:54:13",
+        "last_acquired_date": "2022-06-23T17:54:13"
+      }
+    ],
+    "last_sale": {
+      "from_address": "0xf7b4FF31422206EC4eb427e69D27a9b93faC0c8C",
+      "to_address": "0xc360614e540Aa7d38AE9b1F93CBF978979b12f32",
+      "quantity": 1,
+      "timestamp": "2022-06-23T17:54:13",
+      "transaction": "0xfd32411354c83943ed4e4ebcc460357d72277f558e1c007e6e2008d2590027ee",
+      "marketplace_name": "OpenSea",
+      "is_bundle_sale": false,
+      "payment_token": {
+        "payment_token_id": "ethereum.native",
+        "name": "Ether",
+        "symbol": "ETH",
+        "address": null,
+        "decimals": 18
+      },
+      "unit_price": 36000000000000000,
+      "total_price": 36000000000000000
+    },
+    "contract": {
+      "type": "ERC721",
+      "name": "MutantAIYachtClub",
+      "symbol": null
+    },
+    "collection": {
+      "collection_id": "d1609f6ff9d7d437d541fe6eec5ae21c",
+      "name": "MutantAI",
+      "description": "10,097 Ø₮ⱧɆⱤ₩ØⱤⱠĐⱠɎ ₥Ʉ₮₳₦₮₴. \n₩Ɇ ₳ⱤɆ ⱧɆⱤɆ. ⱤɆ₴ł₴₮₳₦₵Ɇ ł₴ ₣Ʉ₮łⱠɆ.",
+      "image_url": "https://lh3.googleusercontent.com/EzxGyP8WRLxpbNQunA5_AXeGhAGa5qIOAbp4bqtcNfijUa-f1eXFOxic1KYJYVp7xqzwvxgAOM7MHerorzdmOVWxl2vuCWsMi8g",
+      "banner_image_url": "https://lh3.googleusercontent.com/Z_wDvQT_wORR0gBoPdqEgFkcq8la-7wxu8l0HMPL8chPMVX5eM6oifin3Gsa_BwM23tnsSdrYJNw2Xw-1l3dRA9TWsD0X7mRz9g=w2500",
+      "external_url": "http://cosmiccollective.xyz",
+      "twitter_username": "MutantAInft",
+      "discord_url": "https://discord.gg/cosmiccollective",
+      "marketplace_pages": [
+        {
+          "marketplace_name": "OpenSea",
+          "marketplace_collection_id": "mutantai",
+          "collection_url": "https://opensea.io/collection/mutantai",
+          "verified": false
+        }
+      ],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "tokenId": "4679",
+      "attributes": [
+        {
+          "trait_type": "ESSENCE",
+          "value": "BLOOM"
+        },
+        {
+          "trait_type": "TONE",
+          "value": "Army Green"
+        },
+        {
+          "trait_type": "SOUL",
+          "value": "M1"
+        }
+      ],
+      "image_original_url": "ipfs://QmaC97uLodX753qpRRrmkqi9sEpmZ4AiQwA7Zf2ppNBJ5N",
+      "animation_original_url": null
+    }
+  },
+  {
+    "nft_id": "ethereum.0x495f947276749ce646f68ac8c248420045cb7b5e.80205210429560762404920626118058825131052752475020525387142333017193684402177",
+    "chain": "ethereum",
+    "contract_address": "0x495f947276749Ce646f68AC8c248420045cb7b5e",
+    "token_id": "80205210429560762404920626118058825131052752475020525387142333017193684402177",
+    "name": "Blue Flowers",
+    "description": "Daily life in \nFeeling Blue Planet\n#43\n\n5000 x 5299 pixels\n300 dpi\nBKK, Thailand\nArtwork by Lemonnerd",
+    "image_url": "https://cdn.simplehash.com/assets/c58ce9faffa0d6cc97b0db6eb91cdbc8727ca2478dd4d822f19757c8e46701c7.jpg",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/Fi3ajGBTRDF8cCvZjp46Dt9c-ii6usB9jDgW3LsNnadVvx6TNAzjsPc9fv1MuhGQ_ZT7A8Ic3jeAn7Odtt9Jl6U3ljIBrYR18pUT=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/Fi3ajGBTRDF8cCvZjp46Dt9c-ii6usB9jDgW3LsNnadVvx6TNAzjsPc9fv1MuhGQ_ZT7A8Ic3jeAn7Odtt9Jl6U3ljIBrYR18pUT",
+      "image_large_url": "https://lh3.googleusercontent.com/Fi3ajGBTRDF8cCvZjp46Dt9c-ii6usB9jDgW3LsNnadVvx6TNAzjsPc9fv1MuhGQ_ZT7A8Ic3jeAn7Odtt9Jl6U3ljIBrYR18pUT=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/Fi3ajGBTRDF8cCvZjp46Dt9c-ii6usB9jDgW3LsNnadVvx6TNAzjsPc9fv1MuhGQ_ZT7A8Ic3jeAn7Odtt9Jl6U3ljIBrYR18pUT=k-w1200-s2400-rj",
+      "blurhash": "UI2j$VbIV.e-aEf$jIfmZxelkFf+flabfjjZ"
+    },
+    "background_color": null,
+    "external_url": "https://linktr.ee/Lemonnerd",
+    "created_date": null,
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0x5356326c9983ca90d08953c330644c1D4F7b2c1b",
+        "quantity": 1,
+        "first_acquired_date": "2022-04-26T15:18:01",
+        "last_acquired_date": "2022-04-26T15:18:01"
+      }
+    ],
+    "last_sale": {
+      "from_address": "0xB1528A566Cd088DE1FF17cbf1D1915e30b0799E6",
+      "to_address": "0x5356326c9983ca90d08953c330644c1D4F7b2c1b",
+      "quantity": 1,
+      "timestamp": "2022-04-26T15:18:01",
+      "transaction": "0x37efe3b95ad1a5e6b26b2265bf33d298858ba8b8a5b1a8df007d42fde5a585c2",
+      "marketplace_name": "OpenSea",
+      "is_bundle_sale": false,
+      "payment_token": {
+        "payment_token_id": "ethereum.native",
+        "name": "Ether",
+        "symbol": "ETH",
+        "address": null,
+        "decimals": 18
+      },
+      "unit_price": 100000000000000000,
+      "total_price": 100000000000000000
+    },
+    "contract": {
+      "type": "ERC1155",
+      "name": "OpenSea Shared Storefront",
+      "symbol": "OPENSTORE"
+    },
+    "collection": {
+      "collection_id": "1f001e05afda8a057fcefbf87571ac88",
+      "name": "Feeling Blue Planet",
+      "description": "Daily Blue Life in \"Feeling Blue Planet\"\r\n1/1 handmade illustration by Lemonnerd",
+      "image_url": "https://lh3.googleusercontent.com/-WRBi0XhFdGCy7ZA5MRCDOYihAaQudVJYTU1T_zWEAavaTv_HIURaEWFYdKurA9grPZ17ARfqteLFCc25w-2xHjrq7ALOwcjAxQ",
+      "banner_image_url": "https://lh3.googleusercontent.com/e6_enwkym3GKYCel6nZcn93jhMwGGfjh6uczbI5FsGo1anWrI_vmhYQoDJk-IF8kg5MHdZEvUKEGG559fYFpzW1YTj1A9adrdiT3=w2500",
+      "external_url": "https://linktr.ee/Lemonnerd",
+      "twitter_username": "Lemonnerd0_0",
+      "discord_url": null,
+      "marketplace_pages": [
+        {
+          "marketplace_name": "OpenSea",
+          "marketplace_collection_id": "feelingblueplanet",
+          "collection_url": "https://opensea.io/collection/feelingblueplanet",
+          "verified": false
+        }
+      ],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "image_original_url": "https://lh3.googleusercontent.com/BT4Up_lDnIGHwV7r7gFYw6-oUenyuENfLOYRUwptuehxbj1zDzcj3w_X_x4LxDwqBrT_xeRZPRjEr26WSK4FD2DZ7VHjysw-c3DOX1A=s0",
+      "animation_original_url": null
+    }
+  }
+]

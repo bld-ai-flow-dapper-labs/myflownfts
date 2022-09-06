@@ -1,0 +1,32 @@
+[
+  {
+    "key": 1,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot1.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 2,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike1.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 3,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot2.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 4,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike2.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 5,
+    "name": "Dr Seuss",
+    "image": "/communities/card-drseuss.png",
+    "url": "https://seussibles.com/"
+  }
+]
