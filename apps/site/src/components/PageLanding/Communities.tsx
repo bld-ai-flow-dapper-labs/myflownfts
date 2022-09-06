@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
 import NavButtons from '../NavButtons';
 import CommunityCard from './CommunityCard';
-import communities from './communities.json';
+import communities from './json/communities.json';
 
 export default function Communities() {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ export default function Communities() {
         </div>
         <NavButtons />
       </div>
-      <div className="flex gap-6 overflow-x-scroll">
+      <div className="flex gap-6 pb-4 overflow-x-scroll scrollbar">
         {communities.map((item) => (
           <CommunityCard
             key={item.key}

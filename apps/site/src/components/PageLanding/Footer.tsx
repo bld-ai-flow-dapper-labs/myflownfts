@@ -31,17 +31,15 @@ export default function Footer() {
             <TelegramIcon />
           </a>
         </div>
-        <span className="text-gray-700 text-footer">
+        <span className="text-gray-700 text-footer font-body">
           <Trans
             i18nKey="pages.landing.footer.title"
             components={{ bold: <strong /> }}
           />
         </span>
       </div>
-      <div className="flex gap-[2.25rem]">
-        <a href="#" className="font-semibold text-white text-footer">
-          {t('pages.landing.footer.terms')}
-        </a>
+      <div className="flex gap-[2.25rem] font-semibold text-white text-footer">
+        <a href="#">{t('pages.landing.footer.terms')}</a>
         <a href="#">{t('pages.landing.footer.contactUs')}</a>
       </div>
     </div>

@@ -1,5 +1,211 @@
 [
   {
+    "nft_id": "arbitrum.0xcf6d92fb2996287c67a3b9da1728924cf096347a.12",
+    "chain": "arbitrum",
+    "contract_address": "0xCF6D92Fb2996287C67A3B9dA1728924CF096347A",
+    "token_id": "12",
+    "name": "Nitro Lion #12",
+    "description": "Nitro Lion is an NFT collection which brings various rewards to its hodlers",
+    "image_url": "https://cdn.simplehash.com/assets/9ab9db90e55e40cec59f720bca097fb8d13310b6bc95be75eba4760715e1cd8b.gif",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/Wpp8RhnjRTVeiQs6-2-p2SuAmUgeIsubgdNX8nOlbETaN1GZBdGLZkLkXte-cwOh96yUZglHwNSIa8w8L9TJPOENJ93E-Tueog=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/Wpp8RhnjRTVeiQs6-2-p2SuAmUgeIsubgdNX8nOlbETaN1GZBdGLZkLkXte-cwOh96yUZglHwNSIa8w8L9TJPOENJ93E-Tueog",
+      "image_large_url": "https://lh3.googleusercontent.com/Wpp8RhnjRTVeiQs6-2-p2SuAmUgeIsubgdNX8nOlbETaN1GZBdGLZkLkXte-cwOh96yUZglHwNSIa8w8L9TJPOENJ93E-Tueog=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/Wpp8RhnjRTVeiQs6-2-p2SuAmUgeIsubgdNX8nOlbETaN1GZBdGLZkLkXte-cwOh96yUZglHwNSIa8w8L9TJPOENJ93E-Tueog=k-w1200-s2400-rj",
+      "blurhash": "UHFrI@bx9,=}0JogA9ITD+IT-5xaEdxbM_t9"
+    },
+    "background_color": null,
+    "external_url": null,
+    "created_date": "2022-09-02T20:57:21",
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0x5a92A2cEAB89286186BaCE8329FDDc22d818964a",
+        "quantity": 1,
+        "first_acquired_date": "2022-09-02T20:57:21",
+        "last_acquired_date": "2022-09-02T20:57:21"
+      }
+    ],
+    "last_sale": null,
+    "contract": {
+      "type": "ERC721",
+      "name": "Nitro Lion",
+      "symbol": "LION"
+    },
+    "collection": {
+      "collection_id": "fb664fd8f0eca0511b40630aebcc850b",
+      "name": "Nitro Lion",
+      "description": null,
+      "image_url": "https://lh3.googleusercontent.com/pcHOycDlwW26xiciBO--1bCufziuBg7vDU0XrZ3eji_56jAIznR7PsIJX2093GlJbuRbL2K1PjI4zt0jQB9l8ND_AD-IlSxQ9yw",
+      "banner_image_url": null,
+      "external_url": null,
+      "twitter_username": null,
+      "discord_url": null,
+      "marketplace_pages": [
+        {
+          "marketplace_name": "Stratos",
+          "marketplace_collection_id": "0xCF6D92Fb2996287C67A3B9dA1728924CF096347A",
+          "collection_url": "https://stratosnft.io/collection/0xCF6D92Fb2996287C67A3B9dA1728924CF096347A",
+          "verified": false
+        }
+      ],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "symbol": "LION",
+      "attributes": [
+        {
+          "trait_type": "Background",
+          "value": "Modern Restaurant"
+        },
+        {
+          "trait_type": "Status Effect",
+          "value": "Pink Flames"
+        },
+        {
+          "trait_type": "Body",
+          "value": "Body"
+        },
+        {
+          "trait_type": "Drip",
+          "value": "Armour"
+        },
+        {
+          "trait_type": "Eyes",
+          "value": "Red Visor"
+        },
+        {
+          "trait_type": "Head",
+          "value": "Crown"
+        },
+        {
+          "trait_type": "Mouth",
+          "value": "Silver Mask"
+        },
+        {
+          "trait_type": "Rarity Rank",
+          "value": 186,
+          "display_type": "number",
+          "max_value": 1111
+        }
+      ],
+      "image_original_url": "https://nftstorage.link/ipfs/QmTwm7Umm1MTv3W9hFHdmFMwYBFdQvkFyJtFYfKzKF7NSx/12.gif",
+      "animation_original_url": null
+    }
+  },
+  {
+    "nft_id": "ethereum.0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb.570",
+    "chain": "ethereum",
+    "contract_address": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+    "token_id": "570",
+    "name": "CryptoPunk #570",
+    "description": null,
+    "image_url": "https://cdn.simplehash.com/assets/0e81a01d0e86fe24583599dbfe16dc09af5eeefe6afbdbc1250784f520de8e7a.png",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/R8vq6sjk-Rljy07o4C-vgozSQfBumiF0SOiWhZ5_82pzKb2i8gQURW08gdLCLdPUqyUNMhUUqpdkt3K6TxDx3SYsS4CHGgZGtMg=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/R8vq6sjk-Rljy07o4C-vgozSQfBumiF0SOiWhZ5_82pzKb2i8gQURW08gdLCLdPUqyUNMhUUqpdkt3K6TxDx3SYsS4CHGgZGtMg",
+      "image_large_url": "https://lh3.googleusercontent.com/R8vq6sjk-Rljy07o4C-vgozSQfBumiF0SOiWhZ5_82pzKb2i8gQURW08gdLCLdPUqyUNMhUUqpdkt3K6TxDx3SYsS4CHGgZGtMg=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/R8vq6sjk-Rljy07o4C-vgozSQfBumiF0SOiWhZ5_82pzKb2i8gQURW08gdLCLdPUqyUNMhUUqpdkt3K6TxDx3SYsS4CHGgZGtMg=k-w1200-s2400-rj",
+      "blurhash": "UTF$n*t60{IpIbR*%IxaE1j[-Va|tKayRVoM"
+    },
+    "background_color": null,
+    "external_url": "https://www.larvalabs.com/cryptopunks/details/570",
+    "created_date": "2017-06-23T14:45:35",
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0xdE3df72601b79acec367eECc2d126BD946ACB320",
+        "quantity": 1,
+        "first_acquired_date": "2021-08-30T07:17:56",
+        "last_acquired_date": "2021-08-30T07:17:56"
+      }
+    ],
+    "last_sale": null,
+    "contract": {
+      "type": "CRYPTOPUNKS",
+      "name": "CRYPTOPUNKS",
+      "symbol": "Ͼ"
+    },
+    "collection": {
+      "collection_id": "6dbbb898be7ee3c05af90199fefce18b",
+      "name": "CryptoPunks",
+      "description": "CryptoPunks launched as a fixed set of 10,000 items in mid-2017 and became one of the inspirations for the ERC-721 standard. They have been featured in places like The New York Times, Christie’s of London, Art|Basel Miami, and The PBS NewsHour.",
+      "image_url": "https://lh3.googleusercontent.com/JpgFXpMefO8pMQ0DB1tNYtyJB1oP3ehLA7V1PlqAbP4PRfCyt6BdB-x2928ncuwMgoHKA7bzlOEoaL8oJZRQdfV6X28Mf8rp0i0B",
+      "banner_image_url": "https://lh3.googleusercontent.com/Iye7fnF496bHX6yOpg1c9DnhNY7_qVjn_Kzmk_gqBgczCdNWkgubhiCZP_hbVNU4h7Uv1HUtnTHu45puFB6wh3dDTUVazpIZ-w=w2500",
+      "external_url": "https://www.larvalabs.com/cryptopunks",
+      "twitter_username": "larvalabs",
+      "discord_url": "https://discord.gg/tQp4pSE",
+      "marketplace_pages": [
+        {
+          "marketplace_name": "OpenSea",
+          "marketplace_collection_id": "cryptopunks",
+          "collection_url": "https://opensea.io/collection/cryptopunks",
+          "verified": true
+        }
+      ],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "traits": [
+        {
+          "trait_type": "accessory",
+          "value": "Cap",
+          "display_type": null,
+          "max_value": null,
+          "trait_count": 351,
+          "order": null
+        },
+        {
+          "trait_type": "accessory",
+          "value": "Muttonchops",
+          "display_type": null,
+          "max_value": null,
+          "trait_count": 303,
+          "order": null
+        },
+        {
+          "trait_type": "type",
+          "value": "Male",
+          "display_type": null,
+          "max_value": null,
+          "trait_count": 6039,
+          "order": null
+        },
+        {
+          "trait_type": "accessory",
+          "value": "Cigarette",
+          "display_type": null,
+          "max_value": null,
+          "trait_count": 961,
+          "order": null
+        },
+        {
+          "trait_type": "accessory",
+          "value": "3 attributes",
+          "display_type": null,
+          "max_value": null,
+          "trait_count": 4122,
+          "order": null
+        }
+      ],
+      "is_nsfw": false,
+      "image_original_url": "https://www.larvalabs.com/cryptopunks/cryptopunk570.png",
+      "animation_original_url": null
+    }
+  },
+  {
     "nft_id": "ethereum.0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b.17028",
     "chain": "ethereum",
     "contract_address": "0x49cF6f5d44E70224e2E23fDcdd2C053F30aDA28B",
@@ -265,6 +471,63 @@
     },
     "extra_metadata": {
       "image_original_url": "https://lh3.googleusercontent.com/BT4Up_lDnIGHwV7r7gFYw6-oUenyuENfLOYRUwptuehxbj1zDzcj3w_X_x4LxDwqBrT_xeRZPRjEr26WSK4FD2DZ7VHjysw-c3DOX1A=s0",
+      "animation_original_url": null
+    }
+  },
+  {
+    "nft_id": "polygon.0x8d0501d85becda92b89e56177ddfcea5fc1f0af2.1272",
+    "chain": "polygon",
+    "contract_address": "0x8D0501d85becDA92B89E56177dDfcEA5Fc1f0AF2",
+    "token_id": "1272",
+    "name": "The Eyes #673",
+    "description": "To only see. — by u/Rojom\n\nThis Collectible Avatar was created by Rojom in partnership with Reddit, as a part of the Collectible Avatars Creator Program.\n\nIf you purchased this Collectible Avatar and want to connect it to your Reddit account, [visit Reddit to make it your avatar.](https://reddit.com/avatar/nft/polygon/8d0501d85becda92b89e56177ddfcea5fc1f0af2/1272?action=import)\n\n[Learn More About Collectible Avatars on Reddit.](https://reddithelp.com/hc/en-us/articles/6213835889044)\n\n[View the Previews Terms.](https://www.redditinc.com/policies/previews-terms)",
+    "image_url": "https://cdn.simplehash.com/assets/157477f51fa76dc5f52cbdef3eae85906e2b99baf6c922cf55890cba430b605d.png",
+    "video_url": null,
+    "audio_url": null,
+    "model_url": null,
+    "previews": {
+      "image_small_url": "https://lh3.googleusercontent.com/bLCupSm2N9iolxd9jdkcAFOpUs_-R6Pkkm-ffb0hnrJEYDgPGrvsXfnZuMTr3znoyXfCF712F8YA8PxU5_RYD41SDPdv9bT2b_Y=s250",
+      "image_medium_url": "https://lh3.googleusercontent.com/bLCupSm2N9iolxd9jdkcAFOpUs_-R6Pkkm-ffb0hnrJEYDgPGrvsXfnZuMTr3znoyXfCF712F8YA8PxU5_RYD41SDPdv9bT2b_Y",
+      "image_large_url": "https://lh3.googleusercontent.com/bLCupSm2N9iolxd9jdkcAFOpUs_-R6Pkkm-ffb0hnrJEYDgPGrvsXfnZuMTr3znoyXfCF712F8YA8PxU5_RYD41SDPdv9bT2b_Y=s1000",
+      "image_opengraph_url": "https://lh3.googleusercontent.com/bLCupSm2N9iolxd9jdkcAFOpUs_-R6Pkkm-ffb0hnrJEYDgPGrvsXfnZuMTr3znoyXfCF712F8YA8PxU5_RYD41SDPdv9bT2b_Y=k-w1200-s2400-rj",
+      "blurhash": "UPE{kNWBj[of~qj[WBj[9Fj[WBayayayofay"
+    },
+    "background_color": null,
+    "external_url": "https://reddit.com/avatar/nft/polygon/8d0501d85becda92b89e56177ddfcea5fc1f0af2/1272?action=import",
+    "created_date": "2022-07-14T06:46:15",
+    "status": "minted",
+    "token_count": 1,
+    "owner_count": 1,
+    "owners": [
+      {
+        "owner_address": "0x321B9448382BC3b4328aE844882D0Ab181807A18",
+        "quantity": 1,
+        "first_acquired_date": "2022-08-30T22:16:01",
+        "last_acquired_date": "2022-08-30T22:16:01"
+      }
+    ],
+    "last_sale": null,
+    "contract": {
+      "type": "ERC1155",
+      "name": null,
+      "symbol": null
+    },
+    "collection": {
+      "collection_id": "a09982a2a6574f13ccab31edeaece75d",
+      "name": null,
+      "description": null,
+      "image_url": "https://lh3.googleusercontent.com/FlM856S7BFGn4kL_5MBfDG1ldogT04aXgL68yFUnNc7hkha8zPHlc0aVRf64kvbYfGXsNCwRBb1w8WROI70LF9VRqAmx_tMhfAA",
+      "banner_image_url": null,
+      "external_url": null,
+      "twitter_username": null,
+      "discord_url": null,
+      "marketplace_pages": [],
+      "metaplex_mint": null,
+      "metaplex_first_verified_creator": null
+    },
+    "extra_metadata": {
+      "attributes": [],
+      "image_original_url": "ipfs://QmbY3ZRfhZR9Gwg4JTMvpCWZuKKP2YpLpSGE9HENk2QjmV",
       "animation_original_url": null
     }
   }

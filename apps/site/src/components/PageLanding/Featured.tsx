@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
 import NavButtons from '../NavButtons';
-import nfts from './nfts.json';
+import nfts from './json/nfts.json';
 import NFTCard from './NFTCard';
 
 export default function Featured() {
   const { t } = useTranslation();
-  console.log(nfts);
+
   return (
     <div className="flex flex-col gap-[3.625rem] pt-[8.375rem] px-[16.75rem]">
       <div className="flex justify-between">
@@ -19,17 +19,26 @@ export default function Featured() {
         </div>
         <NavButtons />
       </div>
-      <div className="flex gap-6 overflow-x-scroll">
-        {nfts.map((item) => (
+      <div className="grid grid-flow-col grid-rows-2 gap-6 pb-12 overflow-x-scroll scrollbar">
+        {nfts.map((item, index) => (
           <NFTCard
             key={item.token_id}
             chain={item.chain}
-            creatorName={item.collection.name}
-            creatorAvatar={item.collection.image_url}
+            creatorName={
+              item.collection?.twitter_username
+                ? item.collection.twitter_username
+                : 'Unknown'
+            }
+            creatorAvatar={item.collection?.image_url}
             token_id={item.token_id}
             name={item.name}
-            image_url={item.image_url}
-            url={item.external_url}
+            image_url={
+              index % 6 === 0
+                ? item.previews?.image_large_url
+                : item.previews?.image_medium_url
+            }
+            url={item.collection?.external_url}
+            big={index % 6 === 0 ? true : false}
           />
         ))}
       </div>
