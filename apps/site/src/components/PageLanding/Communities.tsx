@@ -3,9 +3,15 @@ import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
 import NavButtons from '../NavButtons';
 import CommunityCard from './CommunityCard';
 import communities from './json/communities.json';
+import { useRef } from 'react';
 
 export default function Communities() {
   const { t } = useTranslation();
+  const scrollRef = useRef(null);
+
+  const scroll = (scrollOffset) => {
+    scrollRef.current.scrollLeft += scrollOffset;
+  };
 
   return (
     <div className="flex flex-col gap-[3.375rem] pt-[8.375rem] px-[16.75rem]">
@@ -17,9 +23,12 @@ export default function Communities() {
           </span>
           <StarIcon />
         </div>
-        <NavButtons />
+        <NavButtons scroll={scroll} />
       </div>
-      <div className="flex gap-6 pb-4 overflow-x-scroll scrollbar">
+      <div
+        className="flex gap-6 pb-4 overflow-x-scroll scrollbar scroll-smooth"
+        ref={scrollRef}
+      >
         {communities.map((item) => (
           <CommunityCard
             key={item.key}

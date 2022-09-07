@@ -7,12 +7,14 @@ export default function Header() {
   return (
     <div className="w-screen h-full bg-no-repeat bg-cover bg-header">
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-80 lg:px-8 lg:flex lg:flex-col lg:items-center lg:justify-between">
-        <h1 className="font-bold text-center text-white text-h1 sm:text-4xl">
+        <h1 className="flex flex-wrap justify-center w-[54.875rem] font-bold text-center text-white text-h1 sm:text-4xl">
           <span>{t('pages.landing.header.welcome')}</span>
-          <span className="h-2 bg-primary text-inverted">
-            {t('pages.landing.header.next')}
-            <br /> {t('pages.landing.header.generation')}
-          </span>
+          <div className="items-center justify-center flex ml-2 w-44 h-[4.125rem] bg-primary text-inverted">
+            <span>{t('pages.landing.header.next')}</span>
+          </div>
+          <div className="flex items-center justify-center mr-2 w-[25.375rem] h-[4.125rem] bg-primary text-inverted">
+            <span>{t('pages.landing.header.generation')} </span>
+          </div>
           <span>{t('pages.landing.header.nfts')}</span>
         </h1>
         <TextInput

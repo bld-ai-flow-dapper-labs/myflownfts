@@ -3,9 +3,15 @@ import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
 import NavButtons from '../NavButtons';
 import nfts from './json/nfts.json';
 import NFTCard from './NFTCard';
+import { useRef } from 'react';
 
 export default function Featured() {
   const { t } = useTranslation();
+  const scrollRef = useRef(null);
+
+  const scroll = (scrollOffset) => {
+    scrollRef.current.scrollLeft += scrollOffset;
+  };
 
   return (
     <div className="flex flex-col gap-[3.625rem] pt-[8.375rem] px-[16.75rem]">
@@ -17,9 +23,12 @@ export default function Featured() {
           </span>
           <StarIcon />
         </div>
-        <NavButtons />
+        <NavButtons scroll={scroll} />
       </div>
-      <div className="grid grid-flow-col grid-rows-2 gap-6 pb-12 overflow-x-scroll scrollbar">
+      <div
+        className="grid grid-flow-col grid-rows-2 gap-6 pb-12 overflow-x-scroll scrollbar scroll-smooth"
+        ref={scrollRef}
+      >
         {nfts.map((item, index) => (
           <NFTCard
             key={item?.token_id}
