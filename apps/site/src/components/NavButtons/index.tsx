@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
+import Button from '../Button';
 import { ReactComponent as ChevronLeftIcon } from './images/icon-chevron-left.svg';
 import { ReactComponent as ChevronRightIcon } from './images/icon-chevron-right.svg';
 
@@ -7,15 +8,18 @@ export default function NavButtons() {
 
   return (
     <div className="flex items-center gap-3">
-      <button className="flex items-center justify-center w-16 h-16 rounded-lg bg-button-browse">
+      <Button className="w-16 h-16 bg-button-browse" variant="custom">
         <ChevronLeftIcon />
-      </button>
-      <button className="flex items-center justify-center w-16 h-16 rounded-lg bg-button-browse">
+      </Button>
+      <Button className="w-16 h-16 bg-button-browse" variant="custom">
         <ChevronRightIcon />
-      </button>
-      <button className="flex items-center justify-center w-[11.875rem] h-16 rounded-lg bg-button-browse text-white">
+      </Button>
+      <Button
+        className="w-[11.875rem] h-16 bg-button-browse text-white font-sans"
+        variant="custom"
+      >
         {t('pages.landing.buttonBrowseMore')}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -12,7 +12,6 @@ module.exports = {
   theme: {
     colors: {
       primary: '#23ff82',
-      secondary: '#5A72F8',
       container: {
         dark: '#A5A4FF33',
         text: '#E3E3F8',
@@ -23,7 +22,7 @@ module.exports = {
       'button-browse': '#2d3040',
       indigo: {
         50: '#eef2ff',
-        600: '#4f46e5',
+        600: '#5A72F8',
         700: '#4338ca',
       },
       gray: {

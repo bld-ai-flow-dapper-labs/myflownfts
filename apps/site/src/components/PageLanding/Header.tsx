@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import TextInput from '../TextInput';
+import Button from '../Button';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -21,22 +22,20 @@ export default function Header() {
         />
         <div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="h-[3.125rem] w-[13.125rem] inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg text-white bg-indigo-600 hover:bg-indigo-700"
-            >
+            <Button href="#" className="h-[3.125rem] w-[13.125rem]">
               {t('common.buttonConnectWallet')}
-            </a>
+            </Button>
           </div>
           <div className="inline-flex ml-3 rounded-md shadow">
-            <a
+            <Button
               href="https://flow.com/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center w-[13.125rem] justify-center px-5 py-3 font-semibold text-indigo-600 bg-white rounded-lg text-button hover:bg-indigo-50"
+              className="h-[3.125rem] w-[13.125rem]"
+              variant="light"
             >
               {t('pages.landing.buttonLearnMore')}
-            </a>
+            </Button>
           </div>
         </div>
       </div>

@@ -28,5 +28,65 @@
     "name": "Dr Seuss",
     "image": "/communities/card-drseuss.png",
     "url": "https://seussibles.com/"
+  },
+  {
+    "key": 6,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot1.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 7,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike1.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 8,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot2.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 9,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike2.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 10,
+    "name": "Dr Seuss",
+    "image": "/communities/card-drseuss.png",
+    "url": "https://seussibles.com/"
+  },
+  {
+    "key": 11,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot1.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 12,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike1.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 13,
+    "name": "NBA Topshot",
+    "image": "/communities/card-topshot2.png",
+    "url": "https://nbatopshot.com/"
+  },
+  {
+    "key": 14,
+    "name": "UFC Strike",
+    "image": "/communities/card-ufcstrike2.png",
+    "url": "https://www.ufcstrike.com/"
+  },
+  {
+    "key": 15,
+    "name": "Dr Seuss",
+    "image": "/communities/card-drseuss.png",
+    "url": "https://seussibles.com/"
   }
 ]
