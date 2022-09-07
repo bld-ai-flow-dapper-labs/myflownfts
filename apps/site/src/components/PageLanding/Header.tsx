@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
+import TextInput from '../TextInput';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -13,10 +14,10 @@ export default function Header() {
           </span>
           <span>{t('pages.landing.header.nfts')}</span>
         </h1>
-        <input
-          type="text"
-          className="h-8 m-10 rounded-md w-96 placeholder:pl-2"
+        <TextInput
+          containerClassName="h-16 m-10 w-[54.875rem]"
           placeholder={t('common.search')}
+          searchBar
         />
         <div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
