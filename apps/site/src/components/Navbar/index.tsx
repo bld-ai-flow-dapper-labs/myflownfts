@@ -4,7 +4,7 @@ import { ReactComponent as ImageLogo } from './images/logo.svg';
 export default function Navbar() {
   const { t } = useTranslation();
   return (
-    <div className="absolute flex items-center justify-between w-screen h-20 px-20">
+    <div className="absolute flex items-center justify-between w-full h-20 px-20">
       <div className="flex items-center">
         <ImageLogo />
         <span className="pl-3 font-bold text-white text-h4">

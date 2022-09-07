@@ -4,9 +4,9 @@ import { ReactComponent as ImageLogo } from './images/logo-intro.svg';
 export default function Intro() {
   const { t } = useTranslation();
   return (
-    <div className="bg-intro bg-no-repeat bg-cover w-screen h-[824px] pl-[17rem] pt-[11.875rem]">
+    <div className="bg-intro bg-no-repeat bg-cover w-full h-[824px] pl-[17rem] pt-[10.75rem]">
       <ImageLogo />
-      <div className="w-[46rem] pt-[3.75rem]">
+      <div className="w-[46rem] pt-[2.625rem]">
         <span className="block font-bold text-white text-md">
           {t('pages.landing.intro.title')}
         </span>

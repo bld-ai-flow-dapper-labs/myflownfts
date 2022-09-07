@@ -26,7 +26,7 @@ export default function Communities() {
         <NavButtons scroll={scroll} />
       </div>
       <div
-        className="flex gap-6 pb-4 overflow-x-scroll scrollbar scroll-smooth"
+        className="flex gap-6 pb-10 overflow-x-scroll scrollbar scroll-smooth"
         ref={scrollRef}
       >
         {communities.map((item) => (

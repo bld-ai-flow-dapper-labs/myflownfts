@@ -14,7 +14,7 @@ export default function PageLanding() {
       <Header />
       <Intro />
       <Partners />
-      <div className="bg-community-featured h-[122.25rem] bg-no-repeat bg-cover">
+      <div className="bg-community-featured h-[128.375rem] bg-no-repeat bg-cover bg-center">
         <Communities />
         <Featured />
       </div>

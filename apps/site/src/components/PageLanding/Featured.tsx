@@ -26,7 +26,7 @@ export default function Featured() {
         <NavButtons scroll={scroll} />
       </div>
       <div
-        className="grid grid-flow-col grid-rows-2 gap-6 pb-12 overflow-x-scroll scrollbar scroll-smooth"
+        className="grid grid-flow-col grid-rows-2 gap-6 pb-[3.875rem] overflow-x-scroll scrollbar scroll-smooth"
         ref={scrollRef}
       >
         {nfts.map((item, index) => (

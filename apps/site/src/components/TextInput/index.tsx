@@ -38,10 +38,10 @@ export default function TextInput({
       <input
         type="text"
         className={classNames(
-          'rounded-md py-4 px-6 text-body font-body text-white truncate box-border w-full h-full',
+          'rounded-md pb-4 pt-3 px-6 text-body font-body text-white truncate box-border w-full h-full',
           styling === 'dark' && 'bg-container-dark',
           startIcon && 'pl-10',
-          (endIcon || searchBar) && 'pr-10',
+          (endIcon || searchBar) && 'pr-20',
           className
         )}
         disabled={disabled}
