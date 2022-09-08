@@ -1,10 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 import { ReactComponent as ImageLogo } from './images/logo.svg';
+import { ReactComponent as SearchIcon } from './images/icon-search.svg';
+import { ReactComponent as DrawerIcon } from './images/icon-drawer.svg';
 
 export default function Navbar() {
   const { t } = useTranslation();
   return (
-    <div className="absolute flex items-center justify-between w-full h-20 px-20">
+    <div className="absolute flex items-center justify-between w-full h-20 px-6 md:px-20 bg-nav-mobile md:bg-transparent">
       <div className="flex items-center">
         <ImageLogo />
         <span className="pl-3 font-bold text-white text-h4">
@@ -13,10 +15,14 @@ export default function Navbar() {
       </div>
       <a
         href="#"
-        className="h-[3.125rem] w-[13.125rem] inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg text-white bg-indigo-600 hover:bg-indigo-700"
+        className="hidden h-[3.125rem] w-[13.125rem] md:inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg text-white bg-indigo-600 hover:bg-indigo-700"
       >
         {t('common.buttonConnectWallet')}
       </a>
+      <div className="flex gap-3 md:hidden">
+        <SearchIcon />
+        <DrawerIcon />
+      </div>
     </div>
   );
 }

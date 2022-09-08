@@ -29,7 +29,7 @@ export default function TextInput({
   ...otherProps
 }: TextInputProps) {
   return (
-    <div className={classNames('box-border relative', containerClassName)}>
+    <div className={classNames('box-border relative flex', containerClassName)}>
       {startIcon && (
         <div className="absolute left-0 p-6 -translate-y-1/2 top-1/2">
           {startIcon}

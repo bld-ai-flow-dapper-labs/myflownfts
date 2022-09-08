@@ -11,10 +11,10 @@ import { ReactComponent as TelegramIcon } from './images/icon-telegram.svg';
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <div className="flex items-center justify-between h-[8.5rem] bg-gray-900 px-20">
-      <Logo />
-      <div className="flex flex-col items-center justify-center gap-6 pl-[6.75rem]">
-        <div className="flex gap-6">
+    <div className="flex md:flex-row flex-col-reverse items-center justify-center md:justify-between w-full h-full md:h-[8.5rem] bg-gray-900 px-20">
+      <Logo className="order-last my-6 md:order-first md:my-0" />
+      <div className="flex flex-col items-center gap-6 md:pl-[6.75rem] place-self-center mb-[3.25rem] md:mb-0">
+        <div className="flex items-center gap-6">
           <a href="#">
             <DiscordIcon />
           </a>
@@ -38,7 +38,7 @@ export default function Footer() {
           />
         </span>
       </div>
-      <div className="flex gap-[2.25rem] font-semibold text-white text-footer">
+      <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 md:mb-0">
         <a href="#">{t('pages.landing.footer.terms')}</a>
         <a href="#">{t('pages.landing.footer.contactUs')}</a>
       </div>

@@ -34,4 +34,17 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  @keyframes move-ticker {
+    from {
+      transform: translate(-115%, 0);
+    }
+    to {
+      transform: translate(9.3%, 0);
+    }
+  }
+
+  .scroll-ticker {
+    animation: move-ticker 20s linear infinite;
+  }
 }

@@ -19,8 +19,16 @@ export default function Partners() {
         </span>
         <StarIcon />
       </div>
-      <div className="w-full pt-4">
-        <div className="grid items-center grid-flow-col pr-12 overflow-x-scroll gap-44 no-scrollbar">
+      <div className="w-full pt-4 overflow-hidden">
+        <div className="grid items-center grid-flow-col pr-12 gap-44 scroll-ticker">
+          {/*  overflow-x-scroll gap-44 no-scrollbar if no animation */}
+          <NBAIcon />
+          <DrSeussIcon />
+          <UFCIcon />
+          <SamsungIcon />
+          <UbisoftIcon />
+          <NFLIcon />
+          <TopshotIcon />
           <NBAIcon />
           <DrSeussIcon />
           <UFCIcon />

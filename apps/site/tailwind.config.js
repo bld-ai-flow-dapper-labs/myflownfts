@@ -29,6 +29,8 @@ module.exports = {
         700: '#82818e',
         900: '#202124',
       },
+      'nav-mobile': '#2021244D',
+      transparent: 'transparent',
     },
     fontFamily: {
       sans: ['Termina', ...defaultTheme.fontFamily.sans],
@@ -48,6 +50,7 @@ module.exports = {
       body: ['0.9375rem', { lineHeight: '18px' }], //15px
       caption: ['0.75rem', { lineHeight: '14.4px' }], //12px
       button: ['0.875rem', { letterSpacing: '0.03em', lineHeight: '24px' }], //14px
+      'mobile-h1': ['1.5rem', { letterSpacing: '0.05em', lineHeight: '36px' }], //24px
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,
@@ -58,6 +61,8 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         header: "url('../../src/components/PageLanding/images/bg-header.png')",
+        'header-mobile':
+          "url('../../src/components/PageLanding/images/bg-header-mobile.png')",
         intro: "url('../../src/components/PageLanding/images/bg-intro.png')",
         partners:
           "url('../../src/components/PageLanding/images/bg-partners.png')",
