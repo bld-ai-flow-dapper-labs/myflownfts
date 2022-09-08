@@ -5,10 +5,10 @@ import Button from '../Button';
 export default function Header() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-end h-screen gap-[2.25rem] md:gap-16 px-5 pb-[7.25rem] md:pb-0 bg-center bg-no-repeat bg-cover md:justify-center bg-header-mobile md:bg-header">
-      <h1 className="flex flex-wrap justify-center items-center lg:w-[54.875rem] font-bold text-white lg:text-h1 text-mobile-h1">
+    <div className="flex flex-col items-center justify-end h-full md:h-screen gap-[2.25rem] md:gap-16 px-5 pb-[7.25rem] md:pb-0 bg-center bg-no-repeat bg-cover py-[23rem] md:py-0 md:justify-center bg-header-mobile md:bg-header">
+      <h1 className="flex flex-wrap justify-center items-center md:w-[54.875rem] font-bold text-white md:text-h1 text-mobile-h1">
         <span>{t('pages.landing.header.welcome')}</span>
-        <div className="items-center justify-center flex mx-2 lg:px-[0.625rem] pl-[0.625rem] pr-2 py-0.5 bg-primary text-inverted">
+        <div className="items-center justify-center flex mx-2 md:px-[0.625rem] pl-[0.625rem] pr-2 py-0.5 bg-primary text-inverted">
           <span>{t('pages.landing.header.next')}</span>
           <span className="inline ml-2 lg:hidden">
             {t('pages.landing.header.generation')}

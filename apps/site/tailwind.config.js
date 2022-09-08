@@ -18,6 +18,7 @@ module.exports = {
       },
       chip: '#2A9CA6',
       white: colors.white,
+      black: colors.black,
       inverted: '#122a48',
       'button-browse': '#2d3040',
       indigo: {
@@ -51,6 +52,11 @@ module.exports = {
       caption: ['0.75rem', { lineHeight: '14.4px' }], //12px
       button: ['0.875rem', { letterSpacing: '0.03em', lineHeight: '24px' }], //14px
       'mobile-h1': ['1.5rem', { letterSpacing: '0.05em', lineHeight: '36px' }], //24px
+      'mobile-section': [
+        '1.125rem',
+        { letterSpacing: '0.05em', lineHeight: '36px' },
+      ], //18px
+      'mobile-md': ['1.25rem', { letterSpacing: '0.05em', lineHeight: '24px' }],
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,
@@ -64,11 +70,15 @@ module.exports = {
         'header-mobile':
           "url('../../src/components/PageLanding/images/bg-header-mobile.png')",
         intro: "url('../../src/components/PageLanding/images/bg-intro.png')",
+        'intro-mobile':
+          "url('../../src/components/PageLanding/images/bg-intro-mobile.png')",
         partners:
           "url('../../src/components/PageLanding/images/bg-partners.png')",
         'community-featured':
           "url('../../src/components/PageLanding/images/bg-community-featured.png')",
         signup: "url('../../src/components/PageLanding/images/bg-signup.png')",
+        'signup-mobile':
+          "url('../../src/components/PageLanding/images/bg-signup-mobile.png')",
       }),
     },
   },

@@ -11,31 +11,31 @@ import { ReactComponent as StarIcon } from './images/icon-star-green.svg';
 export default function Partners() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center w-full h-[21.5rem] bg-no-repeat bg-cover bg-partners text-h3 pt-16 gap-6">
+    <div className="flex flex-col items-center w-full h-[14.375rem] md:h-[21.5rem] bg-no-repeat bg-cover bg-partners text-h3 pt-12 md:pt-16 gap-6">
       <div className="flex items-center gap-12">
         <StarIcon />
-        <span className="font-bold text-white text-section">
+        <span className="font-bold text-white text-mobile-section md:text-section">
           {t('pages.landing.partners')}
         </span>
         <StarIcon />
       </div>
-      <div className="w-full pt-4 overflow-hidden">
-        <div className="grid items-center grid-flow-col pr-12 gap-44 scroll-ticker">
+      <div className="w-full -mt-[1.75rem] overflow-hidden md:mt-4">
+        <div className="grid items-center grid-flow-col pr-12 md:gap-44 scroll-ticker-sm md:scroll-ticker-md">
           {/*  overflow-x-scroll gap-44 no-scrollbar if no animation */}
-          <NBAIcon />
-          <DrSeussIcon />
-          <UFCIcon />
-          <SamsungIcon />
-          <UbisoftIcon />
-          <NFLIcon />
-          <TopshotIcon />
-          <NBAIcon />
-          <DrSeussIcon />
-          <UFCIcon />
-          <SamsungIcon />
-          <UbisoftIcon />
-          <NFLIcon />
-          <TopshotIcon />
+          <NBAIcon className="scale-50 md:scale-100" />
+          <DrSeussIcon className="scale-50 md:scale-100" />
+          <UFCIcon className="scale-50 md:scale-100" />
+          <SamsungIcon className="scale-50 md:scale-100" />
+          <UbisoftIcon className="mx-10 scale-50 md:scale-100 md:mx-0" />
+          <NFLIcon className="mx-10 scale-50 md:scale-100 md:mx-0" />
+          <TopshotIcon className="scale-50 md:scale-100" />
+          <NBAIcon className="scale-50 md:scale-100" />
+          <DrSeussIcon className="scale-50 md:scale-100" />
+          <UFCIcon className="scale-50 md:scale-100" />
+          <SamsungIcon className="scale-50 md:scale-100" />
+          <UbisoftIcon className="mx-10 scale-50 md:scale-100 md:mx-0" />
+          <NFLIcon className="mx-10 scale-50 md:scale-100 md:mx-0" />
+          <TopshotIcon className="scale-50 md:scale-100" />
         </div>
       </div>
     </div>

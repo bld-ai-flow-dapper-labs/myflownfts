@@ -23,7 +23,7 @@ export default function Communities() {
           </span>
           <StarIcon />
         </div>
-        <NavButtons scroll={scroll} />
+        <NavButtons className="hidden md:flex" scroll={scroll} />
       </div>
       <div
         className="flex gap-6 pb-10 overflow-x-scroll scrollbar scroll-smooth"

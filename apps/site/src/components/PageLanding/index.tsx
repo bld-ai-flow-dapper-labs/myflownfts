@@ -12,14 +12,14 @@ export default function PageLanding() {
     <div>
       <Navbar />
       <Header />
-      {/* <Intro />
+      <Intro />
       <Partners />
       <div className="bg-community-featured h-[128.375rem] bg-no-repeat bg-cover bg-center">
         <Communities />
-        <Featured />
+        {/* <Featured /> */}
       </div>
       <Signup />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }
