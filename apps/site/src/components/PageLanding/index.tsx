@@ -1,7 +1,6 @@
-import Navbar from '../Navbar';
+import { Navbar, Footer } from '../UI';
 import Communities from './Communities';
 import Featured from './Featured';
-import Footer from './Footer';
 import Header from './Header';
 import Intro from './Intro';
 import Partners from './Partners';

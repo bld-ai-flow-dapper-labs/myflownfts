@@ -66,19 +66,24 @@ module.exports = {
     },
     extend: {
       backgroundImage: (theme) => ({
-        header: "url('../../src/components/PageLanding/images/bg-header.png')",
+        header:
+          "url('../../src/components/PageLanding/images/header/bg-header.png')",
         'header-mobile':
-          "url('../../src/components/PageLanding/images/bg-header-mobile.png')",
-        intro: "url('../../src/components/PageLanding/images/bg-intro.png')",
+          "url('../../src/components/PageLanding/images/header/bg-header-mobile.png')",
+        intro:
+          "url('../../src/components/PageLanding/images/intro/bg-intro.png')",
         'intro-mobile':
-          "url('../../src/components/PageLanding/images/bg-intro-mobile.png')",
+          "url('../../src/components/PageLanding/images/intro/bg-intro-mobile.png')",
         partners:
-          "url('../../src/components/PageLanding/images/bg-partners.png')",
+          "url('../../src/components/PageLanding/images/partners/bg-partners.png')",
+        'partners-mobile':
+          "url('../../src/components/PageLanding/images/partners/bg-partners-mobile.png')",
         'community-featured':
-          "url('../../src/components/PageLanding/images/bg-community-featured.png')",
-        signup: "url('../../src/components/PageLanding/images/bg-signup.png')",
+          "url('../../src/components/PageLanding/images/community-featured/bg-community-featured.png')",
+        signup:
+          "url('../../src/components/PageLanding/images/signup/bg-signup.png')",
         'signup-mobile':
-          "url('../../src/components/PageLanding/images/bg-signup-mobile.png')",
+          "url('../../src/components/PageLanding/images/signup/bg-signup-mobile.png')",
       }),
     },
   },

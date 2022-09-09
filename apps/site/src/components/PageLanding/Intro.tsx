@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as ImageLogo } from './images/logo-intro.svg';
+import { ReactComponent as ImageLogo } from './images/intro/logo-intro.svg';
 
 export default function Intro() {
   const { t } = useTranslation();

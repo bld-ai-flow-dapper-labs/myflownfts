@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
-import NavButtons from '../NavButtons';
+import { ReactComponent as StarIcon } from './images/community-featured/icon-star-yellow.svg';
+import { NavButtons } from '../UI';
 import CommunityCard from './CommunityCard';
 import communities from './json/communities.json';
 import { useRef } from 'react';
@@ -31,7 +31,7 @@ export default function Communities() {
       >
         {communities.map((item) => (
           <CommunityCard
-            key={item.key}
+            key={item.id}
             name={item.name}
             image={item.image}
             url={item.url}

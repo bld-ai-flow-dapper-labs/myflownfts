@@ -1,7 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as Logo } from './images/logo-filled.svg';
-import Button from '../Button';
-import TextInput from '../TextInput';
+import { ReactComponent as Logo } from './images/signup/logo-filled.svg';
+import { Button, TextInput } from '../UI';
 // import { ReactComponent as DiscordIcon } from './images/icon-discord.svg';
 
 export default function Signup() {

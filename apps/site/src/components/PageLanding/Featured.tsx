@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as StarIcon } from './images/icon-star-yellow.svg';
-import NavButtons from '../NavButtons';
+import { ReactComponent as StarIcon } from './images/community-featured/icon-star-yellow.svg';
+import { NavButtons } from '../UI';
 import nfts from './json/nfts.json';
 import NFTCard from './NFTCard';
 import { useRef } from 'react';

@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import TextInput from '../TextInput';
-import Button from '../Button';
+import { Button, TextInput } from '../UI';
 
 export default function Header() {
   const { t } = useTranslation();

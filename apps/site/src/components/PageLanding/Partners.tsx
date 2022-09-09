@@ -6,12 +6,12 @@ import { ReactComponent as SamsungIcon } from './images/partners/icon-samsung.sv
 import { ReactComponent as UbisoftIcon } from './images/partners/icon-ubisoft.svg';
 import { ReactComponent as NFLIcon } from './images/partners/icon-nfl.svg';
 import { ReactComponent as TopshotIcon } from './images/partners/icon-topshot.svg';
-import { ReactComponent as StarIcon } from './images/icon-star-green.svg';
+import { ReactComponent as StarIcon } from './images/partners/icon-star-green.svg';
 
 export default function Partners() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center w-full h-[14.375rem] md:h-[21.5rem] bg-no-repeat bg-cover bg-partners text-h3 pt-12 md:pt-16 gap-6">
+    <div className="flex flex-col items-center w-full h-[14.375rem] md:h-[21.5rem] bg-no-repeat bg-cover bg-partners-mobile md:bg-partners bg-bottom text-h3 pt-12 md:pt-16 gap-6">
       <div className="flex items-center gap-12">
         <StarIcon />
         <span className="font-bold text-white text-mobile-section md:text-section">
