@@ -14,19 +14,19 @@ export default function Communities() {
   };
 
   return (
-    <div className="flex flex-col gap-[3.375rem] pt-12 md:pt-[8.375rem] px-5 md:px-[16.75rem]">
-      <div className="flex items-center justify-center md:py-4 md:justify-between">
-        <div className="flex items-center gap-[1.125rem] md:gap-12">
+    <div className="flex flex-col gap-[3.375rem] pt-12 xl:pt-[8.375rem] px-5 xl:px-[16.75rem]">
+      <div className="flex items-center justify-center lg:py-4 lg:justify-between">
+        <div className="flex items-center gap-[1.125rem] lg:gap-6 2xl:gap-12">
           <StarIcon />
-          <span className="font-bold text-white text-mobile-section md:text-section">
+          <span className="font-bold text-white text-mobile-section lg:text-h3 2xl:text-section">
             {t('pages.landing.ourCommunities')}
           </span>
           <StarIcon />
         </div>
-        <NavButtons className="hidden md:flex" scroll={scroll} />
+        <NavButtons className="hidden lg:flex" scroll={scroll} />
       </div>
       <div
-        className="flex gap-6 -mt-[1.875rem] overflow-x-scroll md:mt-0 md:pb-10 scrollbar-mobile md:scrollbar scroll-smooth"
+        className="flex gap-6 -mt-[1.875rem] overflow-x-scroll xl:mt-0 xl:pb-10 scrollbar-mobile xl:scrollbar scroll-smooth"
         ref={scrollRef}
       >
         {communities.map((item) => (
@@ -39,7 +39,8 @@ export default function Communities() {
         ))}
       </div>
       <NavButtons
-        className="flex -mt-[1.875rem] md:hidden"
+        // sm:self-center sm:w-80, for centered and constrained size
+        className="flex -mt-[1.875rem] lg:hidden"
         scroll={scroll}
         mobile
       />

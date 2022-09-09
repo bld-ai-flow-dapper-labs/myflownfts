@@ -31,7 +31,7 @@ export default function TextInput({
   return (
     <div className={classNames('box-border relative flex', containerClassName)}>
       {startIcon && (
-        <div className="absolute left-0 p-6 -translate-y-1/2 top-1/2">
+        <div className="absolute left-0 p-3 -translate-y-1/2 top-1/2">
           {startIcon}
         </div>
       )}
@@ -50,7 +50,7 @@ export default function TextInput({
         {...otherProps}
       />
       {(searchBar || endIcon) && (
-        <div className="absolute right-0 p-6 -translate-y-1/2 top-1/2">
+        <div className="absolute right-0 p-3 -translate-y-1/2 top-1/2">
           {searchBar ? <SearchIcon /> : endIcon}
         </div>
       )}

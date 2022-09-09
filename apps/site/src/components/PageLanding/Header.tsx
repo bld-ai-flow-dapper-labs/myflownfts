@@ -1,27 +1,43 @@
 import useTranslation from 'next-translate/useTranslation';
+import classnames from 'classnames';
 import { Button, TextInput } from '../UI';
 
 export default function Header() {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-end h-full md:h-screen gap-[2.25rem] md:gap-16 px-5 pb-[7.25rem] md:pb-0 bg-center bg-no-repeat bg-cover py-[23rem] md:py-0 md:justify-center bg-header-mobile md:bg-header">
-      <h1 className="flex flex-wrap justify-center items-center md:w-[54.875rem] font-bold text-white md:text-h1 text-mobile-h1">
+    <div
+      className={classnames(
+        'flex flex-col items-center justify-center',
+        'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
+        'xs:bg-header-mobile-xs',
+        'sm:bg-header-mobile-sm sm:justify-bottom',
+        'md:pb-24',
+        'lg:gap-16 lg:justify-center lg:bg-header lg:pb-[19rem]'
+      )}
+    >
+      <h1
+        className={classnames(
+          'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
+          'xs:w-[25rem] sm:w-[30rem] md:w-[54.875rem] md:text-h2',
+          'lg:text-h1'
+        )}
+      >
         <span>{t('pages.landing.header.welcome')}</span>
-        <div className="items-center justify-center flex mx-2 md:px-[0.625rem] pl-[0.625rem] pr-2 py-0.5 bg-primary text-inverted">
+        <div className="items-center justify-center flex mx-2 sm:px-[0.625rem] pl-[0.625rem] pr-2 py-0.5 bg-primary text-inverted">
           <span>{t('pages.landing.header.next')}</span>
-          <span className="inline ml-2 lg:hidden">
+          <span className="inline ml-2 sm:hidden">
             {t('pages.landing.header.generation')}
           </span>
         </div>
-        <div className="hidden lg:inline">
-          <div className="flex items-center justify-center mr-2 lg:px-[0.625rem] pr-[0.625rem] py-0.5 bg-primary text-inverted">
+        <div className="hidden sm:inline">
+          <div className="flex items-center justify-center mr-2 sm:px-[0.625rem] pr-[0.625rem] py-0.5 bg-primary text-inverted">
             <span>{t('pages.landing.header.generation')} </span>
           </div>
         </div>
         <span>{t('pages.landing.header.nfts')}</span>
       </h1>
       <TextInput
-        containerClassName="grid h-16 md:max-w-[54.875rem] flex-shrink w-full" //2xl:w-[54.875rem] w-[34.875rem]
+        containerClassName="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
         className="placeholder:font-semibold md:placeholder:font-medium"
         placeholder={t('common.search')}
         searchBar

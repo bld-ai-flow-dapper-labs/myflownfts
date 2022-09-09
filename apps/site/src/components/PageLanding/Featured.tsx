@@ -14,19 +14,19 @@ export default function Featured() {
   };
 
   return (
-    <div className="flex flex-col gap-[3.375rem] pt-12 md:pt-[8.375rem] px-5 md:px-[16.75rem]">
-      <div className="flex items-center justify-center md:py-4 md:justify-between">
-        <div className="flex items-center gap-[1.125rem] md:gap-12">
+    <div className="flex flex-col gap-[3.375rem] pt-12 xl:pt-[8.375rem] px-5 xl:px-[16.75rem] lg:pb-[5.25rem]">
+      <div className="flex items-center justify-center lg:py-4 lg:justify-between">
+        <div className="flex items-center gap-[1.125rem] lg:gap-6 2xl:gap-12">
           <StarIcon />
-          <span className="font-bold text-white text-mobile-section md:text-section">
+          <span className="font-bold text-white text-mobile-section lg:text-h3 2xl:text-section">
             {t('pages.landing.featuredNFTs')}
           </span>
           <StarIcon />
         </div>
-        <NavButtons className="hidden md:flex" scroll={scroll} />
+        <NavButtons className="hidden lg:flex" scroll={scroll} />
       </div>
       <div
-        className="grid grid-flow-col grid-rows-1 -mt-8 md:mt-0 md:grid-rows-2 gap-6 pb-6 md:pb-[3.875rem] overflow-x-scroll scrollbar-mobile md:scrollbar scroll-smooth"
+        className="grid grid-flow-col grid-rows-1 -mt-8 xl:mt-0 xl:grid-rows-2 gap-6 pb-6 xl:pb-[3.875rem] overflow-x-scroll scrollbar-mobile lg:scrollbar scroll-smooth"
         ref={scrollRef}
       >
         {nfts.map((item, index) => (
@@ -54,7 +54,8 @@ export default function Featured() {
         ))}
       </div>
       <NavButtons
-        className="flex -mt-[1.875rem] mb-12 md:hidden"
+        // sm:self-center sm:w-80, for centered and constrained size
+        className="flex -mt-[1.875rem] pb-12 lg:hidden"
         scroll={scroll}
         mobile
       />

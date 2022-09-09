@@ -13,7 +13,7 @@ export default function PageLanding() {
       <Header />
       <Intro />
       <Partners />
-      <div className="bg-community-featured h-fit md:h-[128.375rem] bg-no-repeat bg-cover bg-center">
+      <div className="h-full bg-center bg-no-repeat bg-cover bg-community-featured-mobile lg:bg-community-featured">
         <Communities />
         <Featured />
       </div>

@@ -28,10 +28,10 @@ export default function NFTCard({
     return (
       <a
         key={token_id}
-        className="flex flex-grow-0 flex-col h-[28.125rem] w-[20.5rem] md:w-[42.5rem] md:h-[51.5rem] bg-container-dark rounded-lg gap-6 md:row-span-2"
+        className="flex flex-grow-0 flex-col h-[28.125rem] w-[20.5rem] xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark rounded-lg gap-6 xl:row-span-2"
         href={url}
       >
-        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25rem] md:h-[50rem] bg-white">
+        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25rem] xl:h-[50rem] bg-white">
           <Image
             loader={() => image_url}
             src={image_url}
@@ -74,10 +74,10 @@ export default function NFTCard({
     return (
       <a
         key={token_id}
-        className="flex flex-col h-[28.125rem] w-[20.5rem] md:h-[25rem] bg-container-dark rounded-lg gap-6"
+        className="flex flex-col h-[28.125rem] w-[20.5rem] xl:h-[25rem] bg-container-dark rounded-lg gap-6"
         href={url}
       >
-        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25.75rem] md:h-[16.875rem]">
+        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25.75rem] xl:h-[16.875rem]">
           <Image
             loader={() => image_url}
             src={image_url}
