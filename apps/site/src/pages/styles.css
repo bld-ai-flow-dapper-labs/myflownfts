@@ -24,6 +24,27 @@
     background: #c0a0b9;
   }
 
+  .scrollbar-mobile::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #4d4d50;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-thumb {
+    background: #f5c6fb;
+    border-radius: 100vh;
+  }
+
+  .scrollbar-mobile::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
