@@ -11,6 +11,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      current: 'currentColor',
       primary: '#23ff82',
       container: {
         dark: '#A5A4FF33',
@@ -19,18 +20,23 @@ module.exports = {
       chip: '#2A9CA6',
       white: colors.white,
       black: colors.black,
+      yellow: '#FFF030',
       inverted: '#122a48',
-      'button-browse': '#2d3040',
+      scroll: {
+        button: '#2d3040',
+        hover: '#474c63',
+      },
       indigo: {
         50: '#eef2ff',
         600: '#5A72F8',
         700: '#4338ca',
       },
       gray: {
+        50: '#bfbfbf',
         700: '#82818e',
         900: '#202124',
       },
-      'nav-mobile': '#2021244D',
+      'navbar-mobile': '#2021244D',
       transparent: 'transparent',
     },
     fontFamily: {

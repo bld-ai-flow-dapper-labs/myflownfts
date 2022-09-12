@@ -1,4 +1,4 @@
-import { Navbar, Footer } from '../UI';
+import { Navbar, Footer } from '../common';
 import Communities from './Communities';
 import Featured from './Featured';
 import Header from './Header';

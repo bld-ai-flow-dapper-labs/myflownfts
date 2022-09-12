@@ -55,29 +55,4 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-
-  @keyframes move-ticker {
-    from {
-      transform: translate(-115%, 0);
-    }
-    to {
-      transform: translate(9.3%, 0);
-    }
-  }
-
-  @keyframes move-ticker-sm {
-    from {
-      transform: translate(-500%, 0);
-    }
-    to {
-      transform: translate(10%, 0);
-    }
-  }
-
-  .scroll-ticker-md {
-    animation: move-ticker 20s linear infinite;
-  }
-  .scroll-ticker-sm {
-    animation: move-ticker-sm 30s linear infinite;
-  }
 }

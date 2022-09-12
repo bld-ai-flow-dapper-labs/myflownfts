@@ -1,27 +1,14 @@
 {
   "common": {
-    "buttonConnectWallet": "Connect Wallet",
     "title": "My Flow NFTs",
+    "buttonBrowseMore": "Browse More",
+    "buttonConnectWallet": "Connect Wallet",
     "search": "Search by Wallet Address, NFT or Community"
   },
   "pages": {
     "landing": {
-      "buttonBrowseMore": "Browse More",
       "buttonLearnMore": "Learn More",
       "createdBy": "Created By",
-      "header": {
-        "welcome": "Welcome to Flow’s",
-        "next": "next",
-        "generation": "generation",
-        "nfts": "of NFTs."
-      },
-      "intro": {
-        "title": "Home to the world's most trusted communities",
-        "subtitle1": "Flow is easy to use and powerful to build with. Every aspect of the platform was designed from the ground up to support exceptional user experience at mainstream scale.",
-        "subtitle2": " Originally conceived by the team behind CryptoKitties, Flow today is a decentralized network supported and built on by a growing community of brands and Web3 builders."
-      },
-      "partners": "PARTNERS",
-      "ourCommunities": "OUR COMMUNITIES",
       "featuredNFTs": "FEATURED NFTs",
       "flowCommunity": {
         "title": "Be a part of the Flow community",
@@ -33,7 +20,20 @@
         "title": "Built by <bold>Flow</bold> Foundation",
         "contactUs": "Contact Us",
         "terms": "Terms"
-      }
+      },
+      "header": {
+        "generation": "generation",
+        "next": "next",
+        "nfts": "of NFTs.",
+        "welcome": "Welcome to Flow’s"
+      },
+      "intro": {
+        "title": "Home to the world's most trusted communities",
+        "subtitle1": "Flow is easy to use and powerful to build with. Every aspect of the platform was designed from the ground up to support exceptional user experience at mainstream scale.",
+        "subtitle2": " Originally conceived by the team behind CryptoKitties, Flow today is a decentralized network supported and built on by a growing community of brands and Web3 builders."
+      },
+      "ourCommunities": "OUR COMMUNITIES",
+      "partners": "PARTNERS"
     }
   }
 }

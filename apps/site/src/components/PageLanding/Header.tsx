@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import classnames from 'classnames';
-import { Button, TextInput } from '../UI';
+import { Button, TextInput } from '../common';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -18,14 +18,13 @@ export default function Header() {
       <h1
         className={classnames(
           'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
-          'xs:w-[25rem] sm:w-[30rem] md:w-[54.875rem] md:text-h2',
-          'lg:text-h1'
+          'xs:w-[25rem] sm:w-[30rem] md:w-[54.875rem] md:text-h2 lg:text-h1'
         )}
       >
         <span>{t('pages.landing.header.welcome')}</span>
         <div className="items-center justify-center flex mx-2 sm:px-[0.625rem] pl-[0.625rem] pr-2 py-0.5 bg-primary text-inverted">
           <span>{t('pages.landing.header.next')}</span>
-          <span className="inline ml-2 sm:hidden">
+          <span className="ml-2 sm:hidden">
             {t('pages.landing.header.generation')}
           </span>
         </div>

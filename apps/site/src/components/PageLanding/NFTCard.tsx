@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import { Chip } from '../UI';
+import { Chip } from '../common';
 
 interface Props {
   chain: string;
@@ -101,7 +101,7 @@ export default function NFTCard({
                 placeholder="empty"
                 unoptimized={true}
               />
-              <div className="flex flex-col w-fit max-w-2/3">
+              <div className="flex flex-col w-fit max-w-[8rem]">
                 <span className="block font-semibold font-body text-container-text text-body opacity-30">
                   {t('pages.landing.createdBy')}
                 </span>
@@ -112,7 +112,7 @@ export default function NFTCard({
             </div>
             <Chip chain={chain} label={chain} />
           </div>
-          <span className="pt-4 font-bold text-title">{name}</span>
+          <span className="pt-4 font-bold truncate text-title">{name}</span>
         </div>
       </a>
     );
