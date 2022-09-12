@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
 import { ScrollButtons } from '../common';
 import nfts from './json/nfts.json';
-import NFTCard from './NFTCard';
+import NFTCard from '../common/NFTCard';
 import { useRef } from 'react';
 
 export default function Featured() {

@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import { Chip } from '../common';
+import { Chip } from '..';
+import classNames from 'classnames';
 
 interface Props {
   chain: string;
+  className?: string;
   creatorName: string;
   creatorAvatar: string;
   token_id: string;
@@ -15,6 +17,7 @@ interface Props {
 
 export default function NFTCard({
   chain,
+  className,
   creatorName,
   creatorAvatar,
   token_id,
@@ -28,7 +31,10 @@ export default function NFTCard({
     return (
       <a
         key={token_id}
-        className="flex flex-grow-0 flex-col h-[28.125rem] w-[20.5rem] xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark rounded-lg gap-6 xl:row-span-2"
+        className={classNames(
+          'flex flex-grow-0 flex-col h-[28.125rem] w-[20.5rem] xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark/20 rounded-lg gap-6 xl:row-span-2',
+          className
+        )}
         href={url}
       >
         <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25rem] xl:h-[50rem] bg-white">
@@ -74,7 +80,10 @@ export default function NFTCard({
     return (
       <a
         key={token_id}
-        className="flex flex-col h-[28.125rem] w-[20.5rem] xl:h-[25rem] bg-container-dark rounded-lg gap-6"
+        className={classNames(
+          'flex flex-col h-[28.125rem] w-[20.5rem] xl:h-[25rem] bg-container-dark/20 rounded-lg gap-6',
+          className
+        )}
         href={url}
       >
         <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25.75rem] xl:h-[16.875rem]">

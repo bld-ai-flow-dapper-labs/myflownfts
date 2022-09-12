@@ -14,7 +14,7 @@ module.exports = {
       current: 'currentColor',
       primary: '#23ff82',
       container: {
-        dark: '#A5A4FF33',
+        dark: '#A5A4FF',
         text: '#E3E3F8',
       },
       chip: '#2A9CA6',
@@ -28,16 +28,22 @@ module.exports = {
       },
       indigo: {
         50: '#eef2ff',
+        500: '#8B9CFB',
         600: '#5A72F8',
         700: '#4338ca',
       },
       gray: {
         50: '#bfbfbf',
+        100: '#9DA7B9',
         700: '#82818e',
         900: '#202124',
       },
-      'navbar-mobile': '#2021244D',
+      navbar: {
+        mobile: '#2021244D',
+        account: '#202124E5',
+      },
       transparent: 'transparent',
+      lightBlue: '#3BD9E7',
     },
     fontFamily: {
       sans: ['Termina', ...defaultTheme.fontFamily.sans],
@@ -63,6 +69,8 @@ module.exports = {
         { letterSpacing: '0.05em', lineHeight: '36px' },
       ], //18px
       'mobile-md': ['1.25rem', { letterSpacing: '0.05em', lineHeight: '24px' }],
+      tab: ['1rem', { lineHeight: '19px' }], //18px
+      count: ['0.875rem', { letterSpacing: '0.02em', lineHeight: '20px' }], //14px
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,

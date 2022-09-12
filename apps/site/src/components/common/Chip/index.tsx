@@ -1,44 +1,75 @@
 import { ReactComponent as FlowIcon } from '../images/icon-flow-nofill.svg';
 import { ReactComponent as EthIcon } from '../images/icon-eth.svg';
+import classNames from 'classnames';
 
 // Add icons of other chains when available
 interface Props {
-  label: string;
   chain?: string;
+  className?: string;
+  label: string;
+  variant?: 'primary' | 'secondary';
 }
 
-export default function Chip({ label, chain }: Props) {
+export default function Chip({
+  className,
+  chain,
+  label,
+  variant = 'primary',
+}: Props) {
   let newLabel;
   let logo;
 
   switch (chain) {
     case 'ethereum':
-      newLabel = 'ETH';
+      newLabel = label !== chain ? label : 'ETH';
       logo = <EthIcon className="w-3 h-3" />;
       break;
     case 'flow':
-      newLabel = 'FLOW';
+      newLabel = label !== chain ? label : 'FLOW';
       logo = <FlowIcon className="w-3 h-3" />;
       break;
     case 'polygon':
-      newLabel = 'MATIC';
+      newLabel = label !== chain ? label : 'MATIC';
       break;
     case 'solana':
-      newLabel = 'SOL';
+      newLabel = label !== chain ? label : 'SOL';
       break;
     case 'optimism':
-      newLabel = 'OP';
+      newLabel = label !== chain ? label : 'OP';
       break;
     case 'arbitrum':
-      newLabel = 'ARB';
+      newLabel = label !== chain ? label : 'ARB';
       break;
     default:
       newLabel = label;
   }
   return (
-    <div className="flex items-center justify-center gap-1 px-2 my-1.5 rounded-l-full rounded-r-full bg-chip text-white">
-      {logo}
-      <span className="text-caption font-body">{newLabel}</span>
+    <div
+      className={classNames(
+        'flex items-center justify-center gap-1 px-2 my-1.5 rounded-l-full rounded-r-full',
+        variant === 'primary' && 'bg-chip text-white',
+        variant === 'secondary' &&
+          'text-lightBlue gap-[0.625rem] bg-lightBlue/20',
+        className
+      )}
+    >
+      <div
+        className={classNames(
+          variant === 'primary' && 'scale-100',
+          variant === 'secondary' && 'scale-150'
+        )}
+      >
+        {logo}
+      </div>
+      <span
+        className={classNames(
+          'font-body',
+          variant === 'primary' && 'text-caption',
+          variant === 'secondary' && 'text-body w-[6.25rem] truncate'
+        )}
+      >
+        {newLabel}
+      </span>
     </div>
   );
 }

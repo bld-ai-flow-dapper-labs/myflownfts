@@ -39,7 +39,7 @@ export default function TextInput({
         type="text"
         className={classNames(
           'rounded-md pb-4 pt-3 px-6 text-body font-body text-white truncate box-border w-full h-full',
-          styling === 'dark' && 'bg-container-dark',
+          styling === 'dark' && 'bg-container-dark/10',
           startIcon && 'pl-10',
           (endIcon || searchBar) && 'pr-20',
           className
@@ -52,7 +52,7 @@ export default function TextInput({
       {(searchBar || endIcon) && (
         <div className="absolute right-0 p-3 -translate-y-1/2 top-1/2">
           {searchBar ? (
-            <SearchIcon className="text-white rounded-md bg-container-dark" />
+            <SearchIcon className="text-white rounded-md bg-container-dark/[.15]" />
           ) : (
             endIcon
           )}
