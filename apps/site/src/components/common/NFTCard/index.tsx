@@ -1,55 +1,77 @@
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import { Chip } from '..';
+import { Button, Chip } from '..';
 import classNames from 'classnames';
 
 interface Props {
+  big?: boolean;
   chain: string;
   className?: string;
   creatorName: string;
   creatorAvatar: string;
-  token_id: string;
-  name: string;
   image_url: string;
+  name: string;
+  token_id: string;
   url: string;
-  big?: boolean;
+  variant?: 'featured' | 'view';
 }
 
 export default function NFTCard({
+  big = false,
   chain,
   className,
   creatorName,
   creatorAvatar,
-  token_id,
-  name,
   image_url,
+  name,
+  token_id,
   url,
-  big,
+  variant = 'featured',
 }: Props) {
   const { t } = useTranslation();
-  if (big) {
-    return (
-      <a
-        key={token_id}
+
+  return (
+    <Button
+      key={token_id}
+      className={classNames(
+        'group flex flex-col text-left truncate flex-grow-0 h-[28.125rem] w-[20.5rem]',
+        big && variant === 'featured'
+          ? 'xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark/20 rounded-lg gap-4 xl:row-span-2'
+          : 'xl:h-[25rem] bg-container-dark/20 rounded-lg gap-4',
+        className
+      )}
+      variant="custom"
+      href={url}
+    >
+      <div
         className={classNames(
-          'flex flex-grow-0 flex-col h-[28.125rem] w-[20.5rem] xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark/20 rounded-lg gap-6 xl:row-span-2',
-          className
+          'relative flex justify-center items-center m-1 rounded-md overflow-hidden',
+          big
+            ? 'h-[25rem] w-[20rem] xl:w-[42rem] xl:h-[50rem]'
+            : 'h-[25rem] w-[20rem]',
+          variant === 'view' && 'h-[20rem] w-[19rem]'
         )}
-        href={url}
       >
-        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25rem] xl:h-[50rem] bg-white">
-          <Image
-            loader={() => image_url}
-            src={image_url}
-            width={800}
-            height={900}
-            alt={name}
-            placeholder="empty"
-            unoptimized={true}
-          />
-        </div>
-        <div className="flex flex-col font-bold text-white break-words left-6 text-h4 h-[7.875rem] px-6">
-          <div className="flex justify-between">
+        <Image
+          loader={() => image_url}
+          src={image_url}
+          width={big ? 800 : 320}
+          height={big ? 900 : 320}
+          alt={name}
+          placeholder="empty"
+          layout="fill"
+          objectFit="cover"
+          unoptimized={true}
+          className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
+        />
+      </div>
+      <div
+        className={classNames(
+          'flex flex-col font-bold text-white left-6 text-h4 px-6 pb-6 w-full'
+        )}
+      >
+        <div className="flex items-center justify-between">
+          {variant === 'featured' && (
             <div className="flex gap-3">
               <Image
                 className="rounded-full"
@@ -61,7 +83,12 @@ export default function NFTCard({
                 placeholder="empty"
                 unoptimized={true}
               />
-              <div className="flex flex-col w-fit max-w-2/3">
+              <div
+                className={
+                  (classNames('flex flex-col w-fit'),
+                  big ? 'max-w-2/3' : 'max-w-[8rem]')
+                }
+              >
                 <span className="block font-semibold font-body text-container-text text-body opacity-30">
                   {t('pages.landing.createdBy')}
                 </span>
@@ -70,59 +97,24 @@ export default function NFTCard({
                 </span>
               </div>
             </div>
-            <Chip chain={chain} label={chain} />
-          </div>
-          <span className="pt-4 font-bold text-title">{name}</span>
+          )}
+          {variant === 'view' && (
+            <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
+              {creatorName}
+            </span>
+          )}
+          <Chip chain={chain} label={chain} className="h-6" />
         </div>
-      </a>
-    );
-  } else
-    return (
-      <a
-        key={token_id}
-        className={classNames(
-          'flex flex-col h-[28.125rem] w-[20.5rem] xl:h-[25rem] bg-container-dark/20 rounded-lg gap-6',
-          className
-        )}
-        href={url}
-      >
-        <div className="flex justify-center items-center m-1 rounded-md overflow-hidden h-[25.75rem] xl:h-[16.875rem]">
-          <Image
-            loader={() => image_url}
-            src={image_url}
-            width={320}
-            height={320}
-            alt={name}
-            placeholder="empty"
-            unoptimized={true}
-          />
-        </div>
-        <div className="flex flex-col font-bold text-white break-words left-6 text-h4 h-[7.875rem] px-6 pb-4">
-          <div className="flex justify-between">
-            <div className="flex gap-3">
-              <Image
-                className="rounded-full"
-                loader={() => creatorAvatar}
-                src={creatorAvatar}
-                width={40}
-                height={40}
-                alt={name}
-                placeholder="empty"
-                unoptimized={true}
-              />
-              <div className="flex flex-col w-fit max-w-[8rem]">
-                <span className="block font-semibold font-body text-container-text text-body opacity-30">
-                  {t('pages.landing.createdBy')}
-                </span>
-                <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-                  {creatorName}
-                </span>
-              </div>
-            </div>
-            <Chip chain={chain} label={chain} />
-          </div>
-          <span className="pt-4 font-bold truncate text-title">{name}</span>
-        </div>
-      </a>
-    );
+        <span
+          className={classNames(
+            'font-bold truncate text-title',
+            variant === 'featured' && 'pt-4 ',
+            variant === 'view' && 'pt-1.5'
+          )}
+        >
+          {name}
+        </span>
+      </div>
+    </Button>
+  );
 }

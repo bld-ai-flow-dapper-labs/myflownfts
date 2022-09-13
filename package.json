@@ -16,6 +16,7 @@
     "next": "12.2.3",
     "next-translate": "^1.5.0",
     "postcss": "^8.4.16",
+    "random-gradient": "^0.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-fast-marquee": "^1.3.5",

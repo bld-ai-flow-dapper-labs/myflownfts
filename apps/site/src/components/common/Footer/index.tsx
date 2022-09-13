@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
+import Button from '../Button';
 
 import { ReactComponent as Logo } from '../images/icon-flow-nofill.svg';
 import { ReactComponent as DiscordIcon } from '../images/icon-discord.svg';
@@ -13,32 +14,43 @@ export default function Footer() {
   return (
     <div className="flex md:flex-row flex-col-reverse items-center justify-center md:justify-between w-full h-full md:h-[8.5rem] bg-gray-900 px-20">
       <Logo className="order-last my-6 text-primary md:order-first md:my-0" />
-      <div className="flex flex-col items-center gap-6 md:pl-[6.75rem] place-self-center mb-[3.25rem] md:mb-0">
+      <div className="flex flex-col items-center gap-6 md:translate-x-20 mb-[3.25rem] md:mb-0">
         <div className="flex items-center gap-6 text-white">
-          <a href="http://onflow.org/discord" className="hover:text-gray-50">
+          <Button
+            href="http://onflow.org/discord"
+            className="hover:text-gray-50"
+            variant="custom"
+          >
             <DiscordIcon />
-          </a>
-          <a href="https://github.com/onflow" className="hover:text-gray-50">
+          </Button>
+          <Button
+            href="https://github.com/onflow"
+            className="hover:text-gray-50"
+            variant="custom"
+          >
             <GithubIcon />
-          </a>
-          <a
+          </Button>
+          <Button
             href="https://twitter.com/flow_blockchain"
             className="hover:text-gray-50"
+            variant="custom"
           >
             <TwitterIcon />
-          </a>
-          <a
+          </Button>
+          <Button
             href="https://www.youtube.com/channel/UCs9r5lqmYQsKCpLB9jKwocg"
             className="hover:text-gray-50"
+            variant="custom"
           >
             <YoutubeIcon />
-          </a>
-          <a
+          </Button>
+          <Button
             href="https://t.me/s/flow_blockchain"
             className="hover:text-gray-50"
+            variant="custom"
           >
             <TelegramIcon />
-          </a>
+          </Button>
         </div>
         <span className="text-gray-700 text-footer font-body">
           <Trans
@@ -48,12 +60,12 @@ export default function Footer() {
         </span>
       </div>
       <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 md:mb-0">
-        <a href="#" className="hover:text-gray-50">
+        <Button href="#" className="hover:text-gray-50" variant="custom">
           {t('pages.landing.footer.terms')}
-        </a>
-        <a href="#" className="hover:text-gray-50">
+        </Button>
+        <Button href="#" className="hover:text-gray-50" variant="custom">
           {t('pages.landing.footer.contactUs')}
-        </a>
+        </Button>
       </div>
     </div>
   );

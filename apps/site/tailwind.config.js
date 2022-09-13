@@ -113,6 +113,13 @@ module.exports = {
         'signup-mobile':
           "url('../../src/components/PageLanding/images/signup/bg-signup-mobile.png')",
       }),
+      gridTemplateColumns: {
+        'fill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
+        'fill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
+        fill: 'repeat(auto-fill, 312px)',
+
+        // etc.
+      },
     },
   },
   plugins: [],
