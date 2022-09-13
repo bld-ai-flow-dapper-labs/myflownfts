@@ -1,6 +1,6 @@
 # Myflownfts
 
-## I. Installation
+## Installation
 
 ### Prerequisites
 
@@ -10,6 +10,10 @@
 
 #### Frontend Setup
 
-- `npm install -g yarn`
-- `yarn`
-- `nx serve site`
+- Create `/apps/site/.env.local` file and fill out `API_KEY`, which can be obtained from https://app.simplehash.com/.
+
+```
+npm install -g yarn
+yarn
+nx serve site
+```
