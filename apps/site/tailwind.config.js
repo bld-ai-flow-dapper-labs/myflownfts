@@ -38,10 +38,7 @@ module.exports = {
         700: '#82818e',
         900: '#202124',
       },
-      navbar: {
-        mobile: '#2021244D',
-        account: '#202124E5',
-      },
+      navbar: '#202124',
       transparent: 'transparent',
       lightBlue: '#3BD9E7',
     },
@@ -68,7 +65,8 @@ module.exports = {
         '1.125rem',
         { letterSpacing: '0.05em', lineHeight: '36px' },
       ], //18px
-      'mobile-md': ['1.25rem', { letterSpacing: '0.05em', lineHeight: '24px' }],
+      'mobile-md': ['1.25rem', { letterSpacing: '0.05em', lineHeight: '24px' }], //20px
+      'mobile-sm': ['0.625rem', { lineHeight: '12px' }], //10px
       tab: ['1rem', { lineHeight: '19px' }], //18px
       count: ['0.875rem', { letterSpacing: '0.02em', lineHeight: '20px' }], //14px
     },
@@ -114,11 +112,8 @@ module.exports = {
           "url('../../src/components/PageLanding/images/signup/bg-signup-mobile.png')",
       }),
       gridTemplateColumns: {
-        'fill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
-        'fill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
         fill: 'repeat(auto-fill, 312px)',
-
-        // etc.
+        'fill-mobile': 'repeat(auto-fill, 165px)',
       },
     },
   },

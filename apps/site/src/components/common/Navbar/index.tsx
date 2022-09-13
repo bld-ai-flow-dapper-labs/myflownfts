@@ -16,7 +16,7 @@ export default function Navbar({ className, search = false }: Props) {
   return (
     <div
       className={classNames(
-        'absolute flex items-center justify-between gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar-mobile lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
+        'absolute flex items-center justify-between gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
         className
       )}
     >

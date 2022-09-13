@@ -45,12 +45,11 @@ export default function PageViewNFTs() {
   const renderNFTs = () => {
     if (nfts.length > 0) {
       return (
-        <div className="grid justify-center w-full gap-6 py-12 grid-cols-fill">
+        <div className="grid justify-center w-full gap-2 py-12 lg:gap-6 grid-cols-fill-mobile lg:grid-cols-fill">
           {nfts
             .filter((_, index) => index < numNFTs)
             .map((item) => (
               <NFTCard
-                className="bg-container-dark/[0.05] hover:bg-container-dark/[0.1] !h-[27rem] !w-[19.5rem]"
                 key={item?.token_id}
                 chain={item?.chain}
                 creatorName={
@@ -86,15 +85,15 @@ export default function PageViewNFTs() {
 
   return (
     <div>
-      <Navbar className="!bg-navbar-account" search />
-      <div className="h-[25rem]" style={header} />
+      <Navbar className="lg:!bg-navbar/90" search />
+      <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
       <div className="relative flex flex-col items-center justify-center w-full">
         <div
-          className="absolute rounded-full w-[15rem] h-[15rem] -top-[11.875rem]"
+          className="absolute rounded-full w-[8.75rem] h-[8.75rem] lg:w-[15rem] lg:h-[15rem] -top-[4.75rem] lg:-top-[11.875rem]"
           style={icon}
         />
-        <div className="flex flex-col items-center px-24 w-full bg-gray-900 pb-[9.5rem]">
-          <div className="flex items-center pt-[4.625rem] pb-12 gap-3">
+        <div className="flex flex-col items-center px-4 lg:px-24 w-full bg-gray-900 pb-12 lg:pb-[9.5rem] pt-[5.125rem] lg:pt-[4.625rem]">
+          <div className="flex items-center gap-3 pb-12">
             {renderAddressChip()}
             <Button
               className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
