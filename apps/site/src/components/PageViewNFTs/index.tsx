@@ -74,7 +74,7 @@ export default function PageViewNFTs() {
         <div className="grid justify-center w-full gap-2 py-12 lg:gap-6 grid-cols-fill-mobile lg:grid-cols-fill">
           {NFTs.filter((_, index) => index < numNFTs).map((item) => (
             <NFTCard
-              key={item?.token_id}
+              key={item?.nft_id}
               chain={item?.chain}
               creatorName={
                 item.collection?.twitter_username ??

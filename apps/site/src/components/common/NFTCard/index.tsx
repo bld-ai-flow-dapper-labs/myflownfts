@@ -59,8 +59,6 @@ export default function NFTCard({
         <Image
           loader={() => image_url}
           src={image_url}
-          width={big ? 800 : 320}
-          height={big ? 900 : 320}
           alt={name}
           placeholder="empty"
           layout="fill"
