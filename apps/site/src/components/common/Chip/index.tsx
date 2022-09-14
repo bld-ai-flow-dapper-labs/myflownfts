@@ -1,6 +1,6 @@
-import { ReactComponent as FlowIcon } from '../images/icon-flow-nofill.svg';
-import { ReactComponent as EthIcon } from '../images/icon-eth.svg';
 import { ReactComponent as CopiedIcon } from '../images/icon-copied.svg';
+import { ReactComponent as EthIcon } from '../images/icon-eth.svg';
+import { ReactComponent as FlowIcon } from '../images/icon-flow-nofill.svg';
 
 import classNames from 'classnames';
 
@@ -45,6 +45,7 @@ export default function Chip({
     default:
       newLabel = label;
   }
+
   if (variant === 'copied') {
     logo = <CopiedIcon className="w-3 h-3 -translate-x-4" />;
   }
@@ -62,7 +63,7 @@ export default function Chip({
       <div
         className={classNames(
           variant === 'primary' && 'scale-100',
-          (variant === 'secondary' || variant == 'copied') && 'scale-150'
+          (variant === 'secondary' || variant === 'copied') && 'scale-150'
         )}
       >
         {logo}

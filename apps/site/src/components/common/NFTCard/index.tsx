@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import useTranslation from 'next-translate/useTranslation';
-import { Button, Chip } from '..';
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
+import { Button, Chip } from '..';
 
 interface Props {
   big?: boolean;
@@ -34,8 +34,8 @@ export default function NFTCard({
     <Button
       key={token_id}
       className={classNames(
-        'group flex flex-col text-left truncate flex-grow-0 ',
-        !big && variant === 'featured' && 'h-[28.125rem] w-[20.5rem]',
+        'group flex flex-col text-left truncate flex-grow-0',
+        variant === 'featured' && 'h-[28.125rem] w-[20.5rem]',
         big && variant === 'featured'
           ? 'xl:w-[42.5rem] xl:h-[51.5rem] bg-container-dark/20 rounded-lg gap-4 xl:row-span-2'
           : 'xl:h-[25rem] bg-container-dark/20 rounded-lg gap-4',

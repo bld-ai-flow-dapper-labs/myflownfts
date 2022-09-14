@@ -1,13 +1,13 @@
-import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
-import Button from '../Button';
+import useTranslation from 'next-translate/useTranslation';
+import { Button } from '..';
 
-import { ReactComponent as Logo } from '../images/icon-flow-nofill.svg';
 import { ReactComponent as DiscordIcon } from '../images/icon-discord.svg';
+import { ReactComponent as Logo } from '../images/icon-flow-nofill.svg';
 import { ReactComponent as GithubIcon } from '../images/icon-github.svg';
+import { ReactComponent as TelegramIcon } from '../images/icon-telegram.svg';
 import { ReactComponent as TwitterIcon } from '../images/icon-twitter.svg';
 import { ReactComponent as YoutubeIcon } from '../images/icon-youtube.svg';
-import { ReactComponent as TelegramIcon } from '../images/icon-telegram.svg';
 
 export default function Footer() {
   const { t } = useTranslation();

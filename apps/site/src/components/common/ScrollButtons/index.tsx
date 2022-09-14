@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import Button from '../Button';
+import { Button } from '..';
 import { ReactComponent as ChevronLeftIcon } from '../images/icon-chevron-left.svg';
 import { ReactComponent as ChevronRightIcon } from '../images/icon-chevron-right.svg';
-import classNames from 'classnames';
 
 type ButtonProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,

@@ -1,10 +1,9 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import Button from '../Button';
-import TextInput from '../TextInput';
+import { Button, TextInput } from '..';
+import { ReactComponent as DrawerIcon } from '../images/icon-drawer.svg';
 import { ReactComponent as ImageLogo } from '../images/icon-flow.svg';
 import { ReactComponent as SearchIcon } from '../images/icon-search.svg';
-import { ReactComponent as DrawerIcon } from '../images/icon-drawer.svg';
-import classNames from 'classnames';
 
 interface Props {
   className?: string;
@@ -33,7 +32,7 @@ export default function Navbar({ className, search = false }: Props) {
         />
       )}
       <Button
-        href="/owned/1"
+        href="/owned/0xb09c3e1b345f77ca"
         className="hidden h-[3.125rem] w-[13.125rem] lg:inline-flex flex-shrink-0 items-center justify-center px-5 py-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700"
       >
         {t('common.buttonConnectWallet')}
