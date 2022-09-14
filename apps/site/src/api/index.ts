@@ -1,4 +1,4 @@
-import { NFTListResponse } from './types';
+import { NFT, NFTListResponse } from './types';
 
 export const getNFTsByWallet = async (
   walletAddresses: string,
@@ -30,11 +30,11 @@ export const getNFTsByContract = async (
   return json;
 };
 
-export const getNFTsByTokenId = async (
+export const getNFTByTokenId = async (
   contractAddress: string,
   tokenId: string,
   chain = 'flow'
-): Promise<NFTListResponse> => {
+): Promise<NFT> => {
   const response = await fetch(
     `/api/nfts/token?chain=${chain}&contract_address=${contractAddress}&token_id=${tokenId}`
   );
@@ -53,4 +53,31 @@ export const getRawQuery = async (url: string): Promise<NFTListResponse> => {
   const response = await fetch(`/api/nfts?query=${newUrl}`);
   const json = await response.json();
   return json;
+};
+
+export const getOwnershipSummaryByWallet = async (
+  walletAddresses: string,
+  chains = 'flow'
+): Promise<NFTListResponse> => {
+  const response = await fetch(
+    `/api/nfts/contracts?chains=${chains}&wallet_addresses=${walletAddresses}`
+  );
+  const json = await response.json();
+  return json;
+};
+
+export const getTotalNFTsByWallet = async (
+  walletAddresses: string,
+  chains = 'flow'
+): Promise<number> => {
+  const response = await fetch(
+    `/api/nfts/contracts?chains=${chains}&wallet_addresses=${walletAddresses}`
+  );
+  const { data } = await response.json();
+  const contracts = data[0].contracts;
+  if (contracts.length == 1) return contracts[0].nfts_owned;
+  const total = contracts.reduce(
+    (prev, next) => prev?.nfts_owned + next?.nfts_owned
+  );
+  return total;
 };
