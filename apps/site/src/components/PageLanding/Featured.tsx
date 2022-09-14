@@ -31,7 +31,7 @@ export default function Featured() {
       >
         {nfts.map((item, index) => (
           <NFTCard
-            key={item?.token_id}
+            key={item?.nft_id}
             chain={item?.chain}
             creatorName={
               item.collection?.twitter_username ??
