@@ -8,7 +8,7 @@ interface Props {
   chain: string;
   className?: string;
   creatorName: string;
-  creatorAvatar: string;
+  creatorAvatar?: string;
   image_url: string;
   name: string;
   token_id: string;

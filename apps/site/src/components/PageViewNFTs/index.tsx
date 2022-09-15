@@ -21,14 +21,14 @@ export default function PageViewNFTs() {
   const [isLoading, setIsLoading] = useState(false);
   const [NFTs, setNFTs] = useState<NFT[]>();
   const [total, setTotal] = useState(0);
-  const [profileNFT, setProfileNFT] = useState(0);
+  const [profileNFT, setProfileNFT] = useState<string>();
   const [increment, setIncrement] = useState(0);
   const [numNFTs, setNumNFTs] = useState(increment);
   const [nextPage, setNextPage] = useState<string>();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const header = { background: gradient(address, 'diagonal') };
-  const icon = { background: gradient(iconHash) };
+  const icon = { background: gradient(iconHash, 'horizontal') };
 
   const loadInitial = () => {
     const { innerWidth: width } = window;
@@ -47,7 +47,12 @@ export default function PageViewNFTs() {
       loadInitial();
       setIsLoading(true);
       const { next, data } = await getNFTsByWallet(address);
-      setProfileNFT(Math.floor(Math.random() * data?.length));
+      const cleanNFTs = data?.filter(
+        (item) => item.name && item.previews.image_small_url
+      );
+      const profileNFT =
+        cleanNFTs[Math.floor(Math.random() * cleanNFTs?.length)]?.token_id;
+      setProfileNFT(profileNFT);
       setNFTs(data);
       setNextPage(next);
       const total = await getTotalNFTsByWallet(address);
@@ -96,37 +101,25 @@ export default function PageViewNFTs() {
   );
 
   const renderNFTs = () => {
-    const cleanNFTs = NFTs?.filter(
-      (item) =>
-        item.name &&
-        item.previews.image_small_url &&
-        item.nft_id &&
-        item.token_id
-    );
-    if (cleanNFTs?.length > 0) {
+    if (NFTs?.length > 0) {
       return (
         <div className="grid justify-center w-full gap-2 py-12 lg:gap-6 grid-cols-fill-mobile lg:grid-cols-fill">
-          {cleanNFTs
-            .filter((_, index) => index < numNFTs)
-            .map((item) => (
-              <NFTCard
-                key={item.nft_id}
-                chain={item?.chain ?? 'flow'}
-                creatorName={
-                  item.collection?.twitter_username ??
-                  item.collection?.name ??
-                  'Unknown'
-                }
-                creatorAvatar={
-                  item.collection?.image_url ?? item.previews?.image_small_url
-                }
-                token_id={item.token_id}
-                name={item.name}
-                image_url={item.previews?.image_small_url} // Error if no unknown
-                url={item?.external_url ?? 'Unknown'}
-                variant="view"
-              />
-            ))}
+          {NFTs.filter((_, index) => index < numNFTs).map((item) => (
+            <NFTCard
+              key={item.nft_id}
+              chain={item.chain ?? 'flow'}
+              creatorName={
+                item.collection.twitter_username ??
+                item.collection.name ??
+                'Unknown'
+              }
+              token_id={item.token_id}
+              name={item.name ?? item.token_id}
+              image_url={item.previews.image_small_url ?? '/not_supported.png'} // Error if no unknown
+              url={item.external_url ?? null}
+              variant="view"
+            />
+          ))}
         </div>
       );
     }
@@ -142,6 +135,25 @@ export default function PageViewNFTs() {
     );
   };
 
+  const renderProfilePhoto = () => {
+    const profilePhoto = NFTs.filter((nft) => nft.token_id === profileNFT)[0];
+    return (
+      <Image
+        loader={() =>
+          profilePhoto.previews.image_small_url ?? profilePhoto.image_url
+        }
+        src={profilePhoto.previews.image_small_url ?? profilePhoto.image_url}
+        alt={profilePhoto.name}
+        placeholder="empty"
+        layout="fill"
+        objectFit="cover"
+        unoptimized={true}
+        className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
+        priority
+      />
+    );
+  };
+
   return (
     <div>
       <Navbar className="lg:!bg-navbar/90" search />
@@ -151,18 +163,7 @@ export default function PageViewNFTs() {
           className="absolute overflow-hidden rounded-full w-[8.75rem] h-[8.75rem] lg:w-[15rem] lg:h-[15rem] -top-[4.75rem] lg:-top-[11.875rem]"
           style={icon}
         >
-          {!isLoading && NFTs && (
-            <Image
-              loader={() => NFTs[profileNFT].image_url}
-              src={NFTs[profileNFT].image_url}
-              alt={NFTs[profileNFT].name}
-              placeholder="empty"
-              layout="fill"
-              objectFit="cover"
-              unoptimized={true}
-              className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
-            />
-          )}
+          {!isLoading && NFTs?.length > 0 && profileNFT && renderProfilePhoto()}
         </div>
         <div className="flex flex-col items-center px-4 lg:px-24 w-full bg-gray-900 pb-12 lg:pb-[9.5rem] pt-[5.125rem] lg:pt-[4.625rem]">
           <div className="flex items-center gap-3 pb-12">

@@ -75,9 +75,12 @@ export const getTotalNFTsByWallet = async (
   );
   const { data } = await response.json();
   const contracts = data[0].contracts;
-  if (contracts.length == 1) return contracts[0].nfts_owned;
-  const total = contracts.reduce(
-    (prev, next) => prev?.nfts_owned + next?.nfts_owned
-  );
-  return total;
+  if (contracts.length > 1) {
+    const total = contracts.reduce((prev, next) => {
+      return prev + next?.nfts_owned;
+    }, 0);
+    return total;
+  } else {
+    return contracts[0]?.nfts_owned ?? 0;
+  }
 };
