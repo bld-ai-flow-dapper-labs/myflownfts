@@ -56,7 +56,7 @@ module.exports = {
       md: ['2.25rem', { letterSpacing: '0.05em', lineHeight: '43.2px' }], //36px
       sm: ['1.5rem', { lineHeight: '28.8px' }], //24px
       title: ['1.125rem', { lineHeight: '21.6px' }], //18px
-      footer: ['1rem', { lineHeight: '19.2px' }], //18px
+      footer: ['1rem', { lineHeight: '19.2px' }], //16px
       body: ['0.9375rem', { lineHeight: '18px' }], //15px
       caption: ['0.75rem', { lineHeight: '14.4px' }], //12px
       button: ['0.875rem', { letterSpacing: '0.03em', lineHeight: '24px' }], //14px

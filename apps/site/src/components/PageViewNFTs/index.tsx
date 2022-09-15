@@ -121,7 +121,7 @@ export default function PageViewNFTs() {
               token_id={item.token_id}
               name={item.name ?? item.token_id}
               image_url={item.previews.image_small_url ?? '/not_supported.png'} // Error if no unknown
-              url={item.external_url ?? null}
+              url={`/nft/${item.contract_address}/${item.token_id}`}
               variant="view"
             />
           ))}

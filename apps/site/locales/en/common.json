@@ -47,6 +47,9 @@
       "noItems": "No items to display",
       "noOwned": "This wallet does not own NFTs yet.",
       "owned": "Owned"
+    },
+    "viewNFT": {
+      "buyOnMarketplace": "Buy on Marketplace"
     }
   }
 }
