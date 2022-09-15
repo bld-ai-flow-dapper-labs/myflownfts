@@ -37,7 +37,24 @@ export interface NFT {
       last_acquired_date: string;
     }
   ];
-  last_sale: null;
+  last_sale?: {
+    from_address: string;
+    to_address: string;
+    quantity: number;
+    timestamp: string;
+    transaction: string;
+    marketplace_name: string;
+    is_bundle_sale: boolean;
+    payment_token: {
+      payment_token_id: string;
+      name: string;
+      symbol: string;
+      address?: null;
+      decimals: number;
+    };
+    unit_price: number;
+    total_price: number;
+  };
   contract: {
     type: string; // NonFungibleToken
     name: string;
@@ -65,6 +82,11 @@ export interface NFT {
     image_original_url: string;
     animation_original_url: string;
   };
+}
+
+export interface ExchangeRates {
+  usd: number;
+  eth: number;
 }
 
 export type NFTListResponse = ListResponse<NFT>;

@@ -49,7 +49,11 @@
       "owned": "Owned"
     },
     "viewNFT": {
-      "buyOnMarketplace": "Buy on Marketplace"
+      "buyOnMarketplace": "Buy on Marketplace",
+      "currency": "Currency",
+      "lastSale": "Last Sale",
+      "noDescription": "No description available",
+      "notFound": "NFT NOT FOUND"
     }
   }
 }

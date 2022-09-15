@@ -7,3 +7,13 @@ export const fetchFromApi = async (url: string) => {
     },
   });
 };
+
+export const fetchFromCurrencyApi = async (url: string) => {
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      authorization: `Apikey ${process.env.CURRENCY_API_KEY}`,
+    },
+  });
+};

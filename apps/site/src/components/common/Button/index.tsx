@@ -1,13 +1,13 @@
-import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import React, { forwardRef } from 'react';
 
 interface BaseProps {
   disabled?: boolean;
   endIcon?: React.ReactNode;
   endText?: string;
   startIcon?: React.ReactNode;
-  variant?: 'light' | 'dark' | 'scroll' | 'custom';
+  variant?: 'light' | 'dark' | 'scroll' | 'currency' | 'custom';
 }
 
 interface AnchorProps
@@ -51,6 +51,10 @@ const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>(
         'text-indigo-600 bg-white rounded-lg text-button hover:bg-indigo-50',
       variant === 'scroll' &&
         'bg-scroll-button text-white hover:bg-scroll-hover',
+      variant === 'currency' &&
+        !disabled &&
+        'bg-scroll-button text-white hover:bg-scroll-hover',
+      variant === 'currency' && disabled && 'bg-indigo-600 text-white',
       className
     );
 

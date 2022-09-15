@@ -1,4 +1,4 @@
-import { NFT, NFTListResponse } from './types';
+import { ExchangeRates, NFT, NFTListResponse } from './types';
 
 export const getNFTsByWallet = async (
   walletAddresses: string,
@@ -62,6 +62,12 @@ export const getOwnershipSummaryByWallet = async (
   const response = await fetch(
     `/api/nfts/contracts?chains=${chains}&wallet_addresses=${walletAddresses}`
   );
+  const json = await response.json();
+  return json;
+};
+
+export const getExchangeRates = async (): Promise<ExchangeRates> => {
+  const response = await fetch(`/api/currencies`);
   const json = await response.json();
   return json;
 };

@@ -48,7 +48,7 @@ export default function Featured() {
                 ? item.previews?.image_large_url
                 : item.previews?.image_medium_url
             }
-            url={item.collection?.external_url}
+            url={`/nft/${item.contract_address}/${item.token_id}`}
             big={index % 7 === 0 ? true : false}
           />
         ))}
