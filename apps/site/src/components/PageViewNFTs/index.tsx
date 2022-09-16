@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
-import { getNFTsByWallet, getRawQuery, getTotalNFTsByWallet } from '../../api';
+import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { NFT } from '../../api/types';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
 
@@ -47,7 +47,7 @@ export default function PageViewNFTs() {
     (async () => {
       try {
         loadInitial();
-        const { next, data } = await getNFTsByWallet(address);
+        const { next, count, data } = await getNFTsByWallet(address);
         if (!data) throw 'Error in fetching NFTs';
         const cleanNFTs = data?.filter(
           (item) => item.name && item.previews.image_small_url
@@ -57,8 +57,7 @@ export default function PageViewNFTs() {
         setProfileNFT(profileNFT);
         setNFTs(data);
         setNextPage(next);
-        const total = await getTotalNFTsByWallet(address);
-        setTotal(total);
+        setTotal(count);
         setIsLoading(false);
       } catch (e) {
         console.error(e);

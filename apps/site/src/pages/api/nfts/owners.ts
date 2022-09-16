@@ -1,7 +1,7 @@
-import { fetchFromApi } from './../utils';
-import { NFTListResponse } from './../../../api/types';
-import { BASE_API_URL } from '../../../constants';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { BASE_API_URL } from '../../../constants';
+import { NFTListResponse } from './../../../api/types';
+import { fetchFromApi } from './../utils';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +12,7 @@ export default async function handler(
   }
 
   const { chains, wallet_addresses } = req.query;
-  const url = `${BASE_API_URL}/nfts/owners?chains=${chains}&wallet_addresses=${wallet_addresses}`;
+  const url = `${BASE_API_URL}/nfts/owners?chains=${chains}&wallet_addresses=${wallet_addresses}&count=1`;
 
   await fetchFromApi(url)
     .then((response) => response.json())
@@ -20,6 +20,7 @@ export default async function handler(
       return res.status(200).json({
         next: response.next,
         previous: response.previous,
+        count: response.count,
         data: response.nfts,
       });
     })

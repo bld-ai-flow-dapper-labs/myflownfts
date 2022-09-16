@@ -5,7 +5,7 @@ export const getNFTsByWallet = async (
   chains = 'flow'
 ): Promise<NFTListResponse> => {
   const response = await fetch(
-    `/api/nfts/owners?chains=${chains}&wallet_addresses=${walletAddresses}`
+    `/api/nfts/owners?chains=${chains}&wallet_addresses=${walletAddresses}&count=1`
   );
   const json = await response.json();
   return json;
@@ -64,23 +64,4 @@ export const getOwnershipSummaryByWallet = async (
   );
   const json = await response.json();
   return json;
-};
-
-export const getTotalNFTsByWallet = async (
-  walletAddresses: string,
-  chains = 'flow'
-): Promise<number> => {
-  const response = await fetch(
-    `/api/nfts/contracts?chains=${chains}&wallet_addresses=${walletAddresses}`
-  );
-  const { data } = await response.json();
-  const contracts = data[0].contracts;
-  if (contracts.length > 1) {
-    const total = contracts.reduce((prev, next) => {
-      return prev + next?.nfts_owned;
-    }, 0);
-    return total;
-  } else {
-    return contracts[0]?.nfts_owned ?? 0;
-  }
 };
