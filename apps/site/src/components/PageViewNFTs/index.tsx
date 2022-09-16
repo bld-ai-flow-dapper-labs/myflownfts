@@ -18,7 +18,7 @@ export default function PageViewNFTs() {
   const { t } = useTranslation();
 
   const [isCopied, setIsCopied] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [NFTs, setNFTs] = useState<NFT[]>();
   const [total, setTotal] = useState(0);
   const [profileNFT, setProfileNFT] = useState<string>();
@@ -26,6 +26,7 @@ export default function PageViewNFTs() {
   const [numNFTs, setNumNFTs] = useState(increment);
   const [nextPage, setNextPage] = useState<string>();
   const [page, setPage] = useState(1);
+  const [error, setError] = useState(false);
 
   const header = { background: gradient(address, 'diagonal') };
   const icon = { background: gradient(iconHash, 'horizontal') };
@@ -44,20 +45,25 @@ export default function PageViewNFTs() {
 
   useEffect(() => {
     (async () => {
-      loadInitial();
-      setIsLoading(true);
-      const { next, data } = await getNFTsByWallet(address);
-      const cleanNFTs = data?.filter(
-        (item) => item.name && item.previews.image_small_url
-      );
-      const profileNFT =
-        cleanNFTs[Math.floor(Math.random() * cleanNFTs?.length)]?.token_id;
-      setProfileNFT(profileNFT);
-      setNFTs(data);
-      setNextPage(next);
-      const total = await getTotalNFTsByWallet(address);
-      setTotal(total);
-      setIsLoading(false);
+      try {
+        loadInitial();
+        const { next, data } = await getNFTsByWallet(address);
+        if (!data) throw 'Error in fetching NFTs';
+        const cleanNFTs = data?.filter(
+          (item) => item.name && item.previews.image_small_url
+        );
+        const profileNFT =
+          cleanNFTs[Math.floor(Math.random() * cleanNFTs?.length)]?.token_id;
+        setProfileNFT(profileNFT);
+        setNFTs(data);
+        setNextPage(next);
+        const total = await getTotalNFTsByWallet(address);
+        setTotal(total);
+        setIsLoading(false);
+      } catch (e) {
+        console.error(e);
+        setError(true);
+      }
     })();
   }, [address]);
 
@@ -158,14 +164,14 @@ export default function PageViewNFTs() {
     <div>
       <Navbar className="lg:!bg-navbar/90" search />
       <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
-      <div className="relative flex flex-col items-center justify-center w-full">
+      <div className="relative flex flex-col items-center w-full">
         <div
           className="absolute overflow-hidden rounded-full w-[8.75rem] h-[8.75rem] lg:w-[15rem] lg:h-[15rem] -top-[4.75rem] lg:-top-[11.875rem]"
           style={icon}
         >
           {!isLoading && NFTs?.length > 0 && profileNFT && renderProfilePhoto()}
         </div>
-        <div className="flex flex-col items-center px-4 lg:px-24 w-full bg-gray-900 pb-12 lg:pb-[9.5rem] pt-[5.125rem] lg:pt-[4.625rem]">
+        <div className="flex flex-col min-h-[calc(100vh_-_15.5rem)] h-full items-center px-4 lg:px-24 w-full bg-gray-900 pt-[5.125rem] lg:pt-[4.625rem]">
           <div className="flex items-center gap-3 pb-12">
             {renderAddressChip()}
           </div>
@@ -179,18 +185,24 @@ export default function PageViewNFTs() {
               </span>
             </div>
           </div>
-          {isLoading && <Loader className="mt-36" />}
+          {!error && isLoading && <Loader className="my-36" />}
           {!isLoading && renderNFTs()}
           {!isLoading && numNFTs < total && (
             <Button
               onClick={() => setNumNFTs(numNFTs + increment)}
               variant="scroll"
+              className="mb-12 lg:mb-[9.5rem]"
             >
               {t('pages.viewNFTs.loadMore')}
             </Button>
           )}
+          {error && (
+            <span className="w-full font-body font-semibold pt-12 pb-[10.5rem] lg:pb-[14.875rem] text-center text-white break-normal whitespace-pre-line lg:pt-24 text-body lg:text-h2">
+              {t('error.pages.viewNFTs.loading')}
+            </span>
+          )}
+          <Footer className="mt-auto" />
         </div>
-        <Footer />
       </div>
     </div>
   );

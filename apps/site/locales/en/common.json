@@ -5,6 +5,13 @@
     "buttonConnectWallet": "Connect Wallet",
     "search": "Search by Wallet Address, NFT or Community"
   },
+  "error": {
+    "pages": {
+      "viewNFTs": {
+        "loading": "Error loading NFTS.\nPlease refresh the page"
+      }
+    }
+  },
   "pages": {
     "landing": {
       "buttonLearnMore": "Learn More",
