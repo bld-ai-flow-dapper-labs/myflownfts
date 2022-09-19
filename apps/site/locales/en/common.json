@@ -9,6 +9,10 @@
     "pages": {
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
+      },
+      "viewNFT": {
+        "notFound": "NFT NOT FOUND",
+        "unsupported": "UNSUPPORTED NFT"
       }
     }
   },
@@ -52,8 +56,7 @@
       "buyOnMarketplace": "Buy on Marketplace",
       "currency": "Currency",
       "lastSale": "Last Sale",
-      "noDescription": "No description available",
-      "notFound": "NFT NOT FOUND"
+      "noDescription": "No description available"
     }
   }
 }

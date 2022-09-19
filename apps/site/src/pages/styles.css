@@ -69,3 +69,5 @@
     animation: fade-in 1s ease;
   }
 }
+
+@import '~react-image-gallery/styles/css/image-gallery.css';

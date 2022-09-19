@@ -81,6 +81,7 @@ export interface NFT {
     creator_name: string;
     image_original_url: string;
     animation_original_url: string;
+    media: string[];
   };
 }
 

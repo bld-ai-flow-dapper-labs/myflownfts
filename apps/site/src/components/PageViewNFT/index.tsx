@@ -2,17 +2,23 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import * as ReactDOM from 'react-dom/client';
+import ImageGallery from 'react-image-gallery';
+
 import { getExchangeRates, getNFTByTokenId } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
+import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
 import { ReactComponent as LinkIcon } from '../../components/common/images/icon-link.svg';
 import { ReactComponent as RefreshIcon } from '../../components/common/images/icon-refresh.svg';
 import { ReactComponent as ShareIcon } from '../../components/common/images/icon-share.svg';
 import { ReactComponent as USDIcon } from '../../components/common/images/icon-usd.svg';
+import { ReactComponent as ZoomInIcon } from '../../components/common/images/icon-zoom-in.svg';
+import { ReactComponent as ZoomOutIcon } from '../../components/common/images/icon-zoom-out.svg';
 
-import { Button, Chip, Navbar } from '../common';
+import { Button, Chip, Footer, Loader, Navbar } from '../common';
 
 export default function PageViewNFT() {
   const router = useRouter();
@@ -23,6 +29,25 @@ export default function PageViewNFT() {
   const [token, setToken] = useState<NFT>();
   const [currency, setCurrency] = useState<'flow' | 'usd' | 'ethereum'>('flow');
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates>();
+  const galleryRef = useRef(null);
+  const divRef = useRef(null);
+  const [isFullscreen, setisFullscreen] = useState(false);
+  const [images, setImages] = useState([]);
+
+  const renderVideo = (item) => {
+    return (
+      <video
+        autoPlay
+        controls
+        loop
+        muted
+        controlsList="nodownload"
+        className={classNames('h-full mx-auto rounded-lg')}
+      >
+        <source src={item.embedUrl} />
+      </video>
+    );
+  };
 
   useEffect(() => {
     (async () => {
@@ -31,6 +56,42 @@ export default function PageViewNFT() {
         token_id,
         contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum'
       );
+      const gallery = [];
+      if (data.video_url) {
+        gallery.push({
+          embedUrl: data?.video_url,
+          thumbnail: data?.previews.image_small_url,
+          thumbnailClass:
+            'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+          renderItem: renderVideo.bind(this),
+        });
+      }
+      if (data.previews?.image_medium_url) {
+        gallery.push({
+          original: data.previews?.image_medium_url,
+          originalClass:
+            'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+          thumbnail: data.previews?.image_small_url,
+          thumbnailClass:
+            'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+        });
+      }
+      // Renders other images included, unstable due to varying sizes of images distorting the viewer
+      // if (data.extra_metadata.media.length > 0)
+      //   gallery.push(
+      //     ...data.extra_metadata.media
+      //       .filter(
+      //         (item) => item.slice(-4) === '.png' || item.slice(-4) === '.jpg'
+      //       )
+      //       .map((image) => ({
+      //         original: image,
+      //         originalHeight: 800,
+      //         originalWidth: 800,
+      //         thumbnail: image,
+      //         thumbnailClass: 'border-4 border-container-dark/10 w-24 h-24',
+      //       }))
+      //   );
+      setImages(gallery);
       setExchangeRates(await getExchangeRates());
       setToken(data);
       setIsLoading(false);
@@ -38,29 +99,126 @@ export default function PageViewNFT() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderNFT = () => (
-    <div className={classNames('rounded-md overflow-hidden w-4/5 h-full')}>
-      {token.video_url ? (
-        <video
-          autoPlay
-          loop
-          className="h-full border-4 w-9/10 border-container-dark/10"
-        >
-          <source src={token.video_url} />
-        </video>
-      ) : (
-        <div className="relative w-full h-full border-4 border-container-dark/10">
-          <Image
-            loader={() => token.image_url}
-            src={token.image_url}
-            alt={token.name}
-            placeholder="empty"
-            layout="fill"
-            objectFit="cover"
-            unoptimized={true}
-          />
-        </div>
+  const renderFullscreenIcon = (id, component) => {
+    if (!document.getElementById(id)) {
+      const divs = document.getElementsByClassName(
+        'image-gallery-slide-wrapper'
+      );
+      if (divs[0]) {
+        const d = document.createElement('div');
+        d.id = id;
+        divs[0].appendChild(d);
+        const rootElement = document.getElementById(id);
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(component);
+      }
+    }
+  };
+
+  const renderZoomControl = () => (
+    <div
+      className={classNames(
+        'absolute top-0 flex justify-between w-full text-white',
+        !isFullscreen && 'hidden'
       )}
+    >
+      <Button
+        variant="custom"
+        onClick={() => galleryRef.current.toggleFullScreen()}
+      >
+        <CloseIcon />
+      </Button>
+      <div className="right-0 flex gap-4">
+        <Button variant="custom">
+          <ZoomInIcon />
+        </Button>
+        <Button variant="custom">
+          <ZoomOutIcon />
+        </Button>
+      </div>
+    </div>
+  );
+
+  useEffect(() => {
+    document
+      .getElementsByClassName('image-gallery-thumbnails-container')[0]
+      ?.classList.add('flex');
+    document
+      .getElementsByClassName('image-gallery-index')[0]
+      ?.classList.add('absolute');
+    document
+      .getElementsByClassName('image-gallery-index')[0]
+      ?.classList.add('left-1/2');
+    document
+      .getElementsByClassName('image-gallery-index')[0]
+      ?.classList.add('-translate-x-1/2');
+    document
+      .getElementsByClassName('image-gallery-index')[0]
+      ?.classList.add('flex');
+    document
+      .getElementsByClassName('image-gallery-index')[0]
+      ?.classList.add('justify-center');
+    const zoom = document.getElementById('zoomcontrol');
+    console.log(zoom);
+    if (isFullscreen && !zoom)
+      renderFullscreenIcon('zoomcontrol', renderZoomControl());
+    if (!isFullscreen && zoom) zoom.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isFullscreen]);
+
+  const renderNFT = () => (
+    <div
+      className={classNames(
+        'relative rounded-md w-full lg:w-4/5 border-4 border-container-dark/0 bg-container-dark/10'
+      )}
+      ref={divRef}
+    >
+      <ImageGallery
+        ref={galleryRef}
+        items={images}
+        autoplay
+        disableThumbnailScroll
+        showThumbnails={!isFullscreen && images?.length > 1}
+        showIndex={isFullscreen && images?.length > 1}
+        showNav={isFullscreen}
+        showPlayButton={false}
+        showFullscreenButton={false}
+        showVideo
+        onClick={() => {
+          if (!isFullscreen) galleryRef.current.toggleFullScreen();
+        }}
+        onScreenChange={() => {
+          setisFullscreen(!isFullscreen);
+        }}
+        // Added 'children' plug-in to override deeply nested class for zoomed in image
+        additionalClass={classNames(
+          isFullscreen && 'children:top-1/2 children:-translate-y-1/2'
+        )}
+      />
+    </div>
+  );
+
+  const renderButtons = () => (
+    <div className="flex items-center gap-3 pb-4">
+      <Button
+        className="flex items-center justify-center w-8 h-8 px-0"
+        variant="scroll"
+        onClick={() => router.replace(router.asPath)}
+      >
+        <RefreshIcon />
+      </Button>
+      <Button
+        className="flex items-center justify-center w-8 h-8 px-0"
+        variant="scroll"
+      >
+        <ShareIcon />
+      </Button>
+      <Button
+        className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
+        variant="scroll"
+      >
+        <span className="text-white">...</span>
+      </Button>
     </div>
   );
 
@@ -95,52 +253,41 @@ export default function PageViewNFT() {
   };
 
   return (
-    <div className="relative h-screen bg-navbar">
+    <div className="relative h-full min-h-screen bg-navbar">
       <Navbar />
+      {isLoading && (
+        <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+          <Loader />
+        </div>
+      )}
 
-      {!isLoading && token?.nft_id && (
-        <div className="flex w-full h-full gap-[10.375rem] pt-28">
-          <div className="flex items-start justify-end w-1/2 mt-12 h-5/6">
-            {renderNFT()}
+      {!isLoading && token?.nft_id && token?.name && token?.image_url && (
+        <div className="flex flex-col h-fit w-full items-end lg:pr-[16.875rem] pt-28">
+          <div className="flex self-center justify-end w-11/12 lg:self-end lg:w-fit lg:mx-0">
+            {renderButtons()}
           </div>
-          <div className="flex justify-end w-1/2">
-            <div className="flex flex-col h-fit w-full items-end pr-[16.875rem]">
-              <div className="flex items-center gap-3 pb-4">
-                <Button
-                  className="flex items-center justify-center w-8 h-8 px-0"
-                  variant="scroll"
-                  onClick={() => router.replace(router.asPath)}
-                >
-                  <RefreshIcon />
-                </Button>
-                <Button
-                  className="flex items-center justify-center w-8 h-8 px-0"
-                  variant="scroll"
-                >
-                  <ShareIcon />
-                </Button>
-                <Button
-                  className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
-                  variant="scroll"
-                >
-                  <span className="text-white">...</span>
-                </Button>
-              </div>
+          <div className="flex flex-col item-center lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
+            <div className="flex justify-center w-11/12 pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
+              {renderNFT()}
+            </div>
+            <div className="flex justify-center w-11/12 mx-auto lg:justify-end lg:w-1/2">
               <div className="flex flex-col min-w-[20rem] w-full gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
                 <div className="flex gap-3">
                   <Image
                     className="rounded-full"
                     loader={() =>
                       token.collection?.image_url ??
-                      token.previews?.image_small_url
+                      token.previews?.image_small_url ??
+                      'Unsupported'
                     }
                     src={
                       token.collection?.image_url ??
-                      token.previews?.image_small_url
+                      token.previews?.image_small_url ??
+                      'Unsupported'
                     }
                     width={40}
                     height={40}
-                    alt={token.name}
+                    alt={token?.name}
                     placeholder="empty"
                     unoptimized={true}
                   />
@@ -158,7 +305,7 @@ export default function PageViewNFT() {
                   </div>
                 </div>
                 <span className="font-semibold text-white text-h3">
-                  {token.name}
+                  {token?.name}
                 </span>
                 <span className="font-medium text-white text-footer font-body">
                   {token.description ?? t('pages.viewNFT.noDescription')}
@@ -224,10 +371,19 @@ export default function PageViewNFT() {
         </div>
       )}
       {!isLoading && !token?.nft_id && (
-        <span className="absolute font-bold text-white -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
-          {t('pages.viewNFT.notFound')}
+        <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
+          {t('error.pages.viewNFT.notFound')}
         </span>
       )}
+      {!isLoading && token?.nft_id && !token?.name && !token?.image_url && (
+        <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
+          {t('error.pages.viewNFT.unsupported')}
+        </span>
+      )}
+
+      <Footer
+        className={classNames('pt-12', isLoading && 'absolute bottom-0')}
+      />
     </div>
   );
 }
