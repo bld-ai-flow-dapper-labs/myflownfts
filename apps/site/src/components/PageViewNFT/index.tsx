@@ -3,20 +3,16 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import * as ReactDOM from 'react-dom/client';
 import ImageGallery from 'react-image-gallery';
 
 import { getExchangeRates, getNFTByTokenId } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
-import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
 import { ReactComponent as LinkIcon } from '../../components/common/images/icon-link.svg';
 import { ReactComponent as RefreshIcon } from '../../components/common/images/icon-refresh.svg';
 import { ReactComponent as ShareIcon } from '../../components/common/images/icon-share.svg';
 import { ReactComponent as USDIcon } from '../../components/common/images/icon-usd.svg';
-import { ReactComponent as ZoomInIcon } from '../../components/common/images/icon-zoom-in.svg';
-import { ReactComponent as ZoomOutIcon } from '../../components/common/images/icon-zoom-out.svg';
 
 import { Button, Chip, Footer, Loader, Navbar } from '../common';
 
@@ -66,11 +62,12 @@ export default function PageViewNFT() {
           renderItem: renderVideo.bind(this),
         });
       }
-      if (data.previews?.image_medium_url) {
+      if (data.previews?.image_large_url) {
         gallery.push({
-          original: data.previews?.image_medium_url,
+          original: data.previews?.image_large_url,
           originalClass:
             'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+          fullscreen: data.previews?.image_large_url,
           thumbnail: data.previews?.image_small_url,
           thumbnailClass:
             'border-1 border-container-dark/0 rounded-lg overflow-hidden',
@@ -99,70 +96,23 @@ export default function PageViewNFT() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderFullscreenIcon = (id, component) => {
-    if (!document.getElementById(id)) {
-      const divs = document.getElementsByClassName(
-        'image-gallery-slide-wrapper'
-      );
-      if (divs[0]) {
-        const d = document.createElement('div');
-        d.id = id;
-        divs[0].appendChild(d);
-        const rootElement = document.getElementById(id);
-        const root = ReactDOM.createRoot(rootElement);
-        root.render(component);
-      }
-    }
-  };
-
-  const renderZoomControl = () => (
-    <div
-      className={classNames(
-        'absolute top-0 flex justify-between w-full text-white',
-        !isFullscreen && 'hidden'
-      )}
-    >
-      <Button
-        variant="custom"
-        onClick={() => galleryRef.current.toggleFullScreen()}
-      >
-        <CloseIcon />
-      </Button>
-      <div className="right-0 flex gap-4">
-        <Button variant="custom">
-          <ZoomInIcon />
-        </Button>
-        <Button variant="custom">
-          <ZoomOutIcon />
-        </Button>
-      </div>
-    </div>
-  );
-
+  // Modify classes within react-image-gallery to include icons when fullscreen
   useEffect(() => {
-    document
-      .getElementsByClassName('image-gallery-thumbnails-container')[0]
-      ?.classList.add('flex');
-    document
-      .getElementsByClassName('image-gallery-index')[0]
-      ?.classList.add('absolute');
-    document
-      .getElementsByClassName('image-gallery-index')[0]
-      ?.classList.add('left-1/2');
-    document
-      .getElementsByClassName('image-gallery-index')[0]
-      ?.classList.add('-translate-x-1/2');
-    document
-      .getElementsByClassName('image-gallery-index')[0]
-      ?.classList.add('flex');
-    document
-      .getElementsByClassName('image-gallery-index')[0]
-      ?.classList.add('justify-center');
-    const zoom = document.getElementById('zoomcontrol');
-    console.log(zoom);
-    if (isFullscreen && !zoom)
-      renderFullscreenIcon('zoomcontrol', renderZoomControl());
-    if (!isFullscreen && zoom) zoom.remove();
+    if (isFullscreen)
+      document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
+    else
+      document
+        .getElementsByTagName('video')[0]
+        ?.classList.remove('h-[90.75vh]');
+
+    // document
+    //   .getElementsByClassName('react-transform-component')[0]
+    //   ?.className.replace(/\btransform-component-module_.*?\b/g, '');
+    // // transform-component-module_
+    // document
+    //   .getElementsByClassName('react-transform-wrapper')[0]
+    //   ?.removeAttribute('class');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
 
@@ -178,11 +128,13 @@ export default function PageViewNFT() {
         items={images}
         autoplay
         disableThumbnailScroll
-        showThumbnails={!isFullscreen && images?.length > 1}
-        showIndex={isFullscreen && images?.length > 1}
+        showThumbnails={images.length > 1}
+        showThumbnailsOnNormalViewOnly={images.length > 1}
+        showIndexOnFullscreenOnly={images.length > 1}
         showNav={isFullscreen}
         showPlayButton={false}
         showFullscreenButton={false}
+        showZoomButtons
         showVideo
         onClick={() => {
           if (!isFullscreen) galleryRef.current.toggleFullScreen();
@@ -190,10 +142,6 @@ export default function PageViewNFT() {
         onScreenChange={() => {
           setisFullscreen(!isFullscreen);
         }}
-        // Added 'children' plug-in to override deeply nested class for zoomed in image
-        additionalClass={classNames(
-          isFullscreen && 'children:top-1/2 children:-translate-y-1/2'
-        )}
       />
     </div>
   );
