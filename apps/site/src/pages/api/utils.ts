@@ -17,3 +17,13 @@ export const fetchFromCurrencyApi = async (url: string) => {
     },
   });
 };
+
+export const postToApi = async (url: string) => {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'X-API-KEY': process.env.API_KEY,
+    },
+  });
+};

@@ -4,8 +4,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
-import { getExchangeRates, getNFTByTokenId } from '../../api';
+import {
+  getExchangeRates,
+  getNFTByTokenId,
+  getRefreshMetadata,
+} from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
@@ -13,6 +18,7 @@ import { ReactComponent as LinkIcon } from '../../components/common/images/icon-
 import { ReactComponent as RefreshIcon } from '../../components/common/images/icon-refresh.svg';
 import { ReactComponent as ShareIcon } from '../../components/common/images/icon-share.svg';
 import { ReactComponent as USDIcon } from '../../components/common/images/icon-usd.svg';
+import { BASE_URL } from '../../constants';
 
 import { Button, Chip, Footer, Loader, Navbar } from '../common';
 
@@ -96,7 +102,7 @@ export default function PageViewNFT() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Modify classes within react-image-gallery to include icons when fullscreen
+  // Modify classes within react-image-gallery to change dimensions on runtime
   useEffect(() => {
     if (isFullscreen)
       document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
@@ -104,14 +110,6 @@ export default function PageViewNFT() {
       document
         .getElementsByTagName('video')[0]
         ?.classList.remove('h-[90.75vh]');
-
-    // document
-    //   .getElementsByClassName('react-transform-component')[0]
-    //   ?.className.replace(/\btransform-component-module_.*?\b/g, '');
-    // // transform-component-module_
-    // document
-    //   .getElementsByClassName('react-transform-wrapper')[0]
-    //   ?.removeAttribute('class');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
@@ -151,16 +149,21 @@ export default function PageViewNFT() {
       <Button
         className="flex items-center justify-center w-8 h-8 px-0"
         variant="scroll"
-        onClick={() => router.replace(router.asPath)}
+        onClick={() => refreshMetadata()}
       >
         <RefreshIcon />
       </Button>
-      <Button
-        className="flex items-center justify-center w-8 h-8 px-0"
-        variant="scroll"
+      <FacebookShareButton
+        url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
       >
-        <ShareIcon />
-      </Button>
+        <Button
+          className="flex items-center justify-center w-8 h-8 px-0"
+          variant="scroll"
+        >
+          <ShareIcon />
+        </Button>
+      </FacebookShareButton>
+
       <Button
         className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
         variant="scroll"
@@ -185,7 +188,7 @@ export default function PageViewNFT() {
 
   // For testing: /0x8943c7bac1914c9a7aba750bf2b6b09fd21037e0/5903
   // ETH Initial price
-  const priceConversion = () => {
+  const getPriceConversion = () => {
     if (!token.last_sale?.unit_price || !exchangeRates) return 'Unavailable';
     const ethPrice = token.last_sale.unit_price / 10 ** 18;
     const flowPrice = ethPrice / exchangeRates?.eth;
@@ -198,6 +201,15 @@ export default function PageViewNFT() {
       case 'usd':
         return usdPrice.toFixed(2);
     }
+  };
+
+  const refreshMetadata = async () => {
+    const data = await getRefreshMetadata(
+      contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
+      contract_address,
+      token_id
+    );
+    console.log(data);
   };
 
   return (
@@ -303,7 +315,7 @@ export default function PageViewNFT() {
                     <span>{t('pages.viewNFT.lastSale')}</span>
                     <Chip
                       className="h-[1.875rem] w-fit justify-between"
-                      label={priceConversion().toString()}
+                      label={getPriceConversion().toString()}
                       chain={currency}
                       variant="price"
                     />

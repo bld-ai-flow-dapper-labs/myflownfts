@@ -90,4 +90,8 @@ export interface ExchangeRates {
   eth: number;
 }
 
+export interface RefreshResponse {
+  message: string;
+}
+
 export type NFTListResponse = ListResponse<NFT>;
