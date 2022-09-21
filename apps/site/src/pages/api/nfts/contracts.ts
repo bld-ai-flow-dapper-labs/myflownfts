@@ -12,16 +12,13 @@ export default async function handler(
   }
 
   const { chains, wallet_addresses } = req.query;
-  const url = `${BASE_API_URL}/nfts/owners?chains=${chains}&wallet_addresses=${wallet_addresses}&count=1`;
+  const url = `${BASE_API_URL}/nfts/contracts?chains=${chains}&wallet_addresses=${wallet_addresses}`;
 
   await fetchFromApi(url)
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({
-        next: response.next,
-        previous: response.previous,
-        count: response.count,
-        data: response.nfts,
+        data: response.wallets,
       });
     })
     .catch((err) => {

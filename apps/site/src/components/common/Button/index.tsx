@@ -7,7 +7,7 @@ interface BaseProps {
   endIcon?: React.ReactNode;
   endText?: string;
   startIcon?: React.ReactNode;
-  variant?: 'light' | 'dark' | 'transparent' | 'scroll' | 'custom';
+  variant?: 'light' | 'dark' | 'scroll' | 'custom';
 }
 
 interface AnchorProps
@@ -43,11 +43,14 @@ const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>(
     ref
   ) {
     const buttonClassName = classNames(
-      'inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg',
+      'transition ease-in-out delay-150 duration-300',
+      variant !== 'custom' &&
+        'inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg',
       variant === 'dark' && 'text-white bg-indigo-600 hover:bg-indigo-700',
       variant === 'light' &&
         'text-indigo-600 bg-white rounded-lg text-button hover:bg-indigo-50',
-      variant === 'scroll' && 'bg-scroll-button hover:bg-scroll-hover',
+      variant === 'scroll' &&
+        'bg-scroll-button text-white hover:bg-scroll-hover',
       className
     );
 

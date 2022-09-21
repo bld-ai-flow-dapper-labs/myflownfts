@@ -1,6 +1,7 @@
 export interface ListResponse<T> {
   next?: string;
   previous?: string;
+  count?: number;
   data: T[];
 }
 

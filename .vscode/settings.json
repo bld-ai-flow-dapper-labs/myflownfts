@@ -12,10 +12,10 @@
   },
   "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": ["source.fixAll"]
+    "editor.codeActionsOnSave": ["source.fixAll", "source.sortImports"]
   },
   "[typescriptreact]": {
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": ["source.fixAll"]
+    "editor.codeActionsOnSave": ["source.fixAll", "source.sortImports"]
   }
 }

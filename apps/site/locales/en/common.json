@@ -5,6 +5,13 @@
     "buttonConnectWallet": "Connect Wallet",
     "search": "Search by Wallet Address, NFT or Community"
   },
+  "error": {
+    "pages": {
+      "viewNFTs": {
+        "loading": "Error loading NFTS.\nPlease refresh the page"
+      }
+    }
+  },
   "pages": {
     "landing": {
       "buttonLearnMore": "Learn More",
@@ -34,6 +41,12 @@
       },
       "ourCommunities": "OUR COMMUNITIES",
       "partners": "PARTNERS"
+    },
+    "viewNFTs": {
+      "loadMore": "Load More",
+      "noItems": "No items to display",
+      "noOwned": "This wallet does not own NFTs yet.",
+      "owned": "Owned"
     }
   }
 }

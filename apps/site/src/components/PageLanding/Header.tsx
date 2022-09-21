@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { Button, TextInput } from '../common';
 
 export default function Header() {
   const { t } = useTranslation();
   return (
     <div
-      className={classnames(
+      className={classNames(
         'flex flex-col items-center justify-center',
         'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
         'xs:bg-header-mobile-xs',
@@ -16,7 +16,7 @@ export default function Header() {
       )}
     >
       <h1
-        className={classnames(
+        className={classNames(
           'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
           'xs:w-[25rem] sm:w-[30rem] md:w-[54.875rem] md:text-h2 lg:text-h1'
         )}

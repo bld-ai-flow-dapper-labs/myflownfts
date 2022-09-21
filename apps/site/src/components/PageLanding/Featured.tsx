@@ -1,9 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
-import { ScrollButtons } from '../common';
-import nfts from './json/nfts.json';
-import NFTCard from './NFTCard';
 import { useRef } from 'react';
+import { ScrollButtons } from '../common';
+import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
+import NFTCard from '../common/NFTCard';
+import nfts from './json/nfts.json';
 
 export default function Featured() {
   const { t } = useTranslation();

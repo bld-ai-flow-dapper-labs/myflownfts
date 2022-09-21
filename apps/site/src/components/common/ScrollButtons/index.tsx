@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import Button from '../Button';
+import { Button } from '..';
 import { ReactComponent as ChevronLeftIcon } from '../images/icon-chevron-left.svg';
 import { ReactComponent as ChevronRightIcon } from '../images/icon-chevron-right.svg';
-import classnames from 'classnames';
 
 type ButtonProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -21,9 +21,8 @@ export default function ScrollButtons({
   const { t } = useTranslation();
 
   return (
-    <div
-      className={classnames('flex items-center gap-3 text-white', className)}
-    >
+
+    <div className={classNames('flex items-center gap-3', className)}>
       <Button
         className="w-[3.125rem] h-[3.125rem]"
         variant="scroll"
@@ -39,7 +38,7 @@ export default function ScrollButtons({
         <ChevronRightIcon />
       </Button>
       <Button
-        className={classnames(
+        className={classNames(
           'h-[3.125rem] font-sans',
           !mobile && 'w-[11.875rem]',
           mobile && 'w-full'
