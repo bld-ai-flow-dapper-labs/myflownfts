@@ -1,5 +1,6 @@
 import { NFT, NFTListResponse } from './types';
 
+
 export const getNFTsByWallet = async (
   walletAddresses: string,
   chains = 'flow'
@@ -35,6 +36,7 @@ export const getNFTByTokenId = async (
   tokenId: string,
   chain = 'flow'
 ): Promise<NFT> => {
+
   const response = await fetch(
     `/api/nfts/token?chain=${chain}&contract_address=${contractAddress}&token_id=${tokenId}`
   );
@@ -65,3 +67,4 @@ export const getOwnershipSummaryByWallet = async (
   const json = await response.json();
   return json;
 };
+
