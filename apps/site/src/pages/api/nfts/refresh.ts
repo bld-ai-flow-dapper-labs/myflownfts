@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { RefreshResponse } from '../../../api/types';
 import { BASE_API_URL } from '../../../constants';
-import { fetchFromApi, postToApi } from '../utils';
+import { postToApi } from '../utils';
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +14,7 @@ export default async function handler(
   const { chain, contract_address, token_id } = req.query;
   const url = `${BASE_API_URL}/nfts/refresh/${chain}/${contract_address}/${token_id}`;
 
-  await fetchFromApi(url)
+  await postToApi(url)
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

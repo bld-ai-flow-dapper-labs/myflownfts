@@ -72,7 +72,7 @@ export const getExchangeRates = async (): Promise<ExchangeRates> => {
   return json;
 };
 
-export const getRefreshMetadata = async (
+export const postRefreshMetadata = async (
   chain = 'flow',
   contractAddress: string,
   tokenId: string

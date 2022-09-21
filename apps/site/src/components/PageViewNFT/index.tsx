@@ -14,7 +14,11 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
-import { getExchangeRates, getNFTByTokenId } from '../../api';
+import {
+  getExchangeRates,
+  getNFTByTokenId,
+  postRefreshMetadata,
+} from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
@@ -73,13 +77,13 @@ export default function PageViewNFT() {
           renderItem: renderVideo.bind(this),
         });
       }
-      if (data.previews?.image_large_url) {
+      if (data.image_url) {
         gallery.push({
-          original: data.previews?.image_large_url,
+          original: data.previews?.image_large_url ?? data.image_url,
           originalClass:
             'border-1 border-container-dark/0 rounded-lg overflow-hidden',
-          fullscreen: data.previews?.image_large_url,
-          thumbnail: data.previews?.image_small_url,
+          fullscreen: data.previews?.image_large_url ?? data.image_url,
+          thumbnail: data.previews?.image_small_url ?? data.image_url,
           thumbnailClass:
             'border-1 border-container-dark/0 rounded-lg overflow-hidden',
         });
@@ -109,12 +113,18 @@ export default function PageViewNFT() {
 
   // Modify classes within react-image-gallery to change dimensions on runtime
   useEffect(() => {
-    if (isFullscreen)
+    if (isFullscreen) {
       document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
-    else
+      document.getElementsByTagName('img')[0]?.classList.add('h-[90.75vh]');
+      document
+        .getElementsByClassName('react-transform-wrapper')[0]
+        ?.removeAttribute('class');
+    } else {
       document
         .getElementsByTagName('video')[0]
         ?.classList.remove('h-[90.75vh]');
+      document.getElementsByTagName('img')[0]?.classList.remove('h-[90.75vh]');
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
@@ -217,46 +227,47 @@ export default function PageViewNFT() {
     </Popover.Root>
   );
 
-  const renderReportPopover = () => (
-    <Popover.Root onOpenChange={() => setIsPopoverOpen(!isPopoverOpen)}>
-      <Popover.Anchor>
-        <Popover.Trigger asChild>
-          <Button
-            className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
-            variant="scroll"
-            data-tip={t('pages.viewNFT.popover.more')}
-            data-for="more"
-            data-event-off="click"
-          >
-            <span className="text-white">...</span>
-            <ReactTooltip
-              id="more"
-              place="top"
-              effect="solid"
-              className="rounded-lg font-body !bg-black"
-              arrowColor="#000"
-              disable={isPopoverOpen}
-            />
-          </Button>
-        </Popover.Trigger>
-      </Popover.Anchor>
-      <Popover.Portal>
-        <Popover.Content className="slideDownAndFade">
-          <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
-            <Button
-              className="!justify-start w-full hover:scale-105"
-              variant="scroll"
-              onClick={() =>
-                toast(t('pages.viewNFT.reported'), { type: 'info' })
-              }
-            >
-              <span>{t('pages.viewNFT.report')}</span>
-            </Button>
-          </div>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
-  );
+  // Uncomment when reporting is implemented
+  // const renderReportPopover = () => (
+  //   <Popover.Root onOpenChange={() => setIsPopoverOpen(!isPopoverOpen)}>
+  //     <Popover.Anchor>
+  //       <Popover.Trigger asChild>
+  //         <Button
+  //           className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
+  //           variant="scroll"
+  //           data-tip={t('pages.viewNFT.popover.more')}
+  //           data-for="more"
+  //           data-event-off="click"
+  //         >
+  //           <span className="text-white">...</span>
+  //           <ReactTooltip
+  //             id="more"
+  //             place="top"
+  //             effect="solid"
+  //             className="rounded-lg font-body !bg-black"
+  //             arrowColor="#000"
+  //             disable={isPopoverOpen}
+  //           />
+  //         </Button>
+  //       </Popover.Trigger>
+  //     </Popover.Anchor>
+  //     <Popover.Portal>
+  //       <Popover.Content className="slideDownAndFade">
+  //         <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
+  //           <Button
+  //             className="!justify-start w-full hover:scale-105"
+  //             variant="scroll"
+  //             onClick={() =>
+  //               toast(t('pages.viewNFT.reported'), { type: 'info' })
+  //             }
+  //           >
+  //             <span>{t('pages.viewNFT.report')}</span>
+  //           </Button>
+  //         </div>
+  //       </Popover.Content>
+  //     </Popover.Portal>
+  //   </Popover.Root>
+  // );
 
   const renderButtons = () => (
     <div className="flex items-center gap-3 pb-4">
@@ -279,7 +290,7 @@ export default function PageViewNFT() {
         />
       </Button>
       {renderSocialsPopover()}
-      {renderReportPopover()}
+      {/* {renderReportPopover()} */}
     </div>
   );
 
@@ -314,16 +325,16 @@ export default function PageViewNFT() {
   };
 
   const refreshMetadata = async () => {
-    // const data = await getRefreshMetadata(
-    //   contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
-    //   contract_address,
-    //   token_id
-    // );
-    // if (data) toast('Refresh queued', { type: 'success' });
-    // else
-    //   toast('Error in adding to refresh queue. Please refresh the page', {
-    //     type: 'error',
-    //   });
+    const data = await postRefreshMetadata(
+      contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
+      contract_address,
+      token_id
+    );
+    if (data) toast('Refresh queued', { type: 'success' });
+    else
+      toast('Error in adding to refresh queue. Please refresh the page', {
+        type: 'error',
+      });
 
     toast(t('pages.viewNFT.refresh'), { type: 'success' });
   };
@@ -394,57 +405,59 @@ export default function PageViewNFT() {
                 <span className="font-medium text-white text-footer font-body">
                   {token.description ?? t('pages.viewNFT.noDescription')}
                 </span>
-                <div className="flex flex-col text-body font-semibold text-white bg-container-dark/5 rounded-md py-[1.375rem] px-4 gap-8">
-                  <div className="flex items-center justify-between pb-1.5 border-b-2 border-container-dark/5">
-                    <span>{t('pages.viewNFT.currency')}</span>
-                    <div className="flex self-end gap-1 text-white">
-                      <Button
-                        className="w-8 h-8 px-0"
-                        variant="currency"
-                        disabled={currency === 'flow'}
-                        onClick={() => setCurrency('flow')}
-                      >
-                        <FlowIcon className="scale-50" />
-                      </Button>
-                      <Button
-                        className="w-8 h-8 px-0"
-                        variant="currency"
-                        disabled={currency === 'usd'}
-                        onClick={() => {
-                          // Conservative, assumes flow token is the default currency
-                          // if (!exchangeRates && token.last_sale.unit_price) {
-                          //   setExchangeRates(await getExchangeRates());
-                          // }
-                          setCurrency('usd');
-                        }}
-                      >
-                        <USDIcon />
-                      </Button>
-                      <Button
-                        className="w-8 h-8 px-0"
-                        variant="currency"
-                        disabled={currency === 'ethereum'}
-                        onClick={() => {
-                          // if (!exchangeRates && token.last_sale.unit_price) {
-                          //   setExchangeRates(await getExchangeRates());
-                          // }
-                          setCurrency('ethereum');
-                        }}
-                      >
-                        <EthIcon className="scale-75" />
-                      </Button>
+                {token.last_sale && (
+                  <div className="flex flex-col text-body font-semibold text-white bg-container-dark/5 rounded-md py-[1.375rem] px-4 gap-8">
+                    <div className="flex items-center justify-between pb-1.5 border-b-2 border-container-dark/5">
+                      <span>{t('pages.viewNFT.currency')}</span>
+                      <div className="flex self-end gap-1 text-white">
+                        <Button
+                          className="w-8 h-8 px-0"
+                          variant="currency"
+                          disabled={currency === 'flow'}
+                          onClick={() => setCurrency('flow')}
+                        >
+                          <FlowIcon className="scale-50" />
+                        </Button>
+                        <Button
+                          className="w-8 h-8 px-0"
+                          variant="currency"
+                          disabled={currency === 'usd'}
+                          onClick={() => {
+                            // Conservative, assumes flow token is the default currency
+                            // if (!exchangeRates && token.last_sale.unit_price) {
+                            //   setExchangeRates(await getExchangeRates());
+                            // }
+                            setCurrency('usd');
+                          }}
+                        >
+                          <USDIcon />
+                        </Button>
+                        <Button
+                          className="w-8 h-8 px-0"
+                          variant="currency"
+                          disabled={currency === 'ethereum'}
+                          onClick={() => {
+                            // if (!exchangeRates && token.last_sale.unit_price) {
+                            //   setExchangeRates(await getExchangeRates());
+                            // }
+                            setCurrency('ethereum');
+                          }}
+                        >
+                          <EthIcon className="scale-75" />
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="flex -mt-[1.125rem] items-center justify-between">
+                      <span>{t('pages.viewNFT.lastSale')}</span>
+                      <Chip
+                        className="h-[1.875rem] w-fit justify-between"
+                        label={getPriceConversion().toString()}
+                        chain={currency}
+                        variant="price"
+                      />
                     </div>
                   </div>
-                  <div className="flex -mt-[1.125rem] items-center justify-between">
-                    <span>{t('pages.viewNFT.lastSale')}</span>
-                    <Chip
-                      className="h-[1.875rem] w-fit justify-between"
-                      label={getPriceConversion().toString()}
-                      chain={currency}
-                      variant="price"
-                    />
-                  </div>
-                </div>
+                )}
                 <Button className="gap-2" href={token?.external_url}>
                   <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
                   <LinkIcon />
@@ -466,7 +479,16 @@ export default function PageViewNFT() {
       )}
 
       <Footer
-        className={classNames('pt-12', isLoading && 'absolute bottom-0')}
+        className={classNames(
+          'pt-12',
+          (isLoading ||
+            (!isLoading &&
+              token?.nft_id &&
+              !token?.name &&
+              !token?.image_url) ||
+            (!isLoading && !token?.nft_id)) &&
+            'absolute bottom-0'
+        )}
       />
     </div>
   );
