@@ -54,9 +54,24 @@
     },
     "viewNFT": {
       "buyOnMarketplace": "Buy on Marketplace",
+      "copied": "Link copied",
       "currency": "Currency",
       "lastSale": "Last Sale",
-      "noDescription": "No description available"
+      "noDescription": "No description available",
+      "popover": {
+        "more": "More",
+        "refresh": "Refresh metadata",
+        "share": "Share"
+      },
+      "refresh": "Refresh queued.\nCheck back in a minute",
+      "report": "Report",
+      "reported": "Reported.\nThank you for your feedback.",
+      "share": {
+        "caption": "Check out this NFT",
+        "copy": "Copy link",
+        "facebook": "Share on Facebook",
+        "twitter": "Share on Twitter"
+      }
     }
   }
 }

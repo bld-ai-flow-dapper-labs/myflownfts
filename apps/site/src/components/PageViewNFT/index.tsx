@@ -1,16 +1,20 @@
+import * as Popover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import ImageGallery from 'react-image-gallery';
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
-
 import {
-  getExchangeRates,
-  getNFTByTokenId,
-  getRefreshMetadata,
-} from '../../api';
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from 'react-share';
+import { toast, ToastContainer } from 'react-toastify';
+import ReactTooltip from 'react-tooltip';
+
+import { getExchangeRates, getNFTByTokenId } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
@@ -35,6 +39,7 @@ export default function PageViewNFT() {
   const divRef = useRef(null);
   const [isFullscreen, setisFullscreen] = useState(false);
   const [images, setImages] = useState([]);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const renderVideo = (item) => {
     return (
@@ -144,32 +149,137 @@ export default function PageViewNFT() {
     </div>
   );
 
+  const renderSocialsPopover = () => (
+    <Popover.Root onOpenChange={() => setIsPopoverOpen(!isPopoverOpen)}>
+      <Popover.Anchor>
+        <Popover.Trigger asChild>
+          <Button
+            className="flex items-center justify-center w-8 h-8 px-0"
+            variant="scroll"
+            data-tip={t('pages.viewNFT.popover.share')}
+            data-for="share"
+            data-event-off="click"
+          >
+            <ShareIcon />
+            <ReactTooltip
+              id="share"
+              place="top"
+              effect="solid"
+              className="rounded-lg font-body !bg-black"
+              arrowColor="#000"
+              disable={isPopoverOpen}
+            />
+          </Button>
+        </Popover.Trigger>
+      </Popover.Anchor>
+      <Popover.Portal>
+        <Popover.Content className="slideDownAndFade">
+          <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
+            <Button
+              className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2"
+              variant="scroll"
+              onClick={() => {
+                navigator.clipboard.writeText(location.href);
+                toast(t('pages.viewNFT.copied'), { type: 'success' });
+              }}
+            >
+              <FlowIcon className="scale-[.65] bg-white rounded-full text-primary" />
+              <span>{t('pages.viewNFT.share.copy')}</span>
+            </Button>
+            <Button
+              className="!justify-start w-full hover:scale-105"
+              variant="scroll"
+            >
+              <FacebookShareButton
+                url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
+                className="flex items-center gap-4"
+              >
+                <FacebookIcon size={32} round />
+                <span>{t('pages.viewNFT.share.facebook')}</span>
+              </FacebookShareButton>
+            </Button>
+            <Button
+              className="!justify-start w-full hover:scale-105"
+              variant="scroll"
+            >
+              <TwitterShareButton
+                url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
+                className="flex items-center gap-4"
+                title={t('pages.viewNFT.share.caption')}
+              >
+                <TwitterIcon size={32} round />
+                <span>{t('pages.viewNFT.share.twitter')}</span>
+              </TwitterShareButton>
+            </Button>
+          </div>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+
+  const renderReportPopover = () => (
+    <Popover.Root onOpenChange={() => setIsPopoverOpen(!isPopoverOpen)}>
+      <Popover.Anchor>
+        <Popover.Trigger asChild>
+          <Button
+            className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
+            variant="scroll"
+            data-tip={t('pages.viewNFT.popover.more')}
+            data-for="more"
+            data-event-off="click"
+          >
+            <span className="text-white">...</span>
+            <ReactTooltip
+              id="more"
+              place="top"
+              effect="solid"
+              className="rounded-lg font-body !bg-black"
+              arrowColor="#000"
+              disable={isPopoverOpen}
+            />
+          </Button>
+        </Popover.Trigger>
+      </Popover.Anchor>
+      <Popover.Portal>
+        <Popover.Content className="slideDownAndFade">
+          <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
+            <Button
+              className="!justify-start w-full hover:scale-105"
+              variant="scroll"
+              onClick={() =>
+                toast(t('pages.viewNFT.reported'), { type: 'info' })
+              }
+            >
+              <span>{t('pages.viewNFT.report')}</span>
+            </Button>
+          </div>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+
   const renderButtons = () => (
     <div className="flex items-center gap-3 pb-4">
       <Button
         className="flex items-center justify-center w-8 h-8 px-0"
         variant="scroll"
         onClick={() => refreshMetadata()}
+        data-tip={t('pages.viewNFT.popover.refresh')}
+        data-for="refresh"
+        data-event-off="click"
       >
         <RefreshIcon />
+        <ReactTooltip
+          id="refresh"
+          place="top"
+          effect="solid"
+          className="rounded-lg font-body !bg-black"
+          arrowColor="#000"
+          disable={isPopoverOpen}
+        />
       </Button>
-      <FacebookShareButton
-        url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
-      >
-        <Button
-          className="flex items-center justify-center w-8 h-8 px-0"
-          variant="scroll"
-        >
-          <ShareIcon />
-        </Button>
-      </FacebookShareButton>
-
-      <Button
-        className="flex items-center justify-center w-8 h-8 px-0 pt-1.5 text-center"
-        variant="scroll"
-      >
-        <span className="text-white">...</span>
-      </Button>
+      {renderSocialsPopover()}
+      {renderReportPopover()}
     </div>
   );
 
@@ -204,16 +314,30 @@ export default function PageViewNFT() {
   };
 
   const refreshMetadata = async () => {
-    const data = await getRefreshMetadata(
-      contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
-      contract_address,
-      token_id
-    );
-    console.log(data);
+    // const data = await getRefreshMetadata(
+    //   contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
+    //   contract_address,
+    //   token_id
+    // );
+    // if (data) toast('Refresh queued', { type: 'success' });
+    // else
+    //   toast('Error in adding to refresh queue. Please refresh the page', {
+    //     type: 'error',
+    //   });
+
+    toast(t('pages.viewNFT.refresh'), { type: 'success' });
   };
 
   return (
     <div className="relative h-full min-h-screen bg-navbar">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar
+        pauseOnHover={false}
+        theme="dark"
+        bodyClassName="whitespace-pre-wrap"
+      />
       <Navbar />
       {isLoading && (
         <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
