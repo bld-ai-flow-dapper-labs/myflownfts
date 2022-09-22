@@ -1,9 +1,36 @@
-import useTranslation from 'next-translate/useTranslation';
+import * as fcl from '@onflow/fcl';
 import classNames from 'classnames';
+import { useAtom } from 'jotai';
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { addressAtom, userAtom } from '../../atoms';
+import { useWallet } from '../../pages/api/utils';
 import { Button, TextInput } from '../common';
 
 export default function Header() {
   const { t } = useTranslation();
+  const [user] = useAtom(userAtom);
+  const [address] = useAtom(addressAtom);
+  const [typed, setTyped] = useState('');
+
+  const router = useRouter();
+  const { connectWallet } = useWallet();
+
+  useEffect(() => {
+    if (address) {
+      setTyped(address);
+    }
+  }, [address]);
+
+  const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+
+    if (typed) {
+      router.push(`/owned/${typed}`);
+    }
+  };
+
   return (
     <div
       className={classNames(
@@ -35,15 +62,27 @@ export default function Header() {
         </div>
         <span>{t('pages.landing.header.nfts')}</span>
       </h1>
-      <TextInput
-        containerClassName="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
-        className="placeholder:font-semibold md:placeholder:font-medium"
-        placeholder={t('common.search')}
-        searchBar
-      />
+      <form
+        onSubmit={handleSubmit}
+        className="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
+      >
+        <TextInput
+          // containerClassName="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
+          className="placeholder:font-semibold md:placeholder:font-medium"
+          placeholder={t('common.search')}
+          value={typed}
+          onChange={(e) => setTyped(e.target.value)}
+          searchBar
+        />
+      </form>
       <div className="flex flex-col justify-center w-full gap-3 md:flex-row lg:flex-shrink-0">
-        <Button href="#" className="h-[3.125rem] w-full md:w-[13.125rem]">
-          {t('common.buttonConnectWallet')}
+        <Button
+          onClick={connectWallet}
+          className="h-[3.125rem] w-full md:w-[13.125rem]"
+        >
+          {user?.loggedIn
+            ? t('common.buttonDisconnectWallet')
+            : t('common.buttonConnectWallet')}
         </Button>
         <Button
           href="https://flow.com/"
