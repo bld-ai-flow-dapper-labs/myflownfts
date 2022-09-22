@@ -3,7 +3,9 @@
     "title": "My Flow NFTs",
     "buttonBrowseMore": "Browse More",
     "buttonConnectWallet": "Connect Wallet",
-    "search": "Search by Wallet Address, NFT or Community"
+    "buttonDisconnectWallet": "Disconnect Wallet",
+    "search": "Search by Wallet Address, NFT or Community",
+    "walletId": "Wallet ID"
   },
   "error": {
     "pages": {
