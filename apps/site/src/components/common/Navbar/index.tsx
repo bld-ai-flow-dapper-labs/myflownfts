@@ -1,4 +1,3 @@
-import { useWallet } from 'apps/site/src/pages/api/utils';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button, TextInput } from '..';
 import { addressAtom, userAtom } from '../../../atoms';
+import { useWallet } from '../../../utils';
 import { ReactComponent as DrawerIcon } from '../images/icon-drawer.svg';
 import { ReactComponent as ImageLogo } from '../images/icon-flow.svg';
 import { ReactComponent as SearchIcon } from '../images/icon-search.svg';
@@ -17,6 +17,7 @@ interface Props {
 
 export default function Navbar({ className, search = false }: Props) {
   const [address] = useAtom(addressAtom);
+  const [user] = useAtom(userAtom);
   const [typed, setTyped] = useState('');
 
   const { t } = useTranslation();
@@ -63,7 +64,6 @@ export default function Navbar({ className, search = false }: Props) {
           className="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
         >
           <TextInput
-            // containerClassName="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
             className="placeholder:font-semibold md:placeholder:font-medium"
             placeholder={t('common.search')}
             searchBar
@@ -72,15 +72,25 @@ export default function Navbar({ className, search = false }: Props) {
           />
         </form>
       )}
-      <Button
-        // href={address && `/owned/${address}`}
-        onClick={handleButtonClick}
-        className="hidden h-[3.125rem] min-w-[13.125rem] lg:inline px-5 py-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
-      >
-        {address
-          ? `${t('common.walletId')}: ${address}`
-          : t('common.buttonConnectWallet')}
-      </Button>
+      <div className="hidden lg:flex gap-2.5">
+        <Button
+          onClick={handleButtonClick}
+          className="h-[3.125rem] min-w-[13.125rem] px-5 py-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
+        >
+          {address
+            ? `${t('common.walletId')}: ${address}`
+            : t('common.buttonConnectWallet')}
+        </Button>
+        {user?.loggedIn && (
+          <Button
+            onClick={connectWallet}
+            className="h-[3.125rem] w-full md:w-[13.125rem]"
+            variant="light"
+          >
+            {t('common.buttonDisconnectWallet')}
+          </Button>
+        )}
+      </div>
       <div className="flex gap-3 lg:hidden">
         <SearchIcon className="rounded-md bg-container-dark/[.15]" />
         <DrawerIcon className="rounded-md bg-container-dark/[.15]" />

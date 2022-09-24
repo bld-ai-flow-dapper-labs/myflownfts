@@ -1,11 +1,10 @@
-import * as fcl from '@onflow/fcl';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { addressAtom, userAtom } from '../../atoms';
-import { useWallet } from '../../pages/api/utils';
+import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
 
 export default function Header() {
@@ -67,7 +66,6 @@ export default function Header() {
         className="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
       >
         <TextInput
-          // containerClassName="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
           className="placeholder:font-semibold md:placeholder:font-medium"
           placeholder={t('common.search')}
           value={typed}
