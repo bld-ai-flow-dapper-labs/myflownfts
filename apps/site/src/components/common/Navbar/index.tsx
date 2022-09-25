@@ -66,7 +66,15 @@ export default function Navbar({ className, search = false }: Props) {
           <TextInput
             className="placeholder:font-semibold md:placeholder:font-medium"
             placeholder={t('common.search')}
-            searchBar
+            endIcon={
+              <Button
+                className="text-white rounded-md bg-container-dark/[.15]"
+                onClick={handleSubmit}
+                variant="custom"
+              >
+                <SearchIcon className="inline" />
+              </Button>
+            }
             value={typed}
             onChange={(e) => setTyped(e.target.value)}
           />

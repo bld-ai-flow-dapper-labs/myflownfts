@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { addressAtom, userAtom } from '../../atoms';
 import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
+import { ReactComponent as SearchIcon } from '../common/images/icon-search.svg';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -67,10 +68,18 @@ export default function Header() {
       >
         <TextInput
           className="placeholder:font-semibold md:placeholder:font-medium"
+          endIcon={
+            <Button
+              className="text-white rounded-md bg-container-dark/[.15]"
+              onClick={handleSubmit}
+              variant="custom"
+            >
+              <SearchIcon className="inline" />
+            </Button>
+          }
           placeholder={t('common.search')}
           value={typed}
           onChange={(e) => setTyped(e.target.value)}
-          searchBar
         />
       </form>
       <div className="flex flex-col justify-center w-full gap-3 md:flex-row lg:flex-shrink-0">
