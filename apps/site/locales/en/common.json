@@ -4,7 +4,7 @@
     "buttonBrowseMore": "Browse More",
     "buttonConnectWallet": "Connect Wallet",
     "buttonDisconnectWallet": "Disconnect Wallet",
-    "search": "Search by Wallet Address",
+    "search": "Enter wallet address",
     "walletId": "Wallet ID"
   },
   "error": {
@@ -45,11 +45,19 @@
         "subtitle1": "Flow is easy to use and powerful to build with. Every aspect of the platform was designed from the ground up to support exceptional user experience at mainstream scale.",
         "subtitle2": " Originally conceived by the team behind CryptoKitties, Flow today is a decentralized network supported and built on by a growing community of brands and Web3 builders."
       },
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs"
+      },
       "ourCommunities": "OUR COMMUNITIES",
       "partners": "PARTNERS"
     },
     "viewNFTs": {
       "loadMore": "Load More",
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs | Owned"
+      },
       "noItems": "No items to display",
       "noOwned": "This wallet does not own NFTs yet.",
       "owned": "Owned"
@@ -59,6 +67,10 @@
       "copied": "Link copied",
       "currency": "Currency",
       "lastSale": "Last Sale",
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs | {{nftName}}"
+      },
       "noDescription": "No description available",
       "popover": {
         "more": "More",
