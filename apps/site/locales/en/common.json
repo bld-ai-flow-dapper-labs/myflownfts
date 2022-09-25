@@ -4,7 +4,7 @@
     "buttonBrowseMore": "Browse More",
     "buttonConnectWallet": "Connect Wallet",
     "buttonDisconnectWallet": "Disconnect Wallet",
-    "search": "Search by Wallet Address, NFT or Community",
+    "search": "Search by Wallet Address",
     "walletId": "Wallet ID"
   },
   "error": {

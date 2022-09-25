@@ -1,12 +1,12 @@
-import * as fcl from '@onflow/fcl';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { addressAtom, userAtom } from '../../atoms';
-import { useWallet } from '../../pages/api/utils';
+import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
+import { ReactComponent as SearchIcon } from '../common/images/icon-search.svg';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -67,12 +67,19 @@ export default function Header() {
         className="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
       >
         <TextInput
-          // containerClassName="grid h-16 md:max-w-[40rem] lg:max-w-[50.875rem] flex-shrink w-full"
           className="placeholder:font-semibold md:placeholder:font-medium"
+          endIcon={
+            <Button
+              className="text-white rounded-md bg-container-dark/[.15]"
+              onClick={handleSubmit}
+              variant="custom"
+            >
+              <SearchIcon className="inline" />
+            </Button>
+          }
           placeholder={t('common.search')}
           value={typed}
           onChange={(e) => setTyped(e.target.value)}
-          searchBar
         />
       </form>
       <div className="flex flex-col justify-center w-full gap-3 md:flex-row lg:flex-shrink-0">
