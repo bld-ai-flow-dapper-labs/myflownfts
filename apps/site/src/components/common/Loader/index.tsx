@@ -3,7 +3,11 @@ import React from 'react';
 import { ReactComponent as Logo } from '../images/icon-flow.svg';
 import { ReactComponent as Loading } from '../images/icon-loading.svg';
 
-export default function Loader({ className }) {
+interface Props {
+  className?: string;
+}
+
+export default function Loader({ className }: Props) {
   return (
     <div className={classNames('relative scale-125', className)}>
       <Loading className="absolute animate-spin" />
