@@ -36,7 +36,8 @@ export default function PageViewNFTs() {
     if (width < 560) setIncrement(8);
     else if (width < 733) setIncrement(9);
     else if (width < 906) setIncrement(8);
-    else if (width < 1024) setIncrement(10); //md breakpoint
+    else if (width < 1024) setIncrement(10);
+    //md breakpoint
     else if (width < 1193) setIncrement(8);
     else if (width < 1529) setIncrement(9);
     else if (width < 1900) setIncrement(8);

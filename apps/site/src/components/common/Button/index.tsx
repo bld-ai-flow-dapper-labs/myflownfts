@@ -43,7 +43,8 @@ const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>(
     ref
   ) {
     const buttonClassName = classNames(
-      'transition ease-in-out delay-150 duration-300',
+      'transition ease-in-out duration-300',
+      disabled && 'hover:cursor-not-allowed',
       variant !== 'custom' &&
         'inline-flex items-center justify-center px-5 py-3 text-button font-semibold rounded-lg',
       variant === 'dark' && 'text-white bg-indigo-600 hover:bg-indigo-700',
