@@ -81,23 +81,23 @@ export default function Navbar({ className, search = false }: Props) {
         </form>
       )}
       <div className="hidden lg:flex gap-2.5">
-        <Button
-          onClick={handleButtonClick}
-          className="h-[3.125rem] min-w-[13.125rem] px-5 py-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
-        >
-          {address
-            ? `${t('common.walletId')}: ${address}`
-            : t('common.buttonConnectWallet')}
-        </Button>
-        {user?.loggedIn && (
+        {address && (
           <Button
-            onClick={connectWallet}
-            className="h-[3.125rem] w-full md:w-[13.125rem]"
-            variant="light"
+            onClick={handleButtonClick}
+            className="h-[3.125rem] min-w-[13.125rem] px-5 py-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
           >
-            {t('common.buttonDisconnectWallet')}
+            {`${t('common.walletId')}: ${address}`}
           </Button>
         )}
+        <Button
+          className="h-[3.125rem] w-full md:w-[13.125rem]"
+          onClick={connectWallet}
+          variant={user.loggedIn ? 'light' : 'dark'}
+        >
+          {address
+            ? t('common.buttonDisconnectWallet')
+            : t('common.buttonConnectWallet')}
+        </Button>
       </div>
       <div className="flex gap-3 lg:hidden">
         <SearchIcon className="rounded-md bg-container-dark/[.15]" />
