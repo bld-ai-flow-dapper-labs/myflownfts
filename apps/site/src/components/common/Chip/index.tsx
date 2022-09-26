@@ -1,6 +1,7 @@
 import { ReactComponent as CopiedIcon } from '../images/icon-copied.svg';
 import { ReactComponent as EthIcon } from '../images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../images/icon-flow-nofill.svg';
+import { ReactComponent as UsdIcon } from '../images/icon-usd.svg';
 
 import classNames from 'classnames';
 
@@ -9,7 +10,7 @@ interface Props {
   chain?: string;
   className?: string;
   label: string;
-  variant?: 'primary' | 'secondary' | 'copied';
+  variant?: 'primary' | 'secondary' | 'copied' | 'price';
 }
 
 export default function Chip({
@@ -42,6 +43,10 @@ export default function Chip({
     case 'arbitrum':
       newLabel = label !== chain ? label : 'ARB';
       break;
+    case 'usd':
+      newLabel = label !== chain ? label : 'USD';
+      logo = <UsdIcon className="w-3 h-3" />;
+      break;
     default:
       newLabel = label;
   }
@@ -54,7 +59,7 @@ export default function Chip({
     <div
       className={classNames(
         'flex items-center justify-center gap-1 px-2 my-1.5 rounded-l-full rounded-r-full',
-        variant === 'primary' && 'bg-chip text-white',
+        (variant === 'primary' || variant === 'price') && 'bg-chip text-white',
         (variant === 'secondary' || variant === 'copied') &&
           'text-lightBlue gap-[0.625rem] bg-lightBlue/20 hover:bg-chip hover:text-white transition ease-in-out delay-150 duration-300',
         className
@@ -63,16 +68,19 @@ export default function Chip({
       <div
         className={classNames(
           variant === 'primary' && 'scale-100',
-          (variant === 'secondary' || variant === 'copied') && 'scale-150'
+          (variant === 'secondary' || variant === 'price') && 'scale-150',
+          variant === 'copied' && 'scale-150 justify-self-start',
+          variant === 'price' && 'ml-1'
         )}
       >
         {logo}
       </div>
       <span
         className={classNames(
-          'font-body',
+          'font-body truncate',
           variant === 'primary' && 'text-caption',
-          variant === 'secondary' && 'text-body w-[6.25rem] truncate'
+          variant === 'secondary' && 'text-body w-[6.25rem]',
+          variant === 'price' && 'text-body font-body font-bold pl-2'
         )}
       >
         {newLabel}

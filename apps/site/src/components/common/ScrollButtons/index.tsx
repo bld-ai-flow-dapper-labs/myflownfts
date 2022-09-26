@@ -21,7 +21,6 @@ export default function ScrollButtons({
   const { t } = useTranslation();
 
   return (
-
     <div className={classNames('flex items-center gap-3', className)}>
       <Button
         className="w-[3.125rem] h-[3.125rem]"

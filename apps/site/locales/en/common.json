@@ -4,13 +4,18 @@
     "buttonBrowseMore": "Browse More",
     "buttonConnectWallet": "Connect Wallet",
     "buttonDisconnectWallet": "Disconnect Wallet",
-    "search": "Search by Wallet Address",
+    "search": "Enter wallet address",
     "walletId": "Wallet ID"
   },
   "error": {
     "pages": {
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
+      },
+      "viewNFT": {
+        "notFound": "NFT NOT FOUND",
+        "unsupported": "UNSUPPORTED NFT",
+        "refresh": "Error in adding to refresh queue. Please refresh the page"
       }
     }
   },
@@ -41,14 +46,50 @@
         "subtitle1": "Flow is easy to use and powerful to build with. Every aspect of the platform was designed from the ground up to support exceptional user experience at mainstream scale.",
         "subtitle2": " Originally conceived by the team behind CryptoKitties, Flow today is a decentralized network supported and built on by a growing community of brands and Web3 builders."
       },
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs"
+      },
       "ourCommunities": "OUR COMMUNITIES",
       "partners": "PARTNERS"
     },
     "viewNFTs": {
       "loadMore": "Load More",
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs | Owned"
+      },
       "noItems": "No items to display",
       "noOwned": "This wallet does not own NFTs yet.",
       "owned": "Owned"
+    },
+    "viewNFT": {
+      "buyOnMarketplace": "Buy on Marketplace",
+      "copied": "Link copied",
+      "currency": "Currency",
+      "lastSale": "Last Sale",
+      "meta": {
+        "description": "Welcome to Flow’s next generation of NFTs.",
+        "title": "My Flow NFTs | {{nftName}}"
+      },
+      "noDescription": "No description available",
+      "popover": {
+        "more": "More",
+        "refresh": "Refresh metadata",
+        "share": "Share"
+      },
+      "refresh": {
+        "triggered": "Refresh queued.\nPlease check back in a minute",
+        "queued": "Already in refresh queue.\nPlease check back in a minute"
+      },
+      "report": "Report",
+      "reported": "Reported.\nThank you for your feedback.",
+      "share": {
+        "caption": "Check out this NFT",
+        "copy": "Copy link",
+        "facebook": "Share on Facebook",
+        "twitter": "Share on Twitter"
+      }
     }
   }
 }

@@ -117,5 +117,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      // from https://github.com/tailwindlabs/tailwindcss/pull/6086
+      addVariant('children', '& > *');
+    },
+  ],
 };

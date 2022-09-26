@@ -9,7 +9,7 @@ interface Props {
 
 export default function Loader({ className }: Props) {
   return (
-    <div className={classNames('relative scale-125', className)}>
+    <div className={classNames('relative scale-125 w-fit', className)}>
       <Loading className="absolute animate-spin" />
       <Logo className="scale-75" />
     </div>

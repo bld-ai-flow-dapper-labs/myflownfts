@@ -1,8 +1,8 @@
 import * as fcl from '@onflow/fcl';
 import { Provider } from 'jotai';
+import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import './styles.css';
 
 fcl.config({
@@ -16,9 +16,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>{t('common.title')}</title>
-      </Head>
+      <NextSeo title={t('common.title')} />
       <main className="app">
         <Provider>
           <Component {...pageProps} />
