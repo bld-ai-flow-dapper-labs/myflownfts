@@ -81,36 +81,6 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
-      backgroundImage: (theme) => ({
-        header:
-          "url('../../src/components/PageLanding/images/header/bg-header.png')",
-        'header-mobile':
-          "url('../../src/components/PageLanding/images/header/bg-header-mobile.png')",
-        'header-mobile-xs':
-          "url('../../src/components/PageLanding/images/header/bg-header-mobile-xs.png')",
-        'header-mobile-sm':
-          "url('../../src/components/PageLanding/images/header/bg-header-mobile-sm.png')",
-        intro:
-          "url('../../src/components/PageLanding/images/intro/bg-intro.png')",
-        'intro-mobile':
-          "url('../../src/components/PageLanding/images/intro/bg-intro-mobile.png')",
-        'intro-mobile-xs':
-          "url('../../src/components/PageLanding/images/intro/bg-intro-mobile-xs.png')",
-        'intro-mobile-sm':
-          "url('../../src/components/PageLanding/images/intro/bg-intro-mobile-sm.png')",
-        partners:
-          "url('../../src/components/PageLanding/images/partners/bg-partners.png')",
-        'partners-mobile':
-          "url('../../src/components/PageLanding/images/partners/bg-partners-mobile.png')",
-        'community-featured':
-          "url('../../src/components/PageLanding/images/community-featured/bg-community-featured.png')",
-        'community-featured-mobile':
-          "url('../../src/components/PageLanding/images/community-featured/bg-community-featured-mobile.png')",
-        signup:
-          "url('../../src/components/PageLanding/images/signup/bg-signup.png')",
-        'signup-mobile':
-          "url('../../src/components/PageLanding/images/signup/bg-signup-mobile.png')",
-      }),
       gridTemplateColumns: {
         fill: 'repeat(auto-fill, 312px)',
         'fill-mobile': 'repeat(auto-fill, 165px)',
