@@ -12,9 +12,10 @@ import { ReactComponent as YoutubeIcon } from '../images/icon-youtube.svg';
 
 interface Props {
   className?: string;
+  sidebar?: boolean;
 }
 
-export default function Footer({ className }: Props) {
+export default function Footer({ className, sidebar = false }: Props) {
   const { t } = useTranslation();
   return (
     <div
@@ -23,7 +24,9 @@ export default function Footer({ className }: Props) {
         className
       )}
     >
-      <Logo className="order-last my-6 text-primary lg:order-first lg:my-0" />
+      {!sidebar && (
+        <Logo className="order-last my-6 text-primary lg:order-first lg:my-0" />
+      )}
       <div className="flex flex-col items-center gap-6 lg:translate-x-20 mb-[3.25rem] lg:mb-0">
         <div className="flex items-center gap-6 text-white">
           <Button
@@ -69,18 +72,20 @@ export default function Footer({ className }: Props) {
           />
         </span>
       </div>
-      <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 lg:mb-0">
-        <Button href="#" className="hover:text-gray-50" variant="custom">
-          {t('pages.landing.footer.terms')}
-        </Button>
-        <Button
-          href="#"
-          className="hover:text-gray-50 whitespace-nowrap"
-          variant="custom"
-        >
-          {t('pages.landing.footer.contactUs')}
-        </Button>
-      </div>
+      {!sidebar && (
+        <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 lg:mb-0">
+          <Button href="#" className="hover:text-gray-50" variant="custom">
+            {t('pages.landing.footer.terms')}
+          </Button>
+          <Button
+            href="#"
+            className="hover:text-gray-50 whitespace-nowrap"
+            variant="custom"
+          >
+            {t('pages.landing.footer.contactUs')}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

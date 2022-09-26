@@ -4,6 +4,7 @@
     "buttonBrowseMore": "Browse More",
     "buttonConnectWallet": "Connect Wallet",
     "buttonDisconnectWallet": "Disconnect Wallet",
+    "home": "Home",
     "search": "Enter wallet address",
     "walletId": "Wallet ID"
   },
