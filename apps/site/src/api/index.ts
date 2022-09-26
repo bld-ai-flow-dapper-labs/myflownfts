@@ -78,7 +78,8 @@ export const postRefreshMetadata = async (
   tokenId: string
 ): Promise<RefreshResponse> => {
   const response = await fetch(
-    `/api/nfts/refresh?chain=${chain}&contract_address=${contractAddress}&token_id=${tokenId}`
+    `/api/nfts/refresh?chain=${chain}&contract_address=${contractAddress}&token_id=${tokenId}`,
+    { method: 'POST' }
   );
   const json = await response.json();
   return json;

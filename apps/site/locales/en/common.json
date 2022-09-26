@@ -14,7 +14,8 @@
       },
       "viewNFT": {
         "notFound": "NFT NOT FOUND",
-        "unsupported": "UNSUPPORTED NFT"
+        "unsupported": "UNSUPPORTED NFT",
+        "refresh": "Error in adding to refresh queue. Please refresh the page"
       }
     }
   },
@@ -77,7 +78,10 @@
         "refresh": "Refresh metadata",
         "share": "Share"
       },
-      "refresh": "Refresh queued.\nCheck back in a minute",
+      "refresh": {
+        "triggered": "Refresh queued.\nPlease check back in a minute",
+        "queued": "Already in refresh queue.\nPlease check back in a minute"
+      },
       "report": "Report",
       "reported": "Reported.\nThank you for your feedback.",
       "share": {

@@ -108,6 +108,7 @@ export default function PageViewNFT() {
       setExchangeRates(await getExchangeRates());
       setToken(data);
       setIsLoading(false);
+      console.log(BASE_URL);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -117,9 +118,7 @@ export default function PageViewNFT() {
     if (isFullscreen) {
       document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
       document.getElementsByTagName('img')[0]?.classList.add('h-[90.75vh]');
-      document
-        .getElementsByClassName('react-transform-wrapper')[0]
-        ?.removeAttribute('class');
+      document.getElementsByTagName('img')[0]?.classList.add('!w-screen');
     } else {
       document
         .getElementsByTagName('video')[0]
@@ -156,35 +155,38 @@ export default function PageViewNFT() {
         onScreenChange={() => {
           setisFullscreen(!isFullscreen);
         }}
+        onSlide={() => document.getElementsByTagName('video')[0].pause()}
       />
     </div>
   );
 
   const renderSocialsPopover = () => (
-    <Popover.Root onOpenChange={() => setIsPopoverOpen(!isPopoverOpen)}>
+    <Popover.Root open={isPopoverOpen}>
       <Popover.Anchor>
-        <Popover.Trigger asChild>
-          <Button
-            className="flex items-center justify-center w-8 h-8 px-0"
-            variant="scroll"
-            data-tip={t('pages.viewNFT.popover.share')}
-            data-for="share"
-            data-event-off="click"
-          >
-            <ShareIcon />
-            <ReactTooltip
-              id="share"
-              place="top"
-              effect="solid"
-              className="rounded-lg font-body !bg-black"
-              arrowColor="#000"
-              disable={isPopoverOpen}
-            />
-          </Button>
-        </Popover.Trigger>
+        <Button
+          className="flex items-center justify-center w-8 h-8 px-0"
+          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+          variant="scroll"
+          data-tip={t('pages.viewNFT.popover.share')}
+          data-for="share"
+          data-event-off="click"
+        >
+          <ShareIcon />
+          <ReactTooltip
+            id="share"
+            place="top"
+            effect="solid"
+            className="rounded-lg font-body !bg-black"
+            arrowColor="#000"
+            disable={isPopoverOpen}
+          />
+        </Button>
       </Popover.Anchor>
       <Popover.Portal>
-        <Popover.Content className="slideDownAndFade">
+        <Popover.Content
+          className="slideDownAndFade"
+          onInteractOutside={() => setIsPopoverOpen(false)}
+        >
           <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
             <Button
               className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2"
@@ -192,36 +194,31 @@ export default function PageViewNFT() {
               onClick={() => {
                 navigator.clipboard.writeText(location.href);
                 toast(t('pages.viewNFT.copied'), { type: 'success' });
+                setIsPopoverOpen(false);
               }}
             >
               <FlowIcon className="scale-[.65] bg-white rounded-full text-primary" />
               <span>{t('pages.viewNFT.share.copy')}</span>
             </Button>
-            <Button
-              className="!justify-start w-full hover:scale-105"
-              variant="scroll"
+            <FacebookShareButton
+              url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
+              className="inline-flex items-center justify-start w-full gap-4 px-5 py-3 font-semibold text-white transition duration-300 ease-in-out rounded-lg text-button hover:scale-105 bg-scroll-button hover:bg-scroll-hover"
+              resetButtonStyle={false}
+              onClick={() => setIsPopoverOpen(false)}
             >
-              <FacebookShareButton
-                url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
-                className="flex items-center gap-4"
-              >
-                <FacebookIcon size={32} round />
-                <span>{t('pages.viewNFT.share.facebook')}</span>
-              </FacebookShareButton>
-            </Button>
-            <Button
-              className="!justify-start w-full hover:scale-105"
-              variant="scroll"
+              <FacebookIcon size={32} round />
+              <span>{t('pages.viewNFT.share.facebook')}</span>
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
+              className="inline-flex items-center justify-start w-full gap-4 px-5 py-3 font-semibold text-white transition duration-300 ease-in-out rounded-lg text-button hover:scale-105 bg-scroll-button hover:bg-scroll-hover"
+              title={t('pages.viewNFT.share.caption')}
+              resetButtonStyle={false}
+              onClick={() => setIsPopoverOpen(false)}
             >
-              <TwitterShareButton
-                url={`${BASE_URL}/nft/${contract_address}/${token_id}`}
-                className="flex items-center gap-4"
-                title={t('pages.viewNFT.share.caption')}
-              >
-                <TwitterIcon size={32} round />
-                <span>{t('pages.viewNFT.share.twitter')}</span>
-              </TwitterShareButton>
-            </Button>
+              <TwitterIcon size={32} round />
+              <span>{t('pages.viewNFT.share.twitter')}</span>
+            </TwitterShareButton>
           </div>
         </Popover.Content>
       </Popover.Portal>
@@ -326,18 +323,19 @@ export default function PageViewNFT() {
   };
 
   const refreshMetadata = async () => {
-    const data = await postRefreshMetadata(
+    const { message } = await postRefreshMetadata(
       contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
       contract_address,
       token_id
     );
-    if (data) toast('Refresh queued', { type: 'success' });
+    if (message.includes('triggered'))
+      toast(t('pages.viewNFT.refresh.triggered'), { type: 'success' });
+    else if (message.includes('already in refresh queue'))
+      toast(t('pages.viewNFT.refresh.queued'), { type: 'info' });
     else
-      toast('Error in adding to refresh queue. Please refresh the page', {
+      toast(t('error.pages.viewNFT.refresh'), {
         type: 'error',
       });
-
-    toast(t('pages.viewNFT.refresh'), { type: 'success' });
   };
 
   return (

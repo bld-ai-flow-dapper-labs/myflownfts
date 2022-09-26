@@ -8,7 +8,8 @@ export default async function handler(
   res: NextApiResponse<RefreshResponse>
 ): Promise<NextApiResponse<RefreshResponse>> {
   if (req.method !== 'POST') {
-    return res.status(400);
+    res.status(400).send({ message: 'Only POST requests allowed' });
+    return;
   }
 
   const { chain, contract_address, token_id } = req.query;
