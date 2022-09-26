@@ -24,6 +24,7 @@ export default function Navbar({ className, search = false }: Props) {
   const [typed, setTyped] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [transitionClose, setTransitionClose] = useState(false);
 
   const addressDisplay =
     address.length > 11
@@ -39,6 +40,17 @@ export default function Navbar({ className, search = false }: Props) {
     if (showModal) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'visible';
   }, [showModal]);
+
+  useEffect(() => {
+    if (showModal) {
+      setTimeout(() => setShowModal(false), 450);
+      setTimeout(() => setTransitionClose(false), 500);
+    } else if (showSearch) {
+      setTimeout(() => setShowSearch(false), 450);
+      setTimeout(() => setTransitionClose(false), 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [transitionClose]);
 
   const handleButtonClick = () => {
     if (address) {
@@ -82,43 +94,52 @@ export default function Navbar({ className, search = false }: Props) {
     return (
       <Modal
         isOpen={showModal}
-        className="flex flex-col w-screen h-screen px-6 pt-0.5 text-white bg-gray-900 gap-[3.75rem] overflow-clip"
+        className="w-full h-full text-white bg-gray-900 overflow-clip"
       >
-        <div className="flex items-center justify-between">
-          <TextLogo className="h-14 w-fit" />
-          <Button
-            variant="custom"
-            className="rounded-md bg-container-dark/[.15] w-fit h-fit"
-            onClick={() => setShowModal(false)}
-          >
-            <CloseIcon className="w-10 h-10 scale-50" />
-          </Button>
+        <div
+          className={classNames(
+            'flex flex-col gap-[3.75rem] px-6 pt-0.5',
+            !transitionClose ? 'fadeIn' : 'fadeOut'
+          )}
+        >
+          <div className="flex items-center justify-between">
+            <TextLogo className="h-14 w-fit" />
+            <Button
+              variant="custom"
+              className="rounded-md bg-container-dark/[.15] w-fit h-fit"
+              onClick={() => {
+                setTransitionClose(!transitionClose);
+              }}
+            >
+              <CloseIcon className="w-10 h-10 scale-50" />
+            </Button>
+          </div>
+          <div className="flex flex-col gap-6">
+            <a
+              href="/"
+              className="transition duration-300 ease-in-out hover:text-gray-50 whitespace-nowrap"
+            >
+              {t('common.home')}
+            </a>
+            <Button href="#" className="hover:text-gray-50" variant="custom">
+              {t('pages.landing.footer.terms')}
+            </Button>
+            <Button
+              href="#"
+              className="hover:text-gray-50 whitespace-nowrap"
+              variant="custom"
+            >
+              {t('pages.landing.footer.contactUs')}
+            </Button>
+          </div>
+          <div className="flex flex-col gap-4 place-self-center">
+            {renderAddressButton()}
+          </div>
+          <Footer
+            sidebar
+            className="absolute bottom-0 -translate-x-1/2 left-1/2"
+          />
         </div>
-        <div className="flex flex-col gap-6">
-          <a
-            href="/"
-            className="transition duration-300 ease-in-out hover:text-gray-50 whitespace-nowrap"
-          >
-            {t('common.home')}
-          </a>
-          <Button href="#" className="hover:text-gray-50" variant="custom">
-            {t('pages.landing.footer.terms')}
-          </Button>
-          <Button
-            href="#"
-            className="hover:text-gray-50 whitespace-nowrap"
-            variant="custom"
-          >
-            {t('pages.landing.footer.contactUs')}
-          </Button>
-        </div>
-        <div className="flex flex-col gap-4 place-self-center">
-          {renderAddressButton()}
-        </div>
-        <Footer
-          sidebar
-          className="absolute bottom-0 -translate-x-1/2 left-1/2"
-        />
       </Modal>
     );
   };
@@ -140,7 +161,6 @@ export default function Navbar({ className, search = false }: Props) {
               </span>
             </a>
           )}
-
           {search && (
             <form
               onSubmit={handleSubmit}
@@ -187,8 +207,13 @@ export default function Navbar({ className, search = false }: Props) {
                 </Button>
               </>
             ) : (
-              <>
-                <form onSubmit={handleSubmit} className="w-full py-4 ">
+              <div
+                className={classNames(
+                  'flex items-center justify-between w-full gap-3 h-fit',
+                  !transitionClose ? 'fadeIn' : 'fadeOut'
+                )}
+              >
+                <form onSubmit={handleSubmit} className="w-full py-4">
                   <TextInput
                     className="h-10 w-full max-w-[87.5vw] placeholder:font-semibold md:placeholder:font-medium"
                     placeholder={t('common.search')}
@@ -198,12 +223,12 @@ export default function Navbar({ className, search = false }: Props) {
                 </form>
                 <Button
                   variant="custom"
-                  className="rounded-md bg-container-dark/[.15]"
-                  onClick={() => setShowSearch(false)}
+                  className="rounded-md bg-container-dark/[.15] w-10 h-10"
+                  onClick={() => setTransitionClose(!transitionClose)}
                 >
                   <CloseIcon className="w-10 h-10 scale-50" />
                 </Button>
-              </>
+              </div>
             )}
           </div>
         </div>
