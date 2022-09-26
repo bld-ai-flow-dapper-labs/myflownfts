@@ -108,7 +108,6 @@ export default function PageViewNFT() {
       setExchangeRates(await getExchangeRates());
       setToken(data);
       setIsLoading(false);
-      console.log(BASE_URL);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -132,7 +131,7 @@ export default function PageViewNFT() {
   const renderNFT = () => (
     <div
       className={classNames(
-        'relative rounded-md w-full lg:w-4/5 border-4 border-container-dark/0 bg-container-dark/10'
+        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10'
       )}
       ref={divRef}
     >
@@ -338,6 +337,64 @@ export default function PageViewNFT() {
       });
   };
 
+  const renderTokenPrice = () => (
+    <>
+      {token.last_sale && (
+        <div className="flex flex-col text-body font-semibold text-white bg-container-dark/5 rounded-md py-[1.375rem] px-4 gap-8">
+          <div className="flex items-center justify-between pb-1.5 border-b-2 border-container-dark/5">
+            <span>{t('pages.viewNFT.currency')}</span>
+            <div className="flex self-end gap-1 text-white">
+              <Button
+                className="w-8 h-8 px-0"
+                variant="currency"
+                disabled={currency === 'flow'}
+                onClick={() => setCurrency('flow')}
+              >
+                <FlowIcon className="scale-50" />
+              </Button>
+              <Button
+                className="w-8 h-8 px-0"
+                variant="currency"
+                disabled={currency === 'usd'}
+                onClick={() => {
+                  // Conservative, assumes flow token is the default currency
+                  // if (!exchangeRates && token.last_sale.unit_price) {
+                  //   setExchangeRates(await getExchangeRates());
+                  // }
+                  setCurrency('usd');
+                }}
+              >
+                <USDIcon />
+              </Button>
+              <Button
+                className="w-8 h-8 px-0"
+                variant="currency"
+                disabled={currency === 'ethereum'}
+                onClick={() => {
+                  // if (!exchangeRates && token.last_sale.unit_price) {
+                  //   setExchangeRates(await getExchangeRates());
+                  // }
+                  setCurrency('ethereum');
+                }}
+              >
+                <EthIcon className="scale-75" />
+              </Button>
+            </div>
+          </div>
+          <div className="flex -mt-[1.125rem] items-center justify-between">
+            <span>{t('pages.viewNFT.lastSale')}</span>
+            <Chip
+              className="h-[1.875rem] w-fit justify-between"
+              label={getPriceConversion().toString()}
+              chain={currency}
+              variant="price"
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+
   return (
     <>
       {token && (
@@ -346,7 +403,7 @@ export default function PageViewNFT() {
           title={t('pages.viewNFT.meta.title', { nftName: token.name })}
         />
       )}
-      <div className="relative h-full min-h-screen bg-navbar">
+      <div className="relative flex flex-col w-full h-full min-h-screen bg-navbar">
         <ToastContainer
           position="bottom-right"
           autoClose={1500}
@@ -363,16 +420,14 @@ export default function PageViewNFT() {
         )}
 
         {!isLoading && token?.nft_id && token?.name && token?.image_url && (
-          <div className="flex flex-col h-fit w-full items-end lg:pr-[16.875rem] pt-28">
-            <div className="flex self-center justify-end w-11/12 lg:self-end lg:w-fit lg:mx-0">
-              {renderButtons()}
-            </div>
-            <div className="flex flex-col item-center lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
-              <div className="flex justify-center w-11/12 pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
+          <div className="flex flex-col items-end justify-center h-fit pt-28 place-self-center w-11/12 max-w-[125rem] lg:pr-24">
+            {renderButtons()}
+            <div className="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
+              <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
                 {renderNFT()}
               </div>
-              <div className="flex justify-center w-11/12 mx-auto lg:justify-end lg:w-1/2">
-                <div className="flex flex-col min-w-[20rem] w-full gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
+              <div className="flex justify-center w-full mx-auto lg:justify-end lg:w-1/2">
+                <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
                   <div className="flex gap-3">
                     <Image
                       className="rounded-full"
@@ -392,9 +447,7 @@ export default function PageViewNFT() {
                       placeholder="empty"
                       unoptimized={true}
                     />
-                    <div
-                      className={classNames('flex flex-col w-fit max-w-[8rem]')}
-                    >
+                    <div className="flex flex-col w-fit max-w-32">
                       <span className="block font-semibold font-body text-container-text text-body opacity-30">
                         {t('pages.landing.createdBy')}
                       </span>
@@ -411,59 +464,7 @@ export default function PageViewNFT() {
                   <span className="font-medium text-white text-footer font-body">
                     {token.description ?? t('pages.viewNFT.noDescription')}
                   </span>
-                  {token.last_sale && (
-                    <div className="flex flex-col text-body font-semibold text-white bg-container-dark/5 rounded-md py-[1.375rem] px-4 gap-8">
-                      <div className="flex items-center justify-between pb-1.5 border-b-2 border-container-dark/5">
-                        <span>{t('pages.viewNFT.currency')}</span>
-                        <div className="flex self-end gap-1 text-white">
-                          <Button
-                            className="w-8 h-8 px-0"
-                            variant="currency"
-                            disabled={currency === 'flow'}
-                            onClick={() => setCurrency('flow')}
-                          >
-                            <FlowIcon className="scale-50" />
-                          </Button>
-                          <Button
-                            className="w-8 h-8 px-0"
-                            variant="currency"
-                            disabled={currency === 'usd'}
-                            onClick={() => {
-                              // Conservative, assumes flow token is the default currency
-                              // if (!exchangeRates && token.last_sale.unit_price) {
-                              //   setExchangeRates(await getExchangeRates());
-                              // }
-                              setCurrency('usd');
-                            }}
-                          >
-                            <USDIcon />
-                          </Button>
-                          <Button
-                            className="w-8 h-8 px-0"
-                            variant="currency"
-                            disabled={currency === 'ethereum'}
-                            onClick={() => {
-                              // if (!exchangeRates && token.last_sale.unit_price) {
-                              //   setExchangeRates(await getExchangeRates());
-                              // }
-                              setCurrency('ethereum');
-                            }}
-                          >
-                            <EthIcon className="scale-75" />
-                          </Button>
-                        </div>
-                      </div>
-                      <div className="flex -mt-[1.125rem] items-center justify-between">
-                        <span>{t('pages.viewNFT.lastSale')}</span>
-                        <Chip
-                          className="h-[1.875rem] w-fit justify-between"
-                          label={getPriceConversion().toString()}
-                          chain={currency}
-                          variant="price"
-                        />
-                      </div>
-                    </div>
-                  )}
+                  {renderTokenPrice()}
                   <Button className="gap-2" href={token?.external_url}>
                     <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
                     <LinkIcon />
