@@ -50,6 +50,7 @@ export default function Header() {
         alt=""
         className="z-[-2] w-full object-cover xs:hidden"
         fill
+        placeholder="blur"
         src={bgHeaderMobile}
         unoptimized
       />
@@ -57,6 +58,7 @@ export default function Header() {
         alt=""
         className="z-[-2] w-full object-cover hidden xs:block sm:hidden"
         fill
+        placeholder="blur"
         src={bgHeaderMobileXs}
         unoptimized
       />
@@ -64,6 +66,7 @@ export default function Header() {
         alt=""
         className="z-[-2] w-full object-cover hidden sm:block lg:hidden"
         fill
+        placeholder="blur"
         src={bgHeaderMobileSm}
         unoptimized
       />
@@ -71,8 +74,9 @@ export default function Header() {
         alt=""
         className="z-[-2] w-full object-cover hidden lg:block"
         fill
+        placeholder="blur"
+        quality="100"
         src={bgHeader}
-        unoptimized
       />
       <h1
         className={classNames(

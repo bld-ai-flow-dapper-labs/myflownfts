@@ -21,6 +21,7 @@ export default function Intro() {
         alt=""
         className="z-[-1] w-full object-cover xs:hidden"
         fill
+        placeholder="blur"
         src={bgIntroMobile}
         unoptimized
       />
@@ -28,6 +29,7 @@ export default function Intro() {
         alt=""
         className="z-[-1] w-full object-cover hidden xs:block sm:hidden"
         fill
+        placeholder="blur"
         src={bgIntroMobileXs}
         unoptimized
       />
@@ -35,6 +37,7 @@ export default function Intro() {
         alt=""
         className="z-[-1] w-full object-cover hidden sm:block md:hidden"
         fill
+        placeholder="blur"
         src={bgIntroMobileSm}
         unoptimized
       />
@@ -42,8 +45,9 @@ export default function Intro() {
         alt=""
         className="z-[-1] w-full object-cover hidden md:block"
         fill
+        placeholder="blur"
+        quality="100"
         src={bgIntro}
-        unoptimized
       />
 
       <ImageLogo className="scale-[.6] -translate-x-[2.75rem] md:scale-100 md:translate-x-0" />

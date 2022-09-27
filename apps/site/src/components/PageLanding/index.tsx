@@ -30,6 +30,7 @@ export default function PageLanding() {
             alt=""
             className="z-[-2] w-full object-cover lg:hidden"
             fill
+            placeholder="blur"
             src={bgCommunityFeaturedMobile}
             unoptimized
           />
@@ -37,8 +38,9 @@ export default function PageLanding() {
             alt=""
             className="z-[-2] w-full object-cover hidden lg:block"
             fill
+            placeholder="blur"
+            quality="100"
             src={bgCommunityFeatured}
-            unoptimized
           />
           <Communities />
           <Featured />

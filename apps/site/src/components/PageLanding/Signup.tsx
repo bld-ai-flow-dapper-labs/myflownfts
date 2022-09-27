@@ -13,6 +13,7 @@ export default function Signup() {
         alt=""
         className="z-[-2] w-full object-cover md:hidden"
         fill
+        placeholder="blur"
         src={bgSignupMobile}
         unoptimized
       />
@@ -20,6 +21,7 @@ export default function Signup() {
         alt=""
         className="z-[-2] w-full object-cover hidden md:block"
         fill
+        placeholder="blur"
         src={bgSignup}
         unoptimized
       />

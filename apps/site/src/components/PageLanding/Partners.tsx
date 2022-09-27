@@ -20,6 +20,7 @@ export default function Partners() {
         alt=""
         className="z-[-2] w-full object-cover"
         fill
+        placeholder="blur"
         src={bgPartners}
         unoptimized
       />
