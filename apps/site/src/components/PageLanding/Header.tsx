@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <div
       className={classNames(
-        'flex flex-col items-center justify-center',
+        'flex flex-col items-center justify-center w-full overflow-hidden',
         'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
         'xs:bg-header-mobile-xs',
         'sm:bg-header-mobile-sm sm:justify-bottom',

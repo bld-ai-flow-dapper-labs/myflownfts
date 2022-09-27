@@ -23,7 +23,7 @@ export default function Navbar({ className, search = false }: Props) {
   const [user] = useAtom(userAtom);
   const [typed, setTyped] = useState('');
   const [showSearch, setShowSearch] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [transitionClose, setTransitionClose] = useState(false);
 
   const addressDisplay =
@@ -37,13 +37,14 @@ export default function Navbar({ className, search = false }: Props) {
   const { connectWallet } = useWallet();
 
   useEffect(() => {
-    if (showModal) document.body.style.overflow = 'hidden';
+    if (showSidebar) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'visible';
-  }, [showModal]);
+  }, [showSidebar]);
 
+  // Set delays for transition before hiding components
   useEffect(() => {
-    if (showModal) {
-      setTimeout(() => setShowModal(false), 450);
+    if (showSidebar) {
+      setTimeout(() => setShowSidebar(false), 450);
       setTimeout(() => setTransitionClose(false), 500);
     } else if (showSearch) {
       setTimeout(() => setShowSearch(false), 450);
@@ -73,13 +74,16 @@ export default function Navbar({ className, search = false }: Props) {
       {address && (
         <Button
           onClick={handleButtonClick}
-          className="h-[3.125rem] w-full md:max-w-[17.625rem] p-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
+          className="h-[3.125rem] w-full lg:max-w-[17.625rem] p-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
         >
           {`${t('common.walletId')}: ${addressDisplay}`}
         </Button>
       )}
       <Button
-        className="h-[3.125rem] w-full md:w-[17.625rem]"
+        className={classNames(
+          'h-[3.125rem] w-full lg:w-[17.625rem]',
+          user.loggedIn ? 'lg:max-w-[17.625rem]' : 'lg:max-w-[13.125rem]'
+        )}
         onClick={connectWallet}
         variant={user.loggedIn ? 'light' : 'dark'}
       >
@@ -90,16 +94,16 @@ export default function Navbar({ className, search = false }: Props) {
     </>
   );
 
-  const renderModal = () => {
-    return (
+  const renderSidebar = () => (
+    <div className="flex items-center justify-center">
       <Modal
-        isOpen={showModal}
+        isOpen={showSidebar}
         className="w-full h-full text-white bg-gray-900 overflow-clip"
       >
         <div
           className={classNames(
             'flex flex-col gap-[3.75rem] px-6 pt-0.5',
-            !transitionClose ? 'fadeIn' : 'fadeOut'
+            transitionClose ? 'fadeOut' : 'fadeIn'
           )}
         >
           <div className="flex items-center justify-between">
@@ -115,6 +119,7 @@ export default function Navbar({ className, search = false }: Props) {
             </Button>
           </div>
           <div className="flex flex-col gap-6">
+            {/* <a> forces refresh on click if already on homepage, <Button> does not */}
             <a
               href="/"
               className="transition duration-300 ease-in-out hover:text-gray-50 whitespace-nowrap"
@@ -141,100 +146,95 @@ export default function Navbar({ className, search = false }: Props) {
           />
         </div>
       </Modal>
-    );
-  };
+    </div>
+  );
 
   return (
     <>
-      {!showModal ? (
+      {showSidebar && renderSidebar()}
+      <div
+        className={classNames(
+          'absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
+          className
+        )}
+      >
+        {!showSearch && (
+          <a className="flex items-center flex-shrink-0" href="/">
+            <ImageLogo />
+            <span className="pl-3 font-bold text-h4">{t('common.title')}</span>
+          </a>
+        )}
+        {search && (
+          <form
+            onSubmit={handleSubmit}
+            className="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
+          >
+            <TextInput
+              className="placeholder:font-semibold md:placeholder:font-medium min:w-[160px]"
+              placeholder={t('common.search')}
+              endIcon={
+                <Button
+                  className="text-white rounded-md bg-container-dark/[.15]"
+                  onClick={handleSubmit}
+                  variant="custom"
+                >
+                  <SearchIcon className="inline" />
+                </Button>
+              }
+              value={typed}
+              onChange={(e) => setTyped(e.target.value)}
+            />
+          </form>
+        )}
+        <div className="hidden lg:flex gap-2.5">{renderAddressButton()}</div>
         <div
           className={classNames(
-            'absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
-            className
+            'flex items-center gap-3 lg:hidden',
+            showSearch && 'w-full'
           )}
         >
-          {!showSearch && (
-            <a className="flex items-center flex-shrink-0" href="/">
-              <ImageLogo />
-              <span className="pl-3 font-bold text-h4">
-                {t('common.title')}
-              </span>
-            </a>
-          )}
-          {search && (
-            <form
-              onSubmit={handleSubmit}
-              className="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
+          {showSearch ? (
+            <div
+              className={classNames(
+                'flex items-center justify-between w-full gap-3 h-fit',
+                transitionClose ? 'fadeOut' : 'fadeIn'
+              )}
             >
-              <TextInput
-                className="placeholder:font-semibold md:placeholder:font-medium min:w-[160px]"
-                placeholder={t('common.search')}
-                endIcon={
-                  <Button
-                    className="text-white rounded-md bg-container-dark/[.15]"
-                    onClick={handleSubmit}
-                    variant="custom"
-                  >
-                    <SearchIcon className="inline" />
-                  </Button>
-                }
-                value={typed}
-                onChange={(e) => setTyped(e.target.value)}
-              />
-            </form>
-          )}
-          <div className="hidden lg:flex gap-2.5">{renderAddressButton()}</div>
-          <div
-            className={classNames(
-              'flex items-center gap-3 lg:hidden',
-              showSearch && 'w-full'
-            )}
-          >
-            {!showSearch ? (
-              <>
-                <Button
-                  variant="custom"
-                  onClick={() => setShowSearch(!showSearch)}
-                >
-                  <SearchIcon className="rounded-md bg-container-dark/[.15]" />
-                </Button>
-
-                <Button
-                  variant="custom"
-                  onClick={() => setShowModal(!showModal)}
-                >
-                  <DrawerIcon className="rounded-md bg-container-dark/[.15]" />
-                </Button>
-              </>
-            ) : (
-              <div
-                className={classNames(
-                  'flex items-center justify-between w-full gap-3 h-fit',
-                  !transitionClose ? 'fadeIn' : 'fadeOut'
-                )}
+              <form onSubmit={handleSubmit} className="w-full py-4">
+                <TextInput
+                  className="h-10 w-full max-w-[87.5vw] placeholder:font-semibold md:placeholder:font-medium"
+                  placeholder={t('common.search')}
+                  value={typed}
+                  onChange={(e) => setTyped(e.target.value)}
+                />
+              </form>
+              <Button
+                variant="custom"
+                className="rounded-md bg-container-dark/[.15] w-10 h-10"
+                onClick={() => setTransitionClose(!transitionClose)}
               >
-                <form onSubmit={handleSubmit} className="w-full py-4">
-                  <TextInput
-                    className="h-10 w-full max-w-[87.5vw] placeholder:font-semibold md:placeholder:font-medium"
-                    placeholder={t('common.search')}
-                    value={typed}
-                    onChange={(e) => setTyped(e.target.value)}
-                  />
-                </form>
-                <Button
-                  variant="custom"
-                  className="rounded-md bg-container-dark/[.15] w-10 h-10"
-                  onClick={() => setTransitionClose(!transitionClose)}
-                >
-                  <CloseIcon className="w-10 h-10 scale-50" />
-                </Button>
-              </div>
-            )}
-          </div>
+                <CloseIcon className="w-10 h-10 scale-50" />
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button
+                variant="custom"
+                onClick={() => setShowSearch(!showSearch)}
+              >
+                <SearchIcon className="rounded-md bg-container-dark/[.15]" />
+              </Button>
+
+              <Button
+                variant="custom"
+                onClick={() => setShowSidebar(!showSidebar)}
+              >
+                <DrawerIcon className="rounded-md bg-container-dark/[.15]" />
+              </Button>
+            </>
+          )}
         </div>
-      ) : (
-        <div className="flex items-center justify-center">{renderModal()}</div>
-      )}
+      </div>
     </>
   );
 }
