@@ -94,4 +94,25 @@ export interface RefreshResponse {
   message: string;
 }
 
+export interface FindProfile {
+  address: string;
+  allowStoringFollowers: boolean;
+  avatar?: string;
+  collections?: string[];
+  createdAt: string;
+  description?: string;
+  findName?: string;
+  followers?: string[];
+  following?: string[];
+  gender: string;
+  links: string[];
+  name: string;
+  tags: string[];
+  wallets: {
+    name: string;
+    balance: number;
+    accept: string;
+  };
+}
+
 export type NFTListResponse = ListResponse<NFT>;

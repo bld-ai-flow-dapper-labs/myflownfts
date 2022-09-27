@@ -1,3 +1,5 @@
+import * as fcl from '@onflow/fcl';
+import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
@@ -5,7 +7,9 @@ import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
 import { getNFTsByWallet, getRawQuery } from '../../api';
-import type { NFT } from '../../api/types';
+import type { FindProfile, NFT } from '../../api/types';
+import { userAtom } from '../../atoms';
+import { getProfile } from '../../utils';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
 
 export default function PageViewNFTs() {
@@ -28,6 +32,8 @@ export default function PageViewNFTs() {
   const [nextPage, setNextPage] = useState<string>();
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
+  const [findProfile, setFindProfile] = useState<FindProfile>();
+  const [user, setUser] = useAtom(userAtom);
 
   const header = { background: gradient(address, 'diagonal') };
   const icon = { background: gradient(iconHash, 'horizontal') };
@@ -45,10 +51,17 @@ export default function PageViewNFTs() {
     else setIncrement(10);
   };
 
+  const initializeFindProfile = async () => {
+    const profile = await getProfile(address);
+    console.log(profile);
+    if (profile) setFindProfile(profile);
+  };
+
   useEffect(() => {
     (async () => {
       try {
         loadInitial();
+        initializeFindProfile();
         const { next, count, data } = await getNFTsByWallet(address);
         if (!data) throw 'Error in fetching NFTs';
         const cleanNFTs = data?.filter(
@@ -143,14 +156,22 @@ export default function PageViewNFTs() {
   };
 
   const renderProfilePhoto = () => {
-    const profilePhoto = NFTs.filter((nft) => nft.token_id === profileNFT)[0];
+    let photoUrl;
+    let alt;
+    if (findProfile) {
+      photoUrl = findProfile.avatar;
+      alt = findProfile.name;
+    } else {
+      const profilePhoto = NFTs.filter((nft) => nft.token_id === profileNFT)[0];
+      photoUrl =
+        profilePhoto.previews.image_small_url ?? profilePhoto.image_url;
+      alt = profilePhoto.name;
+    }
     return (
       <Image
-        loader={() =>
-          profilePhoto.previews.image_small_url ?? profilePhoto.image_url
-        }
-        src={profilePhoto.previews.image_small_url ?? profilePhoto.image_url}
-        alt={profilePhoto.name}
+        loader={() => photoUrl}
+        src={photoUrl}
+        alt={alt}
         placeholder="empty"
         layout="fill"
         objectFit="cover"
@@ -173,8 +194,7 @@ export default function PageViewNFTs() {
             style={icon}
           >
             {!isLoading &&
-              NFTs?.length > 0 &&
-              profileNFT &&
+              (findProfile?.avatar || (NFTs?.length > 0 && profileNFT)) &&
               renderProfilePhoto()}
           </div>
           <div className="flex flex-col min-h-[calc(100vh_-_15.5rem)] h-full items-center px-4 lg:px-24 w-full bg-gray-900 pt-[5.125rem] lg:pt-[4.625rem]">
