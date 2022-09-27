@@ -1,6 +1,9 @@
+import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
+import { useEffect } from 'react';
+import { isLandingPageLoadedAtom } from '../../atoms';
 import { Footer, Navbar } from '../common';
 import Communities from './Communities';
 import Featured from './Featured';
@@ -13,6 +16,24 @@ import Signup from './Signup';
 
 export default function PageLanding() {
   const { t } = useTranslation();
+  const [isLandingPageLoaded, setIsLandingPageLoaded] = useAtom(
+    isLandingPageLoadedAtom
+  );
+
+  useEffect(() => {
+    const onPageLoad = () => {
+      setIsLandingPageLoaded(true);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, [setIsLandingPageLoaded]);
 
   return (
     <>
@@ -32,7 +53,7 @@ export default function PageLanding() {
             fill
             placeholder="blur"
             src={bgCommunityFeaturedMobile}
-            unoptimized
+            unoptimized={isLandingPageLoaded}
           />
           <Image
             alt=""
@@ -41,6 +62,7 @@ export default function PageLanding() {
             placeholder="blur"
             quality="100"
             src={bgCommunityFeatured}
+            unoptimized={isLandingPageLoaded}
           />
           <Communities />
           <Featured />

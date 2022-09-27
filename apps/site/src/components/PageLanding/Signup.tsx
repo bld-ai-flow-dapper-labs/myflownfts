@@ -1,5 +1,7 @@
+import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
+import { isLandingPageLoadedAtom } from '../../atoms';
 import { Button, TextInput } from '../common';
 import { ReactComponent as Logo } from '../common/images/icon-flow.svg';
 import bgSignupMobile from './images/signup/bg-signup-mobile.png';
@@ -7,6 +9,8 @@ import bgSignup from './images/signup/bg-signup.png';
 
 export default function Signup() {
   const { t } = useTranslation();
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
+
   return (
     <div className="flex flex-col items-center h-full md:pb-16 pb-10 pt-[2.25rem] md:pt-16 px-[1.25rem] relative">
       <Image
@@ -15,7 +19,7 @@ export default function Signup() {
         fill
         placeholder="blur"
         src={bgSignupMobile}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -23,7 +27,7 @@ export default function Signup() {
         fill
         placeholder="blur"
         src={bgSignup}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <div className="flex items-center justify-center gap-3 -ml-5 md:ml-0">
         <Logo className="scale-50 md:scale-100" />

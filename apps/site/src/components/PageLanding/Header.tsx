@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { addressAtom, userAtom } from '../../atoms';
+import { addressAtom, isLandingPageLoadedAtom, userAtom } from '../../atoms';
 import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
 import { ReactComponent as SearchIcon } from '../common/images/icon-search.svg';
@@ -17,6 +17,7 @@ export default function Header() {
   const { t } = useTranslation();
   const [user] = useAtom(userAtom);
   const [address] = useAtom(addressAtom);
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
   const [typed, setTyped] = useState('');
 
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Header() {
         fill
         placeholder="blur"
         src={bgHeaderMobile}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -60,7 +61,7 @@ export default function Header() {
         fill
         placeholder="blur"
         src={bgHeaderMobileXs}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -68,7 +69,7 @@ export default function Header() {
         fill
         placeholder="blur"
         src={bgHeaderMobileSm}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -77,6 +78,7 @@ export default function Header() {
         placeholder="blur"
         quality="100"
         src={bgHeader}
+        unoptimized={isLandingPageLoaded}
       />
       <h1
         className={classNames(

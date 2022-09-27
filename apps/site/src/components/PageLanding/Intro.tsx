@@ -1,6 +1,8 @@
 import classNames from 'classnames';
+import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
+import { isLandingPageLoadedAtom } from '../../atoms';
 import bgIntroMobileSm from './images/intro/bg-intro-mobile-sm.png';
 import bgIntroMobileXs from './images/intro/bg-intro-mobile-xs.png';
 import bgIntroMobile from './images/intro/bg-intro-mobile.png';
@@ -9,6 +11,8 @@ import { ReactComponent as ImageLogo } from './images/intro/logo-intro.svg';
 
 export default function Intro() {
   const { t } = useTranslation();
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
+
   return (
     <div
       className={classNames(
@@ -23,7 +27,7 @@ export default function Intro() {
         fill
         placeholder="blur"
         src={bgIntroMobile}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -31,7 +35,7 @@ export default function Intro() {
         fill
         placeholder="blur"
         src={bgIntroMobileXs}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -39,7 +43,7 @@ export default function Intro() {
         fill
         placeholder="blur"
         src={bgIntroMobileSm}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <Image
         alt=""
@@ -48,6 +52,7 @@ export default function Intro() {
         placeholder="blur"
         quality="100"
         src={bgIntro}
+        unoptimized={isLandingPageLoaded}
       />
 
       <ImageLogo className="scale-[.6] -translate-x-[2.75rem] md:scale-100 md:translate-x-0" />

@@ -10,10 +10,14 @@ import { ReactComponent as TopshotIcon } from './images/partners/icon-topshot.sv
 import { ReactComponent as UbisoftIcon } from './images/partners/icon-ubisoft.svg';
 import { ReactComponent as UFCIcon } from './images/partners/icon-ufc.svg';
 
+import { useAtom } from 'jotai';
 import Marquee from 'react-fast-marquee';
+import { isLandingPageLoadedAtom } from '../../atoms';
 
 export default function Partners() {
   const { t } = useTranslation();
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
+
   return (
     <div className="flex flex-col items-center w-full h-[14.375rem] lg:h-[21.5rem] text-h3 pt-12 lg:pt-16 gap-6 relative">
       <Image
@@ -22,7 +26,7 @@ export default function Partners() {
         fill
         placeholder="blur"
         src={bgPartners}
-        unoptimized
+        unoptimized={isLandingPageLoaded}
       />
       <div className="flex items-center gap-12">
         <StarIcon className="text-primary" />
