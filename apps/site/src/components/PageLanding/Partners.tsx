@@ -1,5 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/future/image';
 import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
+import bgPartners from './images/partners/bg-partners.png';
 import { ReactComponent as DrSeussIcon } from './images/partners/icon-drseuss.svg';
 import { ReactComponent as NBAIcon } from './images/partners/icon-nba.svg';
 import { ReactComponent as NFLIcon } from './images/partners/icon-nfl.svg';
@@ -8,12 +10,24 @@ import { ReactComponent as TopshotIcon } from './images/partners/icon-topshot.sv
 import { ReactComponent as UbisoftIcon } from './images/partners/icon-ubisoft.svg';
 import { ReactComponent as UFCIcon } from './images/partners/icon-ufc.svg';
 
+import { useAtom } from 'jotai';
 import Marquee from 'react-fast-marquee';
+import { isLandingPageLoadedAtom } from '../../atoms';
 
 export default function Partners() {
   const { t } = useTranslation();
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
+
   return (
-    <div className="flex flex-col items-center w-full h-[14.375rem] lg:h-[21.5rem] bg-no-repeat bg-cover bg-partners-mobile lg:bg-partners bg-bottom text-h3 pt-12 lg:pt-16 gap-6">
+    <div className="flex flex-col items-center w-full h-[14.375rem] lg:h-[21.5rem] text-h3 pt-12 lg:pt-16 gap-6 relative">
+      <Image
+        alt=""
+        className="z-[-2] w-full object-cover"
+        fill
+        placeholder="blur"
+        src={bgPartners}
+        unoptimized={isLandingPageLoaded}
+      />
       <div className="flex items-center gap-12">
         <StarIcon className="text-primary" />
         <span className="font-bold text-white text-mobile-section lg:text-section">
