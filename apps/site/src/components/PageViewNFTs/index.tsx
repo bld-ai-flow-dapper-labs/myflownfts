@@ -165,7 +165,7 @@ export default function PageViewNFTs() {
     <>
       <NextSeo title={t('pages.viewNFTs.meta.title')} />
       <div>
-        <Navbar className="lg:!bg-navbar/90" search />
+        <Navbar className="!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">
           <div

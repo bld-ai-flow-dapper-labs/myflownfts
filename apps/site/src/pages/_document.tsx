@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html className="h-full" lang="en">
       <Head>
-        <meta name="theme-color" content="#142539" />
+        <meta name="theme-color" content="transparent" />
         <link rel="stylesheet" href="https://use.typekit.net/nys4xzx.css" />
         <link
           rel="icon"

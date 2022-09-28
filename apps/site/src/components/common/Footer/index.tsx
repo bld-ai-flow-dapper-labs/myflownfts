@@ -21,6 +21,7 @@ export default function Footer({ className, sidebar = false }: Props) {
     <div
       className={classNames(
         'flex lg:flex-row flex-col-reverse items-center justify-center place-self-end lg:justify-between w-full h-fit lg:h-[8.5rem] bg-gray-900 px-20',
+        sidebar && 'absolute bottom-0 -translate-x-1/2 bg-opacity-0 left-1/2',
         className
       )}
     >
@@ -65,11 +66,27 @@ export default function Footer({ className, sidebar = false }: Props) {
             <TelegramIcon />
           </Button>
         </div>
-        <span className="text-gray-700 text-footer font-body">
+        <span
+          className={classNames(
+            'font-body',
+            sidebar
+              ? 'text-white text-sidebar-footer font-normal'
+              : 'text-gray-700 text-footer'
+          )}
+        >
           <Trans
             i18nKey="pages.landing.footer.title"
             components={{ bold: <strong /> }}
           />
+        </span>
+        <span
+          className={
+            sidebar
+              ? 'font-body text-sidebar-rights text-gray-700 font-normal -mb-3 -mt-4'
+              : 'hidden'
+          }
+        >
+          {t('common.rightsReserved')}
         </span>
       </div>
       {!sidebar && (

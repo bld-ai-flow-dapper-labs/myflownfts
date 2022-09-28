@@ -9,8 +9,8 @@ import { addressAtom, userAtom } from '../../../atoms';
 import { useWallet } from '../../../utils';
 import { ReactComponent as CloseIcon } from '../images/icon-close.svg';
 import { ReactComponent as DrawerIcon } from '../images/icon-drawer.svg';
+import { ReactComponent as ImageLogo } from '../images/icon-flow-nofill.svg';
 import { ReactComponent as TextLogo } from '../images/icon-flow-text.svg';
-import { ReactComponent as ImageLogo } from '../images/icon-flow.svg';
 import { ReactComponent as SearchIcon } from '../images/icon-search.svg';
 
 interface Props {
@@ -26,6 +26,18 @@ export default function Navbar({ className, search = false }: Props) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [transitionClose, setTransitionClose] = useState(false);
 
+  const windowResize = () => {
+    const { innerWidth: width } = window;
+    if (width > 1024) {
+      setShowSearch(false);
+      setShowSidebar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', windowResize);
+  }, []);
+
   const addressDisplay =
     address.length > 11
       ? `${address.slice(0, 4)}...${address.slice(-4)}`
@@ -36,19 +48,18 @@ export default function Navbar({ className, search = false }: Props) {
 
   const { connectWallet } = useWallet();
 
-  useEffect(() => {
-    if (showSidebar) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'visible';
-  }, [showSidebar]);
+  // Ensures animations are finished before re-rendering transitionClose based classes
+  const transitionDelay = async (delay) =>
+    await setTimeout(() => setTransitionClose(false), delay);
 
   // Set delays for transition before hiding components
   useEffect(() => {
-    if (showSidebar) {
-      setTimeout(() => setShowSidebar(false), 450);
-      setTimeout(() => setTransitionClose(false), 500);
-    } else if (showSearch) {
-      setTimeout(() => setShowSearch(false), 450);
-      setTimeout(() => setTransitionClose(false), 500);
+    if ((showSidebar || (showSidebar && showSearch)) && transitionClose) {
+      setTimeout(() => setShowSidebar(false), 200);
+      transitionDelay(200);
+    } else if (showSearch && transitionClose) {
+      setTimeout(() => setShowSearch(false), 200);
+      transitionDelay(200);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transitionClose]);
@@ -74,14 +85,14 @@ export default function Navbar({ className, search = false }: Props) {
       {address && (
         <Button
           onClick={handleButtonClick}
-          className="h-[3.125rem] w-full lg:max-w-[17.625rem] p-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
+          className="h-[3.125rem] w-full lg:max-w-[17.625rem] lg:min-w-[13rem] p-3 text-button font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-700 truncate"
         >
           {`${t('common.walletId')}: ${addressDisplay}`}
         </Button>
       )}
       <Button
         className={classNames(
-          'h-[3.125rem] w-full lg:w-[17.625rem]',
+          'h-[3.125rem] w-full lg:w-[17.625rem] lg:min-w-40',
           user.loggedIn ? 'lg:max-w-[17.625rem]' : 'lg:max-w-[13.125rem]'
         )}
         onClick={connectWallet}
@@ -94,75 +105,105 @@ export default function Navbar({ className, search = false }: Props) {
     </>
   );
 
-  const renderSidebar = () => (
-    <div className="flex items-center justify-center">
-      <Modal
-        isOpen={showSidebar}
-        className="w-full h-full text-white bg-gray-900 overflow-clip"
-      >
-        <div
-          className={classNames(
-            'flex flex-col gap-[3.75rem] px-6 pt-0.5',
-            transitionClose ? 'fadeOut' : 'fadeIn'
-          )}
+  const renderSidebar = () => {
+    Modal.setAppElement(document.getElementById('navbar'));
+
+    return (
+      <div className="flex items-center justify-center">
+        <Modal
+          isOpen={showSidebar}
+          className="w-full h-full pt-3 text-white bg-navbar/30 backdrop-blur-xl overflow-clip backdrop-brightness-50"
+          ariaHideApp={false}
+          style={{ overlay: { backgroundColor: 0 } }}
         >
-          <div className="flex items-center justify-between">
-            <TextLogo className="h-14 w-fit" />
-            <Button
-              variant="custom"
-              className="rounded-md bg-container-dark/[.15] w-fit h-fit"
-              onClick={() => {
-                setTransitionClose(!transitionClose);
-              }}
+          <div className="flex flex-col gap-[3.75rem] px-6">
+            <div className="flex items-center justify-between">
+              <TextLogo className="h-14 w-fit" />
+              <div className="flex gap-3">
+                <Button
+                  variant="custom"
+                  onClick={() => {
+                    setShowSearch(true);
+                    setTransitionClose(true);
+                  }}
+                  className="rounded-md hover:bg-indigo-600"
+                >
+                  <SearchIcon className="rounded-md bg-container-dark/[.15]" />
+                </Button>
+                <Button
+                  variant="custom"
+                  className="rounded-md bg-container-dark/[.15] w-fit h-fit"
+                  onClick={() => {
+                    setTransitionClose(true);
+                  }}
+                >
+                  <CloseIcon className="w-10 h-10 scale-50" />
+                </Button>
+              </div>
+            </div>
+            <div
+              className={classNames(
+                'flex flex-col gap-[3.75rem] -mt-2 text-sidebar-links font-semibold',
+                transitionClose ? 'fadeOut' : 'fadeIn'
+              )}
             >
-              <CloseIcon className="w-10 h-10 scale-50" />
-            </Button>
+              <div className={classNames('flex flex-col gap-6')}>
+                {/* <a> forces refresh on click if already on homepage, <Button> does not */}
+                <a
+                  href="/"
+                  className="transition duration-300 ease-in-out hover:text-gray-50 whitespace-nowrap"
+                >
+                  {t('common.home')}
+                </a>
+                <Button
+                  href="#"
+                  className="hover:text-gray-50"
+                  variant="custom"
+                >
+                  {t('pages.landing.footer.terms')}
+                </Button>
+                <Button
+                  href="#"
+                  className="hover:text-gray-50 whitespace-nowrap"
+                  variant="custom"
+                >
+                  {t('pages.landing.footer.contactUs')}
+                </Button>
+              </div>
+              <div className="flex flex-col w-full gap-4 place-self-center">
+                {renderAddressButton()}
+              </div>
+              <Footer sidebar />
+            </div>
           </div>
-          <div className="flex flex-col gap-6">
-            {/* <a> forces refresh on click if already on homepage, <Button> does not */}
-            <a
-              href="/"
-              className="transition duration-300 ease-in-out hover:text-gray-50 whitespace-nowrap"
-            >
-              {t('common.home')}
-            </a>
-            <Button href="#" className="hover:text-gray-50" variant="custom">
-              {t('pages.landing.footer.terms')}
-            </Button>
-            <Button
-              href="#"
-              className="hover:text-gray-50 whitespace-nowrap"
-              variant="custom"
-            >
-              {t('pages.landing.footer.contactUs')}
-            </Button>
-          </div>
-          <div className="flex flex-col gap-4 place-self-center">
-            {renderAddressButton()}
-          </div>
-          <Footer
-            sidebar
-            className="absolute bottom-0 -translate-x-1/2 left-1/2"
-          />
-        </div>
-      </Modal>
-    </div>
-  );
+        </Modal>
+      </div>
+    );
+  };
 
   return (
     <>
       {showSidebar && renderSidebar()}
       <div
+        id="navbar"
         className={classNames(
-          'absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
+          'fixed lg:absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-screen h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
+          !showSidebar && 'z-10',
           className
         )}
       >
         {!showSearch && (
-          <a className="flex items-center flex-shrink-0" href="/">
-            <ImageLogo />
-            <span className="pl-3 font-bold text-h4">{t('common.title')}</span>
-          </a>
+          <>
+            <a className="items-center flex-shrink-0 hidden lg:flex" href="/">
+              <ImageLogo className="text-primary" />
+              <span className="pl-3 font-bold text-h4">
+                {t('common.title')}
+              </span>
+            </a>
+            <a className="flex items-center flex-shrink-0 lg:hidden" href="/">
+              <TextLogo className="h-14 w-fit" />
+            </a>
+          </>
         )}
         {search && (
           <form
@@ -170,7 +211,7 @@ export default function Navbar({ className, search = false }: Props) {
             className="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
           >
             <TextInput
-              className="placeholder:font-semibold md:placeholder:font-medium min:w-[160px]"
+              className="placeholder:font-semibold md:placeholder:font-medium min-w-[10rem]"
               placeholder={t('common.search')}
               endIcon={
                 <Button
@@ -186,7 +227,9 @@ export default function Navbar({ className, search = false }: Props) {
             />
           </form>
         )}
-        <div className="hidden lg:flex gap-2.5">{renderAddressButton()}</div>
+        <div className="hidden lg:flex gap-2.5 lg:min-w-[25rem] lg:w-fit lg:justify-end">
+          {renderAddressButton()}
+        </div>
         <div
           className={classNames(
             'flex items-center gap-3 lg:hidden',
@@ -211,7 +254,7 @@ export default function Navbar({ className, search = false }: Props) {
               <Button
                 variant="custom"
                 className="rounded-md bg-container-dark/[.15] w-10 h-10"
-                onClick={() => setTransitionClose(!transitionClose)}
+                onClick={() => setTransitionClose(true)}
               >
                 <CloseIcon className="w-10 h-10 scale-50" />
               </Button>
