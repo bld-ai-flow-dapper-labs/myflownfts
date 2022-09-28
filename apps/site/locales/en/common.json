@@ -54,6 +54,7 @@
       "partners": "PARTNERS"
     },
     "viewNFTs": {
+      "buttonCopied": "Copied!",
       "loadMore": "Load More",
       "meta": {
         "description": "Welcome to Flow’s next generation of NFTs.",

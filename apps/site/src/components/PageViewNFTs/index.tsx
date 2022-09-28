@@ -1,5 +1,3 @@
-import * as fcl from '@onflow/fcl';
-import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
@@ -8,7 +6,6 @@ import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { FindProfile, NFT } from '../../api/types';
-import { userAtom } from '../../atoms';
 import { getProfile } from '../../utils';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
 
@@ -33,7 +30,6 @@ export default function PageViewNFTs() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
   const [findProfile, setFindProfile] = useState<FindProfile>();
-  const [user, setUser] = useAtom(userAtom);
 
   const header = { background: gradient(address, 'diagonal') };
   const icon = { background: gradient(iconHash, 'horizontal') };
@@ -51,17 +47,19 @@ export default function PageViewNFTs() {
     else setIncrement(10);
   };
 
-  const initializeFindProfile = async () => {
-    const profile = await getProfile(address);
-    console.log(profile);
-    if (profile) setFindProfile(profile);
+  const getFindProfile = async () => {
+    // Ensure address is a flow address to prevent errors when passed to cadence contracts
+    if (address.match(/^0x[a-fA-F0-9]{16}$/g)) {
+      const profile = await getProfile(address);
+      if (profile) setFindProfile(profile);
+    }
   };
 
   useEffect(() => {
     (async () => {
       try {
         loadInitial();
-        initializeFindProfile();
+        getFindProfile();
         const { next, count, data } = await getNFTsByWallet(address);
         if (!data) throw 'Error in fetching NFTs';
         const cleanNFTs = data?.filter(
@@ -79,6 +77,7 @@ export default function PageViewNFTs() {
         setError(true);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
   useEffect(() => {
@@ -115,10 +114,40 @@ export default function PageViewNFTs() {
           variant="secondary"
         />
       ) : (
-        <Chip className="w-40 h-[2.375rem]" label="Copied!" variant="copied" />
+        <Chip
+          className="w-40 h-[2.375rem] text-lightBlue bg-lightBlue/20"
+          label={t('pages.viewNFTs.buttonCopied')}
+          variant="copied"
+        />
       )}
     </Button>
   );
+
+  const renderFindChip = () => {
+    const link = findProfile.findName
+      ? `https://find.xyz/${findProfile.findName}`
+      : `https://find.xyz/${address}`;
+    const label =
+      findProfile.findName !== ''
+        ? findProfile.findName.concat('.find')
+        : findProfile.name;
+
+    return (
+      <Button
+        href={link}
+        rel="noopener noreferrer"
+        target="_blank"
+        variant="custom"
+      >
+        <Chip
+          className="w-40 h-[2.375rem]"
+          label={label}
+          chain="flow"
+          variant="find"
+        />
+      </Button>
+    );
+  };
 
   const renderNFTs = () => {
     if (NFTs?.length > 0) {
@@ -199,6 +228,7 @@ export default function PageViewNFTs() {
           </div>
           <div className="flex flex-col min-h-[calc(100vh_-_15.5rem)] h-full items-center px-4 lg:px-24 w-full bg-gray-900 pt-[5.125rem] lg:pt-[4.625rem]">
             <div className="flex items-center gap-3 pb-12">
+              {findProfile && renderFindChip()}
               {renderAddressChip()}
             </div>
             <div className="flex justify-center w-full border-b-[1px] border-container-dark/10">

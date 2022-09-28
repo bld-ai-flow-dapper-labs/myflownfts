@@ -41,6 +41,11 @@ module.exports = {
       navbar: '#202124',
       transparent: 'transparent',
       lightBlue: '#3BD9E7',
+      find: {
+        primary: '#72e583',
+        secondary: '#00c075',
+        dark: '#3f8369',
+      },
     },
     fontFamily: {
       sans: ['Termina', ...defaultTheme.fontFamily.sans],
