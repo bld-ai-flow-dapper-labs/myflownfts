@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import * as ReactDOM from 'react-dom/client';
 import ImageGallery from 'react-image-gallery';
 import {
   FacebookIcon,
@@ -21,6 +22,7 @@ import {
   postRefreshMetadata,
 } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
+import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
 import { ReactComponent as LinkIcon } from '../../components/common/images/icon-link.svg';
@@ -42,23 +44,51 @@ export default function PageViewNFT() {
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates>();
   const galleryRef = useRef(null);
   const divRef = useRef(null);
-  const [isFullscreen, setisFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [images, setImages] = useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const renderVideo = (item) => {
     return (
-      <video
-        autoPlay
-        controls
-        loop
-        muted
-        controlsList="nodownload nofullscreen"
-        className={classNames('h-full w-full mx-auto rounded-lg')}
-      >
-        <source src={item.embedUrl} />
-      </video>
+      <div id="video-wrapper" className="relative w-full h-full rounded-lg">
+        <video
+          autoPlay
+          controls
+          loop
+          muted
+          controlsList="nodownload nofullscreen noremoteplayback"
+          className="mx-auto"
+        >
+          <source src={item.embedUrl} />
+        </video>
+      </div>
     );
+  };
+
+  const renderVideoCloseButton = () => {
+    const id = 'video-close-button';
+    const component = (
+      <Button
+        className="absolute text-white left-5 top-5"
+        variant="custom"
+        onClick={() => galleryRef.current.toggleFullScreen()}
+      >
+        <CloseIcon className="scale-150" />
+      </Button>
+    );
+
+    if (!document.getElementById(id)) {
+      const divs = document.getElementById('video-wrapper');
+      console.log(divs);
+      if (divs) {
+        const d = document.createElement('div');
+        d.id = id;
+        divs.appendChild(d);
+        const rootElement = document.getElementById(id);
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(component);
+      }
+    }
   };
 
   useEffect(() => {
@@ -118,13 +148,14 @@ export default function PageViewNFT() {
       document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
       document.getElementsByTagName('img')[0]?.classList.add('h-[90.75vh]');
       document.getElementsByTagName('img')[0]?.classList.add('!w-screen');
+      renderVideoCloseButton();
     } else {
       document
         .getElementsByTagName('video')[0]
         ?.classList.remove('h-[90.75vh]');
       document.getElementsByTagName('img')[0]?.classList.remove('h-[90.75vh]');
+      document.getElementById('video-close-button')?.remove();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
 
@@ -153,7 +184,7 @@ export default function PageViewNFT() {
           if (!isFullscreen) galleryRef.current.toggleFullScreen();
         }}
         onScreenChange={() => {
-          setisFullscreen(!isFullscreen);
+          setIsFullscreen(!isFullscreen);
         }}
         onSlide={() => document.getElementsByTagName('video')[0].pause()}
       />
@@ -429,7 +460,7 @@ export default function PageViewNFT() {
                 {renderNFT()}
               </div>
               <div className="flex justify-center w-full mx-auto lg:justify-end lg:w-1/2">
-                <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
+                <div className="flex flex-col min-w-80 w-full lg:max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
                   <div className="flex gap-3">
                     <Image
                       className="rounded-full"

@@ -210,7 +210,7 @@ export default function Navbar({ className, search = false }: Props) {
         {search && (
           <form
             onSubmit={handleSubmit}
-            className="hidden lg:grid h-[3.375rem] md:max-w-[40rem] lg:max-w-[50.875rem] w-full"
+            className="hidden lg:grid h-[3.375rem] lg:max-w-[35rem]  w-full"
           >
             <TextInput
               className="placeholder:font-semibold md:placeholder:font-medium min-w-[10rem]"
