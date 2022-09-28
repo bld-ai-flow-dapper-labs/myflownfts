@@ -1,17 +1,23 @@
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { addressAtom, userAtom } from '../../atoms';
+import { addressAtom, isLandingPageLoadedAtom, userAtom } from '../../atoms';
 import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
 import { ReactComponent as SearchIcon } from '../common/images/icon-search.svg';
+import bgHeaderMobileSm from './images/header/bg-header-mobile-sm.png';
+import bgHeaderMobileXs from './images/header/bg-header-mobile-xs.png';
+import bgHeaderMobile from './images/header/bg-header-mobile.png';
+import bgHeader from './images/header/bg-header.png';
 
 export default function Header() {
   const { t } = useTranslation();
   const [user] = useAtom(userAtom);
   const [address] = useAtom(addressAtom);
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
   const [typed, setTyped] = useState('');
 
   const router = useRouter();
@@ -34,14 +40,46 @@ export default function Header() {
   return (
     <div
       className={classNames(
-        'flex flex-col items-center justify-center',
-        'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
-        'xs:bg-header-mobile-xs',
-        'sm:bg-header-mobile-sm sm:justify-bottom',
+        'flex flex-col items-center justify-center relative',
+        'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem]',
+        'sm:justify-bottom',
         'md:pb-24',
-        'lg:gap-16 lg:justify-center lg:bg-header lg:pb-[19rem]'
+        'lg:gap-16 lg:justify-center lg:pb-[19rem]'
       )}
     >
+      <Image
+        alt=""
+        className="z-[-2] w-full object-cover xs:hidden"
+        fill
+        placeholder="blur"
+        src={bgHeaderMobile}
+        unoptimized={isLandingPageLoaded}
+      />
+      <Image
+        alt=""
+        className="z-[-2] w-full object-cover hidden xs:block sm:hidden"
+        fill
+        placeholder="blur"
+        src={bgHeaderMobileXs}
+        unoptimized={isLandingPageLoaded}
+      />
+      <Image
+        alt=""
+        className="z-[-2] w-full object-cover hidden sm:block lg:hidden"
+        fill
+        placeholder="blur"
+        src={bgHeaderMobileSm}
+        unoptimized={isLandingPageLoaded}
+      />
+      <Image
+        alt=""
+        className="z-[-2] w-full object-cover hidden lg:block"
+        fill
+        placeholder="blur"
+        quality="100"
+        src={bgHeader}
+        unoptimized={isLandingPageLoaded}
+      />
       <h1
         className={classNames(
           'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
