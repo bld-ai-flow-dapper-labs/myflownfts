@@ -10,7 +10,7 @@ export default function Intro() {
         'bg-intro-mobile bg-no-repeat bg-cover w-full h-[41rem] px-5 py-3',
         'xs:bg-intro-mobile-xs',
         'sm:bg-intro-mobile-sm',
-        'md:bg-intro bg-center md:bg-center md:pl-40 md:h-[51.5rem] md:pr-[30rem] md:pt-32',
+        'md:bg-intro md:bg-center md:pl-40 md:h-[51.5rem] md:pr-[30rem] md:pt-32',
         'xl:bg-center xl:pl-[17rem] xl:pt-[10.75rem]'
       )}
     >

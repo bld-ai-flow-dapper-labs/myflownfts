@@ -53,8 +53,8 @@ export default function PageViewNFT() {
         controls
         loop
         muted
-        controlsList="nodownload"
-        className={classNames('h-full mx-auto rounded-lg')}
+        controlsList="nodownload nofullscreen"
+        className={classNames('h-full w-full mx-auto rounded-lg')}
       >
         <source src={item.embedUrl} />
       </video>
@@ -131,7 +131,8 @@ export default function PageViewNFT() {
   const renderNFT = () => (
     <div
       className={classNames(
-        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10'
+        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
+        isFullscreen && 'z-20'
       )}
       ref={divRef}
     >
@@ -401,6 +402,7 @@ export default function PageViewNFT() {
         <NextSeo
           description={token.description}
           title={t('pages.viewNFT.meta.title', { nftName: token.name })}
+          additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
         />
       )}
       <div className="relative flex flex-col w-full h-full min-h-screen bg-navbar">
@@ -414,7 +416,7 @@ export default function PageViewNFT() {
         />
         <Navbar />
         {isLoading && (
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+          <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
             <Loader />
           </div>
         )}

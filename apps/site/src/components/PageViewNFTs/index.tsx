@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
+import * as hash from 'string-hash';
+import * as color from 'tinycolor2';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { NFT } from '../../api/types';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
@@ -17,6 +19,7 @@ export default function PageViewNFTs() {
       : address;
   const iconHash = address.length > 11 ? address.slice(2) : address;
   const { t } = useTranslation();
+  const metaColor = color({ h: hash(address) % 360, s: 0.95, l: 0.5 });
 
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +32,8 @@ export default function PageViewNFTs() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
 
-  const header = { background: gradient(address, 'diagonal') };
-  const icon = { background: gradient(iconHash, 'horizontal') };
+  const header = { background: gradient(address, 'horizontal') };
+  const icon = { background: gradient(iconHash, 'diagonal') };
 
   const loadInitial = () => {
     const { innerWidth: width } = window;
@@ -163,7 +166,10 @@ export default function PageViewNFTs() {
 
   return (
     <>
-      <NextSeo title={t('pages.viewNFTs.meta.title')} />
+      <NextSeo
+        title={t('pages.viewNFTs.meta.title')}
+        additionalMetaTags={[{ name: 'theme-color', content: `${metaColor}` }]}
+      />
       <div>
         <Navbar className="!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />

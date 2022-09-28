@@ -83,7 +83,7 @@ module.exports = {
       bold: defaultTheme.fontWeight.bold,
     },
     screens: {
-      xs: '450px',
+      xs: '400px',
       ...defaultTheme.screens,
     },
     extend: {

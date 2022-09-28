@@ -35,8 +35,8 @@ export default function Header() {
     <div
       className={classNames(
         'flex flex-col items-center justify-center w-full overflow-hidden',
-        'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
-        'xs:bg-header-mobile-xs',
+        'h-full gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem] bg-center bg-no-repeat bg-cover bg-header-mobile',
+        'xs:bg-header-mobile-xs xs:h-screen',
         'sm:bg-header-mobile-sm sm:justify-bottom',
         'md:pb-24',
         'lg:gap-16 lg:justify-center lg:bg-header lg:pb-[19rem]'

@@ -118,7 +118,9 @@ export default function Navbar({ className, search = false }: Props) {
         >
           <div className="flex flex-col gap-[3.75rem] px-6">
             <div className="flex items-center justify-between">
-              <TextLogo className="h-14 w-fit" />
+              <a href="/">
+                <TextLogo className="w-[6.125rem] h-14" />
+              </a>
               <div className="flex gap-3">
                 <Button
                   variant="custom"
@@ -187,7 +189,7 @@ export default function Navbar({ className, search = false }: Props) {
       <div
         id="navbar"
         className={classNames(
-          'fixed lg:absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-screen h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
+          'fixed lg:absolute flex items-center justify-between gap-8 xs:gap-[3.75rem] w-full h-20 px-6 text-white lg:px-20 bg-navbar/30 lg:bg-transparent backdrop-blur-3xl lg:backdrop-blur-none',
           !showSidebar && 'z-10',
           className
         )}
@@ -200,8 +202,8 @@ export default function Navbar({ className, search = false }: Props) {
                 {t('common.title')}
               </span>
             </a>
-            <a className="flex items-center flex-shrink-0 lg:hidden" href="/">
-              <TextLogo className="h-14 w-fit" />
+            <a className="lg:hidden" href="/">
+              <TextLogo className="w-[6.125rem] h-14" />
             </a>
           </>
         )}
