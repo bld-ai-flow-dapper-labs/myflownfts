@@ -11,7 +11,7 @@ import {
   FacebookIcon,
   FacebookShareButton,
   TwitterIcon,
-  TwitterShareButton,
+  TwitterShareButton
 } from 'react-share';
 import { toast, ToastContainer } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
@@ -19,7 +19,7 @@ import ReactTooltip from 'react-tooltip';
 import {
   getExchangeRates,
   getNFTByTokenId,
-  postRefreshMetadata,
+  postRefreshMetadata
 } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
 import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
@@ -79,7 +79,6 @@ export default function PageViewNFT() {
 
     if (!document.getElementById(id)) {
       const divs = document.getElementById('video-wrapper');
-      console.log(divs);
       if (divs) {
         const d = document.createElement('div');
         d.id = id;
@@ -220,12 +219,18 @@ export default function PageViewNFT() {
         >
           <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
             <Button
-              className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2"
+              className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2 overflow-hidden"
               variant="scroll"
               onClick={() => {
-                navigator.clipboard.writeText(location.href);
-                toast(t('pages.viewNFT.copied'), { type: 'success' });
-                setIsPopoverOpen(false);
+                try {
+                  navigator.clipboard.writeText(location.href);
+                  toast(t('pages.viewNFT.copied'), { type: 'success' });
+                } catch (e) {
+                  console.error(e);
+                  toast(t('error.pages.viewNFT.copy'), { type: 'error' });
+                } finally {
+                  setIsPopoverOpen(false);
+                }
               }}
             >
               <FlowIcon className="scale-[.65] bg-white rounded-full text-primary" />
@@ -518,18 +523,16 @@ export default function PageViewNFT() {
           </span>
         )}
 
-        <Footer
-          className={classNames(
-            'pt-12',
-            (isLoading ||
-              (!isLoading &&
-                token?.nft_id &&
-                !token?.name &&
-                !token?.image_url) ||
-              (!isLoading && !token?.nft_id)) &&
-              'absolute bottom-0'
-          )}
-        />
+        {!isLoading && (
+          <Footer
+            className={classNames(
+              'pt-12',
+              ((token?.nft_id && !token?.name && !token?.image_url) ||
+                !token?.nft_id) &&
+                'absolute bottom-0'
+            )}
+          />
+        )}
       </div>
     </>
   );

@@ -4,8 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
-import * as hash from 'string-hash';
-import * as color from 'tinycolor2';
+import { toast, ToastContainer } from 'react-toastify';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { NFT } from '../../api/types';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
@@ -19,7 +18,6 @@ export default function PageViewNFTs() {
       : address;
   const iconHash = address.length > 11 ? address.slice(2) : address;
   const { t } = useTranslation();
-  const metaColor = color({ h: hash(address) % 360, s: 0.95, l: 0.5 });
 
   const [isCopied, setIsCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,8 +30,8 @@ export default function PageViewNFTs() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
 
-  const header = { background: gradient(address, 'horizontal') };
-  const icon = { background: gradient(iconHash, 'diagonal') };
+  const header = { background: gradient(address, 'diagonal') };
+  const icon = { background: gradient(iconHash, 'vertical') };
 
   const loadInitial = () => {
     const { innerWidth: width } = window;
@@ -91,9 +89,14 @@ export default function PageViewNFTs() {
   const renderAddressChip = () => (
     <Button
       onClick={() => {
-        navigator.clipboard.writeText(address);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 1500);
+        try {
+          navigator.clipboard.writeText(address);
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 1500);
+        } catch (e) {
+          console.error(e);
+          toast(t('error.pages.viewNFT.copy'), { type: 'error' });
+        }
       }}
       variant="custom"
     >
@@ -168,10 +171,18 @@ export default function PageViewNFTs() {
     <>
       <NextSeo
         title={t('pages.viewNFTs.meta.title')}
-        additionalMetaTags={[{ name: 'theme-color', content: `${metaColor}` }]}
+        additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
+      />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar
+        pauseOnHover={false}
+        theme="dark"
+        bodyClassName="whitespace-pre-wrap"
       />
       <div>
-        <Navbar className="!bg-navbar/90" search />
+        <Navbar className="!bg-navbar lg:!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">
           <div
@@ -213,7 +224,7 @@ export default function PageViewNFTs() {
                 {t('error.pages.viewNFTs.loading')}
               </span>
             )}
-            <Footer className="mt-auto" />
+            {!isLoading && <Footer className="mt-auto" />}
           </div>
         </div>
       </div>

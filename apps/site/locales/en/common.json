@@ -17,7 +17,8 @@
       "viewNFT": {
         "notFound": "NFT NOT FOUND",
         "unsupported": "UNSUPPORTED NFT",
-        "refresh": "Error in adding to refresh queue. Please refresh the page"
+        "refresh": "Error in adding to refresh queue. Please refresh the page",
+        "copy": "Error in copying to clipboard."
       }
     }
   },

@@ -36,6 +36,7 @@ export default function Navbar({ className, search = false }: Props) {
 
   useEffect(() => {
     window.addEventListener('resize', windowResize);
+    return () => window.removeEventListener('resize', windowResize);
   }, []);
 
   const addressDisplay =
@@ -49,17 +50,24 @@ export default function Navbar({ className, search = false }: Props) {
   const { connectWallet } = useWallet();
 
   // Ensures animations are finished before re-rendering transitionClose based classes
-  const transitionDelay = async (delay) =>
-    await setTimeout(() => setTransitionClose(false), delay);
-
+  const transitionDelay = async (delay) => {
+    const transition = await setTimeout(() => setTransitionClose(false), delay);
+    return () => clearTimeout(transition);
+  };
   // Set delays for transition before hiding components
   useEffect(() => {
     if ((showSidebar || (showSidebar && showSearch)) && transitionClose) {
-      setTimeout(() => setShowSidebar(false), 200);
+      const sidebarTransition = setTimeout(() => setShowSidebar(false), 200);
       transitionDelay(200);
+      return () => {
+        clearTimeout(sidebarTransition);
+      };
     } else if (showSearch && transitionClose) {
-      setTimeout(() => setShowSearch(false), 200);
+      const searchTransition = setTimeout(() => setShowSearch(false), 200);
       transitionDelay(200);
+      return () => {
+        clearTimeout(searchTransition);
+      };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transitionClose]);
@@ -213,7 +221,7 @@ export default function Navbar({ className, search = false }: Props) {
             className="hidden lg:grid h-[3.375rem] lg:max-w-[35rem]  w-full"
           >
             <TextInput
-              className="placeholder:font-semibold md:placeholder:font-medium min-w-[10rem]"
+              className="text-tab placeholder:font-semibold md:placeholder:font-medium min-w-[10rem]"
               placeholder={t('common.search')}
               endIcon={
                 <Button
@@ -247,7 +255,7 @@ export default function Navbar({ className, search = false }: Props) {
             >
               <form onSubmit={handleSubmit} className="w-full py-4">
                 <TextInput
-                  className="h-10 w-full max-w-[87.5vw] placeholder:font-semibold md:placeholder:font-medium"
+                  className="h-10 w-full max-w-[87.5vw] text-tab placeholder:font-semibold md:placeholder:font-medium"
                   placeholder={t('common.search')}
                   value={typed}
                   onChange={(e) => setTyped(e.target.value)}
