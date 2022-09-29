@@ -276,10 +276,10 @@
     "owner_count": 1,
     "owners": [
       {
-        "owner_address": "0x0327d6fd986e9dab",
+        "owner_address": "0x2f9ab46acd961909",
         "quantity": 1,
-        "first_acquired_date": "2022-01-25T09:59:48",
-        "last_acquired_date": "2022-01-25T09:59:48"
+        "first_acquired_date": "2022-09-20T20:20:17",
+        "last_acquired_date": "2022-09-20T20:20:17"
       }
     ],
     "last_sale": null,
@@ -299,7 +299,8 @@
       "discord_url": null,
       "marketplace_pages": [],
       "metaplex_mint": null,
-      "metaplex_first_verified_creator": null
+      "metaplex_first_verified_creator": null,
+      "floor_prices": []
     },
     "extra_metadata": {
       "uuid": "61795771",

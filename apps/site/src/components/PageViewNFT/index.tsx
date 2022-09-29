@@ -11,7 +11,7 @@ import {
   FacebookIcon,
   FacebookShareButton,
   TwitterIcon,
-  TwitterShareButton
+  TwitterShareButton,
 } from 'react-share';
 import { toast, ToastContainer } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
@@ -19,7 +19,7 @@ import ReactTooltip from 'react-tooltip';
 import {
   getExchangeRates,
   getNFTByTokenId,
-  postRefreshMetadata
+  postRefreshMetadata,
 } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
 import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
@@ -145,8 +145,7 @@ export default function PageViewNFT() {
   useEffect(() => {
     if (isFullscreen) {
       document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.add('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.add('!w-screen');
+      document.getElementsByTagName('img')[0]?.classList.add('h-screen');
       renderVideoCloseButton();
     } else {
       document
@@ -503,10 +502,12 @@ export default function PageViewNFT() {
                     {token.description ?? t('pages.viewNFT.noDescription')}
                   </span>
                   {renderTokenPrice()}
-                  <Button className="gap-2" href={token?.external_url}>
-                    <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
-                    <LinkIcon />
-                  </Button>
+                  {token.external_url && (
+                    <Button className="gap-2" href={token?.external_url}>
+                      <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
+                      <LinkIcon />
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
