@@ -4,14 +4,14 @@ import { useAtom } from 'jotai';
 import { useCallback, useEffect, useMemo } from 'react';
 import { addressAtom, userAtom } from '../atoms';
 
-export const config = () =>
+export const config = () => {
   fcl.config({
-    'accessNode.api': 'https://rest-mainnet.onflow.org',
+    'accessNode.api': process.env.NEXT_PUBLIC_ACCESS_NODE,
     'app.detail.title': 'My Flow NFTs',
-    'discovery.wallet': 'https://flow-wallet.blocto.app/authn',
-    '0xProfile': '0x97bafa4e0b48eef',
-    '0xFIND': '0x97bafa4e0b48eef',
+    'discovery.wallet': process.env.NEXT_PUBLIC_DISCOVERY_WALLET,
+    '0xProfile': process.env.NEXT_PUBLIC_PROFILE_CONTRACT,
   });
+};
 
 export const useWallet = () => {
   const [user, setUser] = useAtom(userAtom);

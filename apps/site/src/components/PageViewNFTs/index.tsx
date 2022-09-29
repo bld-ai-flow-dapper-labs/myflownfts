@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { FindProfile, NFT } from '../../api/types';
 import { getProfile } from '../../utils';
@@ -58,6 +59,8 @@ export default function PageViewNFTs() {
   useEffect(() => {
     (async () => {
       try {
+        // Reload on url change to force update on browser back and forward buttons
+        router.events.on('routeChangeComplete', () => router.reload());
         loadInitial();
         getFindProfile();
         const { next, count, data } = await getNFTsByWallet(address);
@@ -76,9 +79,12 @@ export default function PageViewNFTs() {
         console.error(e);
         setError(true);
       }
+      return () => {
+        router.events.off('routeChangeComplete', () => router.reload());
+      };
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address]);
+  }, []);
 
   useEffect(() => {
     if (numNFTs === 0) setNumNFTs(increment);
@@ -215,6 +221,14 @@ export default function PageViewNFTs() {
     <>
       <NextSeo title={t('pages.viewNFTs.meta.title')} />
       <div>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1500}
+          hideProgressBar
+          pauseOnHover={false}
+          theme="dark"
+          bodyClassName="whitespace-pre-wrap"
+        />
         <Navbar className="lg:!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">

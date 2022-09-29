@@ -8,6 +8,7 @@
     "walletId": "Wallet ID"
   },
   "error": {
+    "search": "Please enter a valid Flow address",
     "pages": {
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
