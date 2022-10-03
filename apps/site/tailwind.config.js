@@ -46,6 +46,15 @@ module.exports = {
         secondary: '#00c075',
         dark: '#3f8369',
       },
+      epic: {
+        start: '#4BC1FA',
+        end: '#7CFF97',
+      },
+      legendary: {
+        start: '#F5C6FB',
+        end: '#FFF030',
+      },
+      property: '#2c2d3a',
     },
     fontFamily: {
       sans: ['Termina', ...defaultTheme.fontFamily.sans],
@@ -80,6 +89,7 @@ module.exports = {
       'sidebar-footer': ['1.125rem', { lineHeight: '26.01px' }], //18px
       tab: ['1rem', { lineHeight: '19px' }], //16px
       count: ['0.875rem', { letterSpacing: '0.02em', lineHeight: '20px' }], //14px
+      rarity: ['0.875rem', { lineHeight: '16.8px' }], //14px
     },
     fontWeight: {
       normal: defaultTheme.fontWeight.normal,

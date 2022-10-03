@@ -10,7 +10,7 @@
     "walletId": "Wallet ID"
   },
   "error": {
-    "search": "Please enter a valid Flow address",
+    "error": "Error",
     "pages": {
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
@@ -21,7 +21,8 @@
         "refresh": "Error in adding to refresh queue. Please refresh the page",
         "copy": "Error in copying to clipboard."
       }
-    }
+    },
+    "search": "Please enter a valid Flow address"
   },
   "pages": {
     "landing": {
@@ -83,6 +84,7 @@
         "refresh": "Refresh metadata",
         "share": "Share"
       },
+      "properties": "Properties",
       "refresh": {
         "triggered": "Refresh queued.\nPlease check back in a minute",
         "queued": "Already in refresh queue.\nPlease check back in a minute"

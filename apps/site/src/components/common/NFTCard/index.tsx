@@ -7,6 +7,7 @@ interface Props {
   big?: boolean;
   chain: string;
   className?: string;
+  contract: string;
   creatorName: string;
   creatorAvatar?: string;
   image_url: string;
@@ -20,6 +21,7 @@ export default function NFTCard({
   big = false,
   chain,
   className,
+  contract,
   creatorName,
   creatorAvatar,
   image_url,
@@ -117,7 +119,7 @@ export default function NFTCard({
             variant === 'view' && 'pt-1.5 text-mobile-sm lg:text-tab'
           )}
         >
-          {name}
+          {name ?? contract + ' #' + token_id}
         </span>
       </div>
     </Button>

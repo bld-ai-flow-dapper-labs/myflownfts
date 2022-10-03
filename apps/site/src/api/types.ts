@@ -82,6 +82,15 @@ export interface NFT {
     image_original_url: string;
     animation_original_url: string;
     media: string[];
+    attributes?: {
+      trait_type: string;
+      value: string;
+      rarity: {
+        score: string;
+        max: string;
+        description: string;
+      };
+    }[];
   };
 }
 
