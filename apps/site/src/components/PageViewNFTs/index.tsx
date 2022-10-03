@@ -137,7 +137,7 @@ export default function PageViewNFTs() {
       );
     }
     return (
-      <div className="flex flex-col items-center justify-center font-body pt-12 pb-[10.5rem] lg:pb-[14.875rem]">
+      <div className="flex flex-col items-center justify-center py-24 pt-12 font-body">
         <span className="font-semibold text-white">
           {t('pages.viewNFTs.noItems')}
         </span>
@@ -181,7 +181,7 @@ export default function PageViewNFTs() {
         theme="dark"
         bodyClassName="whitespace-pre-wrap"
       />
-      <div>
+      <div className="h-full min-h-screen bg-gray-900">
         <Navbar className="!bg-navbar lg:!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">
@@ -194,7 +194,7 @@ export default function PageViewNFTs() {
               profileNFT &&
               renderProfilePhoto()}
           </div>
-          <div className="flex flex-col min-h-[calc(100vh_-_15.5rem)] h-full items-center px-4 lg:px-24 w-full bg-gray-900 pt-[5.125rem] lg:pt-[4.625rem]">
+          <div className="flex flex-col min-h-[calc(100vh-32.25rem)] h-full items-center px-4 lg:px-24 w-full pt-[5.125rem] lg:pt-[4.625rem]">
             <div className="flex items-center gap-3 pb-12">
               {renderAddressChip()}
             </div>
@@ -224,9 +224,9 @@ export default function PageViewNFTs() {
                 {t('error.pages.viewNFTs.loading')}
               </span>
             )}
-            {!isLoading && <Footer className="mt-auto" />}
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

@@ -33,6 +33,13 @@ import { BASE_URL } from '../../constants';
 
 import { Button, Chip, Footer, Loader, Navbar } from '../common';
 
+interface ExtraMetadataProps {
+  url?: string;
+  type?: string;
+}
+
+type ExtraMetadataType = ExtraMetadataProps | string;
+
 export default function PageViewNFT() {
   const router = useRouter();
   const contract_address = router.query.contract_address as string;
@@ -119,20 +126,50 @@ export default function PageViewNFT() {
         });
       }
       // Renders other images included, unstable due to varying sizes of images distorting the viewer
-      // if (data.extra_metadata.media.length > 0)
-      //   gallery.push(
-      //     ...data.extra_metadata.media
-      //       .filter(
-      //         (item) => item.slice(-4) === '.png' || item.slice(-4) === '.jpg'
-      //       )
-      //       .map((image) => ({
-      //         original: image,
-      //         originalHeight: 800,
-      //         originalWidth: 800,
-      //         thumbnail: image,
-      //         thumbnailClass: 'border-4 border-container-dark/10 w-24 h-24',
-      //       }))
-      //   );
+      if (data.extra_metadata?.media?.length > 0)
+        gallery.push(
+          ...data.extra_metadata.media
+            .filter((item: ExtraMetadataType) => {
+              if (typeof item === 'string') {
+                if (!item.startsWith('ipfs'))
+                  return item.slice(-4) === '.png' || item.slice(-4) === '.jpg';
+              }
+              if (typeof item === 'object')
+                try {
+                  if (!item.url.startsWith('ipfs')) {
+                    return (
+                      item.url.slice(-4) === '.png' ||
+                      item.url.slice(-4) === '.jpg'
+                    );
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            })
+            .map((image: ExtraMetadataType) => {
+              if (typeof image === 'string') {
+                return {
+                  original: image,
+                  thumbnail: image,
+                  thumbnailClass:
+                    'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                };
+              }
+              if (typeof image === 'object')
+                try {
+                  if (!image.url.startsWith('ipfs')) {
+                    return {
+                      original: image.url,
+                      thumbnail: image.url,
+                      thumbnailClass:
+                        'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                    };
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            })
+        );
       setImages(gallery);
       setExchangeRates(await getExchangeRates());
       setToken(data);
@@ -144,14 +181,22 @@ export default function PageViewNFT() {
   // Modify classes within react-image-gallery to change dimensions on runtime
   useEffect(() => {
     if (isFullscreen) {
-      document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.add('h-screen');
+      document.getElementsByTagName('video')[0]?.classList.add('h-screen');
+      const imageElements = document.getElementsByClassName(
+        'image-gallery-image'
+      );
+      Array.from(imageElements).forEach((item) =>
+        item.classList.add('h-screen')
+      );
       renderVideoCloseButton();
     } else {
-      document
-        .getElementsByTagName('video')[0]
-        ?.classList.remove('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.remove('h-[90.75vh]');
+      document.getElementsByTagName('video')[0]?.classList.remove('h-screen');
+      const imageElements = document.getElementsByClassName(
+        'image-gallery-image'
+      );
+      Array.from(imageElements).forEach((item) =>
+        item.classList.remove('h-screen')
+      );
       document.getElementById('video-close-button')?.remove();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -169,7 +214,6 @@ export default function PageViewNFT() {
         ref={galleryRef}
         items={images}
         autoplay
-        disableThumbnailScroll
         showThumbnails={images.length > 1}
         showThumbnailsOnNormalViewOnly={images.length > 1}
         showIndexOnFullscreenOnly={images.length > 1}
@@ -178,13 +222,14 @@ export default function PageViewNFT() {
         showFullscreenButton={false}
         showZoomButtons
         showVideo
+        stopPropagation
         onClick={() => {
           if (!isFullscreen) galleryRef.current.toggleFullScreen();
         }}
         onScreenChange={() => {
           setIsFullscreen(!isFullscreen);
         }}
-        onSlide={() => document.getElementsByTagName('video')[0].pause()}
+        onSlide={() => document.getElementsByTagName('video')[0]?.pause()}
       />
     </div>
   );
@@ -451,13 +496,30 @@ export default function PageViewNFT() {
         />
         <Navbar />
         {isLoading && (
-          <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            <Loader />
+          <div className="relative mt-[4.375rem] lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
+            <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <Loader />
+            </div>
+          </div>
+        )}
+
+        {!isLoading && !token?.nft_id && (
+          <div className="relative lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
+            <span className="absolute w-full font-bold text-center text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h3 sm:text-h1">
+              {t('error.pages.viewNFT.notFound')}
+            </span>
+          </div>
+        )}
+        {!isLoading && token?.nft_id && !token?.name && !token?.image_url && (
+          <div className="relative lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
+            <span className="absolute w-full font-bold text-center text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h3 sm:text-h1">
+              {t('error.pages.viewNFT.unsupported')}
+            </span>
           </div>
         )}
 
         {!isLoading && token?.nft_id && token?.name && token?.image_url && (
-          <div className="flex flex-col items-end justify-center h-fit pt-28 place-self-center w-11/12 max-w-[125rem] lg:pr-24">
+          <div className="flex flex-col items-end h-fit pt-28 place-self-center min-h-[50rem] w-11/12 max-w-[125rem] lg:pr-24">
             {renderButtons()}
             <div className="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
               <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
@@ -513,27 +575,16 @@ export default function PageViewNFT() {
             </div>
           </div>
         )}
-        {!isLoading && !token?.nft_id && (
-          <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
-            {t('error.pages.viewNFT.notFound')}
-          </span>
-        )}
-        {!isLoading && token?.nft_id && !token?.name && !token?.image_url && (
-          <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
-            {t('error.pages.viewNFT.unsupported')}
-          </span>
-        )}
 
-        {!isLoading && (
-          <Footer
-            className={classNames(
-              'pt-12',
-              ((token?.nft_id && !token?.name && !token?.image_url) ||
-                !token?.nft_id) &&
-                'absolute bottom-0'
-            )}
-          />
-        )}
+        <Footer
+          className={classNames(
+            'pt-12 pb-12',
+            (isLoading ||
+              (token?.nft_id && !token?.name && !token?.image_url) ||
+              !token?.nft_id) &&
+              'lg:absolute lg:bottom-0'
+          )}
+        />
       </div>
     </>
   );

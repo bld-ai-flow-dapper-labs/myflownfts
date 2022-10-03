@@ -12,11 +12,13 @@ type ButtonProps = React.DetailedHTMLProps<
 interface Props extends ButtonProps {
   scroll: (scrollOffset) => void;
   mobile?: boolean;
+  href?: string;
 }
 export default function ScrollButtons({
   className,
   scroll,
   mobile = false,
+  href,
 }: Props) {
   const { t } = useTranslation();
 
@@ -43,6 +45,7 @@ export default function ScrollButtons({
           mobile && 'w-full'
         )}
         variant="scroll"
+        href={href}
       >
         {t('common.buttonBrowseMore')}
       </Button>

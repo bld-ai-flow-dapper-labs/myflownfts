@@ -23,7 +23,11 @@ export default function Featured() {
           </span>
           <StarIcon className="text-yellow" />
         </div>
-        <ScrollButtons className="hidden lg:flex" scroll={scroll} />
+        <ScrollButtons
+          className="hidden lg:flex"
+          scroll={scroll}
+          href="https://www.flowverse.co/flow-nfts"
+        />
       </div>
       <div
         className="grid grid-flow-col grid-rows-1 -mt-8 xl:mt-0 xl:grid-rows-2 gap-6 pb-6 xl:pb-[3.875rem] overflow-x-scroll scrollbar-mobile lg:scrollbar scroll-smooth"
@@ -57,6 +61,7 @@ export default function Featured() {
         className="flex -mt-[1.875rem] pb-12 lg:hidden"
         scroll={scroll}
         mobile
+        href="https://www.flowverse.co/flow-nfts"
       />
     </div>
   );

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { Button, Footer, TextInput } from '..';
 import { addressAtom, userAtom } from '../../../atoms';
@@ -25,6 +25,7 @@ export default function Navbar({ className, search = false }: Props) {
   const [showSearch, setShowSearch] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [transitionClose, setTransitionClose] = useState(false);
+  const textInputRef = useRef(null);
 
   const windowResize = () => {
     const { innerWidth: width } = window;
@@ -71,6 +72,10 @@ export default function Navbar({ className, search = false }: Props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transitionClose]);
+
+  useEffect(() => {
+    if (showSearch) textInputRef.current.focus();
+  }, [showSearch]);
 
   const handleButtonClick = () => {
     if (address) {
@@ -135,6 +140,7 @@ export default function Navbar({ className, search = false }: Props) {
                   onClick={() => {
                     setShowSearch(true);
                     setTransitionClose(true);
+                    textInputRef.current?.focus();
                   }}
                   className="rounded-md hover:bg-indigo-600"
                 >
@@ -255,6 +261,7 @@ export default function Navbar({ className, search = false }: Props) {
             >
               <form onSubmit={handleSubmit} className="w-full py-4">
                 <TextInput
+                  ref={textInputRef}
                   className="h-10 w-full max-w-[87.5vw] text-tab placeholder:font-semibold md:placeholder:font-medium"
                   placeholder={t('common.search')}
                   value={typed}
@@ -273,7 +280,9 @@ export default function Navbar({ className, search = false }: Props) {
             <>
               <Button
                 variant="custom"
-                onClick={() => setShowSearch(!showSearch)}
+                onClick={() => {
+                  setShowSearch(!showSearch);
+                }}
               >
                 <SearchIcon className="rounded-md bg-container-dark/[.15]" />
               </Button>

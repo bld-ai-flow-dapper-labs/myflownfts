@@ -41,7 +41,7 @@ export default function Header() {
     <div
       className={classNames(
         'flex flex-col items-center justify-center relative',
-        'h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem]',
+        'min-h-[50rem] h-screen gap-[2.25rem] px-5 pt-[23rem] pb-[7.25rem]',
         'sm:justify-bottom',
         'md:pb-24',
         'lg:gap-16 lg:justify-center lg:pb-[19rem]'
@@ -83,7 +83,7 @@ export default function Header() {
       <h1
         className={classNames(
           'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
-          'xs:w-[25rem] sm:w-[30rem] md:w-[54.875rem] md:text-h2 lg:text-h1'
+          'xs:w-[25rem] sm:w-[30rem] md:w-[48rem] lg:w-[54.875rem] md:text-h2 lg:text-h1'
         )}
       >
         <span>{t('pages.landing.header.welcome')}</span>
