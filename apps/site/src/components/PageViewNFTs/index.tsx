@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { FindProfile, NFT } from '../../api/types';
 import { getProfile } from '../../utils';
@@ -221,14 +220,6 @@ export default function PageViewNFTs() {
     <>
       <NextSeo title={t('pages.viewNFTs.meta.title')} />
       <div>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={1500}
-          hideProgressBar
-          pauseOnHover={false}
-          theme="dark"
-          bodyClassName="whitespace-pre-wrap"
-        />
         <Navbar className="lg:!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">

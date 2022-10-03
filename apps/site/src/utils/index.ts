@@ -3,13 +3,14 @@ import { useAtom } from 'jotai';
 
 import { useCallback, useEffect, useMemo } from 'react';
 import { addressAtom, userAtom } from '../atoms';
+import { ACCESS_NODE, DISCOVERY_WALLET, PROFILE_CONTRACT } from '../constants';
 
 export const config = () => {
   fcl.config({
-    'accessNode.api': process.env.NEXT_PUBLIC_ACCESS_NODE,
+    'accessNode.api': ACCESS_NODE,
     'app.detail.title': 'My Flow NFTs',
-    'discovery.wallet': process.env.NEXT_PUBLIC_DISCOVERY_WALLET,
-    '0xProfile': process.env.NEXT_PUBLIC_PROFILE_CONTRACT,
+    'discovery.wallet': DISCOVERY_WALLET,
+    '0xProfile': PROFILE_CONTRACT,
   });
 };
 

@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { addressAtom, isLandingPageLoadedAtom, userAtom } from '../../atoms';
 import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
@@ -49,14 +49,6 @@ export default function Header() {
         'lg:gap-16 lg:justify-center lg:pb-[19rem]'
       )}
     >
-      <ToastContainer
-        position="bottom-right"
-        autoClose={1500}
-        hideProgressBar
-        pauseOnHover={false}
-        theme="dark"
-        bodyClassName="whitespace-pre-wrap"
-      />
       <Image
         alt=""
         className="z-[-2] w-full object-cover xs:hidden"
