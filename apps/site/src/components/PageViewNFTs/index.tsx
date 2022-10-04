@@ -168,6 +168,7 @@ export default function PageViewNFTs() {
             <NFTCard
               key={item.nft_id}
               chain={item.chain ?? 'flow'}
+              contract={item.contract.name}
               creatorName={
                 item.collection.twitter_username ??
                 item.collection.name ??

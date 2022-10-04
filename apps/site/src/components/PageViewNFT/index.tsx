@@ -301,11 +301,12 @@ export default function PageViewNFT() {
       }
       return 'N/A';
     };
+
     return (
       <div
         key={item.trait_type}
         className={classNames(
-          'rounded-lg min-h-[4.5rem] lg:min-h-[5.5rem] p-[0.1rem]',
+          'rounded-lg min-h-[4.5rem] lg:min-h-[5.5rem] p-px',
           (item.rarity?.description === 'rare' ||
             item.rarity?.description === 'uncommon') &&
             'bg-indigo-600',
