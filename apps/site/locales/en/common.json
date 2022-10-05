@@ -10,6 +10,7 @@
     "walletId": "Wallet ID"
   },
   "error": {
+    "search": "Please enter a valid Flow address",
     "pages": {
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
@@ -57,6 +58,7 @@
       "partners": "PARTNERS"
     },
     "viewNFTs": {
+      "buttonCopied": "Copied!",
       "loadMore": "Load More",
       "meta": {
         "description": "Welcome to Flow’s next generation of NFTs.",

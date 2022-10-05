@@ -13,7 +13,7 @@ import {
   TwitterIcon,
   TwitterShareButton,
 } from 'react-share';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
 import {
@@ -486,15 +486,7 @@ export default function PageViewNFT() {
         />
       )}
       <div className="relative flex flex-col w-full h-full min-h-screen bg-navbar">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={1500}
-          hideProgressBar
-          pauseOnHover={false}
-          theme="dark"
-          bodyClassName="whitespace-pre-wrap"
-        />
-        <Navbar />
+        <Navbar search />
         {isLoading && (
           <div className="relative mt-[4.375rem] lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
             <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">

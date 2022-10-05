@@ -6,7 +6,8 @@ import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { getNFTsByWallet, getRawQuery } from '../../api';
-import type { NFT } from '../../api/types';
+import type { FindProfile, NFT } from '../../api/types';
+import { getProfile } from '../../utils';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
 
 export default function PageViewNFTs() {
@@ -29,6 +30,7 @@ export default function PageViewNFTs() {
   const [nextPage, setNextPage] = useState<string>();
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
+  const [findProfile, setFindProfile] = useState<FindProfile>();
 
   const header = { background: gradient(address, 'diagonal') };
   const icon = { background: gradient(iconHash, 'vertical') };
@@ -46,10 +48,21 @@ export default function PageViewNFTs() {
     else setIncrement(10);
   };
 
+  const getFindProfile = async () => {
+    // Ensure address is a flow address to prevent errors when passed to cadence contracts
+    if (address.match(/^0x[a-fA-F0-9]{16}$/g)) {
+      const profile = await getProfile(address);
+      if (profile) setFindProfile(profile);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       try {
+        // Reload on url change to force update on browser back and forward buttons
+        router.events.on('routeChangeComplete', () => router.reload());
         loadInitial();
+        getFindProfile();
         const { next, count, data } = await getNFTsByWallet(address);
         if (!data) throw 'Error in fetching NFTs';
         const cleanNFTs = data?.filter(
@@ -66,8 +79,12 @@ export default function PageViewNFTs() {
         console.error(e);
         setError(true);
       }
+      return () => {
+        router.events.off('routeChangeComplete', () => router.reload());
+      };
     })();
-  }, [address]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (numNFTs === 0) setNumNFTs(increment);
@@ -108,10 +125,40 @@ export default function PageViewNFTs() {
           variant="secondary"
         />
       ) : (
-        <Chip className="w-40 h-[2.375rem]" label="Copied!" variant="copied" />
+        <Chip
+          className="w-40 h-[2.375rem] text-lightBlue bg-lightBlue/20"
+          label={t('pages.viewNFTs.buttonCopied')}
+          variant="copied"
+        />
       )}
     </Button>
   );
+
+  const renderFindChip = () => {
+    const link = findProfile.findName
+      ? `https://find.xyz/${findProfile.findName}`
+      : `https://find.xyz/${address}`;
+    const label =
+      findProfile.findName !== ''
+        ? findProfile.findName.concat('.find')
+        : findProfile.name;
+
+    return (
+      <Button
+        href={link}
+        rel="noopener noreferrer"
+        target="_blank"
+        variant="custom"
+      >
+        <Chip
+          className="w-40 h-[2.375rem]"
+          label={label}
+          chain="flow"
+          variant="find"
+        />
+      </Button>
+    );
+  };
 
   const renderNFTs = () => {
     if (NFTs?.length > 0) {
@@ -149,14 +196,22 @@ export default function PageViewNFTs() {
   };
 
   const renderProfilePhoto = () => {
-    const profilePhoto = NFTs.filter((nft) => nft.token_id === profileNFT)[0];
+    let photoUrl;
+    let alt;
+    if (findProfile) {
+      photoUrl = findProfile.avatar;
+      alt = findProfile.name;
+    } else {
+      const profilePhoto = NFTs.filter((nft) => nft.token_id === profileNFT)[0];
+      photoUrl =
+        profilePhoto.previews.image_small_url ?? profilePhoto.image_url;
+      alt = profilePhoto.name;
+    }
     return (
       <Image
-        loader={() =>
-          profilePhoto.previews.image_small_url ?? profilePhoto.image_url
-        }
-        src={profilePhoto.previews.image_small_url ?? profilePhoto.image_url}
-        alt={profilePhoto.name}
+        loader={() => photoUrl}
+        src={photoUrl}
+        alt={alt}
         placeholder="empty"
         layout="fill"
         objectFit="cover"
@@ -190,12 +245,12 @@ export default function PageViewNFTs() {
             style={icon}
           >
             {!isLoading &&
-              NFTs?.length > 0 &&
-              profileNFT &&
+              (findProfile?.avatar || (NFTs?.length > 0 && profileNFT)) &&
               renderProfilePhoto()}
           </div>
           <div className="flex flex-col min-h-[calc(100vh-32.25rem)] h-full items-center px-4 lg:px-24 w-full pt-[5.125rem] lg:pt-[4.625rem]">
             <div className="flex items-center gap-3 pb-12">
+              {findProfile && renderFindChip()}
               {renderAddressChip()}
             </div>
             <div className="flex justify-center w-full border-b-[1px] border-container-dark/10">
