@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Button, TextInput } from '..';
 import { addressAtom, userAtom } from '../../../atoms';
 import { useWallet } from '../../../utils';
@@ -41,9 +42,10 @@ export default function Navbar({ className, search = false }: Props) {
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-
     if (typed) {
-      router.push(`/owned/${typed}`);
+      if (typed.match(/^0x[a-fA-F0-9]{16}$/g)) router.push(`/owned/${typed}`);
+      // Assumes toast container is present in the calling component
+      else toast(t('error.search'), { type: 'error' });
     }
   };
 

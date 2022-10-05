@@ -38,7 +38,7 @@ export default function Signup() {
       <div className="flex items-center justify-center w-full pt-12">
         <TextInput
           containerClassName="md:w-96 w-full bg-white rounded-md rounded-r-none"
-          className="text-black h-[3.125rem] focus:outline-0"
+          className="text-black h-[3.125rem]"
           placeholder={t('pages.landing.flowCommunity.email')}
         />
         <Button className="min-w-fit rounded-l-none h-[3.125rem] text-button font-semibold">

@@ -40,7 +40,7 @@ export default function TextInput({
       <input
         type="text"
         className={classNames(
-          'rounded-md pb-4 pt-3 px-6 text-body font-body text-white truncate box-border w-full h-full',
+          'rounded-md pb-4 pt-3 px-6 text-body font-body text-white truncate box-border w-full h-full focus:outline-0',
           styling === 'dark' && 'bg-container-dark/10',
           startIcon && 'pl-10',
           endIcon && 'pr-20',

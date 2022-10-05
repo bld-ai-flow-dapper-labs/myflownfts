@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { addressAtom, isLandingPageLoadedAtom, userAtom } from '../../atoms';
 import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
@@ -33,7 +34,8 @@ export default function Header() {
     event.preventDefault();
 
     if (typed) {
-      router.push(`/owned/${typed}`);
+      if (typed.match(/^0x[a-fA-F0-9]{16}$/g)) router.push(`/owned/${typed}`);
+      else toast(t('error.search'), { type: 'error' });
     }
   };
 
