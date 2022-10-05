@@ -41,6 +41,11 @@ export default function Navbar({ className, search = false }: Props) {
     return () => window.removeEventListener('resize', windowResize);
   }, []);
 
+  useEffect(() => {
+    if (showSidebar) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [showSidebar]);
+
   const addressDisplay =
     address.length > 11
       ? `${address.slice(0, 4)}...${address.slice(-4)}`
