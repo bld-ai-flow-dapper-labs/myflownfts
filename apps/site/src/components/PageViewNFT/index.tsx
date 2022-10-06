@@ -495,17 +495,12 @@ export default function PageViewNFT() {
           </div>
         )}
 
-        {!isLoading && !token?.nft_id && (
+        {!isLoading && !token?.image_url && (
           <div className="relative lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
             <span className="absolute w-full font-bold text-center text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h3 sm:text-h1">
-              {t('error.pages.viewNFT.notFound')}
-            </span>
-          </div>
-        )}
-        {!isLoading && token?.nft_id && !token?.name && !token?.image_url && (
-          <div className="relative lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
-            <span className="absolute w-full font-bold text-center text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h3 sm:text-h1">
-              {t('error.pages.viewNFT.unsupported')}
+              {token?.nft_id
+                ? t('error.pages.viewNFT.unsupported')
+                : t('error.pages.viewNFT.notFound')}
             </span>
           </div>
         )}

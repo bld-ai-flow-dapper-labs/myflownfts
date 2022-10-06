@@ -85,7 +85,7 @@ export default function Header() {
       <h1
         className={classNames(
           'flex flex-wrap justify-center items-center font-bold text-white text-mobile-h1',
-          'xs:w-[25rem] sm:w-[30rem] md:w-[48rem] lg:w-[54.875rem] md:text-h2 lg:text-h1'
+          'xs:w-[19rem] sm:w-[25.75rem] md:w-[41.5rem] lg:w-[53rem] md:text-h2 lg:text-h1'
         )}
       >
         <span>{t('pages.landing.header.welcome')}</span>

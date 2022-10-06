@@ -90,7 +90,7 @@ export default function Footer({ className, sidebar = false }: Props) {
         </span>
       </div>
       {!sidebar && (
-        <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 lg:mb-0">
+        <div className="flex gap-[2.25rem] font-semibold text-white text-footer mb-6 lg:mb-0 invisible">
           <Button href="#" className="hover:text-gray-50" variant="custom">
             {t('pages.landing.footer.terms')}
           </Button>

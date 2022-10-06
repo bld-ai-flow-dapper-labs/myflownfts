@@ -250,7 +250,12 @@ export default function Navbar({ className, search = false }: Props) {
             />
           </form>
         )}
-        <div className="hidden lg:flex gap-2.5 lg:min-w-[25rem] lg:w-fit lg:justify-end">
+        <div
+          className={classNames(
+            'hidden lg:flex gap-2.5 lg:w-fit lg:justify-end',
+            address ? 'lg:min-w-[25rem]' : 'lg:min-w-[13.125rem]'
+          )}
+        >
           {renderAddressButton()}
         </div>
         <div
