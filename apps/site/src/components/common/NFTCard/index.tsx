@@ -32,6 +32,14 @@ export default function NFTCard({
 }: Props) {
   const { t } = useTranslation();
 
+  const cleanString = (string) => {
+    if (typeof string === 'string')
+      return string
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2');
+  };
+
   return (
     <Button
       key={token_id}
@@ -100,14 +108,14 @@ export default function NFTCard({
                   {t('pages.landing.createdBy')}
                 </span>
                 <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-                  {creatorName}
+                  {cleanString(creatorName)}
                 </span>
               </div>
             </div>
           )}
           {variant === 'view' && (
             <span className="hidden font-semibold truncate opacity-75 lg:block font-body text-container-text text-body">
-              {creatorName}
+              {cleanString(creatorName)}
             </span>
           )}
           <Chip chain={chain} label={chain} className="h-6" />

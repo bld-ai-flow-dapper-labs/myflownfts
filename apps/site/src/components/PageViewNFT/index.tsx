@@ -234,6 +234,18 @@ export default function PageViewNFT() {
     </div>
   );
 
+  const cleanString = (string) => {
+    if (typeof string === 'string' && !string.toLowerCase().startsWith('http'))
+      return string
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/([0-9])([A-Z])/g, '$1 $2')
+        .replace(/([a-z])([0-9])/g, '$1 $2')
+        .replace(/^./, (str) => str.toUpperCase());
+    return string;
+  };
+
   const renderNFTDetails = () => (
     <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 lg:border-2 rounded-md lg:border-container-dark/10 h-fit">
       <div className="flex gap-3">
@@ -260,8 +272,8 @@ export default function PageViewNFT() {
             {t('pages.landing.createdBy')}
           </span>
           <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-            {token.collection?.twitter_username ??
-              token.collection?.name ??
+            {cleanString(token?.collection.twitter_username) ??
+              cleanString(token?.collection.name) ??
               'Unknown'}
           </span>
         </div>
@@ -269,7 +281,7 @@ export default function PageViewNFT() {
       <span className="font-semibold text-white text-h3">
         {token?.name ?? token.contract.name + ' #' + token.token_id}
       </span>
-      <span className="font-medium text-white text-footer font-body">
+      <span className="font-medium text-white whitespace-pre-line text-footer font-body">
         {token.description ?? t('pages.viewNFT.noDescription')}
       </span>
       {renderTokenPrice()}
@@ -279,15 +291,6 @@ export default function PageViewNFT() {
       </Button>
     </div>
   );
-
-  const cleanString = (string) =>
-    string
-      .replaceAll('_', ' ')
-      .replaceAll('-', ' ')
-      .replaceAll(/([a-z])([A-Z])/g, '$1 $2')
-      .replaceAll(/([0-9])([A-Z])/g, '$1 $2')
-      .replaceAll(/([a-z])([0-9])/g, '$1 $2')
-      .replace(/^./, (str) => str.toUpperCase());
 
   const renderPropertyCard = (item) => {
     const propertyValue = () => {
@@ -318,13 +321,16 @@ export default function PageViewNFT() {
       >
         <div className="relative flex flex-col h-full gap-2 p-4 rounded-lg bg-property/95">
           <span className="font-semibold text-container-text/50 text-caption">
-            {item.trait_type
-              .replaceAll('_', ' ')
-              .replaceAll('-', ' ')
-              .replaceAll(/([a-z])([A-Z])/g, '$1 $2')
-              .replace(/^./, (str) => str.toUpperCase())}
+            {cleanString(item.trait_type)}
           </span>
-          <span className="font-semibold text-footer font-body">
+          <span
+            className={classNames(
+              'font-semibold text-footer font-body whitespace-pre-line',
+              propertyValue()?.toLowerCase().startsWith('https')
+                ? 'break-all'
+                : 'break-word'
+            )}
+          >
             {propertyValue()}
           </span>
           {item.rarity && (
