@@ -7,6 +7,7 @@ interface Props {
   big?: boolean;
   chain: string;
   className?: string;
+  contract: string;
   creatorName: string;
   creatorAvatar?: string;
   image_url: string;
@@ -20,6 +21,7 @@ export default function NFTCard({
   big = false,
   chain,
   className,
+  contract,
   creatorName,
   creatorAvatar,
   image_url,
@@ -29,6 +31,14 @@ export default function NFTCard({
   variant = 'featured',
 }: Props) {
   const { t } = useTranslation();
+
+  const cleanString = (string) => {
+    if (typeof string === 'string')
+      return string
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2');
+  };
 
   return (
     <Button
@@ -98,14 +108,14 @@ export default function NFTCard({
                   {t('pages.landing.createdBy')}
                 </span>
                 <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-                  {creatorName}
+                  {cleanString(creatorName)}
                 </span>
               </div>
             </div>
           )}
           {variant === 'view' && (
             <span className="hidden font-semibold truncate opacity-75 lg:block font-body text-container-text text-body">
-              {creatorName}
+              {cleanString(creatorName)}
             </span>
           )}
           <Chip chain={chain} label={chain} className="h-6" />
@@ -117,7 +127,7 @@ export default function NFTCard({
             variant === 'view' && 'pt-1.5 text-mobile-sm lg:text-tab'
           )}
         >
-          {name}
+          {name ?? contract + ' #' + token_id}
         </span>
       </div>
     </Button>

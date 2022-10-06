@@ -234,6 +234,151 @@ export default function PageViewNFT() {
     </div>
   );
 
+  const cleanString = (string) => {
+    if (typeof string === 'string' && !string.toLowerCase().startsWith('http'))
+      return string
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/([0-9])([A-Z])/g, '$1 $2')
+        .replace(/([a-z])([0-9])/g, '$1 $2')
+        .replace(/^./, (str) => str.toUpperCase());
+    return string;
+  };
+
+  const renderNFTDetails = () => (
+    <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 lg:border-2 rounded-md lg:border-container-dark/10 h-fit">
+      <div className="flex gap-3">
+        <Image
+          className="rounded-full"
+          loader={() =>
+            token.collection?.image_url ??
+            token.previews?.image_small_url ??
+            'Unsupported'
+          }
+          src={
+            token.collection?.image_url ??
+            token.previews?.image_small_url ??
+            'Unsupported'
+          }
+          width={40}
+          height={40}
+          alt={token?.name}
+          placeholder="empty"
+          unoptimized={true}
+        />
+        <div className="flex flex-col w-fit max-w-32">
+          <span className="block font-semibold font-body text-container-text text-body opacity-30">
+            {t('pages.landing.createdBy')}
+          </span>
+          <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
+            {cleanString(token?.collection.twitter_username) ??
+              cleanString(token?.collection.name) ??
+              'Unknown'}
+          </span>
+        </div>
+      </div>
+      <span className="font-semibold text-white text-h3">
+        {token?.name ?? token.contract.name + ' #' + token.token_id}
+      </span>
+      <span className="font-medium text-white whitespace-pre-line text-footer font-body">
+        {token.description ?? t('pages.viewNFT.noDescription')}
+      </span>
+      {renderTokenPrice()}
+      <Button className="gap-2" href={token?.external_url}>
+        <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
+        <LinkIcon />
+      </Button>
+    </div>
+  );
+
+  const renderPropertyCard = (item) => {
+    const propertyValue = () => {
+      if (typeof item.value === 'string') return cleanString(item.value);
+      if (typeof item.value === 'object') {
+        try {
+          return cleanString(item.value.name);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      return 'N/A';
+    };
+
+    return (
+      <div
+        key={item.trait_type}
+        className={classNames(
+          'rounded-lg min-h-[4.5rem] lg:min-h-[5.5rem] p-px',
+          (item.rarity?.description === 'rare' ||
+            item.rarity?.description === 'uncommon') &&
+            'bg-indigo-600',
+          item.rarity?.description === 'epic' &&
+            'bg-gradient-to-r from-epic-start to-epic-end',
+          item.rarity?.description === 'legendary' &&
+            'bg-gradient-to-r from-legendary-start to-legendary-end'
+        )}
+      >
+        <div className="relative flex flex-col h-full gap-2 p-4 rounded-lg bg-property/95">
+          <span className="font-semibold text-container-text/50 text-caption">
+            {cleanString(item.trait_type)}
+          </span>
+          <span
+            className={classNames(
+              'font-semibold text-footer font-body whitespace-pre-line',
+              propertyValue()?.toLowerCase().startsWith('https')
+                ? 'break-all'
+                : 'break-word'
+            )}
+          >
+            {propertyValue()}
+          </span>
+          {item.rarity && (
+            <div className="-mt-1">
+              <br className="hidden lg:block" />
+              <span
+                className={classNames(
+                  'absolute font-medium text-container-text/50 top-4 right-4 lg:top-auto lg:right-auto lg:bottom-4 text-rarity bg-clip-text font-body brightness-[0.6]',
+                  (item.rarity?.description === 'rare' ||
+                    item.rarity?.description === 'uncommon') &&
+                    'bg-indigo-600',
+                  item.rarity?.description === 'epic' &&
+                    'bg-gradient-to-r from-[#4BC1FA] to-[#7CFF97]',
+                  item.rarity?.description === 'legendary' &&
+                    'bg-gradient-to-r from-[#F5C6FB] to-[#FFF030]'
+                )}
+              >
+                {item.rarity.description.replace(/^./, (str) =>
+                  str.toUpperCase()
+                )}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderNFTProperties = () => (
+    <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 rounded-xl bg-container-dark/5 h-fit text-white">
+      <span className="font-semibold text-title">
+        {t('pages.viewNFT.properties')}
+      </span>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+        {token.extra_metadata.attributes
+          .filter(
+            (property) =>
+              !property.trait_type.toLowerCase().includes('date') &&
+              !property.trait_type.toLowerCase().includes('id') &&
+              !property.trait_type.toLowerCase().includes('edition') &&
+              !property.trait_type.toLowerCase().includes('serial') &&
+              !property.trait_type.toLowerCase().includes('series')
+          )
+          .map((item) => renderPropertyCard(item))}
+      </div>
+    </div>
+  );
+
   const renderSocialsPopover = () => (
     <Popover.Root open={isPopoverOpen}>
       <Popover.Anchor>
@@ -481,7 +626,12 @@ export default function PageViewNFT() {
       {token && (
         <NextSeo
           description={token.description}
-          title={t('pages.viewNFT.meta.title', { nftName: token.name })}
+          title={t('pages.viewNFT.meta.title', {
+            nftName:
+              token?.nft_id && token?.image_url
+                ? token.name ?? token.contract.name + ' #' + token.token_id
+                : t('error.error'),
+          })}
           additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
         />
       )}
@@ -505,59 +655,16 @@ export default function PageViewNFT() {
           </div>
         )}
 
-        {!isLoading && token?.nft_id && token?.name && token?.image_url && (
+        {!isLoading && token?.nft_id && token?.image_url && (
           <div className="flex flex-col items-end h-fit pt-28 place-self-center min-h-[50rem] w-11/12 max-w-[125rem] lg:pr-24">
             {renderButtons()}
             <div className="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
               <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
                 {renderNFT()}
               </div>
-              <div className="flex justify-center w-full mx-auto lg:justify-end lg:w-1/2">
-                <div className="flex flex-col min-w-80 w-full lg:max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
-                  <div className="flex gap-3">
-                    <Image
-                      className="rounded-full"
-                      loader={() =>
-                        token.collection?.image_url ??
-                        token.previews?.image_small_url ??
-                        'Unsupported'
-                      }
-                      src={
-                        token.collection?.image_url ??
-                        token.previews?.image_small_url ??
-                        'Unsupported'
-                      }
-                      width={40}
-                      height={40}
-                      alt={token?.name}
-                      placeholder="empty"
-                      unoptimized={true}
-                    />
-                    <div className="flex flex-col w-fit max-w-32">
-                      <span className="block font-semibold font-body text-container-text text-body opacity-30">
-                        {t('pages.landing.createdBy')}
-                      </span>
-                      <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-                        {token.collection?.twitter_username ??
-                          token.collection?.name ??
-                          'Unknown'}
-                      </span>
-                    </div>
-                  </div>
-                  <span className="font-semibold text-white text-h3">
-                    {token?.name}
-                  </span>
-                  <span className="font-medium text-white text-footer font-body">
-                    {token.description ?? t('pages.viewNFT.noDescription')}
-                  </span>
-                  {renderTokenPrice()}
-                  {token.external_url && (
-                    <Button className="gap-2" href={token?.external_url}>
-                      <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
-                      <LinkIcon />
-                    </Button>
-                  )}
-                </div>
+              <div className="flex flex-col items-center w-full gap-6 mx-auto lg:items-end lg:w-1/2">
+                {renderNFTDetails()}
+                {token.extra_metadata.attributes && renderNFTProperties()}
               </div>
             </div>
           </div>
