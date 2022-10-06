@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import { getNFTsByWallet, getRawQuery } from '../../api';
 import type { FindProfile, NFT } from '../../api/types';
 import { getProfile } from '../../utils';
@@ -32,7 +33,7 @@ export default function PageViewNFTs() {
   const [findProfile, setFindProfile] = useState<FindProfile>();
 
   const header = { background: gradient(address, 'diagonal') };
-  const icon = { background: gradient(iconHash, 'horizontal') };
+  const icon = { background: gradient(iconHash, 'vertical') };
 
   const loadInitial = () => {
     const { innerWidth: width } = window;
@@ -105,9 +106,14 @@ export default function PageViewNFTs() {
   const renderAddressChip = () => (
     <Button
       onClick={() => {
-        navigator.clipboard.writeText(address);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 1500);
+        try {
+          navigator.clipboard.writeText(address);
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 1500);
+        } catch (e) {
+          console.error(e);
+          toast(t('error.pages.viewNFT.copy'), { type: 'error' });
+        }
       }}
       variant="custom"
     >
@@ -178,7 +184,7 @@ export default function PageViewNFTs() {
       );
     }
     return (
-      <div className="flex flex-col items-center justify-center font-body pt-12 pb-[10.5rem] lg:pb-[14.875rem]">
+      <div className="flex flex-col items-center justify-center py-24 pt-12 font-body">
         <span className="font-semibold text-white">
           {t('pages.viewNFTs.noItems')}
         </span>
@@ -218,9 +224,20 @@ export default function PageViewNFTs() {
 
   return (
     <>
-      <NextSeo title={t('pages.viewNFTs.meta.title')} />
-      <div>
-        <Navbar className="lg:!bg-navbar/90" search />
+      <NextSeo
+        title={t('pages.viewNFTs.meta.title')}
+        additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
+      />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar
+        pauseOnHover={false}
+        theme="dark"
+        bodyClassName="whitespace-pre-wrap"
+      />
+      <div className="h-full min-h-screen bg-gray-900">
+        <Navbar className="!bg-navbar lg:!bg-navbar/90" search />
         <div className="h-[15.5rem] lg:h-[25rem]" style={header} />
         <div className="relative flex flex-col items-center w-full">
           <div
@@ -231,7 +248,7 @@ export default function PageViewNFTs() {
               (findProfile?.avatar || (NFTs?.length > 0 && profileNFT)) &&
               renderProfilePhoto()}
           </div>
-          <div className="flex flex-col min-h-[calc(100vh_-_15.5rem)] h-full items-center px-4 lg:px-24 w-full bg-gray-900 pt-[5.125rem] lg:pt-[4.625rem]">
+          <div className="flex flex-col min-h-[calc(100vh-32.25rem)] h-full items-center px-4 lg:px-24 w-full pt-[5.125rem] lg:pt-[4.625rem]">
             <div className="flex items-center gap-3 pb-12">
               {findProfile && renderFindChip()}
               {renderAddressChip()}
@@ -262,9 +279,9 @@ export default function PageViewNFTs() {
                 {t('error.pages.viewNFTs.loading')}
               </span>
             )}
-            <Footer className="mt-auto" />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

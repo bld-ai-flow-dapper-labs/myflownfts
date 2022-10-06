@@ -61,7 +61,7 @@ module.exports = {
       md: ['2.25rem', { letterSpacing: '0.05em', lineHeight: '43.2px' }], //36px
       sm: ['1.5rem', { lineHeight: '28.8px' }], //24px
       title: ['1.125rem', { lineHeight: '21.6px' }], //18px
-      footer: ['1rem', { lineHeight: '19.2px' }], //18px
+      footer: ['1rem', { lineHeight: '19.2px' }], //16px
       body: ['0.9375rem', { lineHeight: '18px' }], //15px
       caption: ['0.75rem', { lineHeight: '14.4px' }], //12px
       button: ['0.875rem', { letterSpacing: '0.03em', lineHeight: '24px' }], //14px
@@ -72,7 +72,13 @@ module.exports = {
       ], //18px
       'mobile-md': ['1.25rem', { letterSpacing: '0.05em', lineHeight: '24px' }], //20px
       'mobile-sm': ['0.625rem', { lineHeight: '12px' }], //10px
-      tab: ['1rem', { lineHeight: '19px' }], //18px
+      'sidebar-links': [
+        '1rem',
+        { letterSpacing: '0.03em', lineHeight: '24px' },
+      ], //16px
+      'sidebar-rights': ['0.75rem', { lineHeight: '24px' }], //12px
+      'sidebar-footer': ['1.125rem', { lineHeight: '26.01px' }], //18px
+      tab: ['1rem', { lineHeight: '19px' }], //16px
       count: ['0.875rem', { letterSpacing: '0.02em', lineHeight: '20px' }], //14px
     },
     fontWeight: {
@@ -82,7 +88,7 @@ module.exports = {
       bold: defaultTheme.fontWeight.bold,
     },
     screens: {
-      xs: '450px',
+      xs: '400px',
       ...defaultTheme.screens,
     },
     extend: {

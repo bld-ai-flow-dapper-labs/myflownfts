@@ -276,10 +276,10 @@
     "owner_count": 1,
     "owners": [
       {
-        "owner_address": "0x0327d6fd986e9dab",
+        "owner_address": "0x2f9ab46acd961909",
         "quantity": 1,
-        "first_acquired_date": "2022-01-25T09:59:48",
-        "last_acquired_date": "2022-01-25T09:59:48"
+        "first_acquired_date": "2022-09-20T20:20:17",
+        "last_acquired_date": "2022-09-20T20:20:17"
       }
     ],
     "last_sale": null,
@@ -299,7 +299,8 @@
       "discord_url": null,
       "marketplace_pages": [],
       "metaplex_mint": null,
-      "metaplex_first_verified_creator": null
+      "metaplex_first_verified_creator": null,
+      "floor_prices": []
     },
     "extra_metadata": {
       "uuid": "61795771",
@@ -865,122 +866,6 @@
     "extra_metadata": {
       "uuid": "174292094",
       "image_original_url": "ipfs://QmVQoaMBDrEqZhiGzYGHzK2aZLB4WwES7EUDoRE3PyQ2Qt",
-      "animation_original_url": null
-    }
-  },
-  {
-    "nft_id": "flow.A.9d21537544d9123d.Momentables.4",
-    "chain": "flow",
-    "contract_address": "A.9d21537544d9123d.Momentables",
-    "token_id": "4",
-    "name": "Nailah",
-    "description": "Each crypto pharaoh is cryptographically unique, programmatically brought to life, endowed with a rare combination of sacred backgrounds, majestic costumes, power neckpieces, healing accessories, magical staffs, immortal tattoos and much more. All Crypto Pharaohs are remarkable, magical, and powerful.Some are rarer than other",
-    "image_url": "https://cdn.simplehash.com/assets/1c0283ffa3d5115d0057ddec3fa9df6094984f6470ba91b7e70d7cbbdcecd756.png",
-    "video_url": null,
-    "audio_url": null,
-    "model_url": null,
-    "previews": {
-      "image_small_url": "https://lh3.googleusercontent.com/5v9TZMFYj1KbnemwaX6TSwiVgbz_P_FpRrxhDk_VTcFKDfZfvf8iATWNG7jhickHE8OtX4EnOcLmd8V-q26fvyiLKvGIUAHJMxQ=s250",
-      "image_medium_url": "https://lh3.googleusercontent.com/5v9TZMFYj1KbnemwaX6TSwiVgbz_P_FpRrxhDk_VTcFKDfZfvf8iATWNG7jhickHE8OtX4EnOcLmd8V-q26fvyiLKvGIUAHJMxQ",
-      "image_large_url": "https://lh3.googleusercontent.com/5v9TZMFYj1KbnemwaX6TSwiVgbz_P_FpRrxhDk_VTcFKDfZfvf8iATWNG7jhickHE8OtX4EnOcLmd8V-q26fvyiLKvGIUAHJMxQ=s1000",
-      "image_opengraph_url": "https://lh3.googleusercontent.com/5v9TZMFYj1KbnemwaX6TSwiVgbz_P_FpRrxhDk_VTcFKDfZfvf8iATWNG7jhickHE8OtX4EnOcLmd8V-q26fvyiLKvGIUAHJMxQ=k-w1200-s2400-rj",
-      "blurhash": "UTHxM=aLI;t7_HJAS5n*}SfkagWBw@r@t7Na"
-    },
-    "background_color": null,
-    "external_url": "https://www.momentable.ai/4",
-    "created_date": "2022-02-19T06:48:56",
-    "status": "minted",
-    "token_count": 1,
-    "owner_count": 1,
-    "owners": [
-      {
-        "owner_address": "0x45c9cbc35a97c75c",
-        "quantity": 1,
-        "first_acquired_date": "2022-02-22T06:35:03",
-        "last_acquired_date": "2022-02-22T06:35:03"
-      }
-    ],
-    "last_sale": null,
-    "contract": {
-      "type": "NonFungibleToken",
-      "name": "Momentables",
-      "symbol": null
-    },
-    "collection": {
-      "collection_id": "5b352d8b7aef12554267f7f86a7e4016",
-      "name": "Momentables",
-      "description": null,
-      "image_url": null,
-      "banner_image_url": null,
-      "external_url": null,
-      "twitter_username": null,
-      "discord_url": null,
-      "marketplace_pages": [],
-      "metaplex_mint": null,
-      "metaplex_first_verified_creator": null
-    },
-    "extra_metadata": {
-      "uuid": "148390479",
-      "attributes": [
-        {
-          "trait_type": "Eternal Lip Colors",
-          "value": {
-            "name": "Rosey Plump",
-            "primaryPower": "null",
-            "secondaryPower": "null",
-            "additionalData": "null"
-          }
-        },
-        {
-          "trait_type": "Divine Skin Tones",
-          "value": {
-            "primaryPower": "null",
-            "secondaryPower": "null",
-            "name": "Copper",
-            "additionalData": "null"
-          }
-        },
-        {
-          "trait_type": "Secret Makeup Looks",
-          "value": {
-            "secondaryPower": "null",
-            "additionalData": "null",
-            "name": "Intense Glare",
-            "primaryPower": "null"
-          }
-        },
-        {
-          "trait_type": "Majestic Costumes",
-          "value": {
-            "primaryPower": "null",
-            "additionalData": "null",
-            "name": "Zebra’s Coat",
-            "secondaryPower": "null"
-          }
-        },
-        {
-          "trait_type": "rarity",
-          "value": {
-            "0": "c",
-            "1": "o",
-            "2": "m",
-            "3": "m",
-            "4": "o",
-            "5": "n"
-          }
-        },
-        {
-          "trait_type": "Immortal Tattoos",
-          "value": {
-            "additionalData": "null",
-            "primaryPower": "null",
-            "secondaryPower": "null",
-            "name": "Warriors Scabbard"
-          }
-        }
-      ],
-      "serial_number": 4,
-      "image_original_url": "https://gateway.pinata.cloud/ipfs/QmS84Wo5pr1S8Y2HAThRxTSvTWcEJVSbhMpR3imMMaYCJE",
       "animation_original_url": null
     }
   },

@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import * as ReactDOM from 'react-dom/client';
 import ImageGallery from 'react-image-gallery';
 import {
   FacebookIcon,
@@ -21,6 +22,7 @@ import {
   postRefreshMetadata,
 } from '../../api';
 import type { ExchangeRates, NFT } from '../../api/types';
+import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
 import { ReactComponent as LinkIcon } from '../../components/common/images/icon-link.svg';
@@ -30,6 +32,13 @@ import { ReactComponent as USDIcon } from '../../components/common/images/icon-u
 import { BASE_URL } from '../../constants';
 
 import { Button, Chip, Footer, Loader, Navbar } from '../common';
+
+interface ExtraMetadataProps {
+  url?: string;
+  type?: string;
+}
+
+type ExtraMetadataType = ExtraMetadataProps | string;
 
 export default function PageViewNFT() {
   const router = useRouter();
@@ -42,23 +51,50 @@ export default function PageViewNFT() {
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates>();
   const galleryRef = useRef(null);
   const divRef = useRef(null);
-  const [isFullscreen, setisFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [images, setImages] = useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const renderVideo = (item) => {
     return (
-      <video
-        autoPlay
-        controls
-        loop
-        muted
-        controlsList="nodownload"
-        className={classNames('h-full mx-auto rounded-lg')}
-      >
-        <source src={item.embedUrl} />
-      </video>
+      <div id="video-wrapper" className="relative w-full h-full rounded-lg">
+        <video
+          autoPlay
+          controls
+          loop
+          muted
+          controlsList="nodownload nofullscreen noremoteplayback"
+          className="mx-auto"
+        >
+          <source src={item.embedUrl} />
+        </video>
+      </div>
     );
+  };
+
+  const renderVideoCloseButton = () => {
+    const id = 'video-close-button';
+    const component = (
+      <Button
+        className="absolute text-white left-5 top-5"
+        variant="custom"
+        onClick={() => galleryRef.current.toggleFullScreen()}
+      >
+        <CloseIcon className="scale-150" />
+      </Button>
+    );
+
+    if (!document.getElementById(id)) {
+      const divs = document.getElementById('video-wrapper');
+      if (divs) {
+        const d = document.createElement('div');
+        d.id = id;
+        divs.appendChild(d);
+        const rootElement = document.getElementById(id);
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(component);
+      }
+    }
   };
 
   useEffect(() => {
@@ -90,20 +126,50 @@ export default function PageViewNFT() {
         });
       }
       // Renders other images included, unstable due to varying sizes of images distorting the viewer
-      // if (data.extra_metadata.media.length > 0)
-      //   gallery.push(
-      //     ...data.extra_metadata.media
-      //       .filter(
-      //         (item) => item.slice(-4) === '.png' || item.slice(-4) === '.jpg'
-      //       )
-      //       .map((image) => ({
-      //         original: image,
-      //         originalHeight: 800,
-      //         originalWidth: 800,
-      //         thumbnail: image,
-      //         thumbnailClass: 'border-4 border-container-dark/10 w-24 h-24',
-      //       }))
-      //   );
+      if (data.extra_metadata?.media?.length > 0)
+        gallery.push(
+          ...data.extra_metadata.media
+            .filter((item: ExtraMetadataType) => {
+              if (typeof item === 'string') {
+                if (!item.startsWith('ipfs'))
+                  return item.slice(-4) === '.png' || item.slice(-4) === '.jpg';
+              }
+              if (typeof item === 'object')
+                try {
+                  if (!item.url.startsWith('ipfs')) {
+                    return (
+                      item.url.slice(-4) === '.png' ||
+                      item.url.slice(-4) === '.jpg'
+                    );
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            })
+            .map((image: ExtraMetadataType) => {
+              if (typeof image === 'string') {
+                return {
+                  original: image,
+                  thumbnail: image,
+                  thumbnailClass:
+                    'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                };
+              }
+              if (typeof image === 'object')
+                try {
+                  if (!image.url.startsWith('ipfs')) {
+                    return {
+                      original: image.url,
+                      thumbnail: image.url,
+                      thumbnailClass:
+                        'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                    };
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            })
+        );
       setImages(gallery);
       setExchangeRates(await getExchangeRates());
       setToken(data);
@@ -115,23 +181,32 @@ export default function PageViewNFT() {
   // Modify classes within react-image-gallery to change dimensions on runtime
   useEffect(() => {
     if (isFullscreen) {
-      document.getElementsByTagName('video')[0]?.classList.add('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.add('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.add('!w-screen');
+      document.getElementsByTagName('video')[0]?.classList.add('h-screen');
+      const imageElements = document.getElementsByClassName(
+        'image-gallery-image'
+      );
+      Array.from(imageElements).forEach((item) =>
+        item.classList.add('h-screen')
+      );
+      renderVideoCloseButton();
     } else {
-      document
-        .getElementsByTagName('video')[0]
-        ?.classList.remove('h-[90.75vh]');
-      document.getElementsByTagName('img')[0]?.classList.remove('h-[90.75vh]');
+      document.getElementsByTagName('video')[0]?.classList.remove('h-screen');
+      const imageElements = document.getElementsByClassName(
+        'image-gallery-image'
+      );
+      Array.from(imageElements).forEach((item) =>
+        item.classList.remove('h-screen')
+      );
+      document.getElementById('video-close-button')?.remove();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
 
   const renderNFT = () => (
     <div
       className={classNames(
-        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10'
+        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
+        isFullscreen && 'z-20'
       )}
       ref={divRef}
     >
@@ -139,7 +214,6 @@ export default function PageViewNFT() {
         ref={galleryRef}
         items={images}
         autoplay
-        disableThumbnailScroll
         showThumbnails={images.length > 1}
         showThumbnailsOnNormalViewOnly={images.length > 1}
         showIndexOnFullscreenOnly={images.length > 1}
@@ -148,13 +222,14 @@ export default function PageViewNFT() {
         showFullscreenButton={false}
         showZoomButtons
         showVideo
+        stopPropagation
         onClick={() => {
           if (!isFullscreen) galleryRef.current.toggleFullScreen();
         }}
         onScreenChange={() => {
-          setisFullscreen(!isFullscreen);
+          setIsFullscreen(!isFullscreen);
         }}
-        onSlide={() => document.getElementsByTagName('video')[0].pause()}
+        onSlide={() => document.getElementsByTagName('video')[0]?.pause()}
       />
     </div>
   );
@@ -188,12 +263,18 @@ export default function PageViewNFT() {
         >
           <div className="flex flex-col items-start gap-1 p-1 mt-2 text-white rounded-lg font-body bg-scroll-button">
             <Button
-              className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2"
+              className="!justify-start w-full hover:scale-105 !pl-3 !py-1 gap-2 overflow-hidden"
               variant="scroll"
               onClick={() => {
-                navigator.clipboard.writeText(location.href);
-                toast(t('pages.viewNFT.copied'), { type: 'success' });
-                setIsPopoverOpen(false);
+                try {
+                  navigator.clipboard.writeText(location.href);
+                  toast(t('pages.viewNFT.copied'), { type: 'success' });
+                } catch (e) {
+                  console.error(e);
+                  toast(t('error.pages.viewNFT.copy'), { type: 'error' });
+                } finally {
+                  setIsPopoverOpen(false);
+                }
               }}
             >
               <FlowIcon className="scale-[.65] bg-white rounded-full text-primary" />
@@ -401,25 +482,38 @@ export default function PageViewNFT() {
         <NextSeo
           description={token.description}
           title={t('pages.viewNFT.meta.title', { nftName: token.name })}
+          additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
         />
       )}
       <div className="relative flex flex-col w-full h-full min-h-screen bg-navbar">
         <Navbar search />
         {isLoading && (
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            <Loader />
+          <div className="relative mt-[4.375rem] lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
+            <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <Loader />
+            </div>
+          </div>
+        )}
+
+        {!isLoading && !token?.image_url && (
+          <div className="relative lg:mt-20 lg:-mb-20 h-[calc(100vh-4.125rem)] lg:h-[calc(100vh-10rem)]">
+            <span className="absolute w-full font-bold text-center text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h3 sm:text-h1">
+              {token?.nft_id
+                ? t('error.pages.viewNFT.unsupported')
+                : t('error.pages.viewNFT.notFound')}
+            </span>
           </div>
         )}
 
         {!isLoading && token?.nft_id && token?.name && token?.image_url && (
-          <div className="flex flex-col items-end justify-center h-fit pt-28 place-self-center w-11/12 max-w-[125rem] lg:pr-24">
+          <div className="flex flex-col items-end h-fit pt-28 place-self-center min-h-[50rem] w-11/12 max-w-[125rem] lg:pr-24">
             {renderButtons()}
             <div className="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
               <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
                 {renderNFT()}
               </div>
               <div className="flex justify-center w-full mx-auto lg:justify-end lg:w-1/2">
-                <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
+                <div className="flex flex-col min-w-80 w-full lg:max-w-[50rem] gap-6 p-6 border-4 rounded-md border-container-dark/10 h-fit">
                   <div className="flex gap-3">
                     <Image
                       className="rounded-full"
@@ -457,36 +551,25 @@ export default function PageViewNFT() {
                     {token.description ?? t('pages.viewNFT.noDescription')}
                   </span>
                   {renderTokenPrice()}
-                  <Button className="gap-2" href={token?.external_url}>
-                    <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
-                    <LinkIcon />
-                  </Button>
+                  {token.external_url && (
+                    <Button className="gap-2" href={token?.external_url}>
+                      <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
+                      <LinkIcon />
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         )}
-        {!isLoading && !token?.nft_id && (
-          <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
-            {t('error.pages.viewNFT.notFound')}
-          </span>
-        )}
-        {!isLoading && token?.nft_id && !token?.name && !token?.image_url && (
-          <span className="absolute font-bold text-white whitespace-pre-wrap -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-h1">
-            {t('error.pages.viewNFT.unsupported')}
-          </span>
-        )}
 
         <Footer
           className={classNames(
-            'pt-12',
+            'pt-12 pb-12',
             (isLoading ||
-              (!isLoading &&
-                token?.nft_id &&
-                !token?.name &&
-                !token?.image_url) ||
-              (!isLoading && !token?.nft_id)) &&
-              'absolute bottom-0'
+              (token?.nft_id && !token?.name && !token?.image_url) ||
+              !token?.nft_id) &&
+              'lg:absolute lg:bottom-0'
           )}
         />
       </div>

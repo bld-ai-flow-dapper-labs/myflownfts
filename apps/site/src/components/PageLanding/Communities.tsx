@@ -1,9 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
-import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
+import { useRef } from 'react';
 import { ScrollButtons } from '../common';
+import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
 import CommunityCard from './CommunityCard';
 import communities from './json/communities.json';
-import { useRef } from 'react';
 
 export default function Communities() {
   const { t } = useTranslation();
@@ -23,7 +23,11 @@ export default function Communities() {
           </span>
           <StarIcon className="text-yellow" />
         </div>
-        <ScrollButtons className="hidden lg:flex" scroll={scroll} />
+        <ScrollButtons
+          className="hidden lg:flex"
+          scroll={scroll}
+          href="https://www.flowverse.co/rankings"
+        />
       </div>
       <div
         className="flex gap-6 -mt-[1.875rem] overflow-x-scroll xl:mt-0 xl:pb-10 scrollbar-mobile xl:scrollbar scroll-smooth"
@@ -42,6 +46,7 @@ export default function Communities() {
         className="flex -mt-[1.875rem] lg:hidden"
         scroll={scroll}
         mobile
+        href="https://www.flowverse.co/rankings"
       />
     </div>
   );

@@ -41,12 +41,12 @@ export default function PageLanding() {
         description={t('pages.landing.meta.description')}
         title={t('pages.landing.meta.title')}
       />
-      <div>
+      <div className="w-full">
         <Navbar />
         <Header />
         <Intro />
         <Partners />
-        <div className="h-full relative">
+        <div className="relative h-full">
           <Image
             alt=""
             className="z-[-2] w-full object-cover lg:hidden"

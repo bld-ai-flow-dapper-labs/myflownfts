@@ -35,7 +35,7 @@ export default function Partners() {
         </span>
         <StarIcon className="text-primary" />
       </div>
-      <div className="w-full -mt-[1.5rem] overflow-hidden lg:mt-4">
+      <div className="z-0 w-full -mt-[1.5rem] overflow-hidden lg:mt-4">
         <Marquee direction="right" gradient={false} speed={50}>
           <div className="grid items-center grid-flow-col gap-0 pr-12 text-white lg:gap-44">
             <NBAIcon className="-ml-20 scale-50 lg:ml-20 lg:scale-100" />

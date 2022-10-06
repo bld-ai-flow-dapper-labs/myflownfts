@@ -17,7 +17,8 @@ export default function Intro() {
     <div
       className={classNames(
         'w-full h-[41rem] px-5 py-3 relative',
-        'md:pl-40 md:h-[51.5rem] md:pr-[30rem] md:pt-32',
+        'md:min-h-[60rem] md:pl-24',
+        'lg:pl-40 lg:h-[51.5rem] lg:pr-[30rem] lg:pt-32',
         'xl:pl-[17rem] xl:pt-[10.75rem]'
       )}
     >
@@ -39,7 +40,7 @@ export default function Intro() {
       />
       <Image
         alt=""
-        className="z-[-1] w-full object-cover hidden sm:block md:hidden"
+        className="z-[-1] w-full object-cover hidden sm:block lg:hidden"
         fill
         placeholder="blur"
         src={bgIntroMobileSm}
@@ -47,7 +48,7 @@ export default function Intro() {
       />
       <Image
         alt=""
-        className="z-[-1] w-full object-cover hidden md:block"
+        className="z-[-1] w-full object-cover hidden lg:block"
         fill
         placeholder="blur"
         quality="100"
@@ -55,8 +56,8 @@ export default function Intro() {
         unoptimized={isLandingPageLoaded}
       />
 
-      <ImageLogo className="scale-[.6] -translate-x-[2.75rem] md:scale-100 md:translate-x-0" />
-      <div className="flex flex-wrap max-w-[46rem] md:pt-[2.625rem] -mt-2.5 md:mt-0">
+      <ImageLogo className="scale-[.6] -translate-x-[2.75rem] lg:scale-100 lg:translate-x-0" />
+      <div className="flex flex-wrap max-w-[46rem] lg:pt-[2.625rem] -mt-2.5 lg:mt-0">
         <span className="block font-bold text-white text-mobile-md md:text-md">
           {t('pages.landing.intro.title')}
         </span>
