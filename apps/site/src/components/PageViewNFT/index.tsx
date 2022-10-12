@@ -658,7 +658,7 @@ export default function PageViewNFT() {
         )}
 
         {!isLoading && token?.nft_id && token?.image_url && (
-          <div className="flex flex-col items-end h-fit pt-28 place-self-center min-h-[50rem] w-11/12 max-w-[125rem] lg:pr-24">
+          <div className="flex flex-col items-end h-fit pt-28 place-self-center min-h-[calc(100vh-11.5rem)] w-11/12 max-w-[125rem] lg:pr-24">
             {renderButtons()}
             <div className="flex flex-col lg:flex-row w-full h-full gap-6 lg:gap-[10.375rem]">
               <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
