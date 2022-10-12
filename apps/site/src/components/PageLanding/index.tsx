@@ -12,7 +12,7 @@ import bgCommunityFeaturedMobile from './images/community-featured/bg-community-
 import bgCommunityFeatured from './images/community-featured/bg-community-featured.png';
 import Intro from './Intro';
 import Partners from './Partners';
-import Signup from './Signup';
+// import Signup from './Signup';
 
 export default function PageLanding() {
   const { t } = useTranslation();
@@ -67,7 +67,7 @@ export default function PageLanding() {
           <Communities />
           <Featured />
         </div>
-        <Signup />
+        {/* <Signup /> */}
         <Footer />
       </div>
     </>
