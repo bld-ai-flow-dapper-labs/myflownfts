@@ -127,7 +127,7 @@ export default function NFTCard({
             variant === 'view' && 'pt-1.5 text-mobile-sm lg:text-tab'
           )}
         >
-          {name ?? contract + ' #' + token_id}
+          {name && name !== contract ? name : contract + ' #' + token_id}
         </span>
       </div>
     </Button>

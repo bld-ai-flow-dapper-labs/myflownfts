@@ -279,7 +279,9 @@ export default function PageViewNFT() {
         </div>
       </div>
       <span className="font-semibold text-white text-h3">
-        {token?.name ?? token.contract.name + ' #' + token.token_id}
+        {token?.name && token?.name !== token?.contract.name
+          ? token.name
+          : token.contract.name + ' #' + token.token_id}
       </span>
       <span className="font-medium text-white whitespace-pre-line text-footer font-body">
         {token.description ?? t('pages.viewNFT.noDescription')}
@@ -672,7 +674,7 @@ export default function PageViewNFT() {
 
         <Footer
           className={classNames(
-            'pt-12 pb-12',
+            'mt-12',
             (isLoading ||
               (token?.nft_id && !token?.name && !token?.image_url) ||
               !token?.nft_id) &&
