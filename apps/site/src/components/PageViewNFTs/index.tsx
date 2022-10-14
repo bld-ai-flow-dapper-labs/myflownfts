@@ -172,7 +172,7 @@ export default function PageViewNFTs() {
               creatorName={
                 item.collection.twitter_username ??
                 item.collection.name ??
-                'Unknown'
+                '/not_supported.png'
               }
               token_id={item.token_id}
               name={
