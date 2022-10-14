@@ -1,7 +1,6 @@
-import { fetchFromApi } from './../utils';
-import { NFT } from '../../../api/types';
-import { BASE_API_URL } from '../../../constants';
+import { fetchFromApi, NFT } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { BASE_API_URL } from '../../../constants';
 
 export default async function handler(
   req: NextApiRequest,

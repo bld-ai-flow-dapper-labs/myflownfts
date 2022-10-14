@@ -17,11 +17,12 @@ import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
 import {
+  ExchangeRates,
   getExchangeRates,
   getNFTByTokenId,
+  NFT,
   postRefreshMetadata,
-} from '../../api';
-import type { ExchangeRates, NFT } from '../../api/types';
+} from '@myflownfts/data-access';
 import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
 import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
@@ -105,7 +106,7 @@ export default function PageViewNFT() {
         contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum'
       );
       const gallery = [];
-      if (data.video_url) {
+      if (data?.video_url) {
         gallery.push({
           embedUrl: data?.video_url,
           thumbnail: data?.previews.image_small_url,
@@ -114,7 +115,7 @@ export default function PageViewNFT() {
           renderItem: renderVideo.bind(this),
         });
       }
-      if (data.image_url) {
+      if (data?.image_url) {
         gallery.push({
           original: data.previews?.image_large_url ?? data.image_url,
           originalClass:
@@ -126,7 +127,7 @@ export default function PageViewNFT() {
         });
       }
       // Renders other images included, unstable due to varying sizes of images distorting the viewer
-      if (data.extra_metadata?.media?.length > 0)
+      if (data?.extra_metadata?.media?.length > 0)
         gallery.push(
           ...data.extra_metadata.media
             .filter((item: ExtraMetadataType) => {
