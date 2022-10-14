@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
 import { useEffect } from 'react';
+import { NFT } from '../../api/types';
 import { isLandingPageLoadedAtom } from '../../atoms';
 import { Footer, Navbar } from '../common';
 import Communities from './Communities';
@@ -12,9 +13,12 @@ import bgCommunityFeaturedMobile from './images/community-featured/bg-community-
 import bgCommunityFeatured from './images/community-featured/bg-community-featured.png';
 import Intro from './Intro';
 import Partners from './Partners';
-// import Signup from './Signup';
 
-export default function PageLanding() {
+interface Props {
+  nfts: NFT[];
+}
+
+export default function PageLanding({ nfts }: Props) {
   const { t } = useTranslation();
   const [isLandingPageLoaded, setIsLandingPageLoaded] = useAtom(
     isLandingPageLoadedAtom
@@ -65,7 +69,7 @@ export default function PageLanding() {
             unoptimized={isLandingPageLoaded}
           />
           <Communities />
-          <Featured />
+          <Featured nfts={nfts} />
         </div>
         {/* <Signup /> */}
         <Footer />
