@@ -131,29 +131,52 @@ export default function PageViewNFT() {
           ...data.extra_metadata.media
             .filter((item: ExtraMetadataType) => {
               if (typeof item === 'string') {
-                if (!item.startsWith('ipfs'))
-                  return item.slice(-4) === '.png' || item.slice(-4) === '.jpg';
+                if (item.startsWith('ipfs'))
+                  if (process.env.NEXT_PUBLIC_IPFS_URL) return item;
+                  else return;
+                return (
+                  item.slice(-4) === '.png' ||
+                  item.slice(-4) === '.jpg' ||
+                  item.slice(-4) === '.gif'
+                );
               }
               if (typeof item === 'object')
                 try {
-                  if (!item.url.startsWith('ipfs')) {
-                    return (
-                      item.url.slice(-4) === '.png' ||
-                      item.url.slice(-4) === '.jpg'
-                    );
-                  }
+                  if (item.url.startsWith('ipfs'))
+                    if (process.env.NEXT_PUBLIC_IPFS_URL) return item.url;
+                    else return;
+
+                  return (
+                    item.url.slice(-4) === '.png' ||
+                    item.url.slice(-4) === '.jpg' ||
+                    item.url.slice(-4) === '.gif'
+                  );
                 } catch (e) {
                   console.error(e);
                 }
             })
             .map((image: ExtraMetadataType) => {
+              console.log(image);
               if (typeof image === 'string') {
-                return {
-                  original: image,
-                  thumbnail: image,
-                  thumbnailClass:
-                    'border-1 border-container-dark/0 rounded-lg overflow-hidden',
-                };
+                if (!image.startsWith('ipfs')) {
+                  return {
+                    original: image,
+                    thumbnail: image,
+                    thumbnailClass:
+                      'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                  };
+                }
+                if (process.env.NEXT_PUBLIC_IPFS_URL) {
+                  const ipfsUrl = process.env.NEXT_PUBLIC_IPFS_URL.concat(
+                    `/ipfs/${image.slice(7)}`
+                  );
+                  return {
+                    original: ipfsUrl,
+                    thumbnail: ipfsUrl,
+                    thumbnailClass:
+                      'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                  };
+                }
               }
               if (typeof image === 'object')
                 try {
@@ -161,6 +184,17 @@ export default function PageViewNFT() {
                     return {
                       original: image.url,
                       thumbnail: image.url,
+                      thumbnailClass:
+                        'border-1 border-container-dark/0 rounded-lg overflow-hidden',
+                    };
+                  }
+                  if (process.env.NEXT_PUBLIC_IPFS_URL) {
+                    const ipfsUrl = process.env.NEXT_PUBLIC_IPFS_URL.concat(
+                      `/ipfs/${image.url.slice(7)}`
+                    );
+                    return {
+                      original: ipfsUrl,
+                      thumbnail: ipfsUrl,
                       thumbnailClass:
                         'border-1 border-container-dark/0 rounded-lg overflow-hidden',
                     };
