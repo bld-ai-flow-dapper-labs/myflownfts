@@ -1,7 +1,5 @@
+import { BASE_API_URL, postToApi, RefreshResponse } from '@data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { RefreshResponse } from '../../../api/types';
-import { BASE_API_URL } from '../../../constants';
-import { postToApi } from '../utils';
 
 export default async function handler(
   req: NextApiRequest,

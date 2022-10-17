@@ -1,8 +1,8 @@
+import { isLandingPageLoadedAtom } from '@web/atoms';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
-import { isLandingPageLoadedAtom } from '../../atoms';
 import bgIntroMobileSm from './images/intro/bg-intro-mobile-sm.png';
 import bgIntroMobileXs from './images/intro/bg-intro-mobile-xs.png';
 import bgIntroMobile from './images/intro/bg-intro-mobile.png';

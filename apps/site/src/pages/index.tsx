@@ -1,7 +1,10 @@
+import {
+  BASE_API_URL,
+  DEFAULT_FEATURED_NFTS,
+  fetchFromApi,
+} from '@data-access';
 import PageLanding from '../components/PageLanding';
 import defaultNfts from '../components/PageLanding/json/nfts.json';
-import { BASE_API_URL, DEFAULT_FEATURED_NFTS } from '../constants';
-import { fetchFromApi } from './api/utils';
 
 export default PageLanding;
 

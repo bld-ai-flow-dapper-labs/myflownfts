@@ -4,7 +4,7 @@ import {
   NFTByList,
   NFTListResponse,
   RefreshResponse,
-} from './types';
+} from '@data-access';
 
 export const getNFTsByWallet = async (
   walletAddresses: string,

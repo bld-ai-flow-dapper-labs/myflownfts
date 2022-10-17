@@ -1,7 +1,9 @@
+import {
+  CURRENCY_API_URL,
+  ExchangeRates,
+  fetchFromCurrencyApi,
+} from '@data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CURRENCY_API_URL } from '../../../constants';
-import { ExchangeRates } from './../../../api/types';
-import { fetchFromCurrencyApi } from './../utils';
 
 export default async function handler(
   req: NextApiRequest,

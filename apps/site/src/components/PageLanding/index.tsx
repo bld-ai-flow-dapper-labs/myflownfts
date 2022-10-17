@@ -1,10 +1,10 @@
+import { NFT } from '@data-access';
+import { isLandingPageLoadedAtom } from '@web/atoms';
 import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
 import { useEffect } from 'react';
-import { NFT } from '../../api/types';
-import { isLandingPageLoadedAtom } from '../../atoms';
 import { Footer, Navbar } from '../common';
 import Communities from './Communities';
 import Featured from './Featured';

@@ -1,3 +1,3 @@
-import PageViewNFT from '../../../components/PageViewNFT';
+import PageViewNFT from '@web/components/PageViewNFT';
 
 export default PageViewNFT;

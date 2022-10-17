@@ -1,3 +1,5 @@
+import { addressAtom, userAtom } from '@web/atoms';
+import { useWallet } from '@web/utils';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,8 +8,6 @@ import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import { Button, Footer, TextInput } from '..';
-import { addressAtom, userAtom } from '../../../atoms';
-import { useWallet } from '../../../utils';
 import { ReactComponent as CloseIcon } from '../images/icon-close.svg';
 import { ReactComponent as DrawerIcon } from '../images/icon-drawer.svg';
 import { ReactComponent as ImageLogo } from '../images/icon-flow-nofill.svg';

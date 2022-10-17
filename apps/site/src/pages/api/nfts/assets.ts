@@ -1,7 +1,5 @@
+import { BASE_API_URL, fetchFromApi, NFTByList } from '@data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { BASE_API_URL } from '../../../constants';
-import { NFTByList } from './../../../api/types';
-import { fetchFromApi } from './../utils';
 
 export default async function handler(
   req: NextApiRequest,
