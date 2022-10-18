@@ -231,7 +231,36 @@ export default function PageViewNFTs() {
     <>
       <NextSeo
         title={t('pages.viewNFTs.meta.title')}
-        additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
+        openGraph={{
+          description: t('pages.viewNFTs.meta.description').concat(address),
+          type: 'text/html; charset=UTF-8',
+          // images: [
+          //   {
+          //     url:
+          //   },
+          // ],
+        }}
+        twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
+        additionalMetaTags={[
+          { name: 'theme-color', content: '#202124' },
+          {
+            property: 'twitter:title',
+            content: t('pages.viewNFTs.meta.title'),
+          },
+          {
+            property: 'twitter:description',
+            content: t('pages.viewNFTs.meta.description').concat(address),
+          },
+          // {
+          //   property: 'twitter:image',
+          //   content: `${
+          //     SSRToken.previews.image_medium_url ??
+          //     SSRToken.image_url ??
+          //     t('error.pages.viewNFT.notFound')
+          //   }`,
+          // },
+          { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
+        ]}
       />
       <ToastContainer
         position="bottom-right"
