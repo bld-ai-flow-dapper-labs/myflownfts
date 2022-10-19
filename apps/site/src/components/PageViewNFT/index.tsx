@@ -1,17 +1,17 @@
-import { BASE_URL, ExchangeRates, NFT } from '@data-access';
-import * as Popover from '@radix-ui/react-popover';
+import { BASE_URL, ExchangeRates, NFT } from '@myflownfts/data-access';
 import {
   getExchangeRates,
   getNFTByTokenId,
   postRefreshMetadata,
-} from '@web/api';
-import { ReactComponent as CloseIcon } from '@web/components/common/images/icon-close.svg';
-import { ReactComponent as EthIcon } from '@web/components/common/images/icon-eth.svg';
-import { ReactComponent as FlowIcon } from '@web/components/common/images/icon-flow-nofill.svg';
-import { ReactComponent as LinkIcon } from '@web/components/common/images/icon-link.svg';
-import { ReactComponent as RefreshIcon } from '@web/components/common/images/icon-refresh.svg';
-import { ReactComponent as ShareIcon } from '@web/components/common/images/icon-share.svg';
-import { ReactComponent as USDIcon } from '@web/components/common/images/icon-usd.svg';
+} from '@myflownfts/site/api';
+import { ReactComponent as CloseIcon } from '@myflownfts/site/components/common/images/icon-close.svg';
+import { ReactComponent as EthIcon } from '@myflownfts/site/components/common/images/icon-eth.svg';
+import { ReactComponent as FlowIcon } from '@myflownfts/site/components/common/images/icon-flow-nofill.svg';
+import { ReactComponent as LinkIcon } from '@myflownfts/site/components/common/images/icon-link.svg';
+import { ReactComponent as RefreshIcon } from '@myflownfts/site/components/common/images/icon-refresh.svg';
+import { ReactComponent as ShareIcon } from '@myflownfts/site/components/common/images/icon-share.svg';
+import { ReactComponent as USDIcon } from '@myflownfts/site/components/common/images/icon-usd.svg';
+import * as Popover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';

@@ -1,5 +1,9 @@
-import { addressAtom, isLandingPageLoadedAtom, userAtom } from '@web/atoms';
-import { useWallet } from '@web/utils';
+import {
+  addressAtom,
+  isLandingPageLoadedAtom,
+  userAtom,
+} from '@myflownfts/site/atoms';
+import { useWallet } from '@myflownfts/site/utils';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';

@@ -1,4 +1,4 @@
-import { NFT } from '@data-access';
+import { NFT } from '@myflownfts/data-access';
 import useTranslation from 'next-translate/useTranslation';
 import { useRef } from 'react';
 import { NFTCard, ScrollButtons } from '../common';

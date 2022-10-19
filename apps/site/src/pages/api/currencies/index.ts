@@ -1,8 +1,4 @@
-import {
-  CURRENCY_API_URL,
-  ExchangeRates,
-  fetchFromCurrencyApi,
-} from '@data-access';
+import { ExchangeRates, getExchangeRates } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -13,9 +9,7 @@ export default async function handler(
     return res.status(400);
   }
 
-  const url = `${CURRENCY_API_URL}/price?fsym=FLOW&tsyms=USD,ETH`; // get Flow to USD and ETH pricing
-
-  await fetchFromCurrencyApi(url)
+  await getExchangeRates()
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

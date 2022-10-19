@@ -1,4 +1,4 @@
-import { BASE_API_URL, fetchFromApi, NFTByList } from '@data-access';
+import { getNFTByList, NFTByList } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -10,8 +10,8 @@ export default async function handler(
   }
 
   const { nft_ids } = req.query;
-  const url = `${BASE_API_URL}/nfts/assets?nft_ids=${nft_ids}`;
-  await fetchFromApi(url)
+
+  await getNFTByList(nft_ids as string)
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

@@ -1,4 +1,4 @@
-import { isLandingPageLoadedAtom } from '@web/atoms';
+import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';

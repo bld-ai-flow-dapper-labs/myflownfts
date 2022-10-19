@@ -1,4 +1,4 @@
-import { BASE_API_URL, postToApi, RefreshResponse } from '@data-access';
+import { postRefreshMetadata, RefreshResponse } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -11,9 +11,12 @@ export default async function handler(
   }
 
   const { chain, contract_address, token_id } = req.query;
-  const url = `${BASE_API_URL}/nfts/refresh/${chain}/${contract_address}/${token_id}`;
 
-  await postToApi(url)
+  await postRefreshMetadata(
+    chain as string,
+    contract_address as string,
+    token_id as string
+  )
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

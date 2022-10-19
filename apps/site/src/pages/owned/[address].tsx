@@ -1,3 +1,3 @@
-import PageViewNFTs from '@web/components/PageViewNFTs';
+import PageViewNFTs from '@myflownfts/site/components/PageViewNFTs';
 
 export default PageViewNFTs;

@@ -1,6 +1,6 @@
-import type { FindProfile, NFT } from '@data-access';
-import { getNFTsByWallet, getRawQuery } from '@web/api';
-import { getProfile } from '@web/utils';
+import type { FindProfile, NFT } from '@myflownfts/data-access';
+import { getNFTsByWallet, getRawQuery } from '@myflownfts/site/api';
+import { getProfile } from '@myflownfts/site/utils';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';

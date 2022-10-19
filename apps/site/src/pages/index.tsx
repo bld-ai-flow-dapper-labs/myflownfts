@@ -2,7 +2,7 @@ import {
   BASE_API_URL,
   DEFAULT_FEATURED_NFTS,
   fetchFromApi,
-} from '@data-access';
+} from '@myflownfts/data-access';
 import PageLanding from '../components/PageLanding';
 import defaultNfts from '../components/PageLanding/json/nfts.json';
 

@@ -1,4 +1,7 @@
-import { BASE_API_URL, fetchFromApi, NFTListResponse } from '@data-access';
+import {
+  getOwnershipSummaryByWallet,
+  NFTListResponse,
+} from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -10,9 +13,11 @@ export default async function handler(
   }
 
   const { chains, wallet_addresses } = req.query;
-  const url = `${BASE_API_URL}/nfts/contracts?chains=${chains}&wallet_addresses=${wallet_addresses}`;
 
-  await fetchFromApi(url)
+  await getOwnershipSummaryByWallet(
+    chains as string,
+    wallet_addresses as string
+  )
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({
