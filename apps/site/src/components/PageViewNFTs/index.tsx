@@ -1,4 +1,4 @@
-import type { FindProfile, NFT } from '@myflownfts/data-access';
+import { BASE_URL, FindProfile, NFT } from '@myflownfts/data-access';
 import { getNFTsByWallet, getRawQuery } from '@myflownfts/site/api';
 import { getProfile } from '@myflownfts/site/utils';
 import { NextSeo } from 'next-seo';
@@ -234,11 +234,11 @@ export default function PageViewNFTs() {
         openGraph={{
           description: t('pages.viewNFTs.meta.description').concat(address),
           type: 'text/html; charset=UTF-8',
-          // images: [
-          //   {
-          //     url:
-          //   },
-          // ],
+          images: [
+            {
+              url: `${BASE_URL}/og-image.png`,
+            },
+          ],
         }}
         twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
         additionalMetaTags={[
@@ -251,14 +251,10 @@ export default function PageViewNFTs() {
             property: 'twitter:description',
             content: t('pages.viewNFTs.meta.description').concat(address),
           },
-          // {
-          //   property: 'twitter:image',
-          //   content: `${
-          //     SSRToken.previews.image_medium_url ??
-          //     SSRToken.image_url ??
-          //     t('error.pages.viewNFT.notFound')
-          //   }`,
-          // },
+          {
+            property: 'twitter:image',
+            content: `${BASE_URL}/twitter-image.png`,
+          },
           { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
         ]}
       />

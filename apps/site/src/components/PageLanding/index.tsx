@@ -49,7 +49,7 @@ export default function PageLanding({ nfts }: Props) {
           type: 'text/html; charset=UTF-8',
           images: [
             {
-              url: `${BASE_URL}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-header.f3121f3f.png&w=1920&q=100`,
+              url: `${BASE_URL}/og-image.png`,
             },
           ],
         }}
@@ -65,7 +65,7 @@ export default function PageLanding({ nfts }: Props) {
           },
           {
             property: 'twitter:image',
-            content: `${BASE_URL}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbg-header.f3121f3f.png&w=1920&q=100`,
+            content: `${BASE_URL}/twitter-image.png`,
           },
           { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
         ]}
