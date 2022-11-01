@@ -11,7 +11,7 @@ export default async function handler(
 
   const { chains, wallet_addresses } = req.query;
 
-  await getNFTsByWallet(chains as string, wallet_addresses as string)
+  await getNFTsByWallet(chains as string, wallet_addresses as string[])
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

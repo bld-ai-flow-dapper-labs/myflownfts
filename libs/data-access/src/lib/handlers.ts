@@ -10,17 +10,17 @@ export const getExchangeRates = async () => {
   return await fetchFromApi(url);
 };
 
-export const getNFTByList = async (nft_ids: string) => {
-  const url = `${BASE_API_URL}/nfts/assets?nft_ids=${nft_ids}`;
+export const getNFTsByList = async (nftIds: string[]) => {
+  const url = `${BASE_API_URL}/nfts/assets?nft_ids=${nftIds}`;
   return await fetchFromApi(url);
 };
 
 export const getNFTByTokenId = async (
   chain: string,
-  contract_address: string,
-  token_id: string
+  contractAddress: string,
+  tokenId: string
 ) => {
-  const url = `${BASE_API_URL}/nfts/${chain}/${contract_address}/${token_id}`;
+  const url = `${BASE_API_URL}/nfts/${chain}/${contractAddress}/${tokenId}`;
   return await fetchFromApi(url);
 };
 
@@ -36,25 +36,25 @@ export const getNFTsByCollection = async (id: string) => {
 
 export const getNFTsByContract = async (
   chain: string,
-  contract_address: string
+  contractAddress: string
 ) => {
-  const url = `${BASE_API_URL}/nfts/${chain}/${contract_address}`; // get NFTs by Contract
+  const url = `${BASE_API_URL}/nfts/${chain}/${contractAddress}`; // get NFTs by Contract
   return await fetchFromApi(url);
 };
 
 export const getNFTsByWallet = async (
   chains: string,
-  wallet_addresses: string
+  walletAddresses: string[]
 ) => {
-  const url = `${BASE_API_URL}/nfts/owners?chains=${chains}&wallet_addresses=${wallet_addresses}&count=1`;
+  const url = `${BASE_API_URL}/nfts/owners?chains=${chains}&wallet_addresses=${walletAddresses}&count=1`;
   return await fetchFromApi(url);
 };
 
 export const getOwnershipSummaryByWallet = async (
-  wallet_addresses: string,
-  chains: string
+  chains: string,
+  walletAddresses: string
 ) => {
-  const url = `${BASE_API_URL}/nfts/contracts?chains=${chains}&wallet_addresses=${wallet_addresses}`;
+  const url = `${BASE_API_URL}/nfts/contracts?chains=${chains}&wallet_addresses=${walletAddresses}`;
   return await fetchFromApi(url);
 };
 
@@ -64,9 +64,9 @@ export const getRawQuery = async (url: string) => {
 
 export const postRefreshMetadata = async (
   chain: string,
-  contract_address: string,
-  token_id: string
+  contractAddress: string,
+  tokenId: string
 ) => {
-  const url = `${BASE_API_URL}/nfts/refresh/${chain}/${contract_address}/${token_id}`;
+  const url = `${BASE_API_URL}/nfts/refresh/${chain}/${contractAddress}/${tokenId}`;
   return await postToApi(url);
 };
