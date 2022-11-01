@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@myflownfts/data-access": ["libs/data-access/src/index.ts"],
+      "@myflownfts/site/*": ["apps/site/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

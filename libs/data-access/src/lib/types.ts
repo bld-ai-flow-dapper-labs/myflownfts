@@ -125,3 +125,7 @@ export interface FindProfile {
 }
 
 export type NFTListResponse = ListResponse<NFT>;
+
+export type NFTByList = {
+  nfts: NFT[];
+};

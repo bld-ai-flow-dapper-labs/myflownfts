@@ -1,6 +1,4 @@
-import { fetchFromApi } from './../../utils';
-import { NFTListResponse } from '../../../../api/types';
-import { BASE_API_URL } from '../../../../constants';
+import { getNFTsByCollection, NFTListResponse } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -12,9 +10,8 @@ export default async function handler(
   }
 
   const { id } = req.query;
-  const url = `${BASE_API_URL}/nfts/collection/${id}`;
 
-  await fetchFromApi(url)
+  await getNFTsByCollection(id as string)
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

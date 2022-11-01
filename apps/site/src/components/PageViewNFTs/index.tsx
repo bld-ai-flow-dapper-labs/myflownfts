@@ -1,3 +1,6 @@
+import type { FindProfile, NFT } from '@myflownfts/data-access';
+import { getNFTsByWallet, getRawQuery } from '@myflownfts/site/api';
+import { getProfile } from '@myflownfts/site/utils';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
@@ -5,9 +8,6 @@ import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { getNFTsByWallet, getRawQuery } from '../../api';
-import type { FindProfile, NFT } from '../../api/types';
-import { getProfile } from '../../utils';
 import { Button, Chip, Footer, Loader, Navbar, NFTCard } from '../common';
 
 export default function PageViewNFTs() {
@@ -172,7 +172,7 @@ export default function PageViewNFTs() {
               creatorName={
                 item.collection.twitter_username ??
                 item.collection.name ??
-                'Unknown'
+                '/not_supported.png'
               }
               token_id={item.token_id}
               name={

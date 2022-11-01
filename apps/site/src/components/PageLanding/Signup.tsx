@@ -1,7 +1,7 @@
+import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
-import { isLandingPageLoadedAtom } from '../../atoms';
 import { Button, TextInput } from '../common';
 import { ReactComponent as Logo } from '../common/images/icon-flow.svg';
 import bgSignupMobile from './images/signup/bg-signup-mobile.png';

@@ -1,9 +1,13 @@
 import * as fcl from '@onflow/fcl';
 import { useAtom } from 'jotai';
 
+import {
+  ACCESS_NODE,
+  DISCOVERY_WALLET,
+  PROFILE_CONTRACT,
+} from '@myflownfts/data-access';
 import { useCallback, useEffect, useMemo } from 'react';
 import { addressAtom, userAtom } from '../atoms';
-import { ACCESS_NODE, DISCOVERY_WALLET, PROFILE_CONTRACT } from '../constants';
 
 export const config = () => {
   fcl.config({

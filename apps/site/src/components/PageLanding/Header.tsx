@@ -1,3 +1,9 @@
+import {
+  addressAtom,
+  isLandingPageLoadedAtom,
+  userAtom,
+} from '@myflownfts/site/atoms';
+import { useWallet } from '@myflownfts/site/utils';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
@@ -5,8 +11,6 @@ import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { addressAtom, isLandingPageLoadedAtom, userAtom } from '../../atoms';
-import { useWallet } from '../../utils';
 import { Button, TextInput } from '../common';
 import { ReactComponent as SearchIcon } from '../common/images/icon-search.svg';
 import bgHeaderMobileSm from './images/header/bg-header-mobile-sm.png';

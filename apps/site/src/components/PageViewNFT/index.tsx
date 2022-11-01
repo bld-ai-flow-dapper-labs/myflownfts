@@ -1,3 +1,16 @@
+import { BASE_URL, ExchangeRates, NFT } from '@myflownfts/data-access';
+import {
+  getExchangeRates,
+  getNFTByTokenId,
+  postRefreshMetadata,
+} from '@myflownfts/site/api';
+import { ReactComponent as CloseIcon } from '@myflownfts/site/components/common/images/icon-close.svg';
+import { ReactComponent as EthIcon } from '@myflownfts/site/components/common/images/icon-eth.svg';
+import { ReactComponent as FlowIcon } from '@myflownfts/site/components/common/images/icon-flow-nofill.svg';
+import { ReactComponent as LinkIcon } from '@myflownfts/site/components/common/images/icon-link.svg';
+import { ReactComponent as RefreshIcon } from '@myflownfts/site/components/common/images/icon-refresh.svg';
+import { ReactComponent as ShareIcon } from '@myflownfts/site/components/common/images/icon-share.svg';
+import { ReactComponent as USDIcon } from '@myflownfts/site/components/common/images/icon-usd.svg';
 import * as Popover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { NextSeo } from 'next-seo';
@@ -15,21 +28,6 @@ import {
 } from 'react-share';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
-
-import {
-  getExchangeRates,
-  getNFTByTokenId,
-  postRefreshMetadata,
-} from '../../api';
-import type { ExchangeRates, NFT } from '../../api/types';
-import { ReactComponent as CloseIcon } from '../../components/common/images/icon-close.svg';
-import { ReactComponent as EthIcon } from '../../components/common/images/icon-eth.svg';
-import { ReactComponent as FlowIcon } from '../../components/common/images/icon-flow-nofill.svg';
-import { ReactComponent as LinkIcon } from '../../components/common/images/icon-link.svg';
-import { ReactComponent as RefreshIcon } from '../../components/common/images/icon-refresh.svg';
-import { ReactComponent as ShareIcon } from '../../components/common/images/icon-share.svg';
-import { ReactComponent as USDIcon } from '../../components/common/images/icon-usd.svg';
-import { BASE_URL } from '../../constants';
 
 import { Button, Chip, Footer, Loader, Navbar } from '../common';
 
@@ -105,7 +103,7 @@ export default function PageViewNFT() {
         contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum'
       );
       const gallery = [];
-      if (data.video_url) {
+      if (data?.video_url) {
         gallery.push({
           embedUrl: data?.video_url,
           thumbnail: data?.previews.image_small_url,
@@ -114,7 +112,7 @@ export default function PageViewNFT() {
           renderItem: renderVideo.bind(this),
         });
       }
-      if (data.image_url) {
+      if (data?.image_url) {
         gallery.push({
           original: data.previews?.image_large_url ?? data.image_url,
           originalClass:
@@ -126,7 +124,7 @@ export default function PageViewNFT() {
         });
       }
       // Renders other images included, unstable due to varying sizes of images distorting the viewer
-      if (data.extra_metadata?.media?.length > 0)
+      if (data?.extra_metadata?.media?.length > 0)
         gallery.push(
           ...data.extra_metadata.media
             .filter((item: ExtraMetadataType) => {
