@@ -17,6 +17,11 @@ export async function getStaticProps() {
     .then((response) => response.json())
     .then((response) => {
       nfts = response.nfts;
+      if (nftIds) {
+        nfts.sort(
+          (a, b) => nftIds.indexOf(a.nft_id) - nftIds.indexOf(b.nft_id)
+        );
+      }
     })
     .catch((err) => {
       console.error(err);

@@ -17,6 +17,7 @@ export default async function handler(
   const { chain, chains, contract_address, query } = req.query;
 
   if (query) {
+    /* used for 'next' or 'previous' queries */
     await getRawQuery(query.toString())
       .then((response) => response.json())
       .then((response) => {
@@ -29,7 +30,7 @@ export default async function handler(
       .catch((err) => {
         console.error(err);
         return res.status(400);
-      }); // used for 'next' or 'previous' queries
+      });
   } else if (chain && contract_address) {
     await getNFTsByContract(chain as string, contract_address as string)
       .then((response) => response.json())
@@ -43,7 +44,7 @@ export default async function handler(
       .catch((err) => {
         console.error(err);
         return res.status(400);
-      }); // get NFTs by Contract
+      });
   } else {
     await getNFTs(chains as string)
       .then((response) => response.json())
@@ -57,6 +58,6 @@ export default async function handler(
       .catch((err) => {
         console.error(err);
         return res.status(400);
-      }); // get all flow NFTs
+      });
   }
 }
