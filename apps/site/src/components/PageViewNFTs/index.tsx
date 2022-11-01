@@ -232,7 +232,7 @@ export default function PageViewNFTs() {
       <NextSeo
         title={t('pages.viewNFTs.meta.title')}
         openGraph={{
-          description: t('pages.viewNFTs.meta.description').concat(address),
+          description: t('pages.viewNFTs.meta.description', { address }),
           type: 'text/html; charset=UTF-8',
           images: [
             {
@@ -249,7 +249,7 @@ export default function PageViewNFTs() {
           },
           {
             property: 'twitter:description',
-            content: t('pages.viewNFTs.meta.description').concat(address),
+            content: t('pages.viewNFTs.meta.description', { address }),
           },
           {
             property: 'twitter:image',
