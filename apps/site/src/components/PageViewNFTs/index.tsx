@@ -1,4 +1,4 @@
-import type { FindProfile, NFT } from '@myflownfts/data-access';
+import { BASE_URL, FindProfile, NFT } from '@myflownfts/data-access';
 import { getNFTsByWallet, getRawQuery } from '@myflownfts/site/api';
 import { getProfile } from '@myflownfts/site/utils';
 import { NextSeo } from 'next-seo';
@@ -231,7 +231,32 @@ export default function PageViewNFTs() {
     <>
       <NextSeo
         title={t('pages.viewNFTs.meta.title')}
-        additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
+        openGraph={{
+          description: t('pages.viewNFTs.meta.description', { address }),
+          type: 'text/html; charset=UTF-8',
+          images: [
+            {
+              url: `${BASE_URL}/og-image.png`,
+            },
+          ],
+        }}
+        twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
+        additionalMetaTags={[
+          { name: 'theme-color', content: '#202124' },
+          {
+            property: 'twitter:title',
+            content: t('pages.viewNFTs.meta.title'),
+          },
+          {
+            property: 'twitter:description',
+            content: t('pages.viewNFTs.meta.description', { address }),
+          },
+          {
+            property: 'twitter:image',
+            content: `${BASE_URL}/twitter-image.png`,
+          },
+          { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
+        ]}
       />
       <ToastContainer
         position="bottom-right"

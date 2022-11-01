@@ -1,4 +1,4 @@
-import { NFT } from '@myflownfts/data-access';
+import { BASE_URL, NFT } from '@myflownfts/data-access';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
@@ -44,6 +44,31 @@ export default function PageLanding({ nfts }: Props) {
       <NextSeo
         description={t('pages.landing.meta.description')}
         title={t('pages.landing.meta.title')}
+        openGraph={{
+          description: t('pages.landing.meta.description'),
+          type: 'text/html; charset=UTF-8',
+          images: [
+            {
+              url: `${BASE_URL}/og-image.png`,
+            },
+          ],
+        }}
+        twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
+        additionalMetaTags={[
+          {
+            property: 'twitter:title',
+            content: t('pages.landing.meta.title'),
+          },
+          {
+            property: 'twitter:description',
+            content: t('pages.landing.meta.description'),
+          },
+          {
+            property: 'twitter:image',
+            content: `${BASE_URL}/twitter-image.png`,
+          },
+          { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
+        ]}
       />
       <div className="w-full">
         <Navbar />

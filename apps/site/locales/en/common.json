@@ -62,7 +62,7 @@
       "buttonCopied": "Copied!",
       "loadMore": "Load More",
       "meta": {
-        "description": "Welcome to Flow’s next generation of NFTs.",
+        "description": "View NFTs owned by {{address}}",
         "title": "My Flow NFTs | Owned"
       },
       "noItems": "No items to display",

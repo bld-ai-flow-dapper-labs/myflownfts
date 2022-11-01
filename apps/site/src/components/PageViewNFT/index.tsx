@@ -38,7 +38,11 @@ interface ExtraMetadataProps {
 
 type ExtraMetadataType = ExtraMetadataProps | string;
 
-export default function PageViewNFT() {
+interface Props {
+  SSRToken: NFT;
+}
+
+export default function PageViewNFT({ SSRToken }: Props) {
   const router = useRouter();
   const contract_address = router.query.contract_address as string;
   const token_id = router.query.token_id as string;
@@ -97,11 +101,16 @@ export default function PageViewNFT() {
 
   useEffect(() => {
     (async () => {
-      const data = await getNFTByTokenId(
-        contract_address,
-        token_id,
-        contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum'
-      );
+      let data;
+      if (SSRToken) {
+        data = SSRToken;
+      } else {
+        data = await getNFTByTokenId(
+          contract_address,
+          token_id,
+          contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum'
+        );
+      }
       const gallery = [];
       if (data?.video_url) {
         gallery.push({
@@ -623,16 +632,64 @@ export default function PageViewNFT() {
 
   return (
     <>
-      {token && (
+      {SSRToken && (
         <NextSeo
-          description={token.description}
+          description={SSRToken.description ?? t('pages.viewNFT.noDescription')}
           title={t('pages.viewNFT.meta.title', {
             nftName:
-              token?.nft_id && token?.image_url
-                ? token.name ?? token.contract.name + ' #' + token.token_id
+              SSRToken?.nft_id && SSRToken?.image_url
+                ? SSRToken.name ??
+                  SSRToken.contract.name + ' #' + SSRToken.token_id
                 : t('error.error'),
           })}
-          additionalMetaTags={[{ name: 'theme-color', content: '#202124' }]}
+          openGraph={{
+            description:
+              SSRToken.description ?? t('pages.viewNFT.noDescription'),
+            type: 'text/html; charset=UTF-8',
+            images: [
+              {
+                url:
+                  SSRToken.previews.image_medium_url ??
+                  SSRToken.image_url ??
+                  t('error.pages.viewNFT.notFound'),
+              },
+            ],
+          }}
+          twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
+          additionalMetaTags={[
+            { name: 'theme-color', content: '#202124' },
+            {
+              property: 'twitter:creator',
+              content: `${
+                cleanString(SSRToken?.collection.twitter_username) ??
+                cleanString(SSRToken?.collection.name)
+              }`,
+            },
+            {
+              property: 'twitter:title',
+              content: `${
+                SSRToken?.nft_id && SSRToken?.image_url
+                  ? SSRToken.name ??
+                    SSRToken.contract.name + ' #' + SSRToken.token_id
+                  : t('error.error')
+              }`,
+            },
+            {
+              property: 'twitter:description',
+              content: `${
+                SSRToken.description ?? t('pages.viewNFT.noDescription')
+              }`,
+            },
+            {
+              property: 'twitter:image',
+              content: `${
+                SSRToken.previews.image_medium_url ??
+                SSRToken.image_url ??
+                t('error.pages.viewNFT.notFound')
+              }`,
+            },
+            { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
+          ]}
         />
       )}
       <div className="relative flex flex-col w-full h-full min-h-screen bg-navbar">
