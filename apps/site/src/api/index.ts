@@ -48,7 +48,7 @@ export const getNFTByTokenId = async (
   return json;
 };
 
-export const getNFTByList = async (nftIds: string): Promise<NFTByList> => {
+export const getNFTsByList = async (nftIds: string): Promise<NFTByList> => {
   const response = await fetch(`/api/nfts/assets?nft_ids=${nftIds}`);
   const json = await response.json();
   return json;

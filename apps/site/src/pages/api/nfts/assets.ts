@@ -1,4 +1,4 @@
-import { getNFTByList, NFTByList } from '@myflownfts/data-access';
+import { getNFTsByList, NFTByList } from '@myflownfts/data-access';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -11,7 +11,7 @@ export default async function handler(
 
   const { nft_ids } = req.query;
 
-  await getNFTByList(nft_ids as string)
+  await getNFTsByList(nft_ids as string[])
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({
