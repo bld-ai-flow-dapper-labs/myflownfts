@@ -1,10 +1,11 @@
 import { BASE_URL, NFT } from '@myflownfts/data-access';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
+import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Footer, Navbar } from '../common';
 import Communities from './Communities';
 import Featured from './Featured';
@@ -23,6 +24,7 @@ export default function PageLanding({ nfts }: Props) {
   const [isLandingPageLoaded, setIsLandingPageLoaded] = useAtom(
     isLandingPageLoadedAtom
   );
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const onPageLoad = () => {
@@ -38,6 +40,19 @@ export default function PageLanding({ nfts }: Props) {
       return () => window.removeEventListener('load', onPageLoad);
     }
   }, [setIsLandingPageLoaded]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY < window.innerHeight / 2) setIsScrolled(false);
+      else setIsScrolled(true);
+    };
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  });
 
   return (
     <>
@@ -71,7 +86,13 @@ export default function PageLanding({ nfts }: Props) {
         ]}
       />
       <div className="w-full">
-        <Navbar />
+        <Navbar
+          className={classNames(
+            'transition ease-in-out duration-300',
+            isScrolled && 'lg:!bg-navbar/90 lg:!backdrop-blur-xl'
+          )}
+          search={isScrolled}
+        />
         <Header />
         <Intro />
         <Partners />

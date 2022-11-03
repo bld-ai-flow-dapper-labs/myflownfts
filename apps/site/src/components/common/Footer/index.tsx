@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { Button } from '..';
 
@@ -74,10 +73,10 @@ export default function Footer({ className, sidebar = false }: Props) {
               : 'text-gray-700 text-footer'
           )}
         >
-          <Trans
-            i18nKey="pages.landing.footer.title"
-            components={{ bold: <strong /> }}
-          />
+          {t('pages.landing.footer.title')}
+          <a href="https://www.bld.ai/" className="font-bold">
+            bld.ai
+          </a>
         </span>
         <span
           className={

@@ -13,12 +13,14 @@ interface Props extends ButtonProps {
   scroll: (scrollOffset) => void;
   mobile?: boolean;
   href?: string;
+  offset: number;
 }
 export default function ScrollButtons({
   className,
   scroll,
   mobile = false,
   href,
+  offset,
 }: Props) {
   const { t } = useTranslation();
 
@@ -27,14 +29,14 @@ export default function ScrollButtons({
       <Button
         className="w-[3.125rem] h-[3.125rem]"
         variant="scroll"
-        onClick={() => scroll(-680)}
+        onClick={() => scroll(offset * -1)}
       >
         <ChevronLeftIcon />
       </Button>
       <Button
         className="w-[3.125rem] h-[3.125rem]"
         variant="scroll"
-        onClick={() => scroll(680)}
+        onClick={() => scroll(offset)}
       >
         <ChevronRightIcon />
       </Button>
