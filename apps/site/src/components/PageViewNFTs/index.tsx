@@ -244,18 +244,17 @@ export default function PageViewNFTs() {
         additionalMetaTags={[
           { name: 'theme-color', content: '#202124' },
           {
-            property: 'twitter:title',
+            name: 'twitter:title',
             content: t('pages.viewNFTs.meta.title'),
           },
           {
-            property: 'twitter:description',
+            name: 'twitter:description',
             content: t('pages.viewNFTs.meta.description', { address }),
           },
           {
-            property: 'twitter:image',
+            name: 'twitter:image',
             content: `${BASE_URL}/twitter-image.png`,
           },
-          { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
         ]}
       />
       <ToastContainer
