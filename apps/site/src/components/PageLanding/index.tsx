@@ -56,18 +56,17 @@ export default function PageLanding({ nfts }: Props) {
         twitter={{ site: 'MyFlowNFTs', cardType: 'summary_large_image' }}
         additionalMetaTags={[
           {
-            property: 'twitter:title',
+            name: 'twitter:title',
             content: t('pages.landing.meta.title'),
           },
           {
-            property: 'twitter:description',
+            name: 'twitter:description',
             content: t('pages.landing.meta.description'),
           },
           {
-            property: 'twitter:image',
+            name: 'twitter:image',
             content: `${BASE_URL}/twitter-image.png`,
           },
-          { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
         ]}
       />
       <div className="w-full">

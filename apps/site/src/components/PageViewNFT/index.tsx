@@ -659,14 +659,14 @@ export default function PageViewNFT({ SSRToken }: Props) {
           additionalMetaTags={[
             { name: 'theme-color', content: '#202124' },
             {
-              property: 'twitter:creator',
+              name: 'twitter:creator',
               content: `${
                 cleanString(SSRToken?.collection.twitter_username) ??
                 cleanString(SSRToken?.collection.name)
               }`,
             },
             {
-              property: 'twitter:title',
+              name: 'twitter:title',
               content: `${
                 SSRToken?.nft_id && SSRToken?.image_url
                   ? SSRToken.name ??
@@ -675,20 +675,19 @@ export default function PageViewNFT({ SSRToken }: Props) {
               }`,
             },
             {
-              property: 'twitter:description',
+              name: 'twitter:description',
               content: `${
                 SSRToken.description ?? t('pages.viewNFT.noDescription')
               }`,
             },
             {
-              property: 'twitter:image',
+              name: 'twitter:image',
               content: `${
                 SSRToken.previews.image_medium_url ??
                 SSRToken.image_url ??
                 t('error.pages.viewNFT.notFound')
               }`,
             },
-            { property: 'Content-Type', content: 'text/html; charset=UTF-8' },
           ]}
         />
       )}
