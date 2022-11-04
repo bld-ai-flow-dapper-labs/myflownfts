@@ -17,19 +17,20 @@ export default function Featured({ nfts }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-[3.375rem] pt-12 xl:pt-[8.375rem] px-5 xl:px-[16.75rem] lg:pb-[5.25rem]">
-      <div className="flex items-center justify-center lg:py-4 lg:justify-between">
+    <div className="flex flex-col gap-[3.375rem] pt-12 xl:pt-[8.375rem] px-5 w-full max-w-[45rem] xl:max-w-[67rem] 2xl:max-w-[89rem] 3xl:max-w-[111rem] mx-auto lg:pb-[5.25rem]">
+      <div className="flex items-center justify-center lg:py-4 md:justify-between">
         <div className="flex items-center gap-[1.125rem] lg:gap-6 2xl:gap-12">
           <StarIcon className="text-yellow" />
-          <span className="font-bold text-white text-mobile-section lg:text-h3 2xl:text-section">
+          <span className="font-bold text-white text-mobile-section xl:text-h3 2xl:text-section">
             {t('pages.landing.featuredNFTs')}
           </span>
           <StarIcon className="text-yellow" />
         </div>
         <ScrollButtons
-          className="hidden lg:flex"
+          className="hidden md:flex"
           scroll={scroll}
           href="https://www.flowverse.co/flow-nfts"
+          offset={704}
         />
       </div>
       <div
@@ -62,10 +63,11 @@ export default function Featured({ nfts }: Props) {
         ))}
       </div>
       <ScrollButtons
-        className="flex -mt-[1.875rem] pb-12 lg:hidden"
+        className="flex -mt-[1.875rem] pb-12 md:hidden"
         scroll={scroll}
         mobile
         href="https://www.flowverse.co/flow-nfts"
+        offset={704}
       />
     </div>
   );

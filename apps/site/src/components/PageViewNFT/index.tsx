@@ -192,19 +192,50 @@ export default function PageViewNFT({ SSRToken }: Props) {
       const imageElements = document.getElementsByClassName(
         'image-gallery-image'
       );
+
       Array.from(imageElements).forEach((item) =>
         item.classList.add('h-screen')
       );
+
+      document
+        .getElementsByClassName('image-gallery-slides')[0]
+        ?.classList.remove(
+          'h-[90vw]',
+          'max-h-[49.5rem]',
+          'lg:h-[33.5vw]',
+          'lg:max-h-[47.125rem]',
+          'flex',
+          'items-center',
+          'place-items-center',
+          'bg-black'
+        );
+
       renderVideoCloseButton();
     } else {
       document.getElementsByTagName('video')[0]?.classList.remove('h-screen');
       const imageElements = document.getElementsByClassName(
         'image-gallery-image'
       );
+
       Array.from(imageElements).forEach((item) =>
         item.classList.remove('h-screen')
       );
+
       document.getElementById('video-close-button')?.remove();
+
+      if (images?.length > 1)
+        document
+          .getElementsByClassName('image-gallery-slides')[0]
+          ?.classList.add(
+            'h-[90vw]',
+            'max-h-[49.5rem]',
+            'lg:h-[33.5vw]',
+            'lg:max-h-[47.125rem]',
+            'flex',
+            'items-center',
+            'place-items-center',
+            'bg-black'
+          );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFullscreen]);
@@ -212,7 +243,7 @@ export default function PageViewNFT({ SSRToken }: Props) {
   const renderNFT = () => (
     <div
       className={classNames(
-        'relative rounded-md w-full lg:w-4/5 lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
+        'relative rounded-md w-full lg:w-4/5 max-w-[50rem] lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
         isFullscreen && 'z-20'
       )}
       ref={divRef}
@@ -718,7 +749,7 @@ export default function PageViewNFT({ SSRToken }: Props) {
               <div className="flex justify-center w-full pt-2 mx-auto lg:pt-0 lg:w-1/2 lg:items-start lg:justify-end lg:pb-16 h-5/6">
                 {renderNFT()}
               </div>
-              <div className="flex flex-col items-center w-full gap-6 mx-auto lg:items-end lg:w-1/2">
+              <div className="flex flex-col items-center w-full gap-6 mx-auto lg:mx-0 lg:items-end lg:w-1/2 lg:max-w-[33.625rem]">
                 {renderNFTDetails()}
                 {token.extra_metadata.attributes && renderNFTProperties()}
               </div>
