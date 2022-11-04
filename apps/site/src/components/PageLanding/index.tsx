@@ -88,7 +88,7 @@ export default function PageLanding({ nfts }: Props) {
       <div className="w-full">
         <Navbar
           className={classNames(
-            'transition ease-in-out duration-300',
+            'lg:!fixed transition ease-in-out duration-300',
             isScrolled && 'lg:!bg-navbar/90 lg:!backdrop-blur-xl'
           )}
           search={isScrolled}
