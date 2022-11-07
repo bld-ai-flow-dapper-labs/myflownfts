@@ -96,3 +96,11 @@ export const postRefreshMetadata = async (
   const json = await response.json();
   return json;
 };
+
+export const sendSignupEmail = async (email: string) => {
+  const response = await fetch(`/api/nodemailer?email=${email}`, {
+    method: 'POST',
+  });
+  const json = await response.json();
+  return json;
+};

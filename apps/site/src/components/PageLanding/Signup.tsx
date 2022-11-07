@@ -1,3 +1,4 @@
+import { sendSignupEmail } from '@myflownfts/site/api';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { initializeApp } from 'firebase/app';
 import { Database, getDatabase, ref, set } from 'firebase/database';
@@ -37,6 +38,7 @@ export default function Signup() {
     try {
       if (email.match(mailRegex)) {
         set(ref(db, 'emails/' + datetime), email);
+        await sendSignupEmail(email);
         toast(t('pages.landing.flowCommunity.success'), { type: 'success' });
         setEmail('');
       } else
