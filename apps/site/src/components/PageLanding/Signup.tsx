@@ -1,11 +1,6 @@
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { initializeApp } from 'firebase/app';
-import {
-  addDoc,
-  collection,
-  Firestore,
-  getFirestore,
-} from 'firebase/firestore';
+import { Database, getDatabase, ref, set } from 'firebase/database';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
@@ -20,7 +15,7 @@ export default function Signup() {
   const { t } = useTranslation();
   const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
   const [email, setEmail] = useState('');
-  const [db, setDb] = useState<Firestore>();
+  const [db, setDb] = useState<Database>();
   const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
   useEffect(() => {
@@ -33,21 +28,22 @@ export default function Signup() {
       messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDER_ID,
       appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     });
-    const db = getFirestore(app);
+    const db = getDatabase(app);
     setDb(db);
   }, []);
 
   const handleSubmit = async () => {
+    const datetime = new Date().toISOString().split('.')[0];
     try {
       if (email.match(mailRegex)) {
-        await addDoc(collection(db, 'emails'), { email: email });
+        set(ref(db, 'emails/' + datetime), email);
         toast(t('pages.landing.flowCommunity.success'), { type: 'success' });
         setEmail('');
       } else
         toast(t('error.pages.landing.flowCommunity.email'), { type: 'error' });
     } catch (e) {
       console.error(e);
-      toast(t('error.pages.landing.flowCommunity.signup', { type: 'error' }));
+      toast(t('error.pages.landing.flowCommunity.signup'), { type: 'error' });
     }
   };
 
@@ -84,10 +80,7 @@ export default function Signup() {
         </span>
       </div>
 
-      <form
-        onSubmit={() => false}
-        className="flex items-center justify-center w-full pt-12"
-      >
+      <form className="flex items-center justify-center w-full pt-12">
         <TextInput
           containerClassName="md:w-96 w-full bg-white rounded-md rounded-r-none"
           className="text-black h-[3.125rem]"
