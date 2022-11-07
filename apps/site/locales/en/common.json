@@ -12,6 +12,12 @@
   "error": {
     "error": "Error",
     "pages": {
+      "landing": {
+        "flowCommunity": {
+          "email": "Please enter a valid email address",
+          "signup": "Error in signing up. Please refresh the page"
+        }
+      },
       "viewNFTs": {
         "loading": "Error loading NFTS.\nPlease refresh the page"
       },
@@ -33,7 +39,8 @@
         "title": "Be a part of the Flow community",
         "email": "Email",
         "discord": "Join Our Discord",
-        "signup": "Sign Up"
+        "signup": "Sign Up",
+        "success": "Signed up successfully!"
       },
       "footer": {
         "title": "Built by ",
