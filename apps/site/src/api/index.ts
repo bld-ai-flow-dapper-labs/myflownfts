@@ -104,3 +104,11 @@ export const sendSignupEmail = async (email: string) => {
   const json = await response.json();
   return json;
 };
+
+export const postCaptchaValidation = async (captcha: string) => {
+  const response = await fetch(`/api/captcha?captcha=${captcha}`, {
+    method: 'POST',
+  });
+  const json = await response.json();
+  return json;
+};

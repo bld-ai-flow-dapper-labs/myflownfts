@@ -1,11 +1,12 @@
-import { sendSignupEmail } from '@myflownfts/site/api';
+import { postCaptchaValidation, sendSignupEmail } from '@myflownfts/site/api';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { initializeApp } from 'firebase/app';
 import { Database, getDatabase, ref, set } from 'firebase/database';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { toast } from 'react-toastify';
 import { Button, TextInput } from '../common';
 import { ReactComponent as Logo } from '../common/images/icon-flow.svg';
@@ -18,6 +19,7 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [db, setDb] = useState<Database>();
   const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  const recaptchaRef = useRef<ReCAPTCHA>();
 
   useEffect(() => {
     const app = initializeApp({
@@ -33,20 +35,37 @@ export default function Signup() {
     setDb(db);
   }, []);
 
-  const handleSubmit = async () => {
-    const datetime = new Date().toISOString().split('.')[0];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      if (email.match(mailRegex)) {
-        set(ref(db, 'emails/' + datetime), email);
-        await sendSignupEmail(email);
-        toast(t('pages.landing.flowCommunity.success'), { type: 'success' });
-        setEmail('');
-      } else
-        toast(t('error.pages.landing.flowCommunity.email'), { type: 'error' });
+      if (!email.match(mailRegex))
+        return toast(t('error.pages.landing.flowCommunity.email'), {
+          type: 'error',
+        });
+      if (recaptchaRef.current) {
+        recaptchaRef.current.execute();
+      }
     } catch (e) {
       console.error(e);
       toast(t('error.pages.landing.flowCommunity.signup'), { type: 'error' });
     }
+  };
+
+  const onReCAPTCHAChange = async (captchaCode: string) => {
+    if (!captchaCode) {
+      return;
+    }
+    const validation = await postCaptchaValidation(captchaCode);
+    if (validation.success) {
+      const datetime = new Date().toISOString().split('.')[0];
+      set(ref(db, 'emails/' + datetime), email);
+      await sendSignupEmail(email);
+      toast(t('pages.landing.flowCommunity.success'), { type: 'success' });
+      setEmail('');
+    } else {
+      toast(t('error.pages.landing.flowCommunity.signup'), { type: 'error' });
+    }
+    if (recaptchaRef.current) recaptchaRef.current.reset();
   };
 
   // Without handler, enter on email input refreshes the page
@@ -82,22 +101,33 @@ export default function Signup() {
         </span>
       </div>
 
-      <form className="flex items-center justify-center w-full pt-12">
-        <TextInput
-          containerClassName="md:w-96 w-full bg-white rounded-md rounded-r-none"
-          className="text-black h-[3.125rem]"
-          placeholder={t('pages.landing.flowCommunity.email')}
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={handleEnter}
-          value={email}
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center justify-center w-full pt-12"
+      >
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          size="invisible"
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          onChange={onReCAPTCHAChange}
         />
-        <Button
-          onClick={handleSubmit}
-          id="btn-submit"
-          className="min-w-fit rounded-l-none h-[3.125rem] text-button font-semibold"
-        >
-          {t('pages.landing.flowCommunity.signup')}
-        </Button>
+        <div className="flex">
+          <TextInput
+            containerClassName="md:w-96 w-full bg-white rounded-md rounded-r-none"
+            className="text-black h-[3.125rem]"
+            placeholder={t('pages.landing.flowCommunity.email')}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleEnter}
+            value={email}
+          />
+          <Button
+            type="submit"
+            id="btn-submit"
+            className="min-w-fit rounded-l-none h-[3.125rem] text-button font-semibold"
+          >
+            {t('pages.landing.flowCommunity.signup')}
+          </Button>
+        </div>
       </form>
     </div>
   );

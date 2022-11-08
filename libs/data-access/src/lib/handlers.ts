@@ -3,6 +3,7 @@ import {
   CURRENCY_API_URL,
   fetchFromApi,
   postToApi,
+  postToRecaptcha,
 } from '../index';
 
 export const getExchangeRates = async () => {
@@ -69,4 +70,12 @@ export const postRefreshMetadata = async (
 ) => {
   const url = `${BASE_API_URL}/nfts/refresh/${chain}/${contractAddress}/${tokenId}`;
   return await postToApi(url);
+};
+
+export const postCaptchaValidation = async (
+  secretKey: string,
+  captcha: string
+) => {
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}`;
+  return await postToRecaptcha(url);
 };
