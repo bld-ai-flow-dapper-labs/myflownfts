@@ -53,7 +53,7 @@ export default function PageLanding({ nfts }: Props) {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  });
+  }, []);
 
   return (
     <>
@@ -117,7 +117,8 @@ export default function PageLanding({ nfts }: Props) {
           <Communities />
           <Featured nfts={nfts} />
         </div>
-        <Signup />
+        {process.env['NEXT_PUBLIC_FIREBASE_API_KEY'] &&
+          process.env['NEXT_PUBLIC_RECAPTCHA_SITE_KEY'] && <Signup />}
         <Footer />
       </div>
     </>

@@ -15,5 +15,23 @@
 ```
 npm install -g yarn
 yarn
-nx serve site
+yarn start
 ```
+
+#### Firebase Setup
+
+1. Create a Firebase project
+2. Add a web app
+3. Insert SDK config into `.env.local`
+4. Create a Realtime Database
+5. Add database url in `.env.local`
+6. Change database rules: `.write: true`
+
+#### ReCAPTCHA Setup
+
+1. Register site in `https://www.google.com/recaptcha/admin/create`
+2. Select "reCAPTCHA v2 - Invisble reCAPTCHA badge"
+3. Add domain
+   - If locally, add local IP address instead of `localhost`
+   - To get IP address, run `ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`
+4. Add reCAPTCHA keys to `.env.local`
