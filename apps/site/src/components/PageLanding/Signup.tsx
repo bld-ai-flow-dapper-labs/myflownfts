@@ -1,4 +1,4 @@
-import { postCaptchaValidation, sendSignupEmail } from '@myflownfts/site/api';
+import { postCaptchaValidation } from '@myflownfts/site/api';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { initializeApp } from 'firebase/app';
 import { Database, getDatabase, ref, set } from 'firebase/database';
@@ -59,7 +59,6 @@ export default function Signup() {
     if (validation.success) {
       const datetime = new Date().toISOString().split('.')[0];
       set(ref(db, 'emails/' + datetime), email);
-      await sendSignupEmail(email);
       toast(t('pages.landing.flowCommunity.success'), { type: 'success' });
       setEmail('');
     } else {
