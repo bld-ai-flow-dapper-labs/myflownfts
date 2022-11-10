@@ -97,14 +97,6 @@ export const postRefreshMetadata = async (
   return json;
 };
 
-export const sendSignupEmail = async (email: string) => {
-  const response = await fetch(`/api/nodemailer?email=${email}`, {
-    method: 'POST',
-  });
-  const json = await response.json();
-  return json;
-};
-
 export const postCaptchaValidation = async (captcha: string) => {
   const response = await fetch(`/api/captcha?captcha=${captcha}`, {
     method: 'POST',
