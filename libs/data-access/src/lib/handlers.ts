@@ -72,10 +72,7 @@ export const postRefreshMetadata = async (
   return await postToApi(url);
 };
 
-export const postCaptchaValidation = async (
-  secretKey: string,
-  captcha: string
-) => {
-  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captcha}`;
+export const postCaptchaValidation = async (captcha: string) => {
+  const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env['RECAPTCHA_SECRET_KEY']}&response=${captcha}`;
   return await postToRecaptcha(url);
 };

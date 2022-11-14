@@ -1,6 +1,7 @@
 import { postCaptchaValidation } from '@myflownfts/site/api';
 import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
 import { initializeApp } from 'firebase/app';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 import { Database, getDatabase, ref, set } from 'firebase/database';
 import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
@@ -33,6 +34,13 @@ export default function Signup() {
     });
     const db = getDatabase(app);
     setDb(db);
+
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(
+        process.env['NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY']
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
   }, []);
 
   const handleSubmit = async (e) => {

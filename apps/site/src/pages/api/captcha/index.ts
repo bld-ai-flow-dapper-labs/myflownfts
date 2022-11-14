@@ -14,10 +14,7 @@ export default async function handler(
 
   const { captcha } = req.query;
 
-  await postCaptchaValidation(
-    process.env['RECAPTCHA_SECRET_KEY'],
-    captcha as string
-  )
+  await postCaptchaValidation(captcha as string)
     .then((response) => response.json())
     .then((response) => {
       return res.status(200).json({

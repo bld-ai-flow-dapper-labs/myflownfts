@@ -27,11 +27,22 @@ yarn start
 5. Add database url in `.env.local`
 6. Change database rules: `.write: true`
 
+#### Firebase App Check Setup
+1. Register site in `https://www.google.com/recaptcha/admin/create`
+2. Select "reCAPTCHA v3"
+3. Add domain/s
+   - If locally, add local IP address instead of `localhost`
+   - To get IP address, run `ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`
+4. Add reCAPTCHA key to `.env.local (NEXT_PUBLIC_RECAPTCHA_V3_SITE_KEY)`
+5. Go to Firebase project and enable `App Check`
+6. In App Check > Apps, add your site and add the reCAPTCHA V3 secret key under `reCAPTCHA`
+7. In App Check > APIs, enforce App Check for the `Realtime Database`
+
 #### ReCAPTCHA Setup
 
 1. Register site in `https://www.google.com/recaptcha/admin/create`
 2. Select "reCAPTCHA v2 - Invisble reCAPTCHA badge"
-3. Add domain
+3. Add domain/s
    - If locally, add local IP address instead of `localhost`
    - To get IP address, run `ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`
 4. Add reCAPTCHA keys to `.env.local`
