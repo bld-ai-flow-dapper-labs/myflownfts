@@ -19,7 +19,9 @@ export default function Signup() {
   const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
   const [email, setEmail] = useState('');
   const [db, setDb] = useState<Database>();
-  const mailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  // From MDN (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email)
+  const mailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const recaptchaRef = useRef<ReCAPTCHA>();
 
   useEffect(() => {
@@ -123,7 +125,7 @@ export default function Signup() {
             containerClassName="md:w-96 w-full bg-white rounded-md rounded-r-none"
             className="text-black h-[3.125rem]"
             placeholder={t('pages.landing.flowCommunity.email')}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.trim())}
             onKeyDown={handleEnter}
             value={email}
           />
