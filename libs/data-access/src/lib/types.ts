@@ -129,3 +129,10 @@ export type NFTListResponse = ListResponse<NFT>;
 export type NFTByList = {
   nfts: NFT[];
 };
+
+export interface RecaptchaResponse {
+  success: boolean;
+  challenge_ts: string;
+  hostname: string;
+  'error-codes': string;
+}

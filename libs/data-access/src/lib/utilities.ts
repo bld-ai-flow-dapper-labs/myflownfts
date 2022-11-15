@@ -29,3 +29,12 @@ export const postToApi = async (url: string) => {
     },
   });
 };
+
+export const postToRecaptcha = async (url: string) => {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/x-www-form-urlencoded; charset=utf-8',
+    },
+  });
+};
