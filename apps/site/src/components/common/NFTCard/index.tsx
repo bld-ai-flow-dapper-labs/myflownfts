@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { Button, Chip } from '..';
 
 interface Props {
   big?: boolean;
+  blurhash?: string;
   chain: string;
   className?: string;
   contract: string;
@@ -12,6 +13,7 @@ interface Props {
   creatorAvatar?: string;
   image_url: string;
   name: string;
+  unoptimized?: boolean;
   token_id: string;
   url: string;
   variant?: 'featured' | 'view';
@@ -19,6 +21,7 @@ interface Props {
 
 export default function NFTCard({
   big = false,
+  blurhash,
   chain,
   className,
   contract,
@@ -26,6 +29,7 @@ export default function NFTCard({
   creatorAvatar,
   image_url,
   name,
+  unoptimized = false,
   token_id,
   url,
   variant = 'featured',
@@ -70,11 +74,11 @@ export default function NFTCard({
           loader={() => image_url}
           src={image_url}
           alt={name}
-          placeholder="empty"
-          layout="fill"
-          objectFit="cover"
-          unoptimized={true}
+          placeholder={blurhash ? 'blur' : 'empty'}
+          fill
+          unoptimized={unoptimized}
           className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
+          blurDataURL={blurhash}
         />
       </div>
       <div

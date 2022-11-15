@@ -1,4 +1,6 @@
 import { NFT } from '@myflownfts/data-access';
+import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
+import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRef } from 'react';
 import { NFTCard, ScrollButtons } from '../common';
@@ -11,6 +13,7 @@ interface Props {
 export default function Featured({ nfts }: Props) {
   const { t } = useTranslation();
   const scrollRef = useRef(null);
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
 
   const scroll = (scrollOffset) => {
     scrollRef.current.scrollLeft += scrollOffset;
@@ -59,6 +62,8 @@ export default function Featured({ nfts }: Props) {
             }
             url={`/nft/${item.contract_address}/${item.token_id}`}
             big={index % 7 === 0 ? true : false}
+            blurhash={item.previews?.blurhash}
+            unoptimized={isLandingPageLoaded}
           />
         ))}
       </div>

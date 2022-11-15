@@ -1,3 +1,5 @@
+import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
+import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRef } from 'react';
 import { ScrollButtons } from '../common';
@@ -8,6 +10,7 @@ import communities from './json/communities.json';
 export default function Communities() {
   const { t } = useTranslation();
   const scrollRef = useRef(null);
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
 
   const scroll = (scrollOffset) => {
     scrollRef.current.scrollLeft += scrollOffset;
@@ -40,6 +43,7 @@ export default function Communities() {
             name={item.name}
             image={item.image}
             url={item.url}
+            unoptimized={isLandingPageLoaded}
           />
         ))}
       </div>

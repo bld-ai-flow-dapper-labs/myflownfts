@@ -15,7 +15,7 @@ import * as Popover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import * as ReactDOM from 'react-dom/client';
@@ -56,6 +56,22 @@ export default function PageViewNFT({ SSRToken }: Props) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [images, setImages] = useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+
+  useEffect(() => {
+    const onPageLoad = () => {
+      setIsPageLoaded(true);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, [setIsPageLoaded]);
 
   const renderVideo = (item) => {
     return (
@@ -302,8 +318,9 @@ export default function PageViewNFT({ SSRToken }: Props) {
           width={40}
           height={40}
           alt={token?.name}
-          placeholder="empty"
-          unoptimized={true}
+          placeholder={token.previews?.blurhash ? 'blur' : 'empty'}
+          unoptimized={isPageLoaded}
+          blurDataURL={token.previews?.blurhash}
         />
         <div className="flex flex-col w-fit max-w-32">
           <span className="block font-semibold font-body text-container-text text-body opacity-30">
