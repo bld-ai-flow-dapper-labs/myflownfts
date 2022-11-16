@@ -5,17 +5,13 @@ import {
   postRefreshMetadata,
 } from '@myflownfts/site/api';
 import { ReactComponent as CloseIcon } from '@myflownfts/site/components/common/images/icon-close.svg';
-import { ReactComponent as EthIcon } from '@myflownfts/site/components/common/images/icon-eth.svg';
 import { ReactComponent as FlowIcon } from '@myflownfts/site/components/common/images/icon-flow-nofill.svg';
-import { ReactComponent as LinkIcon } from '@myflownfts/site/components/common/images/icon-link.svg';
 import { ReactComponent as RefreshIcon } from '@myflownfts/site/components/common/images/icon-refresh.svg';
 import { ReactComponent as ShareIcon } from '@myflownfts/site/components/common/images/icon-share.svg';
-import { ReactComponent as USDIcon } from '@myflownfts/site/components/common/images/icon-usd.svg';
 import * as Popover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import * as ReactDOM from 'react-dom/client';
@@ -28,8 +24,8 @@ import {
 } from 'react-share';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
-
-import { Button, Chip, Footer, Loader, Navbar } from '../common';
+import { Button, Footer, Loader, Navbar } from '../common';
+import Details from './Details';
 
 interface ExtraMetadataProps {
   url?: string;
@@ -49,14 +45,14 @@ export default function PageViewNFT({ SSRToken }: Props) {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<NFT>();
-  const [currency, setCurrency] = useState<'flow' | 'usd' | 'ethereum'>('flow');
-  const [exchangeRates, setExchangeRates] = useState<ExchangeRates>();
+
   const galleryRef = useRef(null);
   const divRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [images, setImages] = useState([]);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [exchangeRates, setExchangeRates] = useState<ExchangeRates>();
 
   useEffect(() => {
     const onPageLoad = () => {
@@ -259,7 +255,7 @@ export default function PageViewNFT({ SSRToken }: Props) {
   const renderNFT = () => (
     <div
       className={classNames(
-        'relative rounded-md w-full lg:w-4/5 max-w-[50rem] lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
+        'relative overflow-hidden rounded-md w-full lg:w-4/5 max-w-[50rem] lg:max-w-[62.5rem] border-4 border-container-dark/0 bg-container-dark/10',
         isFullscreen && 'z-20'
       )}
       ref={divRef}
@@ -299,55 +295,6 @@ export default function PageViewNFT({ SSRToken }: Props) {
         .replace(/^./, (str) => str.toUpperCase());
     return string;
   };
-
-  const renderNFTDetails = () => (
-    <div className="flex flex-col min-w-80 w-full max-w-[50rem] gap-6 p-6 lg:border-2 rounded-md lg:border-container-dark/10 h-fit">
-      <div className="flex gap-3">
-        <Image
-          className="rounded-full"
-          loader={() =>
-            token.collection?.image_url ??
-            token.previews?.image_small_url ??
-            'Unsupported'
-          }
-          src={
-            token.collection?.image_url ??
-            token.previews?.image_small_url ??
-            'Unsupported'
-          }
-          width={40}
-          height={40}
-          alt={token?.name}
-          placeholder={token.previews?.blurhash ? 'blur' : 'empty'}
-          unoptimized={isPageLoaded}
-          blurDataURL={token.previews?.blurhash}
-        />
-        <div className="flex flex-col w-fit max-w-32">
-          <span className="block font-semibold font-body text-container-text text-body opacity-30">
-            {t('pages.landing.createdBy')}
-          </span>
-          <span className="block font-semibold truncate opacity-75 font-body text-container-text text-body">
-            {cleanString(token?.collection.twitter_username) ??
-              cleanString(token?.collection.name) ??
-              'Unknown'}
-          </span>
-        </div>
-      </div>
-      <span className="font-semibold text-white text-h3">
-        {token?.name && token?.name !== token?.contract.name
-          ? token.name
-          : token.contract.name + ' #' + token.token_id}
-      </span>
-      <span className="font-medium text-white whitespace-pre-line text-footer font-body">
-        {token.description ?? t('pages.viewNFT.noDescription')}
-      </span>
-      {renderTokenPrice()}
-      <Button className="gap-2" href={token?.external_url}>
-        <span>{t('pages.viewNFT.buyOnMarketplace')}</span>
-        <LinkIcon />
-      </Button>
-    </div>
-  );
 
   const renderPropertyCard = (item) => {
     const propertyValue = () => {
@@ -574,36 +521,6 @@ export default function PageViewNFT({ SSRToken }: Props) {
     </div>
   );
 
-  // Assumes last_sale is FLOW price
-  // const priceConversion = () => {
-  //   if (!token.last_sale) return 'Unavailable';
-  //   switch (currency) {
-  //     case 'flow':
-  //       return token.last_sale.unit_price.toFixed(2);
-  //     case 'ethereum':
-  //       return (token.last_sale.unit_price * exchangeRates.eth).toFixed(3);
-  //     case 'usd':
-  //       return (token.last_sale.unit_price * exchangeRates.usd).toFixed(2);
-  //   }
-  // };
-
-  // For testing: /0x8943c7bac1914c9a7aba750bf2b6b09fd21037e0/5903
-  // ETH Initial price
-  const getPriceConversion = () => {
-    if (!token.last_sale?.unit_price || !exchangeRates) return 'Unavailable';
-    const ethPrice = token.last_sale.unit_price / 10 ** 18;
-    const flowPrice = ethPrice / exchangeRates?.eth;
-    const usdPrice = flowPrice * exchangeRates?.usd;
-    switch (currency) {
-      case 'flow':
-        return flowPrice.toFixed(2);
-      case 'ethereum':
-        return ethPrice.toFixed(3);
-      case 'usd':
-        return usdPrice.toFixed(2);
-    }
-  };
-
   const refreshMetadata = async () => {
     const { message } = await postRefreshMetadata(
       contract_address.slice(0, 2) === 'A.' ? 'flow' : 'ethereum',
@@ -619,64 +536,6 @@ export default function PageViewNFT({ SSRToken }: Props) {
         type: 'error',
       });
   };
-
-  const renderTokenPrice = () => (
-    <>
-      {token.last_sale && (
-        <div className="flex flex-col text-body font-semibold text-white bg-container-dark/5 rounded-md py-[1.375rem] px-4 gap-8">
-          <div className="flex items-center justify-between pb-1.5 border-b-2 border-container-dark/5">
-            <span>{t('pages.viewNFT.currency')}</span>
-            <div className="flex self-end gap-1 text-white">
-              <Button
-                className="w-8 h-8 px-0"
-                variant="currency"
-                disabled={currency === 'flow'}
-                onClick={() => setCurrency('flow')}
-              >
-                <FlowIcon className="scale-50" />
-              </Button>
-              <Button
-                className="w-8 h-8 px-0"
-                variant="currency"
-                disabled={currency === 'usd'}
-                onClick={() => {
-                  // Conservative, assumes flow token is the default currency
-                  // if (!exchangeRates && token.last_sale.unit_price) {
-                  //   setExchangeRates(await getExchangeRates());
-                  // }
-                  setCurrency('usd');
-                }}
-              >
-                <USDIcon />
-              </Button>
-              <Button
-                className="w-8 h-8 px-0"
-                variant="currency"
-                disabled={currency === 'ethereum'}
-                onClick={() => {
-                  // if (!exchangeRates && token.last_sale.unit_price) {
-                  //   setExchangeRates(await getExchangeRates());
-                  // }
-                  setCurrency('ethereum');
-                }}
-              >
-                <EthIcon className="scale-75" />
-              </Button>
-            </div>
-          </div>
-          <div className="flex -mt-[1.125rem] items-center justify-between">
-            <span>{t('pages.viewNFT.lastSale')}</span>
-            <Chip
-              className="h-[1.875rem] w-fit justify-between"
-              label={getPriceConversion().toString()}
-              chain={currency}
-              variant="price"
-            />
-          </div>
-        </div>
-      )}
-    </>
-  );
 
   return (
     <>
@@ -697,7 +556,7 @@ export default function PageViewNFT({ SSRToken }: Props) {
             images: [
               {
                 url:
-                  SSRToken.previews.image_medium_url ??
+                  SSRToken.previews?.image_medium_url ??
                   SSRToken.image_url ??
                   t('error.pages.viewNFT.notFound'),
               },
@@ -709,8 +568,8 @@ export default function PageViewNFT({ SSRToken }: Props) {
             {
               name: 'twitter:creator',
               content: `${
-                cleanString(SSRToken?.collection.twitter_username) ??
-                cleanString(SSRToken?.collection.name)
+                cleanString(SSRToken?.collection?.twitter_username) ??
+                cleanString(SSRToken?.collection?.name)
               }`,
             },
             {
@@ -731,7 +590,7 @@ export default function PageViewNFT({ SSRToken }: Props) {
             {
               name: 'twitter:image',
               content: `${
-                SSRToken.previews.image_medium_url ??
+                SSRToken.previews?.image_medium_url ??
                 SSRToken.image_url ??
                 t('error.pages.viewNFT.notFound')
               }`,
@@ -767,7 +626,11 @@ export default function PageViewNFT({ SSRToken }: Props) {
                 {renderNFT()}
               </div>
               <div className="flex flex-col items-center w-full gap-6 mx-auto lg:mx-0 lg:items-end lg:w-1/2 lg:max-w-[33.625rem]">
-                {renderNFTDetails()}
+                <Details
+                  token={token}
+                  isPageLoaded={isPageLoaded}
+                  exchangeRates={exchangeRates}
+                />
                 {token.extra_metadata.attributes && renderNFTProperties()}
               </div>
             </div>

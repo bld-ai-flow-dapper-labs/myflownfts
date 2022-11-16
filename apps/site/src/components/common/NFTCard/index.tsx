@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/future/image';
+import { BlurhashCanvas } from 'react-blurhash';
 import { Button, Chip } from '..';
 
 interface Props {
@@ -29,7 +30,7 @@ export default function NFTCard({
   creatorAvatar,
   image_url,
   name,
-  unoptimized = false,
+  unoptimized,
   token_id,
   url,
   variant = 'featured',
@@ -70,15 +71,22 @@ export default function NFTCard({
             'h-[10rem] w-[9.75rem] lg:h-[20rem] lg:w-[19rem]'
         )}
       >
+        {blurhash && (
+          <BlurhashCanvas
+            hash={blurhash}
+            width={big ? 700 : 400}
+            height={big ? 800 : 400}
+            punch={1}
+          />
+        )}
         <Image
           loader={() => image_url}
           src={image_url}
           alt={name}
-          placeholder={blurhash ? 'blur' : 'empty'}
+          placeholder="empty"
           fill
           unoptimized={unoptimized}
-          className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
-          blurDataURL={blurhash}
+          className="object-cover transition duration-300 ease-in-out delay-150 group-hover:scale-105"
         />
       </div>
       <div
