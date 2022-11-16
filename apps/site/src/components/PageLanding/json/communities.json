@@ -2,91 +2,55 @@
   {
     "id": 1,
     "name": "NBA Topshot",
-    "image": "/communities/card-topshot1.png",
+    "image": "/communities/card-topshot.png",
     "url": "https://nbatopshot.com/"
   },
   {
     "id": 2,
     "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike1.png",
+    "image": "/communities/card-ufcstrike.png",
     "url": "https://www.ufcstrike.com/"
   },
   {
     "id": 3,
-    "name": "NBA Topshot",
-    "image": "/communities/card-topshot2.png",
-    "url": "https://nbatopshot.com/"
+    "name": "LaLiga Golazos",
+    "image": "/communities/card-laliga.png",
+    "url": "https://laligagolazos.com/"
   },
   {
     "id": 4,
-    "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike2.png",
-    "url": "https://www.ufcstrike.com/"
+    "name": "Flunks",
+    "image": "/communities/card-flunks.png",
+    "url": "https://flunks.io/"
   },
   {
     "id": 5,
-    "name": "Dr Seuss",
-    "image": "/communities/card-drseuss.png",
-    "url": "https://seussibles.com/"
+    "name": "Genies",
+    "image": "/communities/card-genies.png",
+    "url": "https://genies.com/"
   },
   {
     "id": 6,
-    "name": "NBA Topshot",
-    "image": "/communities/card-topshot1.png",
-    "url": "https://nbatopshot.com/"
+    "name": "FLOAT",
+    "image": "/communities/card-float.png",
+    "url": "https://floats.city/"
   },
   {
     "id": 7,
-    "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike1.png",
-    "url": "https://www.ufcstrike.com/"
+    "name": "BALLERZ",
+    "image": "/communities/card-ballerz.png",
+    "url": "https://ballerz.com/"
   },
   {
     "id": 8,
-    "name": "NBA Topshot",
-    "image": "/communities/card-topshot2.png",
-    "url": "https://nbatopshot.com/"
+    "name": "Flovatar",
+    "image": "/communities/card-flovatar.png",
+    "url": "https://flovatar.com/"
   },
   {
     "id": 9,
-    "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike2.png",
-    "url": "https://www.ufcstrike.com/"
-  },
-  {
-    "id": 10,
-    "name": "Dr Seuss",
-    "image": "/communities/card-drseuss.png",
-    "url": "https://seussibles.com/"
-  },
-  {
-    "id": 11,
-    "name": "NBA Topshot",
-    "image": "/communities/card-topshot1.png",
-    "url": "https://nbatopshot.com/"
-  },
-  {
-    "id": 12,
-    "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike1.png",
-    "url": "https://www.ufcstrike.com/"
-  },
-  {
-    "id": 13,
-    "name": "NBA Topshot",
-    "image": "/communities/card-topshot2.png",
-    "url": "https://nbatopshot.com/"
-  },
-  {
-    "id": 14,
-    "name": "UFC Strike",
-    "image": "/communities/card-ufcstrike2.png",
-    "url": "https://www.ufcstrike.com/"
-  },
-  {
-    "id": 15,
-    "name": "Dr Seuss",
-    "image": "/communities/card-drseuss.png",
-    "url": "https://seussibles.com/"
+    "name": "Seussibles",
+    "image": "/communities/card-seussibles.png",
+    "url": "https://www.seussibles.com/"
   }
 ]
