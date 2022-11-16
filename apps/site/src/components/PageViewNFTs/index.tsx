@@ -3,7 +3,7 @@ import { getNFTsByWallet, getRawQuery } from '@myflownfts/site/api';
 import { getProfile } from '@myflownfts/site/utils';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import gradient from 'random-gradient';
 import { useEffect, useState } from 'react';
@@ -31,6 +31,7 @@ export default function PageViewNFTs() {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
   const [findProfile, setFindProfile] = useState<FindProfile>();
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   const header = { background: gradient(address, 'diagonal') };
   const icon = { background: gradient(iconHash, 'vertical') };
@@ -55,6 +56,21 @@ export default function PageViewNFTs() {
       if (profile) setFindProfile(profile);
     }
   };
+
+  useEffect(() => {
+    const onPageLoad = () => {
+      setIsPageLoaded(true);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
+  }, [setIsPageLoaded]);
 
   useEffect(() => {
     (async () => {
@@ -164,27 +180,33 @@ export default function PageViewNFTs() {
     if (NFTs?.length > 0) {
       return (
         <div className="grid justify-center w-full gap-2 py-12 lg:gap-6 grid-cols-fill-mobile lg:grid-cols-fill">
-          {NFTs.filter((_, index) => index < numNFTs).map((item) => (
-            <NFTCard
-              key={item.nft_id}
-              chain={item.chain ?? 'flow'}
-              contract={item.contract.name}
-              creatorName={
-                item.collection.twitter_username ??
-                item.collection.name ??
-                '/not_supported.png'
-              }
-              token_id={item.token_id}
-              name={
-                item?.name && item?.name !== item?.contract.name
-                  ? item.name
-                  : item.contract.name + ' #' + item.token_id
-              }
-              image_url={item.previews.image_small_url ?? '/not_supported.png'} // Error if no unknown
-              url={`/nft/${item.contract_address}/${item.token_id}`}
-              variant="view"
-            />
-          ))}
+          {NFTs.filter((_, index) => index < numNFTs).map((item) => {
+            return (
+              <NFTCard
+                key={item.nft_id}
+                chain={item.chain ?? 'flow'}
+                contract={item.contract.name}
+                creatorName={
+                  item.collection.twitter_username ??
+                  item.collection.name ??
+                  '/not_supported.png'
+                }
+                token_id={item.token_id}
+                name={
+                  item?.name && item?.name !== item?.contract.name
+                    ? item.name
+                    : item.contract.name + ' #' + item.token_id
+                }
+                image_url={
+                  item.previews.image_small_url ?? '/not_supported.png'
+                } // Error if no unknown
+                url={`/nft/${item.contract_address}/${item.token_id}`}
+                variant="view"
+                blurhash={item.previews?.blurhash}
+                unoptimized={isPageLoaded}
+              />
+            );
+          })}
         </div>
       );
     }
@@ -201,8 +223,8 @@ export default function PageViewNFTs() {
   };
 
   const renderProfilePhoto = () => {
-    let photoUrl;
-    let alt;
+    let photoUrl, alt, blurhash;
+
     if (findProfile) {
       photoUrl = findProfile.avatar;
       alt = findProfile.name;
@@ -211,18 +233,19 @@ export default function PageViewNFTs() {
       photoUrl =
         profilePhoto.previews.image_small_url ?? profilePhoto.image_url;
       alt = profilePhoto.name;
+      blurhash = profilePhoto.previews.blurhash;
     }
     return (
       <Image
         loader={() => photoUrl}
         src={photoUrl}
         alt={alt}
-        placeholder="empty"
-        layout="fill"
-        objectFit="cover"
-        unoptimized={true}
+        placeholder={blurhash ? 'blur' : 'empty'}
+        fill
+        unoptimized={isPageLoaded}
         className="transition duration-300 ease-in-out delay-150 group-hover:scale-105"
         priority
+        blurDataURL={blurhash ?? ''}
       />
     );
   };

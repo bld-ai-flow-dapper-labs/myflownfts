@@ -1,13 +1,16 @@
+import { isLandingPageLoadedAtom } from '@myflownfts/site/atoms';
+import { useAtom } from 'jotai';
 import useTranslation from 'next-translate/useTranslation';
 import { useRef } from 'react';
 import { ScrollButtons } from '../common';
 import { ReactComponent as StarIcon } from '../common/images/icon-section-star.svg';
 import CommunityCard from './CommunityCard';
-import communities from './json/communities.json';
+import { CommunityList } from './CommunityList';
 
 export default function Communities() {
   const { t } = useTranslation();
   const scrollRef = useRef(null);
+  const [isLandingPageLoaded] = useAtom(isLandingPageLoadedAtom);
 
   const scroll = (scrollOffset) => {
     scrollRef.current.scrollLeft += scrollOffset;
@@ -34,12 +37,13 @@ export default function Communities() {
         className="flex gap-6 -mt-[1.875rem] overflow-x-scroll xl:mt-0 xl:pb-10 scrollbar-mobile xl:scrollbar scroll-smooth"
         ref={scrollRef}
       >
-        {communities.map((item) => (
+        {CommunityList.map((item) => (
           <CommunityCard
             key={item.id}
             name={item.name}
             image={item.image}
             url={item.url}
+            unoptimized={isLandingPageLoaded}
           />
         ))}
       </div>
